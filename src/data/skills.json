@@ -120,7 +120,8 @@
       "skills": [
         { "name": "Czech", "level": 100, "context": "Native" },
         { "name": "English C1", "level": 90, "context": "Cambridge CAE" },
-        { "name": "German B1", "level": 60, "context": "Intermediate" }
+        { "name": "German B1", "level": 60, "context": "Intermediate" },
+        { "name": "Mandarin B1", "level": 50, "context": "HSK3" }
       ]
     }
   ]
