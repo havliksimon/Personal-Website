@@ -18,26 +18,26 @@ const projects = [
     github: 'https://github.com/havliksimon/ki-asset-management',
     liveUrl: 'https://ki.verxl.com/'
   },
-  {
-    id: 2,
-    title: 'Asian Equity Risk Assessment Platform',
-    description: 'Flask-based web application for analyzing risk factors in Asian equity markets using Python, SQL, and machine learning algorithms for predictive modeling.',
-    icon: BarChart3,
-    tags: ['Python', 'Flask', 'SQL', 'scikit-learn', 'JavaScript'],
-    categories: ['web-development', 'finance', 'python'],
-    featured: true,
-    link: '#'
-  },
-  {
-    id: 3,
-    title: 'Macroeconomic Indicator Dashboard',
-    description: 'R-based dashboard for tracking and forecasting key macroeconomic indicators for China and Asian markets with interactive visualizations.',
-    icon: LineChart,
-    tags: ['R', 'Shiny', 'ggplot2', 'Time Series Analysis'],
-    categories: ['data-analysis', 'r', 'macro'],
-    featured: true,
-    link: '#'
-  },
+  // {
+  //   id: 2,
+  //   title: 'Asian Equity Risk Assessment Platform',
+  //   description: 'Flask-based web application for analyzing risk factors in Asian equity markets using Python, SQL, and machine learning algorithms for predictive modeling.',
+  //   icon: BarChart3,
+  //   tags: ['Python', 'Flask', 'SQL', 'scikit-learn', 'JavaScript'],
+  //   categories: ['web-development', 'finance', 'python'],
+  //   featured: true,
+  //   link: '#'
+  // },
+  // {
+  //   id: 3,
+  //   title: 'Macroeconomic Indicator Dashboard',
+  //   description: 'R-based dashboard for tracking and forecasting key macroeconomic indicators for China and Asian markets with interactive visualizations.',
+  //   icon: LineChart,
+  //   tags: ['R', 'Shiny', 'ggplot2', 'Time Series Analysis'],
+  //   categories: ['data-analysis', 'r', 'macro'],
+  //   featured: true,
+  //   link: '#'
+  // },
   {
     id: 4,
     title: 'Portfolio Optimization Model',
