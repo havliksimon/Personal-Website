@@ -1,0 +1,83 @@
+{
+  "headlines": [
+    {
+      "value": ">8,000",
+      "label": "Listed Companies",
+      "description": "On Chinese stock exchanges (SSE, SZSE, BSE, HKEX) — more than US & EU combined",
+      "icon": "Building2"
+    },
+    {
+      "value": "2×",
+      "label": "vs US Markets",
+      "description": "More listings than US exchanges (NYSE + NASDAQ ≈ 4,000)",
+      "icon": "TrendingUp"
+    },
+    {
+      "value": "8/10",
+      "label": "Top Universities",
+      "description": "8 out of 10 best universities in Leiden Research Ranking are Chinese",
+      "icon": "GraduationCap"
+    },
+    {
+      "value": "35%",
+      "label": "Global Green Investment",
+      "description": "China accounts for over 1/3 of world's renewable energy investment",
+      "icon": "Leaf"
+    },
+    {
+      "value": "$33T",
+      "label": "GDP (PPP)",
+      "description": "China's economy in purchasing power parity — world's largest since 2016",
+      "icon": "DollarSign"
+    },
+    {
+      "value": "600M+",
+      "label": "Middle Class",
+      "description": "Largest middle-class consumer market in the world",
+      "icon": "Users"
+    }
+  ],
+  "hskProgress": [
+    { "level": "HSK1", "date": "Dec 2024", "status": "completed", "description": "150 words, basic communication" },
+    { "level": "HSK2", "date": "—", "status": "skipped", "description": "300 words, elementary" },
+    { "level": "HSK3", "date": "Oct 2025", "status": "completed", "description": "600 words, intermediate (B1)" },
+    { "level": "HSK4", "date": "Target 2026", "status": "target", "description": "1,200 words, upper-intermediate (B2)" }
+  ],
+  "gdpData": {
+    "title": "China GDP (PPP) vs USA",
+    "description": "China's economic rise in purchasing power parity terms (Trillion USD)",
+    "years": [2000, 2005, 2010, 2015, 2020, 2024],
+    "china": [3.6, 7.0, 13.2, 19.8, 24.3, 33.0],
+    "usa": [10.3, 13.1, 15.0, 18.0, 20.9, 23.0]
+  },
+  "quotes": [
+    {
+      "text": "The goal of a successful investor is to find the disparity between the value of a business and the price of its stock.",
+      "author": "Benjamin Graham"
+    },
+    {
+      "text": "In the middle of difficulty lies opportunity.",
+      "author": "Albert Einstein"
+    },
+    {
+      "text": "China is not just a market, it's a laboratory for understanding the future of global commerce.",
+      "author": "Modern Analyst"
+    }
+  ],
+  "photos": [
+    { "src": "/images/china-1.jpg", "alt": "Forbidden City, Beijing", "location": "Forbidden City" },
+    { "src": "/images/china-2.jpg", "alt": "Historic street in Beijing", "location": "Beijing Hutong" },
+    { "src": "/images/china-3.jpg", "alt": "Summer Palace selfie", "location": "Summer Palace" },
+    { "src": "/images/china-4.jpg", "alt": "Summer Palace view", "location": "Summer Palace" },
+    { "src": "/images/china-5.jpg", "alt": "Temple of Heaven", "location": "Temple of Heaven" },
+    { "src": "/images/china-6.jpg", "alt": "Great Wall of China", "location": "Great Wall" }
+  ],
+  "keyFacts": [
+    "China has been the world's largest economy by PPP since 2016",
+    "Chinese stock markets have 2x more listings than US markets",
+    "China produces 8 out of 10 top universities in Leiden Ranking",
+    "China accounts for 35% of global renewable energy investment",
+    "600+ million middle-class consumers — largest in the world",
+    "HSK3 certified, targeting HSK4 for business proficiency"
+  ]
+}

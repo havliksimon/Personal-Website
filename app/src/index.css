@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 0 0% 10%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 20% 98%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 210 20% 98%;
+    --muted-foreground: 220 10% 46%;
+    --accent: 0 84% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 0 0% 10%;
+    --radius: 0.75rem;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-white text-gray-900 antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Navigation */
+  .nav-link {
+    @apply text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors relative;
+  }
+  
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-gray-900 transition-all duration-300;
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+  
+  /* Button Primary */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-all;
+  }
+  
+  /* Button Secondary */
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 text-sm font-medium rounded-full border border-gray-200 hover:bg-gray-50 transition-all;
+  }
+  
+  /* Status Pill */
+  .status-pill {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-full text-xs font-medium text-gray-600;
+  }
+  
+  /* Skill Pill */
+  .skill-pill {
+    @apply inline-flex items-center px-4 py-2 bg-gray-100 rounded-full text-sm text-gray-700 hover:bg-gray-200 transition-colors;
+  }
+  
+  /* Card */
+  .card {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow;
+  }
+  
+  /* Progress Circle */
+  .progress-circle {
+    @apply relative;
+  }
+  
+  .progress-circle svg {
+    @apply transform -rotate-90;
+  }
+  
+  /* Progress Bar */
+  .progress-bar {
+    @apply h-2 bg-gray-100 rounded-full overflow-hidden;
+  }
+  
+  .progress-bar-fill {
+    @apply h-full rounded-full transition-all duration-1000;
+  }
+  
+  /* Section */
+  .section {
+    @apply py-20 md:py-32;
+  }
+  
+  .section-title {
+    @apply text-4xl md:text-5xl font-semibold text-gray-900 mb-4;
+  }
+  
+  .section-subtitle {
+    @apply text-lg text-gray-500 max-w-2xl;
+  }
+  
+  /* Form Input */
+  .form-input {
+    @apply w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all;
+  }
+  
+  /* Tag */
+  .tag {
+    @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full;
+  }
+  
+  .tag-blue { @apply bg-blue-50 text-blue-700; }
+  .tag-green { @apply bg-green-50 text-green-700; }
+  .tag-purple { @apply bg-purple-50 text-purple-700; }
+  .tag-orange { @apply bg-orange-50 text-orange-700; }
+  .tag-red { @apply bg-red-50 text-red-700; }
+  .tag-gray { @apply bg-gray-100 text-gray-700; }
+  
+  /* Flip Card */
+  .flip-card {
+    @apply relative w-full h-full;
+    perspective: 1000px;
+  }
+  
+  .flip-card-inner {
+    @apply relative w-full h-full transition-transform duration-500;
+    transform-style: preserve-3d;
+  }
+  
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-card-front, .flip-card-back {
+    @apply absolute w-full h-full rounded-xl overflow-hidden;
+    backface-visibility: hidden;
+  }
+  
+  .flip-card-back {
+    transform: rotateY(180deg);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}

@@ -1,0 +1,127 @@
+{
+  "categories": [
+    {
+      "id": "quantitative",
+      "name": "Quantitative & Analytical",
+      "icon": "Calculator",
+      "color": "blue",
+      "description": "Mathematical and statistical tools for economic analysis",
+      "skills": [
+        { "name": "Statistics", "level": 90, "context": "Descriptive & inferential" },
+        { "name": "Econometrics", "level": 85, "context": "Regression, time series" },
+        { "name": "Mathematics", "level": 88, "context": "Calculus, optimization" },
+        { "name": "Applied Quantitative Methods", "level": 85, "context": "Statistical modeling" },
+        { "name": "Excel Modeling", "level": 88, "context": "Financial modeling, VBA" }
+      ]
+    },
+    {
+      "id": "programming",
+      "name": "Programming & Data",
+      "icon": "Code",
+      "color": "cyan",
+      "description": "Programming languages and data engineering",
+      "skills": [
+        { "name": "Python", "level": 90, "context": "Pandas, NumPy, SciPy" },
+        { "name": "SQL", "level": 85, "context": "PostgreSQL, MySQL" },
+        { "name": "R", "level": 80, "context": "tidyverse, forecast" },
+        { "name": "Linux/Bash", "level": 85, "context": "Shell scripting" },
+        { "name": "Docker", "level": 70, "context": "Containerization" },
+        { "name": "Git", "level": 82, "context": "Version control" }
+      ]
+    },
+    {
+      "id": "ai",
+      "name": "AI & Machine Learning",
+      "icon": "Brain",
+      "color": "purple",
+      "description": "Artificial intelligence and computational methods",
+      "skills": [
+        { "name": "LLM Deployment", "level": 75, "context": "Local GPU inference" },
+        { "name": "Prompt Engineering", "level": 80, "context": "Chain-of-thought" },
+        { "name": "scikit-learn", "level": 78, "context": "ML models" },
+        { "name": "Neural Networks", "level": 70, "context": "PyTorch basics" },
+        { "name": "NLP", "level": 72, "context": "Text analysis" },
+        { "name": "Hugging Face", "level": 68, "context": "Transformers" }
+      ]
+    },
+    {
+      "id": "finance",
+      "name": "Finance & Investment",
+      "icon": "TrendingUp",
+      "color": "green",
+      "description": "Financial analysis and investment management",
+      "skills": [
+        { "name": "Fundamental Analysis", "level": 90, "context": "DCF, multiples" },
+        { "name": "Risk Management", "level": 85, "context": "VaR, Monte Carlo" },
+        { "name": "Portfolio Theory", "level": 85, "context": "MPT, optimization" },
+        { "name": "Financial Modeling", "level": 88, "context": "Excel, Python" },
+        { "name": "Valuation", "level": 87, "context": "Equity, DCF" }
+      ]
+    },
+    {
+      "id": "economics",
+      "name": "Economic Theory",
+      "icon": "BookOpen",
+      "color": "orange",
+      "description": "Core economic frameworks and theory",
+      "skills": [
+        { "name": "Microeconomics", "level": 90, "context": "Consumer theory" },
+        { "name": "Macroeconomics", "level": 90, "context": "Policy analysis" },
+        { "name": "Game Theory", "level": 80, "context": "Strategic decisions" },
+        { "name": "Int'l Economics", "level": 85, "context": "Trade, exchange rates" },
+        { "name": "Behavioral Econ", "level": 82, "context": "Cognitive biases" }
+      ]
+    },
+    {
+      "id": "policy",
+      "name": "Policy & Institutions",
+      "icon": "Landmark",
+      "color": "emerald",
+      "description": "Economic policy and institutional frameworks",
+      "skills": [
+        { "name": "Economic Policy", "level": 85, "context": "Policy design" },
+        { "name": "EU Policies", "level": 82, "context": "Economic integration" },
+        { "name": "Labour Economics", "level": 80, "context": "Employment, wages" },
+        { "name": "Public Economics", "level": 80, "context": "Taxation, welfare" }
+      ]
+    },
+    {
+      "id": "asia",
+      "name": "Asia-Pacific Focus",
+      "icon": "Globe",
+      "color": "red",
+      "description": "Regional expertise and language skills",
+      "skills": [
+        { "name": "China Markets", "level": 82, "context": "SSE, SZSE, HKEX" },
+        { "name": "Mandarin HSK3", "level": 55, "context": "Targeting HSK4" },
+        { "name": "Business Chinese", "level": 50, "context": "Professional communication" },
+        { "name": "Asian Economics", "level": 78, "context": "Regional analysis" }
+      ]
+    },
+    {
+      "id": "design",
+      "name": "Design & Creative",
+      "icon": "Palette",
+      "color": "pink",
+      "description": "Design and creative capabilities",
+      "skills": [
+        { "name": "Figma", "level": 90, "context": "UI/UX design" },
+        { "name": "Photoshop", "level": 85, "context": "Image editing" },
+        { "name": "UI/UX Design", "level": 80, "context": "User experience" },
+        { "name": "WordPress", "level": 95, "context": "CMS development" }
+      ]
+    },
+    {
+      "id": "languages",
+      "name": "Languages",
+      "icon": "Languages",
+      "color": "indigo",
+      "description": "Multilingual communication capabilities",
+      "skills": [
+        { "name": "Czech", "level": 100, "context": "Native" },
+        { "name": "English C1", "level": 90, "context": "Cambridge CAE" },
+        { "name": "German B1", "level": 60, "context": "Intermediate" }
+      ]
+    }
+  ]
+}

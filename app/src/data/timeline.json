@@ -1,0 +1,103 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "date": "2015 – 2024",
+      "title": "Gymnázium Karla Sladkovského",
+      "subtitle": "General Secondary Education",
+      "description": "Completed general secondary education with focus on economics and mathematics. Won competition for best high school thesis in economics.",
+      "location": "Czech Republic",
+      "type": "education",
+      "status": "Completed",
+      "skills": ["Mathematics", "Critical Thinking", "Research", "Academic Writing"]
+    },
+    {
+      "id": 2,
+      "date": "May 2024",
+      "title": "Thesis Competition — Placement",
+      "subtitle": "Best High School Thesis in Economics",
+      "description": "Placement in the competition for the best high school thesis in Economics, demonstrating early dedication to economic research.",
+      "location": "Czech Republic",
+      "type": "achievement",
+      "status": "Completed",
+      "skills": ["Economic Research", "Academic Writing", "Analysis"]
+    },
+    {
+      "id": 3,
+      "date": "2024 – Present",
+      "title": "VŠE Prague",
+      "subtitle": "Bachelor's in Economics",
+      "description": "Prague University of Economics and Business. Focusing on investment analysis, financial markets, and economic theory.",
+      "location": "Prague, Czech Republic",
+      "type": "education",
+      "status": "Current",
+      "skills": ["Macroeconomics", "Microeconomics", "Econometrics", "Finance", "Statistics"]
+    },
+    {
+      "id": 4,
+      "date": "Nov 2024",
+      "title": "Klub Investorů — Analyst",
+      "subtitle": "Financial Analyst",
+      "description": "Financial Analyst at Investors Club, focusing on equity research, valuation, and portfolio construction.",
+      "location": "Prague, Czech Republic",
+      "type": "experience",
+      "status": "Current",
+      "skills": ["Fundamental Analysis", "Valuation", "Portfolio Management", "Equity Research"]
+    },
+    {
+      "id": 5,
+      "date": "Dec 2024",
+      "title": "HSK1 Certification",
+      "subtitle": "Chinese Language Proficiency",
+      "description": "Hanyu Shuiping Kaoshi Level 1 — First step in Chinese language proficiency journey.",
+      "location": "Prague, Czech Republic",
+      "type": "language",
+      "status": "Completed",
+      "skills": ["Mandarin Chinese", "Language Learning"]
+    },
+    {
+      "id": 6,
+      "date": "Jul – Aug 2025",
+      "title": "Beijing Foreign Studies University",
+      "subtitle": "Chinese Language Intensive",
+      "description": "Intensive Chinese language summer program with focus on business Chinese and cultural immersion.",
+      "location": "Beijing, China",
+      "type": "education",
+      "status": "Completed",
+      "skills": ["Mandarin Chinese", "Cultural Immersion", "International Experience", "Business Chinese"]
+    },
+    {
+      "id": 7,
+      "date": "Oct 2025",
+      "title": "HSK3 Certification",
+      "subtitle": "Intermediate Chinese Proficiency",
+      "description": "Hanyu Shuiping Kaoshi Level 3 — Intermediate Chinese proficiency, equivalent to B1 level.",
+      "location": "Prague, Czech Republic",
+      "type": "language",
+      "status": "Completed",
+      "skills": ["Mandarin Chinese", "Business Chinese"]
+    },
+    {
+      "id": 8,
+      "date": "Feb – Jun 2026",
+      "title": "XJTLU — Semester Abroad",
+      "subtitle": "Xi'an Jiaotong-Liverpool University",
+      "description": "Economics semester exchange program focusing on international economics and China-Asia business relations.",
+      "location": "Suzhou, China",
+      "type": "education",
+      "status": "Upcoming",
+      "skills": ["International Economics", "Cross-cultural Communication", "Adaptability", "China Business"]
+    },
+    {
+      "id": 9,
+      "date": "Jul – Sep 2026",
+      "title": "SISU Shanghai",
+      "subtitle": "Intensive Chinese Language",
+      "description": "Shanghai International Studies University — Advanced Chinese language intensive course targeting HSK4 proficiency.",
+      "location": "Shanghai, China",
+      "type": "education",
+      "status": "Upcoming",
+      "skills": ["Advanced Mandarin", "Business Chinese", "China Market Knowledge"]
+    }
+  ]
+}
