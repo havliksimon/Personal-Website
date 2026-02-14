@@ -142,7 +142,7 @@ const About = () => {
             {/* Portrait */}
             <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 aspect-[4/3]">
               <img
-                src="/images/about-portrait.jpg"
+                src="./images/about-portrait.jpg"
                 alt="Šimon Havlík"
                 className="w-full h-full object-cover"
               />

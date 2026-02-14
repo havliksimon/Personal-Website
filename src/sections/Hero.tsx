@@ -172,7 +172,7 @@ const Hero = () => {
         }}
       >
         <img
-          src="/images/hero-portrait.png"
+          src="./images/hero-portrait.png"
           alt="Šimon Havlík"
           style={{ 
             height: '100%',

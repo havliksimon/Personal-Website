@@ -114,12 +114,12 @@ const China = () => {
   }, []);
 
   const photos = [
-    { src: '/images/china-1.jpg', location: 'Forbidden City, Beijing' },
-    { src: '/images/china-2.jpg', location: 'Beijing Hutong' },
-    { src: '/images/china-3.jpg', location: 'Summer Palace' },
-    { src: '/images/china-4.jpg', location: 'Summer Palace View' },
-    { src: '/images/china-5.jpg', location: 'Temple of Heaven' },
-    { src: '/images/china-6.jpg', location: 'Great Wall of China' },
+    { src: './images/china-1.jpg', location: 'Forbidden City, Beijing' },
+    { src: './images/china-2.jpg', location: 'Beijing Hutong' },
+    { src: './images/china-3.jpg', location: 'Summer Palace' },
+    { src: './images/china-4.jpg', location: 'Summer Palace View' },
+    { src: './images/china-5.jpg', location: 'Temple of Heaven' },
+    { src: './images/china-6.jpg', location: 'Great Wall of China' },
   ];
 
   return (
