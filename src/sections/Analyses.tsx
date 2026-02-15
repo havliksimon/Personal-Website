@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   FileText, Presentation, Download, ExternalLink, 
   Loader2, ChevronRight, BookOpen, BarChart3,
-  TrendingUp, Globe, Sparkles, Languages
+  TrendingUp, Globe, Sparkles, Languages, Info
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -379,16 +379,29 @@ const Analyses = () => {
                   <div className="h-4 w-px bg-gray-700 hidden sm:block" />
                   {activeDoc.language === 'cs' && (
                     <>
-                      <a
-                        href={`https://translate.google.com/translate?sl=cs&tl=en&u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.origin + activeDoc.pdfUrl : activeDoc.pdfUrl)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-amber-400 hover:text-amber-300 hover:bg-gray-800 rounded-lg transition-colors"
-                        title="Open in Google Translate (keeps PDF layout)"
-                      >
-                        <Languages className="w-4 h-4" />
-                        <span className="hidden sm:inline">Translate</span>
-                      </a>
+                      <div className="flex items-center gap-1">
+                        <a
+                          href={`https://r.jina.ai/http://${typeof window !== 'undefined' ? window.location.host : 'localhost'}${activeDoc.pdfUrl}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-amber-400 hover:text-amber-300 hover:bg-gray-800 rounded-lg transition-colors"
+                          title="Free AI translation (text only)"
+                        >
+                          <Languages className="w-4 h-4" />
+                          <span className="hidden sm:inline">Translate</span>
+                        </a>
+                        {/* Info tooltip about translation options */}
+                        <div className="relative group">
+                          <Info className="w-4 h-4 text-gray-500 cursor-help" />
+                          <div className="absolute right-0 top-full mt-2 w-64 p-3 bg-gray-800 rounded-lg text-xs text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                            <p className="font-medium text-white mb-1">Free Translation Options:</p>
+                            <ul className="space-y-1 list-disc pl-3">
+                              <li><span className="text-amber-400">This link</span> = instant AI text translation</li>
+                              <li><span className="text-blue-400">Download</span> + use <a href="https://www.onlinedoctranslator.com/en/" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">Online Doc Translator</a> for full PDF with charts</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
                       <div className="h-4 w-px bg-gray-700 hidden sm:block" />
                     </>
                   )}
