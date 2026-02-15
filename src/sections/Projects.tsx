@@ -18,7 +18,8 @@ interface Project {
   tags: string[];
   color: string;
   gradientBg: string;
-  liveUrl: string;
+  previewUrl: string;  // For iframe preview (may be http)
+  liveUrl: string;     // For external links (always https)
   github: string;
 }
 
@@ -32,7 +33,8 @@ const projects: Project[] = [
     tags: ['Python', 'Flask', 'SQLAlchemy', 'Bootstrap'],
     color: 'blue',
     gradientBg: 'from-blue-500 via-cyan-500 to-blue-600',
-    liveUrl: 'https://ki.verxl.com/',
+    previewUrl: 'http://ki.verxl.com/',      // HTTP for iframe (prevents browser flagging)
+    liveUrl: 'https://ki.verxl.com/',        // HTTPS for external links
     github: 'https://github.com/havliksimon/ki-asset-management'
   },
   {
@@ -44,6 +46,7 @@ const projects: Project[] = [
     tags: ['Python', 'Flask', 'CVXPY', 'Plotly'],
     color: 'emerald',
     gradientBg: 'from-emerald-500 via-teal-500 to-emerald-600',
+    previewUrl: 'https://optimizer.havliksimon.eu/',
     liveUrl: 'https://optimizer.havliksimon.eu/',
     github: 'https://github.com/havliksimon/Portfolio-Optimization-Model'
   }
@@ -367,7 +370,7 @@ const Projects = () => {
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              openFullscreen(project.liveUrl, project.title);
+                              openFullscreen(project.previewUrl, project.title);
                             }}
                             className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-lg transition-all ${
                               isActive 
@@ -431,7 +434,7 @@ const Projects = () => {
                   
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() => openFullscreen(activeProject.liveUrl, activeProject.title)}
+                      onClick={() => openFullscreen(activeProject.previewUrl, activeProject.title)}
                       className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
                     >
                       <Maximize2 className="w-3.5 h-3.5" />
@@ -461,7 +464,7 @@ const Projects = () => {
                   )}
                   <iframe
                     key={activeProject.id}
-                    src={activeProject.liveUrl}
+                    src={activeProject.previewUrl}
                     className="w-full h-full border-0"
                     onLoad={() => setIframeLoading(false)}
                     sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
