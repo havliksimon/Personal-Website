@@ -3,14 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LinkedIn OG Image Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <title>LinkedIn OG Image</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
       display: flex;
@@ -18,7 +14,7 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      background: #0a0a0f;
+      background: #f5f5f7;
       padding: 40px;
       font-family: 'Inter', sans-serif;
     }
@@ -26,80 +22,40 @@
     .og-container {
       width: 1200px;
       height: 630px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+      border-radius: 24px;
       position: relative;
       overflow: hidden;
-      border-radius: 24px;
-      box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+      box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06),
+        0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e2e8f0;
     }
     
-    /* Animated gradient background */
-    .bg-gradient {
-      position: absolute;
-      inset: 0;
-      background: 
-        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(99, 102, 241, 0.4) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(236, 72, 153, 0.3) 0%, transparent 50%),
-        radial-gradient(ellipse 50% 30% at 50% 100%, rgba(34, 211, 238, 0.2) 0%, transparent 50%),
-        linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-      background-size: 200% 200%;
-      animation: gradient 20s ease infinite;
-    }
-    
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
-    /* Grid pattern */
-    .grid {
-      position: absolute;
-      inset: 0;
-      background-image: 
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-    
-    /* Floating orbs */
+    /* Subtle gradient orbs */
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.5;
-      animation: float 10s ease-in-out infinite;
+      filter: blur(60px);
+      opacity: 0.4;
     }
     
     .orb-1 {
       width: 400px;
       height: 400px;
-      background: #6366f1;
-      top: -100px;
+      background: #3b82f6;
+      top: -150px;
       right: -100px;
-      animation-delay: 0s;
     }
     
     .orb-2 {
       width: 300px;
       height: 300px;
       background: #ec4899;
-      bottom: -50px;
-      left: 30%;
-      animation-delay: -3s;
-    }
-    
-    .orb-3 {
-      width: 250px;
-      height: 250px;
-      background: #22d3ee;
-      top: 40%;
-      left: -80px;
-      animation-delay: -6s;
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(30px, -30px) scale(1.1); }
+      bottom: -100px;
+      left: 20%;
+      opacity: 0.25;
     }
     
     /* Content */
@@ -108,340 +64,229 @@
       z-index: 10;
       height: 100%;
       display: flex;
-      padding: 50px 60px;
-      gap: 40px;
+      padding: 60px 70px;
     }
     
-    /* Left section - Name & Title */
-    .left-section {
-      width: 45%;
+    /* Left - Text content */
+    .left {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-    }
-    
-    .header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      justify-content: center;
     }
     
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       padding: 8px 16px;
-      background: rgba(34, 211, 238, 0.15);
-      border: 1px solid rgba(34, 211, 238, 0.3);
+      background: #dbeafe;
       border-radius: 50px;
-      color: #22d3ee;
-      font-size: 12px;
+      color: #1e40af;
+      font-size: 13px;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
+      width: fit-content;
+      margin-bottom: 24px;
     }
     
     .badge::before {
       content: '';
-      width: 6px;
-      height: 6px;
-      background: #22d3ee;
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
     
     @keyframes pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7); }
-      50% { opacity: 0.8; box-shadow: 0 0 0 8px rgba(34, 211, 238, 0); }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
     
-    .name-section h1 {
+    h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 64px;
+      font-size: 72px;
       font-weight: 700;
-      color: white;
-      line-height: 1.1;
-      margin: 20px 0 10px;
+      color: #0f172a;
+      line-height: 1.05;
+      margin-bottom: 8px;
     }
     
-    .name-section h1 span {
-      background: linear-gradient(135deg, #ec4899, #f472b6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    h1 span {
+      color: #dc2626;
     }
     
     .subtitle {
-      font-size: 22px;
-      color: rgba(255,255,255,0.7);
-      font-weight: 400;
-      line-height: 1.5;
+      font-size: 26px;
+      color: #475569;
+      font-weight: 500;
+      margin-bottom: 32px;
     }
     
-    /* Education Card */
-    .info-card {
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 20px 24px;
-      margin-top: 20px;
-    }
-    
-    .info-card-title {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-    
-    .info-card-content {
+    /* Value props */
+    .value-props {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 12px;
+      margin-bottom: 32px;
     }
     
-    .info-item {
+    .prop {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 15px;
-      color: white;
-    }
-    
-    .info-item-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      background: rgba(99, 102, 241, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-    }
-    
-    /* Stats row */
-    .stats {
-      display: flex;
-      gap: 24px;
-      margin-top: 20px;
-    }
-    
-    .stat {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .stat-value {
-      font-size: 28px;
-      font-weight: 800;
-      color: white;
-    }
-    
-    .stat-label {
-      font-size: 12px;
-      color: rgba(255,255,255,0.5);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    /* Right section - Skills & Projects */
-    .right-section {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    
-    /* Skills cloud */
-    .skills-section {
-      background: rgba(255,255,255,0.03);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 24px;
-    }
-    
-    .section-title {
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 16px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .section-title::before {
-      content: '';
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: #22d3ee;
-    }
-    
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    
-    .skill {
-      padding: 10px 18px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 50px;
-      color: white;
-      font-size: 14px;
+      gap: 12px;
+      font-size: 17px;
+      color: #334155;
       font-weight: 500;
     }
     
-    .skill.highlight {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(236, 72, 153, 0.3));
-      border-color: rgba(255,255,255,0.3);
+    .prop-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
     }
     
-    /* Projects showcase */
-    .projects-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .prop-icon.blue { background: #dbeafe; }
+    .prop-icon.purple { background: #f3e8ff; }
+    .prop-icon.green { background: #dcfce7; }
+    .prop-icon.orange { background: #ffedd5; }
+    
+    /* CTA Button */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      background: #0f172a;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      width: fit-content;
+    }
+    
+    /* Right - Visual cards */
+    .right {
+      width: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       gap: 16px;
+      padding-left: 40px;
     }
     
-    .project-card {
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.1);
+    .card {
+      background: white;
       border-radius: 16px;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
+      padding: 20px 24px;
+      box-shadow: 
+        0 1px 3px rgba(0,0,0,0.1),
+        0 4px 6px -1px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
     }
     
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
     }
     
-    .project-card.blue::before {
-      background: linear-gradient(90deg, #3b82f6, #06b6d4);
-    }
-    
-    .project-card.emerald::before {
-      background: linear-gradient(90deg, #10b981, #14b8a6);
-    }
-    
-    .project-icon {
-      width: 40px;
-      height: 40px;
+    .card-icon {
+      width: 36px;
+      height: 36px;
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      margin-bottom: 12px;
+      font-size: 18px;
     }
     
-    .project-card.blue .project-icon {
-      background: rgba(59, 130, 246, 0.2);
-    }
-    
-    .project-card.emerald .project-icon {
-      background: rgba(16, 185, 129, 0.2);
-    }
-    
-    .project-title {
-      font-size: 16px;
+    .card-title {
+      font-size: 15px;
       font-weight: 700;
-      color: white;
-      margin-bottom: 6px;
+      color: #0f172a;
     }
     
-    .project-desc {
-      font-size: 12px;
-      color: rgba(255,255,255,0.6);
+    .card-desc {
+      font-size: 14px;
+      color: #64748b;
       line-height: 1.4;
     }
     
-    .project-tags {
+    .tech-tags {
       display: flex;
-      gap: 6px;
-      margin-top: 10px;
+      gap: 8px;
+      margin-top: 12px;
     }
     
-    .project-tag {
-      padding: 4px 10px;
-      background: rgba(255,255,255,0.1);
+    .tech-tag {
+      padding: 5px 12px;
+      background: #f1f5f9;
       border-radius: 20px;
-      font-size: 10px;
-      color: rgba(255,255,255,0.8);
-    }
-    
-    /* Bottom bar */
-    .bottom-bar {
-      margin-top: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .url {
-      font-size: 14px;
-      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+      color: #475569;
       font-weight: 500;
     }
     
-    .social-proof {
+    /* Color variants */
+    .blue .card-icon { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
+    .emerald .card-icon { background: linear-gradient(135deg, #10b981, #14b8a6); }
+    .purple .card-icon { background: linear-gradient(135deg, #8b5cf6, #a855f7); }
+    .orange .card-icon { background: linear-gradient(135deg, #f97316, #fb923c); }
+    
+    .blue .card-title { color: #1e40af; }
+    .emerald .card-title { color: #065f46; }
+    .purple .card-title { color: #5b21b6; }
+    .orange .card-title { color: #9a3412; }
+    
+    /* URL footer */
+    .footer {
+      position: absolute;
+      bottom: 30px;
+      left: 70px;
+      right: 70px;
       display: flex;
-      gap: 16px;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 20px;
+      border-top: 1px solid #e2e8f0;
     }
     
-    .social-item {
+    .url {
+      font-size: 15px;
+      color: #64748b;
+      font-weight: 600;
+    }
+    
+    .socials {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .social {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      color: #475569;
+      font-weight: 500;
     }
     
-    .social-icon {
-      width: 20px;
-      height: 20px;
-    }
-    
-    /* Portrait overlay - subtle on right */
-    .portrait-overlay {
-      position: absolute;
-      right: -100px;
-      bottom: -150px;
-      width: 500px;
-      height: 700px;
-      opacity: 0.15;
-      pointer-events: none;
-      mask-image: linear-gradient(to left, black 30%, transparent 80%);
-      -webkit-mask-image: linear-gradient(to left, black 30%, transparent 80%);
-    }
-    
-    /* Screenshot instruction */
+    /* Instruction */
     .instruction {
       margin-top: 30px;
-      color: rgba(255,255,255,0.4);
+      color: #64748b;
       font-size: 14px;
       text-align: center;
     }
     
     code {
-      background: rgba(255,255,255,0.1);
+      background: #e2e8f0;
       padding: 4px 8px;
       border-radius: 4px;
       font-family: monospace;
@@ -449,138 +294,94 @@
   </style>
 </head>
 <body>
-  <div class="og-container" id="ogImage">
-    <div class="bg-gradient"></div>
-    <div class="grid"></div>
-    
-    <!-- Floating orbs -->
+  <div class="og-container">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    
-    <!-- Portrait overlay -->
-    <img src="./images/hero-portrait.png" alt="" class="portrait-overlay">
     
     <div class="content">
-      <!-- Left Section -->
-      <div class="left-section">
-        <div>
-          <div class="header">
-            <div class="badge">Open to Opportunities</div>
+      <!-- Left side -->
+      <div class="left">
+        <div class="badge">Open to Opportunities</div>
+        
+        <h1>Šimon<br><span>Havlík</span></h1>
+        <p class="subtitle">Investment Analyst & Portfolio Optimization</p>
+        
+        <div class="value-props">
+          <div class="prop">
+            <div class="prop-icon blue">📊</div>
+            <span>Portfolio tracking platform for investment clubs</span>
           </div>
-          
-          <div class="name-section">
-            <h1>Šimon<br><span>Havlík</span></h1>
-            <p class="subtitle">Investment Analyst &<br>Portfolio Optimization Specialist</p>
+          <div class="prop">
+            <div class="prop-icon purple">⚡</div>
+            <span>Quantitative optimization with MPT & Risk Parity</span>
+          </div>
+          <div class="prop">
+            <div class="prop-icon green">🌏</div>
+            <span>Asia-Pacific markets & Mandarin (HSK 3)</span>
+          </div>
+          <div class="prop">
+            <div class="prop-icon orange">🐍</div>
+            <span>Python, Flask, SQL, React & TypeScript</span>
           </div>
         </div>
         
-        <div>
-          <!-- Education Card -->
-          <div class="info-card">
-            <div class="info-card-title">Education</div>
-            <div class="info-card-content">
-              <div class="info-item">
-                <div class="info-item-icon">🎓</div>
-                <span>VŠE Prague - Economics & Finance</span>
-              </div>
-              <div class="info-item">
-                <div class="info-item-icon">📍</div>
-                <span>Prague, Czech Republic</span>
-              </div>
-              <div class="info-item">
-                <div class="info-item-icon">🌏</div>
-                <span>HSK 3 Mandarin Chinese</span>
-              </div>
-            </div>
+        <div class="cta">View Portfolio →</div>
+      </div>
+      
+      <!-- Right side - Project cards -->
+      <div class="right">
+        <div class="card blue">
+          <div class="card-header">
+            <div class="card-icon">📈</div>
+            <div class="card-title">KI AM Portfolio Tracker</div>
           </div>
-          
-          <!-- Stats -->
-          <div class="stats">
-            <div class="stat">
-              <span class="stat-value">2</span>
-              <span class="stat-label">Live Apps</span>
-            </div>
-            <div class="stat">
-              <span class="stat-value">5+</span>
-              <span class="stat-label">Analyses</span>
-            </div>
-            <div class="stat">
-              <span class="stat-value">8k+</span>
-              <span class="stat-label">Companies</span>
-            </div>
+          <div class="card-desc">Real-time portfolio tracking with AI-assisted workflows and board voting system</div>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Flask</span>
+            <span class="tech-tag">SQLAlchemy</span>
+          </div>
+        </div>
+        
+        <div class="card emerald">
+          <div class="card-header">
+            <div class="card-icon">🎯</div>
+            <div class="card-title">Portfolio Optimizer</div>
+          </div>
+          <div class="card-desc">Modern Portfolio Theory implementation with Monte Carlo simulation & CVaR</div>
+          <div class="tech-tags">
+            <span class="tech-tag">CVXPY</span>
+            <span class="tech-tag">Plotly</span>
+            <span class="tech-tag">Pandas</span>
+          </div>
+        </div>
+        
+        <div class="card purple">
+          <div class="card-header">
+            <div class="card-icon">📑</div>
+            <div class="card-title">Equity Research</div>
+          </div>
+          <div class="card-desc">Fundamental analysis reports on Bilibili, Tuya, Alphabet & Chinese markets</div>
+          <div class="tech-tags">
+            <span class="tech-tag">Valuation</span>
+            <span class="tech-tag">DCF Models</span>
           </div>
         </div>
       </div>
-      
-      <!-- Right Section -->
-      <div class="right-section">
-        <!-- Skills -->
-        <div class="skills-section">
-          <div class="section-title">Technical Skills</div>
-          <div class="skills-grid">
-            <div class="skill highlight">Python</div>
-            <div class="skill highlight">Flask</div>
-            <div class="skill">SQL</div>
-            <div class="skill">Pandas</div>
-            <div class="skill">CVXPY</div>
-            <div class="skill highlight">Portfolio Theory</div>
-            <div class="skill">Risk Analysis</div>
-            <div class="skill">Monte Carlo</div>
-            <div class="skill highlight">China Markets</div>
-            <div class="skill">React</div>
-            <div class="skill">TypeScript</div>
-          </div>
-        </div>
-        
-        <!-- Projects -->
-        <div class="projects-section">
-          <div class="project-card blue">
-            <div class="project-icon">📈</div>
-            <div class="project-title">KI AM Platform</div>
-            <div class="project-desc">Portfolio tracking for investment clubs</div>
-            <div class="project-tags">
-              <span class="project-tag">Python</span>
-              <span class="project-tag">Flask</span>
-            </div>
-          </div>
-          
-          <div class="project-card emerald">
-            <div class="project-icon">⚡</div>
-            <div class="project-title">Portfolio Optimizer</div>
-            <div class="project-desc">MPT, Risk Parity, Black-Litterman</div>
-            <div class="project-tags">
-              <span class="project-tag">CVXPY</span>
-              <span class="project-tag">Plotly</span>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Bottom bar -->
-        <div class="bottom-bar">
-          <span class="url">havliksimon.eu</span>
-          <div class="social-proof">
-            <div class="social-item">
-              <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-              LinkedIn
-            </div>
-            <div class="social-item">
-              <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              GitHub
-            </div>
-          </div>
-        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+      <span class="url">havliksimon.eu</span>
+      <div class="socials">
+        <span class="social">💼 LinkedIn</span>
+        <span class="social">⭐ GitHub</span>
       </div>
     </div>
   </div>
   
   <p class="instruction">
-    📸 Take a screenshot of the image above (1200×630px)<br>
-    Save as <code>og-image.png</code> in your public folder
+    📸 Screenshot this (1200×630px) and save as <code>og-image.png</code> in public folder
   </p>
 </body>
 </html>
