@@ -18,8 +18,8 @@ interface Project {
   tags: string[];
   color: string;
   gradientBg: string;
-  previewUrl: string;  // For iframe preview (may be http)
-  liveUrl: string;     // For external links (always https)
+  previewUrl: string;  // For iframe preview
+  liveUrl: string;     // For external links
   github: string;
 }
 
@@ -33,8 +33,8 @@ const projects: Project[] = [
     tags: ['Python', 'Flask', 'SQLAlchemy', 'Bootstrap'],
     color: 'blue',
     gradientBg: 'from-blue-500 via-cyan-500 to-blue-600',
-    previewUrl: 'http://ki.verxl.com/',      // HTTP for iframe (prevents browser flagging)
-    liveUrl: 'https://ki.verxl.com/',        // HTTPS for external links
+    previewUrl: 'https://ki.verxl.com/',
+    liveUrl: 'https://ki.verxl.com/',
     github: 'https://github.com/havliksimon/ki-asset-management'
   },
   {
