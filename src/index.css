@@ -48,18 +48,28 @@
 
   /* Custom Cursor - Hide default cursor on desktop */
   @media (pointer: fine) {
-    * {
+    *,
+    *::before,
+    *::after {
       cursor: none !important;
     }
     
-    a, button, [role="button"], input, textarea, select, [data-cursor-hover] {
+    a, button, [role="button"], input, textarea, select, [data-cursor-hover],
+    label, [class*="cursor-"] {
       cursor: none !important;
+    }
+
+    /* Ensure iframe and its contents don't show cursor */
+    iframe {
+      pointer-events: auto;
     }
   }
   
   /* Show default cursor on touch devices */
   @media (pointer: coarse) {
-    * {
+    *,
+    *::before,
+    *::after {
       cursor: auto !important;
     }
   }

@@ -2,14 +2,17 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 
 const CustomCursor = () => {
-  const cursorRef = useRef<HTMLDivElement>(null);
+  const cursorContainerRef = useRef<HTMLDivElement>(null);
   const cursorDotRef = useRef<HTMLDivElement>(null);
+  const cursorOutlineRef = useRef<HTMLDivElement>(null);
   const cursorRingRef = useRef<HTMLDivElement>(null);
-  const cursorTextRef = useRef<HTMLDivElement>(null);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
-  const [cursorText, setCursorText] = useState('');
+  
   const mousePos = useRef({ x: 0, y: 0 });
+  const targetPos = useRef({ x: 0, y: 0 });
+  const rafId = useRef<number | undefined>(undefined);
   const isHovering = useRef(false);
+  const isClicking = useRef(false);
 
   useEffect(() => {
     const checkTouch = () => {
@@ -20,285 +23,232 @@ const CustomCursor = () => {
     return () => window.removeEventListener('resize', checkTouch);
   }, []);
 
-  const updateCursor = useCallback(() => {
+  const lerp = (start: number, end: number, factor: number) => {
+    return start + (end - start) * factor;
+  };
+
+  const animate = useCallback(() => {
     if (isTouchDevice) return;
 
-    const cursor = cursorRef.current;
-    const cursorDot = cursorDotRef.current;
-    const cursorRing = cursorRingRef.current;
+    // Smooth follow for container (slight lag for fluid feel)
+    targetPos.current.x = lerp(targetPos.current.x, mousePos.current.x, 0.15);
+    targetPos.current.y = lerp(targetPos.current.y, mousePos.current.y, 0.15);
 
-    if (!cursor || !cursorDot || !cursorRing) return;
+    const container = cursorContainerRef.current;
+    const ring = cursorRingRef.current;
 
-    // Smooth follow for the main cursor container
-    gsap.to(cursor, {
-      x: mousePos.current.x,
-      y: mousePos.current.y,
-      duration: 0.08,
-      ease: 'power2.out'
-    });
+    if (container) {
+      container.style.transform = `translate(${targetPos.current.x}px, ${targetPos.current.y}px) translate(-50%, -50%)`;
+    }
 
-    // Fast follow for the dot
-    gsap.to(cursorDot, {
-      x: mousePos.current.x,
-      y: mousePos.current.y,
-      duration: 0.02,
-      ease: 'none'
-    });
+    // Dot follows precisely with no lag
+    const dot = cursorDotRef.current;
+    if (dot) {
+      dot.style.transform = `translate(${mousePos.current.x}px, ${mousePos.current.y}px) translate(-50%, -50%)`;
+    }
 
-    // Slower, more playful follow for the ring
-    gsap.to(cursorRing, {
-      x: mousePos.current.x,
-      y: mousePos.current.y,
-      duration: 0.15,
-      ease: 'power3.out'
-    });
+    // Ring has more lag for playful trailing effect
+    if (ring && !isHovering.current) {
+      const ringX = lerp(parseFloat(ring.dataset.x || '0'), mousePos.current.x, 0.08);
+      const ringY = lerp(parseFloat(ring.dataset.y || '0'), mousePos.current.y, 0.08);
+      ring.dataset.x = String(ringX);
+      ring.dataset.y = String(ringY);
+      ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    }
+
+    rafId.current = requestAnimationFrame(animate);
   }, [isTouchDevice]);
 
   useEffect(() => {
     if (isTouchDevice) return;
 
-    let rafId: number;
-    let isActive = true;
-
-    const moveCursor = (e: MouseEvent) => {
+    const handleMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
-      if (!isActive) {
-        isActive = true;
-        const animate = () => {
-          if (!isActive) return;
-          updateCursor();
-          rafId = requestAnimationFrame(animate);
-        };
-        animate();
-      }
     };
 
-    const animate = () => {
-      if (!isActive) return;
-      updateCursor();
-      rafId = requestAnimationFrame(animate);
+    const handleMouseDown = () => {
+      isClicking.current = true;
+      gsap.to(cursorDotRef.current, { 
+        scale: 0.6, 
+        duration: 0.1,
+        ease: 'power2.out'
+      });
+      gsap.to(cursorOutlineRef.current, { 
+        scale: 0.85, 
+        duration: 0.1,
+        ease: 'power2.out'
+      });
     };
 
-    // Start animation loop
-    animate();
+    const handleMouseUp = () => {
+      isClicking.current = false;
+      gsap.to(cursorDotRef.current, { 
+        scale: 1, 
+        duration: 0.3,
+        ease: 'elastic.out(1, 0.5)'
+      });
+      gsap.to(cursorOutlineRef.current, { 
+        scale: isHovering.current ? 1.5 : 1, 
+        duration: 0.3,
+        ease: 'elastic.out(1, 0.5)'
+      });
+    };
 
     const handleMouseEnter = () => {
-      gsap.to([cursorRef.current, cursorDotRef.current, cursorRingRef.current], { 
-        opacity: 1, 
-        scale: 1,
-        duration: 0.3,
-        ease: 'back.out(1.7)'
+      gsap.to([cursorContainerRef.current, cursorDotRef.current, cursorOutlineRef.current, cursorRingRef.current], {
+        opacity: 1,
+        duration: 0.2
       });
     };
 
     const handleMouseLeave = () => {
-      gsap.to([cursorRef.current, cursorDotRef.current, cursorRingRef.current], { 
-        opacity: 0, 
-        scale: 0,
-        duration: 0.2 
+      gsap.to([cursorContainerRef.current, cursorDotRef.current, cursorOutlineRef.current, cursorRingRef.current], {
+        opacity: 0,
+        duration: 0.2
       });
     };
 
-    const handleMouseDown = () => {
-      gsap.to(cursorDotRef.current, { scale: 0.5, duration: 0.1 });
-      gsap.to(cursorRingRef.current, { scale: 0.8, duration: 0.1 });
-    };
+    // Start animation loop
+    rafId.current = requestAnimationFrame(animate);
 
-    const handleMouseUp = () => {
-      gsap.to(cursorDotRef.current, { scale: 1, duration: 0.2, ease: 'back.out(2)' });
-      gsap.to(cursorRingRef.current, { scale: 1, duration: 0.2, ease: 'back.out(2)' });
-    };
+    document.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mouseenter', handleMouseEnter);
+    document.addEventListener('mouseleave', handleMouseLeave);
 
-    // Add hover effects
-    const addHoverEffects = () => {
-      // Interactive elements - buttons, links, etc
-      const interactiveElements = document.querySelectorAll('a, button, [data-cursor-hover], input, textarea, [role="button"]');
-      
-      const handleElementEnter = (e: Event) => {
+    // Hover effects
+    const setupHoverEffects = () => {
+      const interactiveElements = document.querySelectorAll(
+        'a, button, [data-cursor-hover], input, textarea, select, [role="button"], .cursor-pointer'
+      );
+
+      const onEnter = () => {
         isHovering.current = true;
-        const target = e.currentTarget as HTMLElement;
-        const cursorType = target.getAttribute('data-cursor-type');
-        const text = target.getAttribute('data-cursor-text');
         
-        if (text) {
-          setCursorText(text);
-          gsap.to(cursorTextRef.current, { opacity: 1, scale: 1, duration: 0.2 });
-        }
-
-        if (cursorType === 'view') {
-          // "View" mode - large ring with text
-          gsap.to(cursorRingRef.current, { 
-            width: 80, 
-            height: 80, 
-            borderWidth: 1,
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-            duration: 0.3,
-            ease: 'back.out(1.7)'
-          });
-          gsap.to(cursorDotRef.current, { scale: 0, duration: 0.2 });
-        } else if (cursorType === 'drag') {
-          // "Drag" mode
-          gsap.to(cursorRingRef.current, { 
-            width: 60, 
-            height: 60, 
-            borderWidth: 2,
-            borderColor: '#10B981',
-            duration: 0.3 
-          });
-        } else {
-          // Default hover - magnetic pull effect
-          gsap.to(cursorRingRef.current, { 
-            width: 50, 
-            height: 50, 
-            borderWidth: 2,
-            borderColor: 'rgba(0, 0, 0, 0.5)',
-            backgroundColor: 'rgba(0, 0, 0, 0.05)',
-            duration: 0.25,
-            ease: 'back.out(1.7)'
-          });
-          gsap.to(cursorDotRef.current, { 
-            scale: 1.5, 
-            backgroundColor: '#DC2626',
-            duration: 0.2 
-          });
-        }
-      };
-
-      const handleElementLeave = () => {
-        isHovering.current = false;
-        setCursorText('');
-        
-        gsap.to(cursorTextRef.current, { opacity: 0, scale: 0.5, duration: 0.2 });
-        
-        gsap.to(cursorRingRef.current, { 
-          width: 40, 
-          height: 40, 
-          borderWidth: 1.5,
-          borderColor: 'rgba(0, 0, 0, 0.3)',
-          backgroundColor: 'transparent',
+        // Expand outline
+        gsap.to(cursorOutlineRef.current, {
+          scale: 1.5,
+          borderColor: 'rgba(0, 0, 0, 0.4)',
+          borderWidth: '1px',
           duration: 0.25,
           ease: 'power2.out'
         });
-        gsap.to(cursorDotRef.current, { 
-          scale: 1, 
-          backgroundColor: '#DC2626',
-          duration: 0.2 
+
+        // Dot stays same size but becomes more prominent
+        gsap.to(cursorDotRef.current, {
+          scale: 1,
+          backgroundColor: '#000000',
+          duration: 0.2
+        });
+
+        // Ring fades out on hover
+        gsap.to(cursorRingRef.current, {
+          scale: 0,
+          opacity: 0,
+          duration: 0.2
+        });
+      };
+
+      const onLeave = () => {
+        isHovering.current = false;
+        
+        gsap.to(cursorOutlineRef.current, {
+          scale: 1,
+          borderColor: 'rgba(0, 0, 0, 0.25)',
+          borderWidth: '1.5px',
+          duration: 0.25,
+          ease: 'power2.out'
+        });
+
+        gsap.to(cursorDotRef.current, {
+          scale: 1,
+          backgroundColor: '#000000',
+          duration: 0.2
+        });
+
+        gsap.to(cursorRingRef.current, {
+          scale: 1,
+          opacity: 1,
+          duration: 0.3,
+          ease: 'power2.out'
         });
       };
 
       interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', handleElementEnter);
-        el.addEventListener('mouseleave', handleElementLeave);
+        el.addEventListener('mouseenter', onEnter);
+        el.addEventListener('mouseleave', onLeave);
       });
 
-      // Text elements - subtle effect
-      const textElements = document.querySelectorAll('h1, h2, h3, h4, p, span');
-      
-      const handleTextEnter = () => {
-        if (!isHovering.current) {
-          gsap.to(cursorRingRef.current, { 
-            opacity: 0.5,
-            scale: 0.8,
-            duration: 0.2 
-          });
-        }
-      };
-
-      const handleTextLeave = () => {
-        if (!isHovering.current) {
-          gsap.to(cursorRingRef.current, { 
-            opacity: 1,
-            scale: 1,
-            duration: 0.2 
-          });
-        }
-      };
-
-      textElements.forEach(el => {
-        el.addEventListener('mouseenter', handleTextEnter);
-        el.addEventListener('mouseleave', handleTextLeave);
-      });
-
-      return () => {
-        interactiveElements.forEach(el => {
-          el.removeEventListener('mouseenter', handleElementEnter);
-          el.removeEventListener('mouseleave', handleElementLeave);
-        });
-        textElements.forEach(el => {
-          el.removeEventListener('mouseenter', handleTextEnter);
-          el.removeEventListener('mouseleave', handleTextLeave);
-        });
-      };
+      return { onEnter, onLeave, elements: interactiveElements };
     };
 
-    document.addEventListener('mousemove', moveCursor, { passive: true });
-    document.addEventListener('mouseenter', handleMouseEnter);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-
-    const cleanupHover = addHoverEffects();
-    // Re-apply hover effects periodically to catch new elements
-    const intervalId = setInterval(addHoverEffects, 2000);
+    let hoverSetup = setupHoverEffects();
+    
+    // Refresh hover effects periodically
+    const refreshInterval = setInterval(() => {
+      hoverSetup.elements.forEach(el => {
+        el.removeEventListener('mouseenter', hoverSetup.onEnter);
+        el.removeEventListener('mouseleave', hoverSetup.onLeave);
+      });
+      hoverSetup = setupHoverEffects();
+    }, 2000);
 
     return () => {
-      isActive = false;
-      cancelAnimationFrame(rafId);
-      clearInterval(intervalId);
-      cleanupHover?.();
-      document.removeEventListener('mousemove', moveCursor);
-      document.removeEventListener('mouseenter', handleMouseEnter);
-      document.removeEventListener('mouseleave', handleMouseLeave);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      clearInterval(refreshInterval);
+      document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mouseenter', handleMouseEnter);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      hoverSetup.elements.forEach(el => {
+        el.removeEventListener('mouseenter', hoverSetup.onEnter);
+        el.removeEventListener('mouseleave', hoverSetup.onLeave);
+      });
     };
-  }, [isTouchDevice, updateCursor]);
+  }, [isTouchDevice, animate]);
 
   if (isTouchDevice) return null;
 
   return (
     <>
-      {/* Main cursor container - moves smoothly */}
-      <div
-        ref={cursorRef}
-        className="fixed top-0 left-0 pointer-events-none z-[9999] opacity-0"
-        style={{ transform: 'translate(-50%, -50%)' }}
-      />
-      
-      {/* Playful outer ring */}
-      <div
-        ref={cursorRingRef}
-        className="fixed top-0 left-0 w-10 h-10 rounded-full pointer-events-none z-[9998] opacity-0"
-        style={{
-          transform: 'translate(-50%, -50%)',
-          border: '1.5px solid rgba(0, 0, 0, 0.3)',
-          backgroundColor: 'transparent',
-          transition: 'border-color 0.2s, background-color 0.2s',
-        }}
-      />
-      
-      {/* Central dot */}
+      {/* Precise black dot - exact cursor position */}
       <div
         ref={cursorDotRef}
-        className="fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[9999] opacity-0 mix-blend-difference"
+        className="fixed top-0 left-0 w-[6px] h-[6px] bg-black rounded-full pointer-events-none z-[10000] opacity-0"
         style={{
-          backgroundColor: '#DC2626',
-          transform: 'translate(-50%, -50%)',
+          willChange: 'transform',
         }}
       />
-      
-      {/* Text label (appears on certain hovers) */}
-      {cursorText && (
-        <div
-          ref={cursorTextRef}
-          className="fixed top-0 left-0 pointer-events-none z-[9999] opacity-0"
-          style={{ transform: 'translate(-50%, -50%)' }}
-        >
-          <span className="text-xs font-semibold text-gray-900 uppercase tracking-wider">
-            {cursorText}
-          </span>
-        </div>
-      )}
+
+      {/* Outer outline circle - expands on hover */}
+      <div
+        ref={cursorOutlineRef}
+        className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[9999] opacity-0"
+        style={{
+          border: '1.5px solid rgba(0, 0, 0, 0.25)',
+          willChange: 'transform',
+        }}
+      />
+
+      {/* Trailing ring - playful lag effect */}
+      <div
+        ref={cursorRingRef}
+        data-x="0"
+        data-y="0"
+        className="fixed top-0 left-0 w-12 h-12 rounded-full pointer-events-none z-[9998] opacity-0"
+        style={{
+          border: '1px solid rgba(0, 0, 0, 0.1)',
+          willChange: 'transform',
+        }}
+      />
+
+      {/* Container for any additional cursor elements */}
+      <div
+        ref={cursorContainerRef}
+        className="fixed top-0 left-0 pointer-events-none z-[9997] opacity-0"
+      />
     </>
   );
 };
