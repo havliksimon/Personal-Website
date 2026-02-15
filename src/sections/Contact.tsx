@@ -122,9 +122,9 @@ const Contact = () => {
         <div ref={titleRef} className="text-center mb-16">
           <h2 className="section-title">Let's Connect</h2>
           <p className="section-subtitle mx-auto">
-            I'm always open to discussing investment opportunities, consulting projects, 
-            or CEMS program collaborations. Whether you're looking for analytical expertise 
-            or want to exchange ideas about financial markets, I'd love to hear from you.
+            I'm always open to discussing investment opportunities and consulting projects.
+            Whether you're looking for analytical expertise or want to exchange ideas about
+            financial markets, I'd love to hear from you.
           </p>
         </div>
 
@@ -166,7 +166,7 @@ const Contact = () => {
                 <span className="text-sm font-medium text-green-700">Available for opportunities</span>
               </div>
               <p className="text-sm text-green-600">
-                Currently seeking consulting internships and CEMS program opportunities for 2026-2027.
+                Currently seeking consulting internships for 2026-2027.
               </p>
             </div>
           </div>

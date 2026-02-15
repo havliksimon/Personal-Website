@@ -158,7 +158,7 @@ const Hero = () => {
         </a>
       </nav>
 
-      {/* Portrait - CENTERED, 90% from bottom */}
+      {/* Portrait - Desktop: full height, Mobile: smaller */}
       <div
         ref={portraitRef}
         className="absolute flex justify-center items-end"
@@ -184,9 +184,9 @@ const Hero = () => {
         />
       </div>
 
-      {/* GRADUAL blur - from no blur to white */}
+      {/* GRADUAL blur - Desktop: covers portrait bottom, Mobile: adjusted for smaller portrait */}
       <div 
-        className="absolute bottom-0 left-0 right-0 pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 pointer-events-none hidden md:block"
         style={{ 
           zIndex: 15,
           height: '50vh',
@@ -195,18 +195,50 @@ const Hero = () => {
           background: 'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 10%, rgba(255,255,255,0.8) 25%, rgba(255,255,255,0.5) 45%, rgba(255,255,255,0.2) 65%, rgba(255,255,255,0.05) 80%, transparent 100%)'
         }}
       />
+      
+      {/* Mobile gradient - fades from portrait to content area */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 pointer-events-none md:hidden"
+        style={{ 
+          zIndex: 15,
+          height: '45vh',
+          top: '20vh',
+          background: 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.3) 30%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%)'
+        }}
+      />
 
-      {/* Content */}
-      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 20 }}>
+      {/* Mobile Content - Below portrait */}
+      <div className="md:hidden relative flex flex-col" style={{ zIndex: 20, marginTop: '62vh', paddingBottom: '4vh' }}>
+        <div className="pointer-events-auto w-full px-6 text-center">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-xs sm:text-sm text-gray-500 font-mono uppercase tracking-wider">Investment Analyst</span>
+          </div>
+          <h1 className="text-lg sm:text-xl font-semibold text-gray-900 leading-tight">
+            Economics student<br />
+            specializing in <span className="italic">Asia-Pacific</span><br />
+            markets and <span className="italic">data-driven</span><br />
+            analysis
+          </h1>
+        </div>
+      </div>
+
+      {/* Desktop Content - Absolute positioned over portrait */}
+      <div className="hidden md:block absolute inset-0 pointer-events-none" style={{ zIndex: 20 }}>
+        {/* Left side - at 6% from left */}
         <div 
-          className="absolute left-8 pointer-events-auto"
-          style={{ bottom: '18vh', maxWidth: '420px' }}
+          className="absolute pointer-events-auto text-left"
+          style={{ 
+            bottom: '18vh', 
+            maxWidth: '420px',
+            left: '6%'
+          }}
         >
           <div className="flex items-center gap-2 mb-4">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             <span className="text-sm text-gray-500 font-mono uppercase tracking-wider">Investment Analyst</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 leading-tight">
+          <h1 className="text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight">
             Economics student<br />
             specializing in <span className="italic">Asia-Pacific</span><br />
             markets and <span className="italic">data-driven</span><br />
@@ -214,9 +246,14 @@ const Hero = () => {
           </h1>
         </div>
 
+        {/* Right side - at 6% from right */}
         <div 
-          className="absolute right-8 text-right pointer-events-auto"
-          style={{ bottom: '18vh', maxWidth: '280px' }}
+          className="absolute text-right pointer-events-auto"
+          style={{ 
+            bottom: '18vh', 
+            maxWidth: '280px',
+            right: '6%'
+          }}
         >
           <p className="text-sm text-gray-500 leading-relaxed mb-6">
             VŠE Prague · Klub Investorů · Python · SQL · R · Mandarin (HSK3)
