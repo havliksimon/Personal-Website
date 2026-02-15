@@ -114,33 +114,14 @@ const InteractiveNav = () => {
   return (
     <div
       ref={navRef}
-      className="fixed right-4 top-1/2 -translate-y-1/2 z-[100] hidden md:block"
-      style={{ opacity: 0, transform: 'translateY(-50%) translateX(100px)' }}
+      className="fixed right-4 bottom-8 z-[100] hidden md:flex flex-col items-end gap-3"
+      style={{ opacity: 0, transform: 'translateX(100px)' }}
     >
-      {/* Main Toggle Button */}
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        onMouseEnter={() => setIsExpanded(true)}
-        className="relative w-12 h-12 rounded-full bg-white shadow-lg border border-gray-200 flex items-center justify-center hover:shadow-xl transition-shadow group"
-        data-cursor-hover
-      >
-        {/* Active indicator dot */}
-        <div className={`absolute inset-1.5 rounded-full ${activeItem?.color || 'bg-gray-900'} opacity-20 group-hover:opacity-30 transition-opacity`} />
-        
-        {/* Icon */}
-        <div className="relative">
-          {activeItem && <activeItem.icon className="w-5 h-5 text-gray-700" />}
-        </div>
-        
-        {/* Pulse animation */}
-        <div className={`absolute inset-0 rounded-full ${activeItem?.color || 'bg-gray-900'} opacity-20 animate-ping`} style={{ animationDuration: '2s' }} />
-      </button>
-
-      {/* Expanded Menu */}
+      {/* Expanded Menu - positioned above the toggle button */}
       <div
         ref={menuRef}
-        className="absolute right-0 top-14 bg-white rounded-2xl shadow-2xl border border-gray-100 py-3 px-2 min-w-[180px]"
-        style={{ opacity: 0, transform: 'scale(0.8)', transformOrigin: 'top right', pointerEvents: isExpanded ? 'auto' : 'none' }}
+        className="bg-white rounded-2xl shadow-2xl border border-gray-100 py-3 px-2 min-w-[180px] mb-2"
+        style={{ opacity: 0, transform: 'scale(0.8)', transformOrigin: 'bottom right', pointerEvents: isExpanded ? 'auto' : 'none' }}
         onMouseLeave={() => setIsExpanded(false)}
       >
         {/* Header */}
@@ -205,15 +186,34 @@ const InteractiveNav = () => {
         </div>
       </div>
 
-      {/* Tooltip on hover when collapsed */}
-      {!isExpanded && activeItem && (
-        <div className="absolute right-14 top-1/2 -translate-y-1/2 pointer-events-none">
-          <div className="bg-gray-900 text-white text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-            {activeItem.label}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-2 h-2 bg-gray-900 rotate-45" />
-          </div>
+      {/* Main Toggle Button - at the bottom */}
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        onMouseEnter={() => setIsExpanded(true)}
+        className="relative w-12 h-12 rounded-full bg-white shadow-lg border border-gray-200 flex items-center justify-center hover:shadow-xl transition-shadow group"
+        data-cursor-hover
+      >
+        {/* Active indicator dot */}
+        <div className={`absolute inset-1.5 rounded-full ${activeItem?.color || 'bg-gray-900'} opacity-20 group-hover:opacity-30 transition-opacity`} />
+        
+        {/* Icon */}
+        <div className="relative">
+          {activeItem && <activeItem.icon className="w-5 h-5 text-gray-700" />}
         </div>
-      )}
+        
+        {/* Pulse animation */}
+        <div className={`absolute inset-0 rounded-full ${activeItem?.color || 'bg-gray-900'} opacity-20 animate-ping`} style={{ animationDuration: '2s' }} />
+        
+        {/* Tooltip on hover when collapsed */}
+        {!isExpanded && (
+          <div className="absolute right-14 top-1/2 -translate-y-1/2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="bg-gray-900 text-white text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap">
+              {activeItem?.label}
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-2 h-2 bg-gray-900 rotate-45" />
+            </div>
+          </div>
+        )}
+      </button>
     </div>
   );
 };
