@@ -9,7 +9,7 @@ import Skills from './sections/Skills';
 import Projects from './sections/Projects';
 import Analyses from './sections/Analyses';
 import China from './sections/China';
-import Education from './sections/Education';
+
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
 import ScrollProgress from './components/ScrollProgress';
@@ -45,7 +45,6 @@ function App() {
         <Projects />
         <Analyses />
         <China />
-        <Education />
         <Contact />
         <Footer />
       </main>

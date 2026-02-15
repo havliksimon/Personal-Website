@@ -152,7 +152,6 @@ const Hero = () => {
           <a href="#projects" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Projects</a>
           <a href="#analyses" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Analyses</a>
           <a href="#china" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">China</a>
-          <a href="#education" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Education</a>
           <a href="#contact" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
         </div>
         

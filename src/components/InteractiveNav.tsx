@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 import { 
   Home, User, Route, Wrench, Briefcase, 
-  FileText, Globe, GraduationCap, Mail, ChevronUp
+  FileText, Globe, Mail, ChevronUp
 } from 'lucide-react';
 
 interface NavItem {
@@ -20,7 +20,6 @@ const navItems: NavItem[] = [
   { id: 'projects', label: 'Projects', icon: Briefcase, color: 'bg-cyan-500' },
   { id: 'analyses', label: 'Analyses', icon: FileText, color: 'bg-amber-500' },
   { id: 'china', label: 'China', icon: Globe, color: 'bg-red-500' },
-  { id: 'education', label: 'Education', icon: GraduationCap, color: 'bg-indigo-500' },
   { id: 'contact', label: 'Contact', icon: Mail, color: 'bg-pink-500' },
 ];
 
