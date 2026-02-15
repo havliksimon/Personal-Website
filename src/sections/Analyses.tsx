@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   FileText, Presentation, Download, ExternalLink, 
   Loader2, ChevronRight, BookOpen, BarChart3,
-  TrendingUp, Globe, Building2
+  TrendingUp, Globe
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -28,68 +28,68 @@ interface AnalysisDoc {
 const analyses: AnalysisDoc[] = [
   {
     id: 1,
-    title: 'Emerging Markets Equity Analysis',
-    subtitle: 'Q4 2024 Market Outlook',
-    description: 'Comprehensive analysis of emerging market equities focusing on Asia-Pacific region. Includes valuation metrics, risk factors, and portfolio allocation recommendations based on macroeconomic indicators.',
+    title: 'Bilibili Equity Analysis',
+    subtitle: 'EM Technology & Entertainment',
+    description: 'Fundamental equity analysis of Bilibili Inc. (BILI), covering business model, financial performance, valuation metrics, and investment thesis for this Chinese video-sharing platform.',
     type: 'analysis',
     date: 'Dec 2024',
-    pages: 24,
-    pdfUrl: '/analyses/emerging-markets-q4-2024.pdf',
-    thumbnailColor: 'from-amber-500 to-orange-600',
-    icon: Globe,
-    tags: ['EM Equities', 'Valuation', 'Macro']
+    pages: 28,
+    pdfUrl: '/analyses/EM_BILI_Havlik.docx.pdf',
+    thumbnailColor: 'from-pink-500 to-rose-600',
+    icon: TrendingUp,
+    tags: ['Equity Research', 'Technology', 'China']
   },
   {
     id: 2,
-    title: 'Portfolio Risk Assessment',
-    subtitle: 'Risk Parity Strategy Deep Dive',
-    description: 'Quantitative risk analysis of multi-asset portfolios using CVaR optimization, stress testing scenarios, and tail risk evaluation through Extreme Value Theory.',
+    title: 'Tuya Inc. Analysis',
+    subtitle: 'IoT & Smart Home Technology',
+    description: 'Comprehensive analysis of Tuya Inc., an IoT development platform company. Includes market positioning, competitive landscape, financial modeling, and risk assessment.',
     type: 'analysis',
-    date: 'Nov 2024',
-    pages: 18,
-    pdfUrl: '/analyses/portfolio-risk-assessment.pdf',
-    thumbnailColor: 'from-blue-500 to-indigo-600',
-    icon: BarChart3,
-    tags: ['Risk', 'CVaR', 'Stress Test']
+    date: 'Dec 2024',
+    pages: 22,
+    pdfUrl: '/analyses/EM_TUYA_Havlik.pdf',
+    thumbnailColor: 'from-cyan-500 to-blue-600',
+    icon: Globe,
+    tags: ['IoT', 'Technology', 'Emerging Markets']
   },
   {
     id: 3,
-    title: 'China A-Shares Screening',
-    subtitle: 'Fundamental Analysis of 50+ Companies',
-    description: 'In-depth fundamental analysis of China A-share market with focus on consumer discretionary and technology sectors. Includes DCF models and relative valuation.',
+    title: 'Alphabet (Google) Analysis',
+    subtitle: 'Large Cap Technology',
+    description: 'Deep dive into Alphabet Inc. covering Google Search, YouTube, Cloud business segments. Features DCF valuation, competitive moat analysis, and AI positioning assessment.',
     type: 'analysis',
-    date: 'Oct 2024',
-    pages: 32,
-    pdfUrl: '/analyses/china-a-shares-screening.pdf',
-    thumbnailColor: 'from-red-500 to-rose-600',
-    icon: Building2,
-    tags: ['China', 'Fundamental', 'DCF']
+    date: 'Jul 2025',
+    pages: 18,
+    pdfUrl: '/analyses/GOOGL_Havlik.pdf',
+    thumbnailColor: 'from-blue-500 to-indigo-600',
+    icon: BarChart3,
+    tags: ['Large Cap', 'Tech Giants', 'Valuation']
   },
   {
     id: 4,
-    title: 'Investment Club Pitch Deck',
-    subtitle: 'KI Asset Management Strategy',
-    description: 'Strategic presentation for investment club covering portfolio construction methodology, performance attribution, and analyst selection framework.',
+    title: 'Chagee IPO Presentation',
+    subtitle: 'Chinese Tea Chain Investment Thesis',
+    description: 'Investment presentation on Chagee, a leading Chinese tea chain. Covers market opportunity, store economics, competitive positioning, and IPO valuation analysis.',
     type: 'presentation',
-    date: 'Sep 2024',
-    pages: 15,
-    pdfUrl: '/presentations/ki-am-strategy.pdf',
+    date: 'Nov 2024',
+    pages: 20,
+    pdfUrl: '/presentations/presentation_Chagee.pdf',
     thumbnailColor: 'from-emerald-500 to-teal-600',
     icon: Presentation,
-    tags: ['Strategy', 'Framework', 'Pitch']
+    tags: ['IPO', 'Consumer', 'China']
   },
   {
     id: 5,
-    title: 'Portfolio Optimization Workshop',
-    subtitle: 'Modern Portfolio Theory in Practice',
-    description: 'Educational presentation covering MPT implementation, efficient frontier construction, and hands-on optimization exercises using Python.',
+    title: 'Tencent Investment Case',
+    subtitle: 'Chinese Tech Conglomerate',
+    description: 'Strategic investment presentation on Tencent Holdings covering gaming, WeChat ecosystem, fintech, and cloud businesses with valuation framework and risk factors.',
     type: 'presentation',
-    date: 'Aug 2024',
-    pages: 28,
-    pdfUrl: '/presentations/mpt-workshop.pdf',
+    date: 'Oct 2024',
+    pages: 24,
+    pdfUrl: '/presentations/presentation_Tencent.pdf',
     thumbnailColor: 'from-violet-500 to-purple-600',
     icon: BookOpen,
-    tags: ['Education', 'MPT', 'Python']
+    tags: ['Tech', 'China', 'Investment Case']
   }
 ];
 
