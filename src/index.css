@@ -45,6 +45,24 @@
   .font-mono {
     font-family: 'JetBrains Mono', monospace;
   }
+
+  /* Custom Cursor - Hide default cursor on desktop */
+  @media (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
+    
+    a, button, [role="button"], input, textarea, select, [data-cursor-hover] {
+      cursor: none !important;
+    }
+  }
+  
+  /* Show default cursor on touch devices */
+  @media (pointer: coarse) {
+    * {
+      cursor: auto !important;
+    }
+  }
 }
 
 @layer components {

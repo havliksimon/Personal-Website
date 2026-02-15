@@ -11,6 +11,7 @@ import China from './sections/China';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
 import ScrollProgress from './components/ScrollProgress';
+import CustomCursor from './components/CustomCursor';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,19 +28,22 @@ function App() {
   }, []);
 
   return (
-    <main className="relative">
-      <ScrollProgress />
-      <section id="hero">
-        <Hero />
-      </section>
-      <About />
-      <Timeline />
-      <Skills />
-      <Projects />
-      <China />
-      <Contact />
-      <Footer />
-    </main>
+    <>
+      <CustomCursor />
+      <main className="relative cursor-none md:cursor-none">
+        <ScrollProgress />
+        <section id="hero">
+          <Hero />
+        </section>
+        <About />
+        <Timeline />
+        <Skills />
+        <Projects />
+        <China />
+        <Contact />
+        <Footer />
+      </main>
+    </>
   );
 }
 
