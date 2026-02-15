@@ -8,91 +8,98 @@ const Hero = () => {
   const portraitRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Check if mobile - skip heavy animations on mobile
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    
     const ctx = gsap.context(() => {
-      // Floating particles
-      const particles = particlesRef.current;
-      if (particles) {
-        for (let i = 0; i < 150; i++) {
-          const particle = document.createElement('div');
-          particle.className = 'absolute rounded-full';
-          const size = Math.random() * 8 + 2;
-          particle.style.width = `${size}px`;
-          particle.style.height = `${size}px`;
-          particle.style.left = `${Math.random() * 100}%`;
-          particle.style.top = `${Math.random() * 100}%`;
-          const hue = Math.random() > 0.5 ? 200 + Math.random() * 60 : 260 + Math.random() * 40;
-          particle.style.background = `hsla(${hue}, 80%, 70%, ${Math.random() * 0.6 + 0.3})`;
-          particle.style.boxShadow = `0 0 ${size * 3}px hsla(${hue}, 80%, 70%, 0.8), 0 0 ${size * 6}px hsla(${hue}, 80%, 70%, 0.4)`;
-          particles.appendChild(particle);
+      // Only run heavy animations on desktop
+      if (!isMobile) {
+        // Floating particles
+        const particles = particlesRef.current;
+        if (particles) {
+          for (let i = 0; i < 150; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'absolute rounded-full';
+            const size = Math.random() * 8 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            const hue = Math.random() > 0.5 ? 200 + Math.random() * 60 : 260 + Math.random() * 40;
+            particle.style.background = `hsla(${hue}, 80%, 70%, ${Math.random() * 0.6 + 0.3})`;
+            particle.style.boxShadow = `0 0 ${size * 3}px hsla(${hue}, 80%, 70%, 0.8), 0 0 ${size * 6}px hsla(${hue}, 80%, 70%, 0.4)`;
+            particles.appendChild(particle);
 
-          gsap.to(particle, {
-            y: -400 - Math.random() * 500,
-            x: (Math.random() - 0.5) * 300,
-            opacity: 0,
-            duration: 8 + Math.random() * 12,
+            gsap.to(particle, {
+              y: -400 - Math.random() * 500,
+              x: (Math.random() - 0.5) * 300,
+              opacity: 0,
+              duration: 8 + Math.random() * 12,
+              repeat: -1,
+              ease: 'none',
+              delay: Math.random() * 10
+            });
+          }
+        }
+
+        // Smoke clouds
+        const smokeContainer = document.createElement('div');
+        smokeContainer.className = 'absolute inset-0 pointer-events-none';
+        smokeContainer.style.zIndex = '0';
+        sectionRef.current?.appendChild(smokeContainer);
+        
+        for (let i = 0; i < 15; i++) {
+          const cloud = document.createElement('div');
+          cloud.className = 'absolute rounded-full';
+          const size = 300 + Math.random() * 500;
+          cloud.style.width = `${size}px`;
+          cloud.style.height = `${size}px`;
+          cloud.style.left = `${Math.random() * 100}%`;
+          cloud.style.bottom = `${Math.random() * 50}%`;
+          cloud.style.background = `radial-gradient(circle, rgba(180,200,255,${0.3 + Math.random() * 0.2}) 0%, rgba(200,180,255,${0.15}) 40%, transparent 70%)`;
+          cloud.style.filter = 'blur(80px)';
+          smokeContainer.appendChild(cloud);
+
+          gsap.to(cloud, {
+            y: -200 - Math.random() * 300,
+            x: (Math.random() - 0.5) * 200,
+            scale: 1.3,
+            duration: 15 + Math.random() * 15,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+            delay: Math.random() * 5
+          });
+        }
+
+        // Rain drops
+        const rainContainer = document.createElement('div');
+        rainContainer.className = 'absolute inset-0 pointer-events-none';
+        rainContainer.style.zIndex = '1';
+        sectionRef.current?.appendChild(rainContainer);
+        
+        for (let i = 0; i < 60; i++) {
+          const drop = document.createElement('div');
+          drop.className = 'absolute';
+          drop.style.width = '1px';
+          drop.style.height = `${Math.random() * 25 + 15}px`;
+          drop.style.left = `${Math.random() * 100}%`;
+          drop.style.top = '-50px';
+          drop.style.background = `linear-gradient(to bottom, transparent, rgba(180,200,255,${Math.random() * 0.5 + 0.3}))`;
+          drop.style.borderRadius = '1px';
+          rainContainer.appendChild(drop);
+
+          gsap.to(drop, {
+            y: window.innerHeight + 100,
+            duration: 0.6 + Math.random() * 0.4,
             repeat: -1,
             ease: 'none',
-            delay: Math.random() * 10
+            delay: Math.random() * 3
           });
         }
       }
 
-      // Smoke clouds
-      const smokeContainer = document.createElement('div');
-      smokeContainer.className = 'absolute inset-0 pointer-events-none';
-      smokeContainer.style.zIndex = '0';
-      sectionRef.current?.appendChild(smokeContainer);
-      
-      for (let i = 0; i < 15; i++) {
-        const cloud = document.createElement('div');
-        cloud.className = 'absolute rounded-full';
-        const size = 300 + Math.random() * 500;
-        cloud.style.width = `${size}px`;
-        cloud.style.height = `${size}px`;
-        cloud.style.left = `${Math.random() * 100}%`;
-        cloud.style.bottom = `${Math.random() * 50}%`;
-        cloud.style.background = `radial-gradient(circle, rgba(180,200,255,${0.3 + Math.random() * 0.2}) 0%, rgba(200,180,255,${0.15}) 40%, transparent 70%)`;
-        cloud.style.filter = 'blur(80px)';
-        smokeContainer.appendChild(cloud);
-
-        gsap.to(cloud, {
-          y: -200 - Math.random() * 300,
-          x: (Math.random() - 0.5) * 200,
-          scale: 1.3,
-          duration: 15 + Math.random() * 15,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-          delay: Math.random() * 5
-        });
-      }
-
-      // Rain drops
-      const rainContainer = document.createElement('div');
-      rainContainer.className = 'absolute inset-0 pointer-events-none';
-      rainContainer.style.zIndex = '1';
-      sectionRef.current?.appendChild(rainContainer);
-      
-      for (let i = 0; i < 60; i++) {
-        const drop = document.createElement('div');
-        drop.className = 'absolute';
-        drop.style.width = '1px';
-        drop.style.height = `${Math.random() * 25 + 15}px`;
-        drop.style.left = `${Math.random() * 100}%`;
-        drop.style.top = '-50px';
-        drop.style.background = `linear-gradient(to bottom, transparent, rgba(180,200,255,${Math.random() * 0.5 + 0.3}))`;
-        drop.style.borderRadius = '1px';
-        rainContainer.appendChild(drop);
-
-        gsap.to(drop, {
-          y: window.innerHeight + 100,
-          duration: 0.6 + Math.random() * 0.4,
-          repeat: -1,
-          ease: 'none',
-          delay: Math.random() * 3
-        });
-      }
-
+      // Portrait animation - run on both
       gsap.fromTo(portraitRef.current,
         { y: 100, opacity: 0 },
         { y: 0, opacity: 1, duration: 1.8, ease: 'power3.out', delay: 0.3 }
@@ -111,8 +118,8 @@ const Hero = () => {
         background: 'linear-gradient(180deg, #e8eaf0 0%, #f0f2f5 30%, #f5f7fa 60%, #fafbfc 100%)'
       }}
     >
-      {/* Background orbs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+      {/* Background orbs - hidden on mobile */}
+      <div className="hidden md:block absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
         {[...Array(8)].map((_, i) => (
           <div
             key={i}
@@ -131,8 +138,8 @@ const Hero = () => {
         ))}
       </div>
 
-      {/* Floating particles */}
-      <div ref={particlesRef} className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }} />
+      {/* Floating particles - hidden on mobile */}
+      <div ref={particlesRef} className="hidden md:block absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }} />
 
       {/* Navigation */}
       <nav className="absolute top-0 left-0 right-0 z-50 px-8 py-6 flex items-center justify-between">
@@ -249,40 +256,39 @@ const Hero = () => {
         {/* Spacer for nav */}
         <div className="h-20 shrink-0" />
         
-        {/* Portrait - Mobile */}
-        <div
-          ref={portraitRef}
-          className="flex justify-center items-end shrink-0"
-          style={{ 
-            height: '55vh',
-            width: '100%'
-          }}
-        >
-          <img
-            src="./images/hero-portrait.png"
-            alt="Šimon Havlík"
+        {/* Portrait container with gradient overlay */}
+        <div className="relative shrink-0" style={{ height: '58vh' }}>
+          <div
+            ref={portraitRef}
+            className="flex justify-center items-end h-full w-full"
+          >
+            <img
+              src="./images/hero-portrait.png"
+              alt="Šimon Havlík"
+              style={{ 
+                height: '100%',
+                width: 'auto',
+                maxWidth: '100%',
+                objectFit: 'contain',
+                objectPosition: 'bottom center'
+              }}
+            />
+          </div>
+          
+          {/* Strong blur gradient overlay on portrait bottom */}
+          <div 
+            className="absolute bottom-0 left-0 right-0 pointer-events-none"
             style={{ 
-              height: '100%',
-              width: 'auto',
-              maxWidth: '100%',
-              objectFit: 'contain',
-              objectPosition: 'bottom center'
+              zIndex: 15,
+              height: '35%',
+              background: 'linear-gradient(to top, rgba(250,251,252,1) 0%, rgba(250,251,252,0.9) 20%, rgba(250,251,252,0.6) 50%, rgba(250,251,252,0.2) 80%, transparent 100%)'
             }}
           />
         </div>
 
-        {/* Gradient fade below portrait */}
-        <div 
-          className="shrink-0 h-16 w-full pointer-events-none"
-          style={{ 
-            background: 'linear-gradient(to bottom, transparent 0%, rgba(250,251,252,0.5) 50%, rgba(250,251,252,1) 100%)',
-            marginTop: '-64px'
-          }}
-        />
-
-        {/* Content - Mobile */}
-        <div className="flex-1 flex flex-col justify-center px-6 pb-8 bg-[#fafbfc]">
-          <div className="pointer-events-auto w-full text-center">
+        {/* Content - Mobile with matching background */}
+        <div className="flex-1 flex flex-col justify-start px-6 pb-8" style={{ background: '#fafbfc' }}>
+          <div className="pointer-events-auto w-full text-center pt-2">
             <div className="flex items-center justify-center gap-2 mb-3">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               <span className="text-xs text-gray-500 font-mono uppercase tracking-wider">Investment Analyst</span>
