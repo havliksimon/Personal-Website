@@ -8,62 +8,6 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  icon: React.ElementType;
-  tags: string[];
-  categories: string[];
-  featured: boolean;
-  link: string;
-  github?: string;
-  liveUrl?: string;
-  color: string;
-  previewImage?: string;
-}
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: 'KI AM Portfolio Tracking Platform',
-    description: 'Production-grade analyst performance tracking platform for investment clubs. Features real-time stock prices with benchmark comparisons, democratic portfolio construction via board voting, AI-assisted workflows for smart ticker matching, and comprehensive performance analytics. Built for Klub Investorů asset management team with enterprise-grade security.',
-    icon: TrendingUp,
-    tags: ['Python', 'Flask', 'SQLAlchemy', 'Bootstrap', 'Tailwind'],
-    categories: ['web-development', 'finance', 'python'],
-    featured: true,
-    link: 'https://ki.verxl.com/',
-    github: 'https://github.com/havliksimon/ki-asset-management',
-    liveUrl: 'https://ki.verxl.com/',
-    color: 'from-blue-500 to-cyan-400',
-    previewImage: '/ki-preview.jpg'
-  },
-  {
-    id: 2,
-    title: 'Portfolio Optimizer',
-    description: 'Comprehensive quantitative portfolio optimization platform implementing cutting-edge financial mathematics. Features Modern Portfolio Theory, Risk Parity, Black-Litterman model, Extreme Value Theory for tail risk, Monte Carlo simulation with 5,000 paths, distribution fitting with AIC/BIC selection, and Fama-French factor analysis. Bridges academic rigor with practical implementation.',
-    icon: Sparkles,
-    tags: ['Python', 'Flask', 'CVXPY', 'Tailwind', 'Plotly'],
-    categories: ['web-development', 'finance', 'optimization'],
-    featured: true,
-    link: 'https://optimizer.havliksimon.eu/',
-    github: 'https://github.com/havliksimon/Portfolio-Optimization-Model',
-    liveUrl: 'https://optimizer.havliksimon.eu/',
-    color: 'from-emerald-500 to-teal-400',
-    previewImage: '/optimizer-preview.jpg'
-  }
-];
-
-const categoryColors: Record<string, string> = {
-  'web-development': 'bg-blue-100 text-blue-700',
-  'finance': 'bg-green-100 text-green-700',
-  'python': 'bg-yellow-100 text-yellow-700',
-  'data-analysis': 'bg-purple-100 text-purple-700',
-  'r': 'bg-cyan-100 text-cyan-700',
-  'macro': 'bg-orange-100 text-orange-700',
-  'optimization': 'bg-pink-100 text-pink-700'
-};
-
 // Website Preview Modal Component
 interface WebsitePreviewModalProps {
   isOpen: boolean;
@@ -173,7 +117,8 @@ const WebsitePreviewModal = ({ isOpen, onClose, url, title }: WebsitePreviewModa
 const Projects = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const kiCardRef = useRef<HTMLDivElement>(null);
+  const optimizerCardRef = useRef<HTMLDivElement>(null);
   const [previewModal, setPreviewModal] = useState<{ isOpen: boolean; url: string; title: string }>({
     isOpen: false,
     url: '',
@@ -206,33 +151,43 @@ const Projects = () => {
         }
       );
 
-      // Cards animation
-      cardsRef.current.forEach((card, i) => {
-        if (card) {
-          gsap.fromTo(card,
-            { y: 50, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-              delay: i * 0.15,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 85%',
-                toggleActions: 'play none none reverse'
-              }
-            }
-          );
+      // KI Card animation
+      gsap.fromTo(kiCardRef.current,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          delay: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: kiCardRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+          }
         }
-      });
+      );
+
+      // Optimizer Card animation
+      gsap.fromTo(optimizerCardRef.current,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          delay: 0.25,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: optimizerCardRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
-
-  const featuredProjects = projects.filter(p => p.featured);
-  const otherProjects = projects.filter(p => !p.featured);
 
   return (
     <>
@@ -254,153 +209,161 @@ const Projects = () => {
             </p>
           </div>
 
-          {/* Featured Projects - Large Cards */}
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            {featuredProjects.map((project, index) => {
-              const Icon = project.icon;
-              
-              return (
-                <div
-                  key={project.id}
-                  ref={el => { cardsRef.current[index] = el; }}
-                  className="group relative bg-white rounded-3xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1"
-                >
-                  {/* Gradient Header */}
-                  <div className={`h-32 bg-gradient-to-r ${project.color} relative overflow-hidden`}>
-                    <div className="absolute inset-0 bg-white/10" />
-                    <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
-                    <div className="absolute top-4 left-4">
-                      <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
-                        <Icon className="w-7 h-7 text-white" />
-                      </div>
-                    </div>
-                    <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-white/30">
-                        Live App
-                      </span>
-                    </div>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed mb-5">
-                      {project.description}
-                    </p>
-                    
-                    {/* Tech Tags */}
-                    <div className="flex flex-wrap gap-2 mb-5">
-                      {project.tags.slice(0, 4).map((tag, i) => (
-                        <span
-                          key={i}
-                          className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700"
-                        >
-                          <Code2 className="w-3 h-3" />
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    {/* CTA Buttons */}
-                    <div className="flex items-center gap-3">
-                      <button
-                        onClick={() => openPreview(project.liveUrl || project.link, project.title)}
-                        className="flex-1 flex items-center justify-center gap-2 px-5 py-3 bg-gray-900 text-white text-sm font-medium rounded-xl hover:bg-gray-800 transition-all group/btn"
-                      >
-                        <Globe className="w-4 h-4" />
-                        Explore Live App
-                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </button>
-                      
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-3 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"
-                          title="View on GitHub"
-                        >
-                          <Github className="w-5 h-5 text-gray-700" />
-                        </a>
-                      )}
-                    </div>
+          {/* Bento Grid Layout */}
+          <div className="grid md:grid-cols-12 gap-6">
+            
+            {/* KI AM - Left Side (spans 7 columns) */}
+            <div
+              ref={kiCardRef}
+              onClick={() => openPreview('https://ki.verxl.com/', 'KI AM Portfolio Tracking Platform')}
+              className="md:col-span-7 group relative bg-white rounded-3xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 cursor-pointer"
+            >
+              {/* Gradient Header */}
+              <div className="h-40 bg-gradient-to-r from-blue-500 to-cyan-400 relative overflow-hidden">
+                <div className="absolute inset-0 bg-white/10" />
+                <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-white/20 rounded-full blur-2xl" />
+                <div className="absolute top-5 left-5">
+                  <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
+                    <TrendingUp className="w-8 h-8 text-white" />
                   </div>
                 </div>
-              );
-            })}
-          </div>
-
-          {/* Other Projects - Compact Cards */}
-          {otherProjects.length > 0 && (
-            <div className="grid md:grid-cols-2 gap-6">
-              {otherProjects.map((project, index) => {
-                const Icon = project.icon;
-                
-                return (
-                  <div
-                    key={project.id}
-                    ref={el => { cardsRef.current[featuredProjects.length + index] = el; }}
-                    className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition-shadow"
-                  >
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-gray-900 flex items-center justify-center">
-                          <Icon className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-semibold text-gray-900">{project.title}</h3>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        {project.github && (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
-                            title="View on GitHub"
-                          >
-                            <Github className="w-4 h-4 text-gray-600" />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                      {project.description}
-                    </p>
-
-                    {/* Tech Tags */}
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {project.tags.map((tag, i) => (
-                        <span
-                          key={i}
-                          className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700"
-                        >
-                          <Code2 className="w-3 h-3" />
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Category Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {project.categories.map((cat, i) => (
-                        <span
-                          key={i}
-                          className={`px-2.5 py-0.5 rounded-full text-[10px] font-medium ${categoryColors[cat] || 'bg-gray-100 text-gray-700'}`}
-                        >
-                          {cat}
-                        </span>
-                      ))}
-                    </div>
+                <div className="absolute top-5 right-5">
+                  <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-white/30">
+                    Live App
+                  </span>
+                </div>
+                {/* Hover indicator */}
+                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-lg text-white text-sm">
+                    <Globe className="w-4 h-4" />
+                    Click to explore
                   </div>
-                );
-              })}
+                </div>
+              </div>
+              
+              {/* Content */}
+              <div className="p-8">
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                  KI AM Portfolio Tracking Platform
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-6">
+                  Production-grade analyst performance tracking platform for investment clubs. Features real-time stock prices with benchmark comparisons, democratic portfolio construction via board voting, AI-assisted workflows for smart ticker matching, and comprehensive performance analytics.
+                </p>
+                
+                {/* Tech Tags */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {['Python', 'Flask', 'SQLAlchemy', 'Bootstrap', 'Tailwind'].map((tag, i) => (
+                    <span
+                      key={i}
+                      className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700"
+                    >
+                      <Code2 className="w-3 h-3" />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                {/* CTA Row */}
+                <div className="flex items-center justify-between">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openPreview('https://ki.verxl.com/', 'KI AM Portfolio Tracking Platform');
+                    }}
+                    className="flex items-center gap-2 px-6 py-3 bg-gray-900 text-white text-sm font-medium rounded-xl hover:bg-gray-800 transition-all group/btn"
+                  >
+                    <Globe className="w-4 h-4" />
+                    Explore Live App
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </button>
+                  
+                  <a
+                    href="https://github.com/havliksimon/ki-asset-management"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="p-3 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"
+                    title="View on GitHub"
+                  >
+                    <Github className="w-5 h-5 text-gray-700" />
+                  </a>
+                </div>
+              </div>
             </div>
-          )}
+
+            {/* Portfolio Optimizer - Right Side (spans 5 columns) */}
+            <div
+              ref={optimizerCardRef}
+              onClick={() => openPreview('https://optimizer.havliksimon.eu/', 'Portfolio Optimizer')}
+              className="md:col-span-5 group relative bg-white rounded-3xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 cursor-pointer flex flex-col"
+            >
+              {/* Gradient Header */}
+              <div className="h-32 bg-gradient-to-r from-emerald-500 to-teal-400 relative overflow-hidden">
+                <div className="absolute inset-0 bg-white/10" />
+                <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
+                <div className="absolute top-4 left-4">
+                  <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
+                    <Sparkles className="w-7 h-7 text-white" />
+                  </div>
+                </div>
+                <div className="absolute top-4 right-4">
+                  <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-white/30">
+                    Live App
+                  </span>
+                </div>
+              </div>
+              
+              {/* Content */}
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
+                  Portfolio Optimizer
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-4 flex-1">
+                  Comprehensive quantitative portfolio optimization platform implementing Modern Portfolio Theory, Risk Parity, Black-Litterman model, Extreme Value Theory, and Monte Carlo simulation with 5,000 paths.
+                </p>
+                
+                {/* Tech Tags */}
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {['Python', 'Flask', 'CVXPY', 'Plotly'].map((tag, i) => (
+                    <span
+                      key={i}
+                      className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700"
+                    >
+                      <Code2 className="w-3 h-3" />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                {/* CTA Buttons */}
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openPreview('https://optimizer.havliksimon.eu/', 'Portfolio Optimizer');
+                    }}
+                    className="flex-1 flex items-center justify-center gap-2 px-5 py-3 bg-gray-900 text-white text-sm font-medium rounded-xl hover:bg-gray-800 transition-all group/btn"
+                  >
+                    <Globe className="w-4 h-4" />
+                    Explore
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </button>
+                  
+                  <a
+                    href="https://github.com/havliksimon/Portfolio-Optimization-Model"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="p-3 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"
+                    title="View on GitHub"
+                  >
+                    <Github className="w-5 h-5 text-gray-700" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
