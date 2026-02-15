@@ -18,6 +18,8 @@ const Navigation = ({ onNavigate }: NavigationProps) => {
     { label: 'About', section: 'about' },
     { label: 'Timeline', section: 'timeline' },
     { label: 'Skills', section: 'skills' },
+    { label: 'Projects', section: 'projects' },
+    { label: 'Analyses', section: 'analyses' },
     { label: 'China', section: 'china' },
     { label: 'Contact', section: 'contact' }
   ];

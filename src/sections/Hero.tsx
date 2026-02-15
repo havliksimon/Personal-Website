@@ -147,9 +147,10 @@ const Hero = () => {
         
         <div className="hidden md:flex items-center gap-8">
           <a href="#about" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">About</a>
-          <a href="#journey" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Journey</a>
+          <a href="#timeline" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Journey</a>
           <a href="#skills" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Skills</a>
           <a href="#projects" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Projects</a>
+          <a href="#analyses" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Analyses</a>
           <a href="#china" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">China</a>
           <a href="#contact" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
         </div>
