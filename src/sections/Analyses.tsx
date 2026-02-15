@@ -67,16 +67,16 @@ const analyses: AnalysisDoc[] = [
   },
   {
     id: 4,
-    title: 'Chagee IPO Presentation',
-    subtitle: 'Chinese Tea Chain Investment Thesis',
-    description: 'Investment presentation on Chagee, a leading Chinese tea chain. Covers market opportunity, store economics, competitive positioning, and IPO valuation analysis.',
+    title: 'Chagee Investment Case',
+    subtitle: 'High Risk, High Reward Opportunity',
+    description: 'Contrarian investment thesis on Chagee, a leading Chinese tea chain. Despite recent stock decline, presents potential value opportunity through store expansion, brand moat, and margin recovery. High risk with significant upside potential.',
     type: 'presentation',
     date: 'Nov 2024',
     pages: 20,
     pdfUrl: '/presentations/presentation_Chagee.pdf',
     thumbnailColor: 'from-emerald-500 to-teal-600',
     icon: Presentation,
-    tags: ['IPO', 'Consumer', 'China']
+    tags: ['High Risk/Reward', 'Consumer', 'Value']
   },
   {
     id: 5,
