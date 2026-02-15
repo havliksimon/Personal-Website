@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
-  Code2, ExternalLink, Github, TrendingUp, Database, 
+  Code2, ExternalLink, Github, TrendingUp, 
   Sparkles, ArrowRight, X, Loader2, Globe, MousePointer2
 } from 'lucide-react';
 
@@ -47,21 +47,10 @@ const projects: Project[] = [
     categories: ['web-development', 'finance', 'optimization'],
     featured: true,
     link: 'https://optimizer.havliksimon.eu/',
+    github: 'https://github.com/havliksimon/Portfolio-Optimization-Model',
     liveUrl: 'https://optimizer.havliksimon.eu/',
     color: 'from-emerald-500 to-teal-400',
     previewImage: '/optimizer-preview.jpg'
-  },
-  {
-    id: 4,
-    title: 'Portfolio Optimization Model',
-    description: 'Python implementation of Modern Portfolio Theory with risk parity allocation for emerging market portfolios using CVXPY optimization.',
-    icon: Database,
-    tags: ['Python', 'pandas', 'numpy', 'CVXPY'],
-    categories: ['finance', 'python', 'optimization'],
-    featured: false,
-    link: '#',
-    github: 'https://github.com/havliksimon/Portfolio-Optimization-Model',
-    color: 'from-violet-500 to-purple-400'
   }
 ];
 
