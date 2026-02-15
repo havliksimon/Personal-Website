@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LinkedIn OG Image Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -18,7 +18,7 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      background: #1a1a2e;
+      background: #0a0a0f;
       padding: 40px;
       font-family: 'Inter', sans-serif;
     }
@@ -28,23 +28,21 @@
       height: 630px;
       position: relative;
       overflow: hidden;
-      border-radius: 20px;
-      box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+      border-radius: 24px;
+      box-shadow: 0 50px 100px rgba(0,0,0,0.8);
     }
     
-    /* Background with animated gradient */
+    /* Animated gradient background */
     .bg-gradient {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, 
-        #1a1a2e 0%, 
-        #16213e 25%, 
-        #0f3460 50%, 
-        #e94560 75%, 
-        #1a1a2e 100%
-      );
-      background-size: 400% 400%;
-      animation: gradient 15s ease infinite;
+      background: 
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(99, 102, 241, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(236, 72, 153, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 30% at 50% 100%, rgba(34, 211, 238, 0.2) 0%, transparent 50%),
+        linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+      background-size: 200% 200%;
+      animation: gradient 20s ease infinite;
     }
     
     @keyframes gradient {
@@ -53,286 +51,536 @@
       100% { background-position: 0% 50%; }
     }
     
-    /* Pattern overlay */
-    .pattern {
-      position: absolute;
-      inset: 0;
-      opacity: 0.1;
-      background-image: 
-        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(233,69,96,0.3) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(15,52,96,0.4) 0%, transparent 50%);
-    }
-    
-    /* Grid lines */
+    /* Grid pattern */
     .grid {
       position: absolute;
       inset: 0;
       background-image: 
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
+      background-size: 40px 40px;
     }
     
-    /* Content container */
+    /* Floating orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+      animation: float 10s ease-in-out infinite;
+    }
+    
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: #6366f1;
+      top: -100px;
+      right: -100px;
+      animation-delay: 0s;
+    }
+    
+    .orb-2 {
+      width: 300px;
+      height: 300px;
+      background: #ec4899;
+      bottom: -50px;
+      left: 30%;
+      animation-delay: -3s;
+    }
+    
+    .orb-3 {
+      width: 250px;
+      height: 250px;
+      background: #22d3ee;
+      top: 40%;
+      left: -80px;
+      animation-delay: -6s;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, -30px) scale(1.1); }
+    }
+    
+    /* Content */
     .content {
       position: relative;
       z-index: 10;
       height: 100%;
       display: flex;
-      padding: 60px 80px;
+      padding: 50px 60px;
+      gap: 40px;
     }
     
-    /* Left side - Text */
-    .text-section {
-      flex: 1;
+    /* Left section - Name & Title */
+    .left-section {
+      width: 45%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
+    }
+    
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
     
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: rgba(233,69,96,0.2);
-      border: 1px solid rgba(233,69,96,0.4);
+      gap: 6px;
+      padding: 8px 16px;
+      background: rgba(34, 211, 238, 0.15);
+      border: 1px solid rgba(34, 211, 238, 0.3);
       border-radius: 50px;
-      color: #e94560;
-      font-size: 14px;
+      color: #22d3ee;
+      font-size: 12px;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 30px;
-      width: fit-content;
+      letter-spacing: 1.5px;
     }
     
     .badge::before {
       content: '';
-      width: 8px;
-      height: 8px;
-      background: #e94560;
+      width: 6px;
+      height: 6px;
+      background: #22d3ee;
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
     
     @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.2); }
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7); }
+      50% { opacity: 0.8; box-shadow: 0 0 0 8px rgba(34, 211, 238, 0); }
     }
     
-    h1 {
+    .name-section h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 72px;
+      font-size: 64px;
       font-weight: 700;
       color: white;
       line-height: 1.1;
-      margin-bottom: 20px;
+      margin: 20px 0 10px;
     }
     
-    h1 span {
-      background: linear-gradient(135deg, #e94560, #ff6b6b);
+    .name-section h1 span {
+      background: linear-gradient(135deg, #ec4899, #f472b6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
     
     .subtitle {
-      font-size: 28px;
+      font-size: 22px;
       color: rgba(255,255,255,0.7);
       font-weight: 400;
-      margin-bottom: 40px;
-      line-height: 1.4;
+      line-height: 1.5;
     }
     
-    /* Categories */
-    .categories {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    
-    .category {
-      padding: 12px 24px;
-      background: rgba(255,255,255,0.1);
+    /* Education Card */
+    .info-card {
+      background: rgba(255,255,255,0.05);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-top: 20px;
+    }
+    
+    .info-card-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    
+    .info-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
       color: white;
-      font-size: 16px;
-      font-weight: 500;
+    }
+    
+    .info-item-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(99, 102, 241, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    
+    /* Stats row */
+    .stats {
+      display: flex;
+      gap: 24px;
+      margin-top: 20px;
+    }
+    
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Right section - Skills & Projects */
+    .right-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    /* Skills cloud */
+    .skills-section {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 24px;
+    }
+    
+    .section-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 16px;
+      font-weight: 700;
       display: flex;
       align-items: center;
       gap: 8px;
     }
     
-    .category::before {
-      content: '›';
-      color: #e94560;
-      font-weight: 700;
-    }
-    
-    /* Right side - Portrait */
-    .portrait-section {
-      width: 400px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      position: relative;
-    }
-    
-    .portrait-container {
-      position: relative;
-      width: 100%;
-      height: 90%;
-    }
-    
-    .portrait {
-      position: absolute;
-      bottom: -60px;
-      right: -40px;
-      width: 450px;
-      height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5));
-      mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    }
-    
-    /* Decorative elements */
-    .circle {
-      position: absolute;
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 4px;
       border-radius: 50%;
-      border: 2px solid rgba(233,69,96,0.3);
+      background: #22d3ee;
     }
     
-    .circle-1 {
-      width: 300px;
-      height: 300px;
-      top: -100px;
-      right: -100px;
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     
-    .circle-2 {
-      width: 200px;
-      height: 200px;
-      bottom: 100px;
-      left: -50px;
-      border-color: rgba(15,52,96,0.4);
-    }
-    
-    /* Stats floating cards */
-    .stat-card {
-      position: absolute;
-      padding: 16px 24px;
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 16px;
+    .skill {
+      padding: 10px 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50px;
       color: white;
-      z-index: 20;
-    }
-    
-    .stat-card-1 {
-      top: 80px;
-      right: 350px;
-    }
-    
-    .stat-card-1 .number {
-      font-size: 32px;
-      font-weight: 800;
-      color: #e94560;
-    }
-    
-    .stat-card-1 .label {
       font-size: 14px;
-      opacity: 0.8;
+      font-weight: 500;
     }
     
-    .stat-card-2 {
-      bottom: 150px;
-      left: 50%;
+    .skill.highlight {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(236, 72, 153, 0.3));
+      border-color: rgba(255,255,255,0.3);
     }
     
-    .stat-card-2 .number {
-      font-size: 24px;
+    /* Projects showcase */
+    .projects-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    
+    .project-card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+    
+    .project-card.blue::before {
+      background: linear-gradient(90deg, #3b82f6, #06b6d4);
+    }
+    
+    .project-card.emerald::before {
+      background: linear-gradient(90deg, #10b981, #14b8a6);
+    }
+    
+    .project-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    
+    .project-card.blue .project-icon {
+      background: rgba(59, 130, 246, 0.2);
+    }
+    
+    .project-card.emerald .project-icon {
+      background: rgba(16, 185, 129, 0.2);
+    }
+    
+    .project-title {
+      font-size: 16px;
       font-weight: 700;
-      color: #4ecdc4;
+      color: white;
+      margin-bottom: 6px;
     }
     
-    .stat-card-2 .label {
+    .project-desc {
       font-size: 12px;
-      opacity: 0.8;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.4;
+    }
+    
+    .project-tags {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    
+    .project-tag {
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      font-size: 10px;
+      color: rgba(255,255,255,0.8);
+    }
+    
+    /* Bottom bar */
+    .bottom-bar {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .url {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+    }
+    
+    .social-proof {
+      display: flex;
+      gap: 16px;
+    }
+    
+    .social-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+    }
+    
+    .social-icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* Portrait overlay - subtle on right */
+    .portrait-overlay {
+      position: absolute;
+      right: -100px;
+      bottom: -150px;
+      width: 500px;
+      height: 700px;
+      opacity: 0.15;
+      pointer-events: none;
+      mask-image: linear-gradient(to left, black 30%, transparent 80%);
+      -webkit-mask-image: linear-gradient(to left, black 30%, transparent 80%);
     }
     
     /* Screenshot instruction */
     .instruction {
-      margin-top: 40px;
-      color: rgba(255,255,255,0.5);
+      margin-top: 30px;
+      color: rgba(255,255,255,0.4);
       font-size: 14px;
       text-align: center;
     }
     
-    /* Hide instruction in final image */
-    @media print {
-      .instruction { display: none; }
+    code {
+      background: rgba(255,255,255,0.1);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: monospace;
     }
   </style>
 </head>
 <body>
   <div class="og-container" id="ogImage">
     <div class="bg-gradient"></div>
-    <div class="pattern"></div>
     <div class="grid"></div>
     
-    <!-- Decorative circles -->
-    <div class="circle circle-1"></div>
-    <div class="circle circle-2"></div>
+    <!-- Floating orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
     
-    <!-- Floating stat cards -->
-    <div class="stat-card stat-card-1">
-      <div class="number">VŠE</div>
-      <div class="label">Prague</div>
-    </div>
-    
-    <div class="stat-card stat-card-2">
-      <div class="number">HSK 3</div>
-      <div class="label">Mandarin</div>
-    </div>
+    <!-- Portrait overlay -->
+    <img src="./images/hero-portrait.png" alt="" class="portrait-overlay">
     
     <div class="content">
-      <div class="text-section">
-        <div class="badge">Open to Opportunities</div>
-        <h1>Šimon <span>Havlík</span></h1>
-        <p class="subtitle">Investment Analyst &<br>Portfolio Optimization Specialist</p>
+      <!-- Left Section -->
+      <div class="left-section">
+        <div>
+          <div class="header">
+            <div class="badge">Open to Opportunities</div>
+          </div>
+          
+          <div class="name-section">
+            <h1>Šimon<br><span>Havlík</span></h1>
+            <p class="subtitle">Investment Analyst &<br>Portfolio Optimization Specialist</p>
+          </div>
+        </div>
         
-        <div class="categories">
-          <div class="category">Portfolio Theory</div>
-          <div class="category">Equity Research</div>
-          <div class="category">China Markets</div>
-          <div class="category">Python & SQL</div>
+        <div>
+          <!-- Education Card -->
+          <div class="info-card">
+            <div class="info-card-title">Education</div>
+            <div class="info-card-content">
+              <div class="info-item">
+                <div class="info-item-icon">🎓</div>
+                <span>VŠE Prague - Economics & Finance</span>
+              </div>
+              <div class="info-item">
+                <div class="info-item-icon">📍</div>
+                <span>Prague, Czech Republic</span>
+              </div>
+              <div class="info-item">
+                <div class="info-item-icon">🌏</div>
+                <span>HSK 3 Mandarin Chinese</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Stats -->
+          <div class="stats">
+            <div class="stat">
+              <span class="stat-value">2</span>
+              <span class="stat-label">Live Apps</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">5+</span>
+              <span class="stat-label">Analyses</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">8k+</span>
+              <span class="stat-label">Companies</span>
+            </div>
+          </div>
         </div>
       </div>
       
-      <div class="portrait-section">
-        <div class="portrait-container">
-          <img src="./images/hero-portrait.png" alt="Šimon Havlík" class="portrait">
+      <!-- Right Section -->
+      <div class="right-section">
+        <!-- Skills -->
+        <div class="skills-section">
+          <div class="section-title">Technical Skills</div>
+          <div class="skills-grid">
+            <div class="skill highlight">Python</div>
+            <div class="skill highlight">Flask</div>
+            <div class="skill">SQL</div>
+            <div class="skill">Pandas</div>
+            <div class="skill">CVXPY</div>
+            <div class="skill highlight">Portfolio Theory</div>
+            <div class="skill">Risk Analysis</div>
+            <div class="skill">Monte Carlo</div>
+            <div class="skill highlight">China Markets</div>
+            <div class="skill">React</div>
+            <div class="skill">TypeScript</div>
+          </div>
+        </div>
+        
+        <!-- Projects -->
+        <div class="projects-section">
+          <div class="project-card blue">
+            <div class="project-icon">📈</div>
+            <div class="project-title">KI AM Platform</div>
+            <div class="project-desc">Portfolio tracking for investment clubs</div>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Flask</span>
+            </div>
+          </div>
+          
+          <div class="project-card emerald">
+            <div class="project-icon">⚡</div>
+            <div class="project-title">Portfolio Optimizer</div>
+            <div class="project-desc">MPT, Risk Parity, Black-Litterman</div>
+            <div class="project-tags">
+              <span class="project-tag">CVXPY</span>
+              <span class="project-tag">Plotly</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Bottom bar -->
+        <div class="bottom-bar">
+          <span class="url">havliksimon.eu</span>
+          <div class="social-proof">
+            <div class="social-item">
+              <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </div>
+            <div class="social-item">
+              <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              GitHub
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
   
   <p class="instruction">
-    📸 Take a screenshot of the image above (1200×630px) or right-click → "Save image as"<br>
-    Then save it as <code>og-image.png</code> in your public folder
+    📸 Take a screenshot of the image above (1200×630px)<br>
+    Save as <code>og-image.png</code> in your public folder
   </p>
-  
-  <script>
-    // Auto-download functionality using html2canvas would go here
-    // For now, users can screenshot
-    console.log('LinkedIn OG Image Generator Loaded');
-    console.log('Image size: 1200x630px (optimal for LinkedIn)');
-  </script>
 </body>
 </html>
