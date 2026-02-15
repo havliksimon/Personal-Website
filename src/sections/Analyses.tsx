@@ -4,12 +4,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   FileText, Presentation, Download, ExternalLink, 
   Loader2, ChevronRight, BookOpen, BarChart3,
-  TrendingUp, Globe, Sparkles
+  TrendingUp, Globe, Sparkles, Languages
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 type DocumentType = 'analysis' | 'presentation';
+type Language = 'en' | 'cs';
 
 interface AnalysisDoc {
   id: number;
@@ -23,6 +24,7 @@ interface AnalysisDoc {
   thumbnailColor: string;
   icon: React.ElementType;
   tags: string[];
+  language?: Language;
 }
 
 const analyses: AnalysisDoc[] = [
@@ -37,7 +39,8 @@ const analyses: AnalysisDoc[] = [
     pdfUrl: '/analyses/EM_BILI_Havlik.docx.pdf',
     thumbnailColor: 'from-pink-500 to-rose-600',
     icon: TrendingUp,
-    tags: ['Equity Research', 'Technology', 'China']
+    tags: ['Equity Research', 'Technology', 'China'],
+    language: 'cs'
   },
   {
     id: 2,
@@ -50,7 +53,8 @@ const analyses: AnalysisDoc[] = [
     pdfUrl: '/analyses/EM_TUYA_Havlik.pdf',
     thumbnailColor: 'from-cyan-500 to-blue-600',
     icon: Globe,
-    tags: ['IoT', 'Technology', 'Emerging Markets']
+    tags: ['IoT', 'Technology', 'Emerging Markets'],
+    language: 'cs'
   },
   {
     id: 3,
@@ -63,7 +67,8 @@ const analyses: AnalysisDoc[] = [
     pdfUrl: '/analyses/GOOGL_Havlik.pdf',
     thumbnailColor: 'from-blue-500 to-indigo-600',
     icon: BarChart3,
-    tags: ['Large Cap', 'Tech Giants', 'Valuation']
+    tags: ['Large Cap', 'Tech Giants', 'Valuation'],
+    language: 'en'
   },
   {
     id: 4,
@@ -227,8 +232,8 @@ const Analyses = () => {
             </h3>
             <p className="text-[10px] text-gray-500 mb-1.5">{doc.subtitle}</p>
             
-            {/* Tags */}
-            <div className="flex flex-wrap gap-1">
+            {/* Tags + Language */}
+            <div className="flex flex-wrap gap-1 items-center">
               {doc.tags.slice(0, 2).map((tag, i) => (
                 <span
                   key={i}
@@ -237,6 +242,14 @@ const Analyses = () => {
                   {tag}
                 </span>
               ))}
+              {doc.language === 'cs' && (
+                <span
+                  className="px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded text-[9px] font-medium"
+                  title="Document in Czech - Translate available"
+                >
+                  CZ → EN
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -364,6 +377,21 @@ const Analyses = () => {
                     {activeDoc.pages} pages
                   </span>
                   <div className="h-4 w-px bg-gray-700 hidden sm:block" />
+                  {activeDoc.language === 'cs' && (
+                    <>
+                      <a
+                        href={`https://r.jina.ai/http://${typeof window !== 'undefined' ? window.location.host : 'localhost'}${activeDoc.pdfUrl}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-amber-400 hover:text-amber-300 hover:bg-gray-800 rounded-lg transition-colors"
+                        title="Open translated version (AI-powered)"
+                      >
+                        <Languages className="w-4 h-4" />
+                        <span className="hidden sm:inline">Translate</span>
+                      </a>
+                      <div className="h-4 w-px bg-gray-700 hidden sm:block" />
+                    </>
+                  )}
                   <a
                     href={activeDoc.pdfUrl}
                     download
