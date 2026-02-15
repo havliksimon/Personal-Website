@@ -10,6 +10,7 @@ import Projects from './sections/Projects';
 import China from './sections/China';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
+import ScrollProgress from './components/ScrollProgress';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,7 +28,10 @@ function App() {
 
   return (
     <main className="relative">
-      <Hero />
+      <ScrollProgress />
+      <section id="hero">
+        <Hero />
+      </section>
       <About />
       <Timeline />
       <Skills />
