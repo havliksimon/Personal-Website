@@ -13,6 +13,7 @@ import Contact from './sections/Contact';
 import Footer from './sections/Footer';
 import ScrollProgress from './components/ScrollProgress';
 import CustomCursor from './components/CustomCursor';
+import InteractiveNav from './components/InteractiveNav';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,6 +32,7 @@ function App() {
   return (
     <>
       <CustomCursor />
+      <InteractiveNav />
       <main className="relative cursor-none md:cursor-none">
         <ScrollProgress />
         <section id="hero">

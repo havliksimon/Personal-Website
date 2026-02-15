@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   FileText, Presentation, Download, ExternalLink, 
   Loader2, ChevronRight, BookOpen, BarChart3,
-  TrendingUp, Globe
+  TrendingUp, Globe, Sparkles
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -96,16 +96,15 @@ const analyses: AnalysisDoc[] = [
 const Analyses = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const cardsContainerRef = useRef<HTMLDivElement>(null);
+  const analysesListRef = useRef<HTMLDivElement>(null);
+  const presentationsListRef = useRef<HTMLDivElement>(null);
   const viewerRef = useRef<HTMLDivElement>(null);
   
   const [activeDoc, setActiveDoc] = useState<AnalysisDoc>(analyses[0]);
   const [isLoading, setIsLoading] = useState(true);
-  const [filter, setFilter] = useState<'all' | 'analysis' | 'presentation'>('all');
 
-  const filteredDocs = analyses.filter(doc => 
-    filter === 'all' ? true : doc.type === filter
-  );
+  const analysisDocs = analyses.filter(doc => doc.type === 'analysis');
+  const presentationDocs = analyses.filter(doc => doc.type === 'presentation');
 
   const switchDocument = (doc: AnalysisDoc) => {
     setActiveDoc(doc);
@@ -129,7 +128,7 @@ const Analyses = () => {
         }
       );
 
-      gsap.fromTo(cardsContainerRef.current,
+      gsap.fromTo(analysesListRef.current,
         { x: -80, opacity: 0 },
         {
           x: 0,
@@ -138,7 +137,23 @@ const Analyses = () => {
           delay: 0.2,
           ease: 'power2.out',
           scrollTrigger: {
-            trigger: cardsContainerRef.current,
+            trigger: analysesListRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
+
+      gsap.fromTo(presentationsListRef.current,
+        { x: -80, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.9,
+          delay: 0.3,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: presentationsListRef.current,
             start: 'top 85%',
             toggleActions: 'play none none reverse'
           }
@@ -165,6 +180,70 @@ const Analyses = () => {
     return () => ctx.revert();
   }, []);
 
+  const renderDocCard = (doc: AnalysisDoc) => {
+    const Icon = doc.icon;
+    const isActive = activeDoc.id === doc.id;
+    
+    return (
+      <div
+        key={doc.id}
+        onClick={() => switchDocument(doc)}
+        className={`group relative rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer ${
+          isActive 
+            ? 'ring-2 ring-gray-900 shadow-xl scale-[1.02]' 
+            : 'ring-1 ring-gray-200 hover:ring-gray-400 hover:shadow-lg'
+        }`}
+      >
+        <div className="flex">
+          {/* Thumbnail */}
+          <div className={`w-20 h-full min-h-[120px] bg-gradient-to-br ${doc.thumbnailColor} relative flex-shrink-0`}>
+            <div className="absolute inset-0 bg-black/10" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Icon className="w-8 h-8 text-white/90" />
+            </div>
+            
+            {/* Page count badge */}
+            <div className="absolute bottom-2 left-2 right-2">
+              <div className="bg-white/90 backdrop-blur-sm rounded px-1.5 py-0.5 text-center">
+                <span className="text-[10px] font-bold text-gray-800">{doc.pages}p</span>
+              </div>
+            </div>
+
+            {/* Active indicator */}
+            {isActive && (
+              <div className="absolute top-2 left-2 w-5 h-5 rounded-full bg-white flex items-center justify-center">
+                <ChevronRight className="w-3 h-3 text-gray-900" />
+              </div>
+            )}
+          </div>
+          
+          {/* Content */}
+          <div className="flex-1 p-3 bg-white">
+            <p className="text-[10px] text-gray-400 mb-0.5">{doc.date}</p>
+            <h3 className={`font-bold text-sm leading-tight mb-0.5 transition-colors ${
+              isActive ? 'text-gray-900' : 'text-gray-700 group-hover:text-gray-900'
+            }`}>
+              {doc.title}
+            </h3>
+            <p className="text-[10px] text-gray-500 mb-1.5">{doc.subtitle}</p>
+            
+            {/* Tags */}
+            <div className="flex flex-wrap gap-1">
+              {doc.tags.slice(0, 2).map((tag, i) => (
+                <span
+                  key={i}
+                  className="px-1.5 py-0.5 bg-gray-100 rounded text-[9px] font-medium text-gray-600"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -172,7 +251,7 @@ const Analyses = () => {
       className="relative py-20 md:py-28 bg-white overflow-hidden"
     >
       {/* Background decoration */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-amber-50/60 to-transparent rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-gradient-to-tr from-blue-50/40 to-transparent rounded-full blur-3xl" />
       </div>
@@ -209,26 +288,6 @@ const Analyses = () => {
                 <span className="text-gray-900 font-medium">financial research</span>{' '}
                 and presentations covering portfolio optimization, equity analysis, and risk assessment.
               </p>
-              
-              {/* Filter tabs */}
-              <div className="mt-6 flex items-center gap-2 lg:justify-end">
-                {(['all', 'analysis', 'presentation'] as const).map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => setFilter(type)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                      filter === type
-                        ? 'bg-gray-900 text-white'
-                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                    }`}
-                  >
-                    {type === 'all' ? 'All' : type === 'analysis' ? 'Analyses' : 'Presentations'}
-                    <span className="ml-2 text-xs opacity-70">
-                      ({type === 'all' ? analyses.length : analyses.filter(d => d.type === type).length})
-                    </span>
-                  </button>
-                ))}
-              </div>
             </div>
           </div>
         </div>
@@ -236,94 +295,41 @@ const Analyses = () => {
         {/* SPLIT LAYOUT */}
         <div className="flex flex-col lg:flex-row gap-6 px-6 md:px-12 lg:px-16">
           
-          {/* LEFT: Document Cards */}
-          <div 
-            ref={cardsContainerRef}
-            className="w-full lg:w-[420px] xl:w-[450px] flex-shrink-0 space-y-4 max-h-[750px] overflow-y-auto pr-2 custom-scrollbar"
-          >
-            {filteredDocs.map((doc) => {
-              const Icon = doc.icon;
-              const isActive = activeDoc.id === doc.id;
-              
-              return (
-                <div
-                  key={doc.id}
-                  onClick={() => switchDocument(doc)}
-                  className={`group relative bg-gray-50 rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer ${
-                    isActive 
-                      ? 'ring-2 ring-gray-900 shadow-xl' 
-                      : 'hover:shadow-lg hover:bg-gray-100'
-                  }`}
-                >
-                  <div className="flex">
-                    {/* Thumbnail */}
-                    <div className={`w-24 h-full min-h-[140px] bg-gradient-to-br ${doc.thumbnailColor} relative flex-shrink-0`}>
-                      <div className="absolute inset-0 bg-black/10" />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Icon className="w-10 h-10 text-white/90" />
-                      </div>
-                      
-                      {/* Page count badge */}
-                      <div className="absolute bottom-2 left-2 right-2">
-                        <div className="bg-white/90 backdrop-blur-sm rounded px-2 py-1 text-center">
-                          <span className="text-xs font-bold text-gray-800">{doc.pages}p</span>
-                        </div>
-                      </div>
-
-                      {/* Type badge */}
-                      <div className="absolute top-2 left-2">
-                        <div className={`rounded-full p-1.5 ${
-                          doc.type === 'analysis' ? 'bg-blue-500/80' : 'bg-purple-500/80'
-                        }`}>
-                          {doc.type === 'analysis' ? (
-                            <TrendingUp className="w-3 h-3 text-white" />
-                          ) : (
-                            <Presentation className="w-3 h-3 text-white" />
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="flex-1 p-4">
-                      <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <p className="text-xs text-gray-500 mb-1">{doc.date}</p>
-                          <h3 className={`font-bold leading-tight mb-1 transition-colors ${
-                            isActive ? 'text-gray-900' : 'text-gray-700 group-hover:text-gray-900'
-                          }`}>
-                            {doc.title}
-                          </h3>
-                          <p className="text-xs text-gray-500">{doc.subtitle}</p>
-                        </div>
-                        
-                        {isActive && (
-                          <div className="w-6 h-6 rounded-full bg-gray-900 flex items-center justify-center flex-shrink-0">
-                            <ChevronRight className="w-4 h-4 text-white" />
-                          </div>
-                        )}
-                      </div>
-                      
-                      <p className="text-sm text-gray-600 mt-2 line-clamp-2">
-                        {doc.description}
-                      </p>
-                      
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-1.5 mt-3">
-                        {doc.tags.map((tag, i) => (
-                          <span
-                            key={i}
-                            className="px-2 py-0.5 bg-white rounded text-[10px] font-medium text-gray-600 border border-gray-200"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+          {/* LEFT: Two separate sections for Analyses and Presentations */}
+          <div className="w-full lg:w-[400px] xl:w-[420px] flex-shrink-0 space-y-6">
+            
+            {/* ANALYSES SECTION */}
+            <div ref={analysesListRef}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-100 rounded-lg">
+                  <BarChart3 className="w-4 h-4 text-blue-600" />
+                  <span className="text-sm font-semibold text-blue-700">Analyses</span>
                 </div>
-              );
-            })}
+                <div className="h-px flex-1 bg-gradient-to-r from-blue-200 to-transparent" />
+                <span className="text-xs text-gray-400">{analysisDocs.length} documents</span>
+              </div>
+              
+              <div className="space-y-3">
+                {analysisDocs.map(renderDocCard)}
+              </div>
+            </div>
+
+            {/* PRESENTATIONS SECTION */}
+            <div ref={presentationsListRef}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-100 rounded-lg">
+                  <Sparkles className="w-4 h-4 text-purple-600" />
+                  <span className="text-sm font-semibold text-purple-700">Presentations</span>
+                </div>
+                <div className="h-px flex-1 bg-gradient-to-r from-purple-200 to-transparent" />
+                <span className="text-xs text-gray-400">{presentationDocs.length} documents</span>
+              </div>
+              
+              <div className="space-y-3">
+                {presentationDocs.map(renderDocCard)}
+              </div>
+            </div>
+
           </div>
 
           {/* RIGHT: PDF Viewer */}
@@ -331,7 +337,7 @@ const Analyses = () => {
             ref={viewerRef}
             className="flex-1"
           >
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 h-full min-h-[600px] lg:min-h-[750px] flex flex-col">
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 h-full min-h-[600px] lg:min-h-[700px] xl:min-h-[750px] flex flex-col">
               {/* Viewer Header */}
               <div className="flex items-center justify-between px-5 py-4 bg-gray-900">
                 <div className="flex items-center gap-4">
@@ -343,7 +349,7 @@ const Analyses = () => {
                   <div className="h-5 w-px bg-gray-700" />
                   <div className="flex items-center gap-2">
                     {activeDoc.type === 'analysis' ? (
-                      <FileText className="w-4 h-4 text-blue-400" />
+                      <BarChart3 className="w-4 h-4 text-blue-400" />
                     ) : (
                       <Presentation className="w-4 h-4 text-purple-400" />
                     )}
@@ -402,18 +408,13 @@ const Analyses = () => {
                   <span>{activeDoc.subtitle}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  {analyses.map((doc) => (
-                    <button
-                      key={doc.id}
-                      onClick={() => switchDocument(doc)}
-                      className={`w-2 h-2 rounded-full transition-all ${
-                        doc.id === activeDoc.id 
-                          ? 'bg-gray-900 w-4' 
-                          : 'bg-gray-300 hover:bg-gray-400'
-                      }`}
-                      title={doc.title}
-                    />
-                  ))}
+                  <span className={`text-xs px-2 py-1 rounded-full ${
+                    activeDoc.type === 'analysis' 
+                      ? 'bg-blue-100 text-blue-700' 
+                      : 'bg-purple-100 text-purple-700'
+                  }`}>
+                    {activeDoc.type === 'analysis' ? 'Analysis' : 'Presentation'}
+                  </span>
                 </div>
               </div>
             </div>
@@ -421,23 +422,6 @@ const Analyses = () => {
 
         </div>
       </div>
-
-      {/* Custom scrollbar styles */}
-      <style>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #d1d5db;
-          border-radius: 3px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #9ca3af;
-        }
-      `}</style>
     </section>
   );
 };
