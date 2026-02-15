@@ -3,32 +3,66 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   Code2, ExternalLink, Github, TrendingUp, 
-  Sparkles, ArrowRight, X, Loader2, Globe, MousePointer2
+  Sparkles, X, Loader2, Globe, MousePointer2,
+  Maximize2
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Website Preview Modal Component
-interface WebsitePreviewModalProps {
+interface Project {
+  id: number;
+  title: string;
+  shortTitle: string;
+  description: string;
+  icon: React.ElementType;
+  tags: string[];
+  color: string;
+  liveUrl: string;
+  github: string;
+}
+
+const projects: Project[] = [
+  {
+    id: 1,
+    title: 'KI AM Portfolio Tracking Platform',
+    shortTitle: 'KI AM Platform',
+    description: 'Production-grade analyst performance tracking for investment clubs with real-time stock prices, benchmark comparisons, board voting system, and AI-assisted workflows.',
+    icon: TrendingUp,
+    tags: ['Python', 'Flask', 'SQLAlchemy', 'Bootstrap'],
+    color: 'from-blue-500 to-cyan-400',
+    liveUrl: 'https://ki.verxl.com/',
+    github: 'https://github.com/havliksimon/ki-asset-management'
+  },
+  {
+    id: 2,
+    title: 'Portfolio Optimizer',
+    shortTitle: 'Optimizer',
+    description: 'Quantitative portfolio optimization with Modern Portfolio Theory, Risk Parity, Black-Litterman, Extreme Value Theory, and Monte Carlo simulation.',
+    icon: Sparkles,
+    tags: ['Python', 'Flask', 'CVXPY', 'Plotly'],
+    color: 'from-emerald-500 to-teal-400',
+    liveUrl: 'https://optimizer.havliksimon.eu/',
+    github: 'https://github.com/havliksimon/Portfolio-Optimization-Model'
+  }
+];
+
+// Fullscreen Modal for expanded view
+interface FullscreenModalProps {
   isOpen: boolean;
   onClose: () => void;
   url: string;
   title: string;
 }
 
-const WebsitePreviewModal = ({ isOpen, onClose, url, title }: WebsitePreviewModalProps) => {
+const FullscreenModal = ({ isOpen, onClose, url, title }: FullscreenModalProps) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [showHint, setShowHint] = useState(true);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       setIsLoading(true);
-      setShowHint(true);
-      const timer = setTimeout(() => setShowHint(false), 4000);
       return () => {
         document.body.style.overflow = 'unset';
-        clearTimeout(timer);
       };
     }
   }, [isOpen]);
@@ -36,19 +70,16 @@ const WebsitePreviewModal = ({ isOpen, onClose, url, title }: WebsitePreviewModa
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8">
-      {/* Backdrop */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6">
       <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
         onClick={onClose}
       />
       
-      {/* Modal Container - PDF-like appearance */}
-      <div className="relative w-full max-w-6xl h-[85vh] bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-300">
-        {/* Header - PDF-like toolbar */}
+      <div className="relative w-full max-w-7xl h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+        {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-gray-200">
           <div className="flex items-center gap-3">
-            {/* Window dots */}
             <div className="flex items-center gap-1.5">
               <button 
                 onClick={onClose}
@@ -59,7 +90,7 @@ const WebsitePreviewModal = ({ isOpen, onClose, url, title }: WebsitePreviewModa
             </div>
             <div className="h-4 w-px bg-gray-300 mx-2" />
             <Globe className="w-4 h-4 text-gray-500" />
-            <span className="text-sm text-gray-600 font-medium truncate max-w-[200px] md:max-w-md">
+            <span className="text-sm text-gray-600 font-medium truncate max-w-[300px]">
               {title}
             </span>
           </div>
@@ -69,7 +100,7 @@ const WebsitePreviewModal = ({ isOpen, onClose, url, title }: WebsitePreviewModa
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               Open in new tab
@@ -83,17 +114,7 @@ const WebsitePreviewModal = ({ isOpen, onClose, url, title }: WebsitePreviewModa
           </div>
         </div>
         
-        {/* Scroll hint */}
-        {showHint && (
-          <div className="absolute top-16 left-1/2 -translate-x-1/2 z-10 animate-in fade-in slide-in-from-top-2 duration-500">
-            <div className="flex items-center gap-2 px-4 py-2 bg-gray-900/90 text-white text-sm rounded-full shadow-lg">
-              <MousePointer2 className="w-4 h-4" />
-              <span>Scroll to explore</span>
-            </div>
-          </div>
-        )}
-        
-        {/* Iframe Container */}
+        {/* Iframe */}
         <div className="relative w-full h-[calc(100%-52px)] bg-gray-100">
           {isLoading && (
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-50">
@@ -117,20 +138,28 @@ const WebsitePreviewModal = ({ isOpen, onClose, url, title }: WebsitePreviewModa
 const Projects = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const kiCardRef = useRef<HTMLDivElement>(null);
-  const optimizerCardRef = useRef<HTMLDivElement>(null);
-  const [previewModal, setPreviewModal] = useState<{ isOpen: boolean; url: string; title: string }>({
+  const leftColumnRef = useRef<HTMLDivElement>(null);
+  const previewContainerRef = useRef<HTMLDivElement>(null);
+  
+  const [activeProject, setActiveProject] = useState<Project>(projects[1]); // Default to Optimizer
+  const [iframeLoading, setIframeLoading] = useState(true);
+  const [fullscreenModal, setFullscreenModal] = useState<{ isOpen: boolean; url: string; title: string }>({
     isOpen: false,
     url: '',
     title: ''
   });
 
-  const openPreview = (url: string, title: string) => {
-    setPreviewModal({ isOpen: true, url, title });
+  const openFullscreen = (url: string, title: string) => {
+    setFullscreenModal({ isOpen: true, url, title });
   };
 
-  const closePreview = () => {
-    setPreviewModal({ isOpen: false, url: '', title: '' });
+  const closeFullscreen = () => {
+    setFullscreenModal({ isOpen: false, url: '', title: '' });
+  };
+
+  const switchProject = (project: Project) => {
+    setActiveProject(project);
+    setIframeLoading(true);
   };
 
   useEffect(() => {
@@ -151,34 +180,34 @@ const Projects = () => {
         }
       );
 
-      // KI Card animation
-      gsap.fromTo(kiCardRef.current,
-        { y: 50, opacity: 0 },
+      // Left column animation
+      gsap.fromTo(leftColumnRef.current,
+        { x: -50, opacity: 0 },
         {
-          y: 0,
+          x: 0,
           opacity: 1,
-          duration: 0.7,
-          delay: 0.1,
+          duration: 0.8,
+          delay: 0.2,
           ease: 'power2.out',
           scrollTrigger: {
-            trigger: kiCardRef.current,
+            trigger: leftColumnRef.current,
             start: 'top 85%',
             toggleActions: 'play none none reverse'
           }
         }
       );
 
-      // Optimizer Card animation
-      gsap.fromTo(optimizerCardRef.current,
-        { y: 50, opacity: 0 },
+      // Preview container animation
+      gsap.fromTo(previewContainerRef.current,
+        { x: 50, opacity: 0 },
         {
-          y: 0,
+          x: 0,
           opacity: 1,
-          duration: 0.7,
-          delay: 0.25,
+          duration: 0.8,
+          delay: 0.3,
           ease: 'power2.out',
           scrollTrigger: {
-            trigger: optimizerCardRef.current,
+            trigger: previewContainerRef.current,
             start: 'top 85%',
             toggleActions: 'play none none reverse'
           }
@@ -194,171 +223,199 @@ const Projects = () => {
       <section
         ref={sectionRef}
         id="projects"
-        className="section bg-gray-50"
+        className="section bg-gray-50 overflow-hidden"
       >
-        <div className="max-w-6xl mx-auto px-6 md:px-12">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
           {/* Title */}
-          <div ref={titleRef} className="text-center mb-16">
+          <div ref={titleRef} className="text-center mb-12">
             <span className="text-sm font-mono uppercase tracking-wider text-gray-400 mb-4 block">Technical Work</span>
             <h2 className="section-title">
               Featured <span className="text-red-600">Projects</span>
             </h2>
             <p className="section-subtitle mx-auto">
-              Interactive web applications that combine financial expertise with modern web development.
-              Click to explore them live!
+              Click a project to view it in the live preview, or expand for fullscreen.
             </p>
           </div>
 
-          {/* Bento Grid Layout */}
-          <div className="grid md:grid-cols-12 gap-6">
+          {/* Split Layout */}
+          <div className="grid lg:grid-cols-12 gap-8 items-start">
             
-            {/* KI AM - Left Side (spans 7 columns) */}
-            <div
-              ref={kiCardRef}
-              onClick={() => openPreview('https://ki.verxl.com/', 'KI AM Portfolio Tracking Platform')}
-              className="md:col-span-7 group relative bg-white rounded-3xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 cursor-pointer"
-            >
-              {/* Gradient Header */}
-              <div className="h-40 bg-gradient-to-r from-blue-500 to-cyan-400 relative overflow-hidden">
-                <div className="absolute inset-0 bg-white/10" />
-                <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-white/20 rounded-full blur-2xl" />
-                <div className="absolute top-5 left-5">
-                  <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
-                    <TrendingUp className="w-8 h-8 text-white" />
-                  </div>
-                </div>
-                <div className="absolute top-5 right-5">
-                  <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-white/30">
-                    Live App
-                  </span>
-                </div>
-                {/* Hover indicator */}
-                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-lg text-white text-sm">
-                    <Globe className="w-4 h-4" />
-                    Click to explore
-                  </div>
-                </div>
-              </div>
-              
-              {/* Content */}
-              <div className="p-8">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                  KI AM Portfolio Tracking Platform
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-6">
-                  Production-grade analyst performance tracking platform for investment clubs. Features real-time stock prices with benchmark comparisons, democratic portfolio construction via board voting, AI-assisted workflows for smart ticker matching, and comprehensive performance analytics.
-                </p>
+            {/* LEFT: Project Cards */}
+            <div ref={leftColumnRef} className="lg:col-span-5 space-y-6">
+              {projects.map((project) => {
+                const Icon = project.icon;
+                const isActive = activeProject.id === project.id;
                 
-                {/* Tech Tags */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {['Python', 'Flask', 'SQLAlchemy', 'Bootstrap', 'Tailwind'].map((tag, i) => (
-                    <span
-                      key={i}
-                      className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700"
-                    >
-                      <Code2 className="w-3 h-3" />
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                {/* CTA Row */}
-                <div className="flex items-center justify-between">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openPreview('https://ki.verxl.com/', 'KI AM Portfolio Tracking Platform');
-                    }}
-                    className="flex items-center gap-2 px-6 py-3 bg-gray-900 text-white text-sm font-medium rounded-xl hover:bg-gray-800 transition-all group/btn"
+                return (
+                  <div
+                    key={project.id}
+                    onClick={() => switchProject(project)}
+                    className={`group relative bg-white rounded-2xl overflow-hidden border-2 transition-all duration-300 cursor-pointer ${
+                      isActive 
+                        ? 'border-gray-900 shadow-xl scale-[1.02]' 
+                        : 'border-gray-100 hover:border-gray-300 hover:shadow-lg'
+                    }`}
                   >
-                    <Globe className="w-4 h-4" />
-                    Explore Live App
-                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
-                  
-                  <a
-                    href="https://github.com/havliksimon/ki-asset-management"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="p-3 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"
-                    title="View on GitHub"
-                  >
-                    <Github className="w-5 h-5 text-gray-700" />
-                  </a>
-                </div>
-              </div>
+                    {/* Header */}
+                    <div className={`h-24 bg-gradient-to-r ${project.color} relative overflow-hidden`}>
+                      <div className="absolute inset-0 bg-white/10" />
+                      <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-white/20 rounded-full blur-xl" />
+                      
+                      <div className="absolute top-4 left-4">
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center border transition-all ${
+                          isActive 
+                            ? 'bg-white/30 border-white/50' 
+                            : 'bg-white/20 border-white/30'
+                        }`}>
+                          <Icon className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                      
+                      <div className="absolute top-4 right-4">
+                        <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${
+                          isActive 
+                            ? 'bg-white/30 text-white border-white/50' 
+                            : 'bg-white/20 text-white border-white/30'
+                        }`}>
+                          {isActive ? 'Now Previewing' : 'Click to View'}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="p-5">
+                      <h3 className={`text-lg font-semibold mb-2 transition-colors ${
+                        isActive ? 'text-gray-900' : 'text-gray-700 group-hover:text-gray-900'
+                      }`}>
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                        {project.description}
+                      </p>
+                      
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tags.map((tag, i) => (
+                          <span
+                            key={i}
+                            className="inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 rounded-full text-xs text-gray-600"
+                          >
+                            <Code2 className="w-3 h-3" />
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      
+                      {/* Actions */}
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openFullscreen(project.liveUrl, project.title);
+                          }}
+                          className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-all ${
+                            isActive 
+                              ? 'bg-gray-900 text-white hover:bg-gray-800' 
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          }`}
+                        >
+                          <Maximize2 className="w-4 h-4" />
+                          Expand View
+                        </button>
+                        
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="p-2.5 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                          title="View on GitHub"
+                        >
+                          <Github className="w-5 h-5 text-gray-700" />
+                        </a>
+                        
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="p-2.5 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                          title="Open in new tab"
+                        >
+                          <ExternalLink className="w-5 h-5 text-gray-700" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
-            {/* Portfolio Optimizer - Right Side (spans 5 columns) */}
-            <div
-              ref={optimizerCardRef}
-              onClick={() => openPreview('https://optimizer.havliksimon.eu/', 'Portfolio Optimizer')}
-              className="md:col-span-5 group relative bg-white rounded-3xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 cursor-pointer flex flex-col"
-            >
-              {/* Gradient Header */}
-              <div className="h-32 bg-gradient-to-r from-emerald-500 to-teal-400 relative overflow-hidden">
-                <div className="absolute inset-0 bg-white/10" />
-                <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
-                <div className="absolute top-4 left-4">
-                  <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
-                    <Sparkles className="w-7 h-7 text-white" />
+            {/* RIGHT: Live Preview Window */}
+            <div ref={previewContainerRef} className="lg:col-span-7 lg:sticky lg:top-24">
+              <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
+                {/* Window Header */}
+                <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-gray-200">
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-red-400" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                      <div className="w-3 h-3 rounded-full bg-green-400" />
+                    </div>
+                    <div className="h-4 w-px bg-gray-300 mx-2" />
+                    <Globe className="w-4 h-4 text-gray-500" />
+                    <span className="text-sm text-gray-600 font-medium">
+                      {activeProject.shortTitle}
+                    </span>
+                  </div>
+                  
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => openFullscreen(activeProject.liveUrl, activeProject.title)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                    >
+                      <Maximize2 className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">Fullscreen</span>
+                    </button>
+                    <a
+                      href={activeProject.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">New Tab</span>
+                    </a>
                   </div>
                 </div>
-                <div className="absolute top-4 right-4">
-                  <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-white/30">
-                    Live App
-                  </span>
-                </div>
-              </div>
-              
-              {/* Content */}
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
-                  Portfolio Optimizer
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed mb-4 flex-1">
-                  Comprehensive quantitative portfolio optimization platform implementing Modern Portfolio Theory, Risk Parity, Black-Litterman model, Extreme Value Theory, and Monte Carlo simulation with 5,000 paths.
-                </p>
                 
-                {/* Tech Tags */}
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {['Python', 'Flask', 'CVXPY', 'Plotly'].map((tag, i) => (
-                    <span
-                      key={i}
-                      className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700"
-                    >
-                      <Code2 className="w-3 h-3" />
-                      {tag}
-                    </span>
-                  ))}
+                {/* Iframe Container */}
+                <div className="relative w-full aspect-[4/3] lg:aspect-[16/10] bg-gray-100">
+                  {iframeLoading && (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-50">
+                      <Loader2 className="w-10 h-10 text-gray-400 animate-spin mb-4" />
+                      <span className="text-sm text-gray-500">Loading {activeProject.shortTitle}...</span>
+                    </div>
+                  )}
+                  <iframe
+                    key={activeProject.id} // Force remount on project switch
+                    src={activeProject.liveUrl}
+                    className="w-full h-full border-0"
+                    onLoad={() => setIframeLoading(false)}
+                    sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                    title={activeProject.title}
+                  />
                 </div>
                 
-                {/* CTA Buttons */}
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openPreview('https://optimizer.havliksimon.eu/', 'Portfolio Optimizer');
-                    }}
-                    className="flex-1 flex items-center justify-center gap-2 px-5 py-3 bg-gray-900 text-white text-sm font-medium rounded-xl hover:bg-gray-800 transition-all group/btn"
-                  >
-                    <Globe className="w-4 h-4" />
-                    Explore
-                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
-                  
-                  <a
-                    href="https://github.com/havliksimon/Portfolio-Optimization-Model"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="p-3 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"
-                    title="View on GitHub"
-                  >
-                    <Github className="w-5 h-5 text-gray-700" />
-                  </a>
+                {/* Footer hint */}
+                <div className="flex items-center justify-between px-4 py-2.5 bg-gray-50 border-t border-gray-200">
+                  <div className="flex items-center gap-2 text-xs text-gray-500">
+                    <MousePointer2 className="w-3.5 h-3.5" />
+                    <span>Scroll to explore the live app</span>
+                  </div>
+                  <div className="text-xs text-gray-400">
+                    Press a project on the left to switch
+                  </div>
                 </div>
               </div>
             </div>
@@ -367,12 +424,12 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Website Preview Modal */}
-      <WebsitePreviewModal
-        isOpen={previewModal.isOpen}
-        onClose={closePreview}
-        url={previewModal.url}
-        title={previewModal.title}
+      {/* Fullscreen Modal */}
+      <FullscreenModal
+        isOpen={fullscreenModal.isOpen}
+        onClose={closeFullscreen}
+        url={fullscreenModal.url}
+        title={fullscreenModal.title}
       />
     </>
   );
