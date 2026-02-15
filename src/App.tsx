@@ -7,6 +7,7 @@ import About from './sections/About';
 import Timeline from './sections/Timeline';
 import Skills from './sections/Skills';
 import Projects from './sections/Projects';
+import Analyses from './sections/Analyses';
 import China from './sections/China';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
@@ -39,6 +40,7 @@ function App() {
         <Timeline />
         <Skills />
         <Projects />
+        <Analyses />
         <China />
         <Contact />
         <Footer />
