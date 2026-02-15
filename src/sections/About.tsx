@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TrendingUp, Database, Globe, Award, MapPin, GraduationCap, Briefcase } from 'lucide-react';
+import { TrendingUp, Database, Globe, Award, MapPin, GraduationCap, Briefcase, ChevronDown } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -135,6 +135,44 @@ const About = () => {
                 <span>Klub Investorů</span>
               </div>
             </div>
+
+            {/* Education Journey Link - Animated */}
+            <button
+              onClick={() => {
+                const educationSection = document.getElementById('education');
+                if (educationSection) {
+                  const start = window.scrollY;
+                  const target = educationSection.getBoundingClientRect().top + window.scrollY;
+                  const distance = target - start;
+                  const duration = 1800;
+                  const startTime = performance.now();
+                  
+                  const easeInOutQuad = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+                  
+                  const animate = (currentTime: number) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = easeInOutQuad(progress);
+                    
+                    window.scrollTo(0, start + distance * eased);
+                    
+                    if (progress < 1) {
+                      requestAnimationFrame(animate);
+                    }
+                  };
+                  
+                  requestAnimationFrame(animate);
+                }
+              }}
+              className="group mt-6 inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer"
+            >
+              <span className="relative flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
+                <GraduationCap className="w-4 h-4 text-white" />
+                <span className="absolute inset-0 rounded-full bg-amber-400 animate-ping opacity-30" />
+              </span>
+              <span className="font-medium">Education Journey</span>
+              <ChevronDown className="w-4 h-4 animate-bounce" />
+            </button>
           </div>
 
           {/* Right Column - Image & Highlights */}
