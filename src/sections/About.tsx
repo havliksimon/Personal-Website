@@ -146,15 +146,15 @@ const About = () => {
                     const start = window.scrollY;
                     const target = section.getBoundingClientRect().top + window.scrollY;
                     const distance = target - start;
-                    const duration = 2500;
+                    const duration = 4000;
                     const startTime = performance.now();
                     
-                    const easeInOutQuad = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+                    const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
                     
                     const animate = (currentTime: number) => {
                       const elapsed = currentTime - startTime;
                       const progress = Math.min(elapsed / duration, 1);
-                      const eased = easeInOutQuad(progress);
+                      const eased = easeInOutCubic(progress);
                       
                       window.scrollTo(0, start + distance * eased);
                       
@@ -184,15 +184,15 @@ const About = () => {
                     const start = window.scrollY;
                     const target = section.getBoundingClientRect().top + window.scrollY;
                     const distance = target - start;
-                    const duration = 2500;
+                    const duration = 4000;
                     const startTime = performance.now();
                     
-                    const easeInOutQuad = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+                    const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
                     
                     const animate = (currentTime: number) => {
                       const elapsed = currentTime - startTime;
                       const progress = Math.min(elapsed / duration, 1);
-                      const eased = easeInOutQuad(progress);
+                      const eased = easeInOutCubic(progress);
                       
                       window.scrollTo(0, start + distance * eased);
                       
