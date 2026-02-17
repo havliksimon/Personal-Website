@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
-  Code2, ExternalLink, Github, TrendingUp, 
-  Sparkles, X, Loader2, Globe, MousePointer2,
-  Maximize2, Layers, Box, ArrowUpRight
+  TrendingUp, Globe, Sparkles, Layers, Box,
+  Code2, Github, ExternalLink,
+  MousePointer2, Loader2, ArrowUpRight, Maximize2, X, ZoomIn, ZoomOut
 } from 'lucide-react';
 import ProjectsEffects from '../components/ProjectsEffects';
 
@@ -155,6 +155,8 @@ const Projects = () => {
     url: '',
     title: ''
   });
+  const [showZoomControls, setShowZoomControls] = useState(false);
+  const [iframeScale, setIframeScale] = useState(1);
 
   const openFullscreen = (url: string, title: string) => {
     setFullscreenModal({ isOpen: true, url, title });
@@ -167,6 +169,10 @@ const Projects = () => {
   const switchProject = (project: Project) => {
     setActiveProject(project);
     setIframeLoading(true);
+  };
+
+  const handleZoomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIframeScale(parseFloat(e.target.value));
   };
 
   useEffect(() => {
@@ -474,6 +480,7 @@ const Projects = () => {
                     onLoad={() => setIframeLoading(false)}
                     sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
                     title={activeProject.title}
+                    style={{ transform: `scale(${iframeScale})`, transformOrigin: 'top left', width: `${100/iframeScale}%`, height: `${100/iframeScale}%` }}
                   />
                 </div>
                 
@@ -483,6 +490,33 @@ const Projects = () => {
                     <MousePointer2 className="w-4 h-4" />
                     <span>Scroll to explore</span>
                   </div>
+                  
+                  {/* Zoom Slider - shows on hover */}
+                  <div 
+                    className="flex items-center gap-3 group relative"
+                    onMouseEnter={() => setShowZoomControls(true)}
+                    onMouseLeave={() => setShowZoomControls(false)}
+                  >
+                    <div className={`flex items-center gap-2 overflow-hidden transition-all duration-300 ${
+                      showZoomControls ? 'w-36 opacity-100' : 'w-0 opacity-0'
+                    }`}>
+                      <ZoomOut className="w-4 h-4 text-gray-500 flex-shrink-0" />
+                      <input
+                        type="range"
+                        min="0.5"
+                        max="1.5"
+                        step="0.1"
+                        value={iframeScale}
+                        onChange={handleZoomChange}
+                        className="w-full h-1.5 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-gray-700"
+                      />
+                      <ZoomIn className="w-4 h-4 text-gray-500 flex-shrink-0" />
+                    </div>
+                    <span className="text-sm text-gray-700 min-w-[50px] text-center font-medium">
+                      {Math.round(iframeScale * 100)}%
+                    </span>
+                  </div>
+                  
                   <div className="flex items-center gap-2 text-sm text-gray-400">
                     <span>Click cards on the left to switch projects</span>
                     <div className="flex gap-1">
