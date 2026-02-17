@@ -146,7 +146,7 @@ const About = () => {
                     const start = window.scrollY;
                     const target = section.getBoundingClientRect().top + window.scrollY;
                     const distance = target - start;
-                    const duration = 1800;
+                    const duration = 2500;
                     const startTime = performance.now();
                     
                     const easeInOutQuad = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
@@ -184,7 +184,7 @@ const About = () => {
                     const start = window.scrollY;
                     const target = section.getBoundingClientRect().top + window.scrollY;
                     const distance = target - start;
-                    const duration = 1800;
+                    const duration = 2500;
                     const startTime = performance.now();
                     
                     const easeInOutQuad = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
