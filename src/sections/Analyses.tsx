@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   FileText, Presentation, Download, ExternalLink, 
-  Loader2, ChevronRight, BookOpen, BarChart3,
+  ChevronRight, BookOpen, BarChart3,
   TrendingUp, Globe, Sparkles, Languages, Info
 } from 'lucide-react';
 import AnalysesEffects from '../components/AnalysesEffects';
@@ -107,14 +107,12 @@ const Analyses = () => {
   const viewerRef = useRef<HTMLDivElement>(null);
   
   const [activeDoc, setActiveDoc] = useState<AnalysisDoc>(analyses[0]);
-  const [isLoading, setIsLoading] = useState(true);
 
   const analysisDocs = analyses.filter(doc => doc.type === 'analysis');
   const presentationDocs = analyses.filter(doc => doc.type === 'presentation');
 
   const switchDocument = (doc: AnalysisDoc) => {
     setActiveDoc(doc);
-    setIsLoading(true);
   };
 
   useEffect(() => {
@@ -431,20 +429,60 @@ const Analyses = () => {
               </div>
               
               {/* PDF Viewer */}
-              <div className="relative flex-1 bg-gray-100 min-h-[500px]">
-                {isLoading && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-900 z-10">
-                    <Loader2 className="w-10 h-10 text-gray-500 animate-spin mb-4" />
-                    <span className="text-sm text-gray-400">Loading PDF...</span>
+              <div className="relative flex-1 bg-gray-100 min-h-[500px] flex items-center justify-center">
+                <div className="text-center px-8 py-12">
+                  {/* Document Icon */}
+                  <div className={`w-24 h-32 mx-auto mb-6 rounded-lg bg-gradient-to-br ${activeDoc.thumbnailColor} flex items-center justify-center shadow-lg relative`}>
+                    <div className="absolute top-0 right-0 w-6 h-6 bg-white/20 rounded-bl-lg" />
+                    <activeDoc.icon className="w-12 h-12 text-white" />
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+                      <span className="text-xs font-bold text-gray-700">{activeDoc.pages}</span>
+                    </div>
                   </div>
-                )}
-                <iframe
-                  key={activeDoc.id}
-                  src={`${activeDoc.pdfUrl}#toolbar=1&navpanes=0`}
-                  className="w-full h-full border-0"
-                  onLoad={() => setIsLoading(false)}
-                  title={activeDoc.title}
-                />
+                  
+                  {/* Document Info */}
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{activeDoc.title}</h3>
+                  <p className="text-gray-600 mb-6 max-w-sm mx-auto">{activeDoc.description}</p>
+                  
+                  {/* Action Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a
+                      href={activeDoc.pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                      Open Document
+                    </a>
+                    <a
+                      href={activeDoc.pdfUrl}
+                      download
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                    >
+                      <Download className="w-5 h-5" />
+                      Download PDF
+                    </a>
+                  </div>
+                  
+                  {activeDoc.language === 'cs' && (
+                    <div className="mt-6 flex items-center justify-center gap-2">
+                      <span className="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm font-medium">
+                        Czech Document
+                      </span>
+                      <span className="text-gray-400">•</span>
+                      <a
+                        href={`https://r.jina.ai/http://${typeof window !== 'undefined' ? window.location.host : 'localhost'}${activeDoc.pdfUrl}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-blue-600 hover:text-blue-700 hover:underline flex items-center gap-1"
+                      >
+                        <Languages className="w-4 h-4" />
+                        AI Translate
+                      </a>
+                    </div>
+                  )}
+                </div>
               </div>
               
               {/* Footer */}
