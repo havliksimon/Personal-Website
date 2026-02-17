@@ -1,39 +1,538 @@
 <!doctype html>
-<html lang="en">
+<html lang="cs">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Šimon Havlík | Economics Student, Equity Analyst & Developer</title>
+    <title>Šimon Havlík | Konzultant pro čínské investice a analytik | Investiční poradce Čína</title>
     
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="Šimon Havlík | Economics Student, Equity Analyst & Developer">
-    <meta name="description" content="VŠE Prague student doing equity research and building quantitative analysis tools. Published reports on Bilibili, Tuya, Google & Chinese markets. Creator of KI AM Portfolio Tracker and Portfolio Optimizer.">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://havliksimon.eu/">
+    
+    <!-- Primary Meta Tags - Czech Focused SEO -->
+    <meta name="title" content="Šimon Havlík | Konzultant pro čínské investice Praha | Analytik čínských trhů">
+    <meta name="description" content="Hledáte dobrého čínského poradce? Šimon Havlík - konzultant pro investice do Číny a analytik čínských trhů z Prahy. Specialista na čínské akcie, asijsko-pacifické trhy a APAC investice. Odborník na čínské technologické společnosti (Bilibili, Tencent, Alibaba).">
     <meta name="author" content="Šimon Havlík">
-    <meta name="keywords" content="Investment Analyst, Portfolio Optimization, Finance, Python, Asia-Pacific Markets, Equity Research, Flask, SQL">
+    <meta name="keywords" content="dobrý čínský poradce, kde najít čínského poradce, konzultant pro čínské investice, konzultant pro čínu, poradce pro čínské investice, analytik čínských trhů, čínské investice, investice do číny, čínské akcie, čínský trh, asijsko-pacifické trhy, APAC analytik, emerging markets, čínské technologické akcie, čínský konzultant Praha, investiční poradce Čína, čínský akciový trh, čínské IPO, konzultace čínské investice, odborník na čínu, čínský trh analýza, BRICS analytik, pražský analytik číny, VŠE čínské trhy, klub investorů čína, analytik pro čínské akcie, poradenství čínské investice, investiční strategie čína">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    
+    <!-- Language & Region - Czech Primary -->
+    <meta name="language" content="Czech, English">
+    <meta http-equiv="content-language" content="cs, en">
+    
+    <!-- Hreflang for Bilingual SEO -->
+    <link rel="alternate" hreflang="en" href="https://havliksimon.eu/">
+    <link rel="alternate" hreflang="cs" href="https://havliksimon.eu/">
+    <link rel="alternate" hreflang="x-default" href="https://havliksimon.eu/">
+    
+    <!-- Geo-Targeting -->
+    <meta name="geo.region" content="CZ">
+    <meta name="geo.placename" content="Prague">
+    <meta name="geo.position" content="50.0755;14.4378">
+    <meta name="ICBM" content="50.0755, 14.4378">
+    
+    <!-- Sitemap & Robots -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+    
+    <!-- Dublin Core -->
+    <meta name="DC.title" content="Šimon Havlík | Investment Analyst & Equity Research">
+    <meta name="DC.creator" content="Šimon Havlík">
+    <meta name="DC.subject" content="Investment Analysis, Equity Research, Portfolio Management, Finance">
+    <meta name="DC.description" content="Professional portfolio of Šimon Havlík, Investment Analyst specializing in equity research and portfolio optimization.">
+    <meta name="DC.publisher" content="havliksimon.eu">
+    <meta name="DC.date" content="2026">
+    <meta name="DC.type" content="Text">
+    <meta name="DC.format" content="text/html">
+    <meta name="DC.language" content="en, cs">
+    <meta name="DC.coverage" content="Prague, Czech Republic">
     
     <!-- Open Graph / LinkedIn / Facebook -->
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="profile">
     <meta property="og:url" content="https://havliksimon.eu/">
-    <meta property="og:title" content="Šimon Havlík | Economics Student, Equity Analyst & Developer">
-    <meta property="og:description" content="VŠE Prague student doing equity research and building quantitative analysis tools. Published reports on Bilibili, Tuya, Google & Chinese markets. Creator of KI AM Portfolio Tracker and Portfolio Optimizer.">
+    <meta property="og:title" content="Šimon Havlík | Konzultant pro čínské investice | Analytik čínských trhů Praha">
+    <meta property="og:description" content="Hledáte dobrého čínského poradce? Konzultant pro investice do Číny a analytik čínských trhů z Prahy. Specialista na čínské akcie a APAC investice.">
     <meta property="og:image" content="https://havliksimon.eu/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="Šimon Havlík Portfolio">
+    <meta property="og:image:alt" content="Šimon Havlík - China Investment Analyst & APAC Markets Expert">
+    <meta property="og:site_name" content="Šimon Havlík | China Investment Analyst">
     <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="cs_CZ">
+    <meta property="profile:first_name" content="Šimon">
+    <meta property="profile:last_name" content="Havlík">
+    <meta property="profile:username" content="shavlik">
+    <meta property="profile:gender" content="male">
+    <meta property="profile:expertise" content="China Investment Analysis, Asia-Pacific Markets, Equity Research">
     
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://havliksimon.eu/">
-    <meta property="twitter:title" content="Šimon Havlík | Economics Student, Equity Analyst & Developer">
-    <meta property="twitter:description" content="VŠE Prague student doing equity research and building quantitative analysis tools. Published reports on Bilibili, Tuya, Google & Chinese markets.">
-    <meta property="twitter:image" content="https://havliksimon.eu/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@shavlik">
+    <meta name="twitter:creator" content="@shavlik">
+    <meta name="twitter:url" content="https://havliksimon.eu/">
+    <meta name="twitter:title" content="Šimon Havlík | Konzultant pro čínské investice Praha">
+    <meta name="twitter:description" content="Dobrý čínský poradce v Praze. Konzultant pro investice do Číny, analytik čínských trhů a APAC specialista.">
+    <meta name="twitter:image" content="https://havliksimon.eu/og-image.png">
+    <meta name="twitter:image:alt" content="Šimon Havlík - China Investment Analyst & Consultant">
+    <meta name="twitter:label1" content="Location">
+    <meta name="twitter:data1" content="Prague, Czech Republic">
+    <meta name="twitter:label2" content="Expertise">
+    <meta name="twitter:data2" content="China Markets, APAC Equity Research">
     
-    <!-- Favicon -->
+    <!-- Favicon & Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/favicon.svg" color="#1a1a2e">
+    
+    <!-- Humans.txt -->
+    <link rel="author" href="/humans.txt">
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#1a1a2e">
+    <meta name="msapplication-TileColor" content="#1a1a2e">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- JSON-LD Structured Data - Person Profile -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Šimon Havlík",
+        "alternateName": ["Simon Havlik", "Šimon Havlik", "Simon Havlík"],
+        "givenName": "Šimon",
+        "familyName": "Havlík",
+        "jobTitle": ["China Investment Analyst", "Chinese Markets Consultant", "Asia-Pacific Investment Analyst", "Investment Analyst", "Investiční analytik", "Konzultant pro čínské trhy", "Poradce pro čínské investice", "Analytik čínských trhů", "Equity Research Analyst", "Financial Analyst", "Emerging Markets Analyst", "APAC Analyst"],
+        "description": "China Investment Analyst & Consultant specializing in Chinese markets, Asia-Pacific equity research, and APAC portfolio strategies. Expert on Chinese tech companies including Bilibili, Tencent, Alibaba. Economics Student at VŠE Prague. Konzultant a analytik specializující se na čínské trhy, čínské akcie a asijsko-pacifické investice.",
+        "disambiguatingDescription": "China Investment Analyst and APAC Markets Consultant specializing in Chinese equity research, emerging markets, and Asia-Pacific portfolio strategies. Expert on Chinese tech stocks and BRICS markets.",
+        "url": "https://havliksimon.eu/",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://havliksimon.eu/og-image.png",
+          "width": 1200,
+          "height": 630,
+          "caption": "Šimon Havlík - Investment Analyst"
+        },
+        "email": "havlik.simon@post.cz",
+        "telephone": "+420-776-341-621",
+        "birthPlace": {
+          "@type": "Place",
+          "name": "Czech Republic"
+        },
+        "nationality": {
+          "@type": "Country",
+          "name": "Czech Republic"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Prague",
+          "addressRegion": "Prague",
+          "addressCountry": {
+            "@type": "Country",
+            "name": "Czech Republic",
+            "alternateName": "Czechia"
+          }
+        },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Prague University of Economics and Business (VŠE)",
+          "alternateName": "Vysoká škola ekonomická v Praze",
+          "url": "https://www.vse.cz/",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Prague",
+            "addressCountry": "CZ"
+          }
+        },
+        "knowsAbout": [
+          {
+            "@type": "Thing",
+            "name": "China Investment Analysis",
+            "alternateName": "Analýza čínských investic"
+          },
+          {
+            "@type": "Thing",
+            "name": "Chinese Markets",
+            "alternateName": "Čínské trhy"
+          },
+          {
+            "@type": "Thing",
+            "name": "China Equity Research",
+            "alternateName": "Akciové analýzy Číny"
+          },
+          {
+            "@type": "Thing",
+            "name": "Asia-Pacific Markets",
+            "alternateName": "Asijsko-pacifické trhy"
+          },
+          {
+            "@type": "Thing",
+            "name": "APAC Investment Strategy",
+            "alternateName": "APAC investiční strategie"
+          },
+          {
+            "@type": "Thing",
+            "name": "Chinese Tech Stocks",
+            "alternateName": "Čínské technologické akcie"
+          },
+          {
+            "@type": "Thing",
+            "name": "Emerging Markets",
+            "alternateName": "Rozvíjející se trhy"
+          },
+          {
+            "@type": "Thing",
+            "name": "BRICS Markets"
+          },
+          {
+            "@type": "Thing",
+            "name": "Investment Analysis",
+            "alternateName": "Investiční analýza"
+          },
+          {
+            "@type": "Thing",
+            "name": "Equity Research",
+            "alternateName": "Akciové analýzy"
+          },
+          {
+            "@type": "Thing",
+            "name": "Portfolio Optimization",
+            "alternateName": "Optimalizace portfolia"
+          },
+          {
+            "@type": "Thing",
+            "name": "Portfolio Management",
+            "alternateName": "Správa portfolia"
+          },
+          "Financial Modeling",
+          "Quantitative Analysis",
+          "Python Programming",
+          "Data Science",
+          "SQL",
+          "Flask",
+          "Bilibili",
+          "Tencent",
+          "Alibaba",
+          "Tuya Smart"
+        ],
+        "hasOccupation": [
+          {
+            "@type": "Occupation",
+            "name": "China Investment Analyst",
+            "alternateName": "Analytik čínských investic",
+            "occupationLocation": {
+              "@type": "City",
+              "name": "Prague"
+            },
+            "estimatedSalary": {
+              "@type": "MonetaryAmountDistribution",
+              "currency": "CZK",
+              "name": "China Investment Analyst Salary"
+            }
+          },
+          {
+            "@type": "Occupation",
+            "name": "Chinese Markets Consultant",
+            "alternateName": "Konzultant pro čínské trhy",
+            "occupationLocation": {
+              "@type": "City",
+              "name": "Prague"
+            }
+          },
+          {
+            "@type": "Occupation",
+            "name": "APAC Investment Analyst",
+            "alternateName": "APAC analytik",
+            "occupationLocation": {
+              "@type": "City",
+              "name": "Prague"
+            }
+          },
+          {
+            "@type": "Occupation",
+            "name": "Emerging Markets Analyst",
+            "alternateName": "Analytik rozvíjejících se trhů",
+            "occupationLocation": {
+              "@type": "City",
+              "name": "Prague"
+            }
+          }
+        ],
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Klub Investorů",
+          "alternateName": "Investors Club",
+          "url": "https://www.klubinvestoru.cz"
+        },
+        "makesOffer": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "China Investment Consulting",
+              "alternateName": "Konzultace pro čínské investice",
+              "description": "Expert consulting on Chinese market investments, Chinese tech stocks, and Asia-Pacific opportunities. Includes market entry strategy and risk assessment.",
+              "areaServed": {
+                "@type": "Country",
+                "name": "China"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "China Equity Research",
+              "alternateName": "Akciové analýzy Číny",
+              "description": "In-depth equity research on Chinese companies including Bilibili, Tencent, Alibaba, Tuya Smart, and other Chinese tech stocks listed on HKEX and US exchanges."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "APAC Market Analysis",
+              "alternateName": "Analýza asijsko-pacifických trhů",
+              "description": "Comprehensive analysis of Asia-Pacific markets including China, Hong Kong, Japan, South Korea, and emerging Asian economies."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Equity Research",
+              "description": "Professional equity research and stock analysis services"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Portfolio Analysis",
+              "description": "Portfolio optimization and quantitative analysis"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Emerging Markets Advisory",
+              "alternateName": "Poradenství pro rozvíjející se trhy",
+              "description": "Strategic advisory for investments in emerging markets including BRICS countries and developing Asian economies."
+            }
+          }
+        ],
+        "sameAs": [
+          "https://linkedin.com/in/havliksimon",
+          "https://github.com/havliksimon",
+          "https://x.com/shavlik",
+          "https://www.klubinvestoru.cz"
+        ],
+        "additionalName": "Simon Havlik"
+      },
+      "inLanguage": ["en", "cs"],
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Šimon Havlík Portfolio",
+        "url": "https://havliksimon.eu/",
+        "publisher": {
+          "@type": "Person",
+          "name": "Šimon Havlík"
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://havliksimon.eu/"
+          }
+        ]
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": ["h1", "h2", ".about-section"]
+      }
+    }
+    </script>
+    
+    <!-- JSON-LD - ProfessionalService Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Šimon Havlík - Investment Analysis Services",
+      "alternateName": "Simon Havlik Investment Analyst",
+      "description": "Professional investment analysis, equity research, and portfolio optimization services",
+      "url": "https://havliksimon.eu/",
+      "email": "havlik.simon@post.cz",
+      "telephone": "+420-776-341-621",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Prague",
+        "addressCountry": "CZ"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 50.0755,
+        "longitude": 14.4378
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Prague",
+          "alternateName": "Praha"
+        },
+        {
+          "@type": "Country",
+          "name": "Czech Republic"
+        }
+      ],
+      "serviceType": ["China Investment Consulting", "Chinese Markets Analysis", "APAC Investment Strategy", "China Equity Research", "Investment Analysis", "Equity Research", "Portfolio Optimization", "Emerging Markets Advisory", "Konzultace pro čínské investice", "Analýza čínských trhů", "Poradenství pro čínu"]
+      "provider": {
+        "@type": "Person",
+        "name": "Šimon Havlík"
+      }
+    }
+    </script>
+    
+    <!-- JSON-LD - WebSite Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Šimon Havlík | China Investment Analyst & Consultant",
+      "alternateName": "Simon Havlik - Chinese Markets Expert",
+      "url": "https://havliksimon.eu/",
+      "description": "Professional portfolio of Šimon Havlík, China Investment Analyst and Consultant specializing in Chinese markets, Asia-Pacific equity research, and APAC investment strategies. Konzultant specializující se na čínské trhy.",
+      "inLanguage": ["en", "cs"],
+      "publisher": {
+        "@type": "Person",
+        "name": "Šimon Havlík",
+        "url": "https://havliksimon.eu/"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://havliksimon.eu/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "about": {
+        "@type": "Person",
+        "name": "Šimon Havlík",
+        "jobTitle": ["China Investment Analyst", "Chinese Markets Consultant", "APAC Investment Analyst"]
+      }
+    }
+    </script>
+    
+    <!-- JSON-LD - LocalBusiness Schema for Prague -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Šimon Havlík - China Investment Analyst",
+      "alternateName": ["Simon Havlik - Chinese Markets Consultant", "Šimon Havlík - Konzultant pro čínské trhy", "China Investment Analyst Prague"],
+      "description": "China Investment Analyst and Consultant specializing in Chinese markets, Asia-Pacific investments, and Chinese tech equity research. Based in Prague, serving clients interested in China and APAC opportunities. Konzultant pro čínské investice.",
+      "url": "https://havliksimon.eu/",
+      "email": "havlik.simon@post.cz",
+      "telephone": "+420-776-341-621",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Prague",
+        "addressRegion": "Prague",
+        "addressCountry": "CZ"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 50.0755,
+        "longitude": 14.4378
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Prague",
+          "alternateName": "Praha"
+        },
+        {
+          "@type": "Country",
+          "name": "Czech Republic"
+        },
+        {
+          "@type": "Country",
+          "name": "China"
+        },
+        {
+          "@type": "Place",
+          "name": "Asia-Pacific"
+        },
+        {
+          "@type": "Place",
+          "name": "Hong Kong"
+        }
+      ],
+      "priceRange": "$$",
+      "currenciesAccepted": "CZK, EUR, USD",
+      "paymentAccepted": "Bank transfer",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    }
+    </script>
+    
+    <!-- Additional SEO Tags -->
+    <meta name="copyright" content="Šimon Havlík 2026">
+    <meta name="owner" content="Šimon Havlík">
+    <meta name="designer" content="Šimon Havlík">
+    <meta name="reply-to" content="havlik.simon@post.cz">
+    <meta name="rating" content="General">
+    <meta name="target" content="all">
+    <meta name="audience" content="all">
+    <meta name="coverage" content="Worldwide">
+    <meta name="distribution" content="Global">
+    <meta name="revisit-after" content="7 days">
+    <meta name="expires" content="never">
+    
+    <!-- Mobile Optimization -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Šimon Havlík">
+    
+    <!-- PWA & App Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Verification Tags (Add your codes) -->
+    <!-- <meta name="google-site-verification" content="YOUR_CODE"> -->
+    <!-- <meta name="msvalidate.01" content="YOUR_CODE"> -->
+    <!-- <meta name="yandex-verification" content="YOUR_CODE"> -->
+    
+    <!-- Archive Control -->
+    <meta name="googlebot" content="index, follow, archive">
+    <meta name="robots" content="index, follow, archive">
+    
+    <!-- Security & Privacy -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- Article/Person Keywords for NLP -->
+    <meta name="article:author" content="Šimon Havlík">
+    <meta name="article:publisher" content="https://havliksimon.eu/">
+    
+    <!-- Business Hours & Contact -->
+    <meta name="contact" content="havlik.simon@post.cz">
+    <meta name="contact:phone" content="+420-776-341-621">
+    <meta name="contact:address" content="Prague, Czech Republic">
   </head>
   <body>
     <div id="root"></div>

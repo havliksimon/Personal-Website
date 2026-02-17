@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Main sitemap -->
+  <sitemap>
+    <loc>https://havliksimon.eu/sitemap.xml</loc>
+    <lastmod>2026-02-17</lastmod>
+  </sitemap>
+  
+  <!-- Blog/Articles sitemap (when you add a blog) -->
+  <sitemap>
+    <loc>https://havliksimon.eu/sitemap-blog.xml</loc>
+    <lastmod>2026-02-17</lastmod>
+  </sitemap>
+  
+  <!-- Analysis documents sitemap -->
+  <sitemap>
+    <loc>https://havliksimon.eu/sitemap-analyses.xml</loc>
+    <lastmod>2026-02-17</lastmod>
+  </sitemap>
+  
+</sitemapindex>

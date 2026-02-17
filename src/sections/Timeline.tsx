@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import timelineData from '../data/timeline.json';
 import { GraduationCap, Award, Briefcase, Languages, Calendar, MapPin } from 'lucide-react';
+import TimelineEffects from '../components/TimelineEffects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -77,12 +78,15 @@ const Timeline = () => {
     <section
       ref={sectionRef}
       id="journey"
-      className="section bg-white/80 backdrop-blur-sm"
+      aria-labelledby="journey-heading"
+      className="section bg-gray-50/80 backdrop-blur-sm relative overflow-hidden"
     >
+      {/* Emerald Journey Effects */}
+      <TimelineEffects />
       <div className="max-w-5xl mx-auto px-6 md:px-12">
         {/* Title */}
         <div ref={titleRef} className="text-center mb-16">
-          <h2 className="section-title">Education Journey</h2>
+          <h2 id="journey-heading" className="section-title">Education Journey</h2>
           <p className="section-subtitle mx-auto">
             My academic path from secondary education through university, 
             with a growing focus on Asia-Pacific markets and Chinese language.

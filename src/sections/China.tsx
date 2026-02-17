@@ -127,8 +127,18 @@ const China = () => {
     <section
       ref={sectionRef}
       id="china"
-      className="section bg-gray-50/80 backdrop-blur-sm relative overflow-hidden"
+      aria-labelledby="china-heading"
+      className="section bg-gradient-to-b from-gray-50 via-gray-50/95 to-gray-50/80 backdrop-blur-sm relative overflow-hidden"
     >
+      {/* Top gradient fade for smooth transition from gray-50 (Analyses) */}
+      <div
+        className="absolute inset-x-0 top-0 h-48 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(249,250,251,0.9) 0%, rgba(249,250,251,0.5) 50%, transparent 100%)',
+          zIndex: 5,
+        }}
+      />
+      
       {/* Red Lightning & Storm Effects */}
       <ChinaEffects />
       
@@ -136,7 +146,7 @@ const China = () => {
         {/* Title */}
         <div ref={titleRef} className="text-center mb-12">
           <span className="text-sm font-mono uppercase tracking-wider text-gray-400 mb-4 block">Focus Area</span>
-          <h2 className="section-title">China: The World's Economic Engine</h2>
+          <h2 id="china-heading" className="section-title">China: The World's Economic Engine</h2>
           <p className="section-subtitle mx-auto">
             Understanding the scale and momentum of the world's largest economy by purchasing power parity.
           </p>

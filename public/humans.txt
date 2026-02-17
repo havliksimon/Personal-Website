@@ -1,0 +1,62 @@
+/* TEAM */
+    Name: Šimon Havlík
+    Role: China Investment Analyst & Consultant
+    Specialization: Chinese Markets, Asia-Pacific Investments, APAC Equity Research
+    Site: https://havliksimon.eu
+    LinkedIn: https://linkedin.com/in/havliksimon
+    Twitter: https://x.com/shavlik
+    GitHub: https://github.com/havliksimon
+    From: Prague, Czech Republic
+    Email: havlik.simon@post.cz
+
+/* EXPERTISE */
+    China Investment Analysis
+    Chinese Markets Consulting
+    APAC Equity Research
+    Asia-Pacific Portfolio Strategy
+    Chinese Tech Stocks (Bilibili, Tencent, Alibaba, Tuya)
+    Emerging Markets Analysis
+    Investment Portfolio Optimization
+    Quantitative Financial Analysis
+    Konzultace pro čínské investice
+    Analýza čínských trhů
+    Poradenství pro čínu
+
+/* THANKS */
+    VŠE Prague - Prague University of Economics and Business
+    Site: https://www.vse.cz/
+    
+    Klub Investorů (Investors Club)
+    Site: https://www.klubinvestoru.cz
+
+/* SITE */
+    Last update: 2026-02-17
+    Language: English, Czech
+    Doctype: HTML5
+    Standards: HTML5, CSS3, ES6+
+    Components: React, TypeScript, Vite
+    IDE: VS Code
+    
+/* TECHNOLOGY */
+    Frontend: React, TypeScript, Tailwind CSS
+    Build Tool: Vite
+    Charts: D3.js
+    State Management: Zustand
+    Icons: Lucide React
+    
+/* SEO KEYWORDS */
+    Chinese Analyst, Chinese Consultant, China Investment Analyst,
+    China Market Analyst, Konzultant pro čínu, Poradce pro čínu,
+    Analytik čínských trhů, Čínský trh, Čínské akcie,
+    Asia-Pacific Analyst, APAC Investment Analyst,
+    Investment Analyst, Investiční analytik, Equity Research,
+    Portfolio Optimization, Finance, VŠE Prague, Python,
+    Asia-Pacific Markets, China Markets, Emerging Markets,
+    Simon Havlik, Šimon Havlík
+
+/* LOCATION */
+    City: Prague (Praha)
+    Country: Czech Republic (Česká republika)
+    Region: Central Europe
+    Coordinates: 50.0755°N, 14.4378°E
+    Timezone: CET (Central European Time)

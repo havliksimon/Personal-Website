@@ -104,31 +104,82 @@ export const GlobalSpotlight: React.FC = () => {
     return () => observers.forEach((o) => o?.disconnect());
   }, []);
 
+  // Initialize and handle visibility changes
+  useEffect(() => {
+    if (!spotlightRef.current || !orb1Ref.current || !orb2Ref.current) return;
+    
+    // Set initial opacity based on visibility
+    const targetOpacity = isVisible ? { main: 0.85, orb1: 0.4, orb2: 0.35 } : { main: 0, orb1: 0, orb2: 0 };
+    
+    gsap.to(spotlightRef.current, {
+      opacity: targetOpacity.main,
+      duration: 0.5,
+      ease: 'power2.out',
+    });
+    gsap.to(orb1Ref.current, {
+      opacity: targetOpacity.orb1,
+      duration: 0.8,
+      ease: 'power2.out',
+    });
+    gsap.to(orb2Ref.current, {
+      opacity: targetOpacity.orb2,
+      duration: 0.8,
+      ease: 'power2.out',
+    });
+  }, [isVisible]);
+
   // Update spotlight colors when section changes
   useEffect(() => {
     const theme = sectionThemes[currentSection];
     if (!theme || !spotlightRef.current) return;
 
-    // Smooth color transition using GSAP
+    // Use opacity-based transition for smoother color changes
+    // First fade out completely
     gsap.to(spotlightRef.current, {
-      background: `radial-gradient(circle at center, ${theme.primary} 0%, ${theme.secondary} 40%, transparent 70%)`,
-      duration: 0.8,
-      ease: 'power2.out',
+      opacity: 0,
+      duration: 0.4,
+      ease: 'power2.in',
+      onComplete: () => {
+        // Change the background while fully transparent
+        spotlightRef.current!.style.background = `radial-gradient(circle at center, ${theme.primary} 0%, ${theme.secondary} 40%, transparent 70%)`;
+        // Then fade back in
+        gsap.to(spotlightRef.current, {
+          opacity: isVisible ? 0.85 : 0,
+          duration: 0.6,
+          ease: 'power2.out',
+        });
+      },
     });
 
-    // Update ambient orbs with new colors
+    // Update ambient orbs with same opacity-based approach
     if (orb1Ref.current) {
       gsap.to(orb1Ref.current, {
-        background: `radial-gradient(circle, ${theme.secondary} 0%, transparent 70%)`,
-        duration: 1,
-        ease: 'power2.out',
+        opacity: 0,
+        duration: 0.45,
+        ease: 'power2.in',
+        onComplete: () => {
+          orb1Ref.current!.style.background = `radial-gradient(circle, ${theme.secondary} 0%, transparent 70%)`;
+          gsap.to(orb1Ref.current, {
+            opacity: isVisible ? 0.4 : 0,
+            duration: 0.65,
+            ease: 'power2.out',
+          });
+        },
       });
     }
     if (orb2Ref.current) {
       gsap.to(orb2Ref.current, {
-        background: `radial-gradient(circle, ${theme.primary} 0%, transparent 70%)`,
-        duration: 1,
-        ease: 'power2.out',
+        opacity: 0,
+        duration: 0.45,
+        ease: 'power2.in',
+        onComplete: () => {
+          orb2Ref.current!.style.background = `radial-gradient(circle, ${theme.primary} 0%, transparent 70%)`;
+          gsap.to(orb2Ref.current, {
+            opacity: isVisible ? 0.35 : 0,
+            duration: 0.65,
+            ease: 'power2.out',
+          });
+        },
       });
     }
   }, [currentSection]);
@@ -209,8 +260,7 @@ export const GlobalSpotlight: React.FC = () => {
           height: 800,
           background: `radial-gradient(circle at center, ${theme.primary} 0%, ${theme.secondary} 40%, transparent 70%)`,
           filter: 'blur(90px)',
-          opacity: isVisible ? 0.85 : 0,
-          transition: 'opacity 0.5s ease-out',
+          opacity: 0,
           willChange: 'transform, opacity',
           mixBlendMode: 'screen',
         }}
@@ -225,9 +275,8 @@ export const GlobalSpotlight: React.FC = () => {
           height: 600,
           background: `radial-gradient(circle, ${theme.secondary} 0%, transparent 70%)`,
           filter: 'blur(120px)',
-          opacity: isVisible ? 0.4 : 0,
-          transition: 'opacity 0.8s ease-out',
-          willChange: 'transform',
+          opacity: 0,
+          willChange: 'transform, opacity',
           mixBlendMode: 'screen',
         }}
       />
@@ -241,9 +290,8 @@ export const GlobalSpotlight: React.FC = () => {
           height: 500,
           background: `radial-gradient(circle, ${theme.primary} 0%, transparent 70%)`,
           filter: 'blur(100px)',
-          opacity: isVisible ? 0.35 : 0,
-          transition: 'opacity 0.8s ease-out',
-          willChange: 'transform',
+          opacity: 0,
+          willChange: 'transform, opacity',
           mixBlendMode: 'screen',
         }}
       />

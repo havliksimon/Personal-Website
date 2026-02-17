@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  Tento soubor je připraven pro budoucí blogové články.
+  Pro maximální SEO doporučuji vytvořit následující články:
+  
+  1. "Kde najít dobrého čínského poradce v Praze?"
+     URL: /blog/cinsky-poradce-praha
+     Keywords: čínský poradce praha, konzultant čína, investice do číny poradce
+  
+  2. "Jak začít investovat do Číny - kompletní průvodce 2026"
+     URL: /blog/jak-investovat-do-ciny
+     Keywords: jak investovat do číny, čínské investice začátečníci, čínské akcie
+  
+  3. "Top 10 čínských akcií pro rok 2026"
+     URL: /blog/top-cinske-akcie-2026
+     Keywords: nejlepší čínské akcie, čínské akcie doporučení, top čínské společnosti
+  
+  4. "Rizika investic do Číny a jak se jim vyhnout"
+     URL: /blog/rizika-cinskych-investic
+     Keywords: rizika čínských investic, čínský trh rizika, investice čína bezpečnost
+  
+  5. "Analýza čínského trhu: Příležitosti pro české investory"
+     URL: /blog/analyza-cinskeho-trhu
+     Keywords: analýza čínského trhu, čínský trh příležitosti, český investor čína
+  
+  6. "Hong Kong vs. pevninská Čína: Kde investovat?"
+     URL: /blog/hong-kong-vs-cina
+     Keywords: hong kong akcie, čínské akcie hkex, rozdíl hong kong čína
+  
+  7. "Porozumění čínským technologickým společnostem"
+     URL: /blog/cinske-technologicke-spolecnosti
+     Keywords: tencent, alibaba, bilibili, čínské technologie, čínské tech akcie
+  
+  8. "Měnové riziko u čínských investic: Jak ho zvládnout"
+     URL: /blog/menove-riziko-cina
+     Keywords: juan kurz, měnové riziko čína, forex čína
+  
+  9. "Čínský akciový trh pro začátečníky"
+     URL: /blog/cinsky-akciovy-trh-zacatecnici
+     Keywords: čínský akciový trh, jak koupit čínské akcie, začátečník čínské akcie
+  
+  10. "Esg investice v Číně: Příležitosti a výzvy"
+      URL: /blog/esg-investice-cina
+      Keywords: esg čína, udržitelné investice čína, zelené investice čína
+  
+  Každý článek by měl mít:
+  - Minimálně 1500 slov
+  - Unikátní meta title a description
+  - Nadpisy H2, H3
+  - Interní odkazy na další články
+  - Externí odkazy na autoritní zdroje
+  - Obrázky s alt texty
+  - FAQ sekci
+  - CTA (call to action) na konzultaci
+-->
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Placeholder - přidejte URL jakmile vytvoříte články -->
+  <url>
+    <loc>https://havliksimon.eu/blog/</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+</urlset>

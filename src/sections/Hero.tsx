@@ -113,6 +113,8 @@ const Hero = () => {
   return (
     <section
       ref={sectionRef}
+      id="hero"
+      aria-label="Hero Section - Introduction"
       className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-100 via-slate-50 to-white"
     >
       {/* Subtle ambient gradient orbs - work with global spotlight */}
@@ -139,26 +141,27 @@ const Hero = () => {
       <div ref={particlesRef} className="hidden md:block absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }} />
 
       {/* Navigation */}
-      <nav className="absolute top-0 left-0 right-0 z-50 px-8 py-6 flex items-center justify-between">
+      <nav role="navigation" aria-label="Main Navigation" className="absolute top-0 left-0 right-0 z-50 px-8 py-6 flex items-center justify-between">
         <span className="text-lg font-medium text-gray-900">Šimon Havlík</span>
         
         <div className="hidden md:flex items-center gap-8">
-          <a href="#about" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">About</a>
-          <a href="#timeline" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Journey</a>
-          <a href="#skills" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Skills</a>
-          <a href="#projects" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Projects</a>
-          <a href="#analyses" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Analyses</a>
-          <a href="#china" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">China</a>
-          <a href="#contact" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
+          <a href="#about" className="text-sm text-gray-600 hover:text-gray-900 transition-colors" aria-label="Go to About section">About</a>
+          <a href="#journey" className="text-sm text-gray-600 hover:text-gray-900 transition-colors" aria-label="Go to Education Journey section">Journey</a>
+          <a href="#skills" className="text-sm text-gray-600 hover:text-gray-900 transition-colors" aria-label="Go to Skills section">Skills</a>
+          <a href="#projects" className="text-sm text-gray-600 hover:text-gray-900 transition-colors" aria-label="Go to Projects section">Projects</a>
+          <a href="#analyses" className="text-sm text-gray-600 hover:text-gray-900 transition-colors" aria-label="Go to Analyses section">Analyses</a>
+          <a href="#china" className="text-sm text-gray-600 hover:text-gray-900 transition-colors" aria-label="Go to China section">China</a>
+          <a href="#contact" className="text-sm text-gray-600 hover:text-gray-900 transition-colors" aria-label="Go to Contact section">Contact</a>
         </div>
         
         <a
           href="https://linkedin.com/in/havliksimon"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Connect on LinkedIn (opens in new tab)"
           className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors"
         >
-          <Linkedin className="w-4 h-4" />
+          <Linkedin className="w-4 h-4" aria-hidden="true" />
           LinkedIn
         </a>
       </nav>

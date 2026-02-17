@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, Phone, MapPin, Linkedin, Send, CheckCircle } from 'lucide-react';
+import ContactEffects from '../components/ContactEffects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -115,12 +116,15 @@ const Contact = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className="section bg-white/80 backdrop-blur-sm"
+      aria-labelledby="contact-heading"
+      className="section bg-gray-50/80 backdrop-blur-sm relative overflow-hidden"
     >
+      {/* Pink Warm Contact Effects */}
+      <ContactEffects />
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         {/* Title */}
         <div ref={titleRef} className="text-center mb-16">
-          <h2 className="section-title">Let's Connect</h2>
+          <h2 id="contact-heading" className="section-title">Let's Connect</h2>
           <p className="section-subtitle mx-auto">
             I'm always open to discussing investment opportunities and consulting projects.
             Whether you're looking for analytical expertise or want to exchange ideas about

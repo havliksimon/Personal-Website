@@ -6,6 +6,7 @@ import {
   Loader2, ChevronRight, BookOpen, BarChart3,
   TrendingUp, Globe, Sparkles, Languages, Info
 } from 'lucide-react';
+import AnalysesEffects from '../components/AnalysesEffects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -261,8 +262,12 @@ const Analyses = () => {
     <section
       ref={sectionRef}
       id="analyses"
-      className="relative py-20 md:py-28 bg-white/80 backdrop-blur-sm overflow-hidden"
+      aria-labelledby="analyses-heading"
+      className="relative py-20 md:py-28 bg-gray-50/80 backdrop-blur-sm overflow-hidden"
     >
+      {/* Amber Analytical Effects */}
+      <AnalysesEffects />
+      
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-amber-50/60 to-transparent rounded-full blur-3xl" />
@@ -282,7 +287,7 @@ const Analyses = () => {
                 <div className="h-px flex-1 max-w-[100px] bg-gradient-to-r from-gray-300 to-transparent" />
               </div>
               
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+              <h2 id="analyses-heading" className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 Featured{' '}
                 <span className="relative inline-block">
                   <span className="relative z-10 bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">

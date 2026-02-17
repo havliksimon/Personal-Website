@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TrendingUp, Database, Globe, Award, MapPin, GraduationCap, Briefcase, ChevronDown, FileText, Briefcase as ProjectsIcon } from 'lucide-react';
+import AboutEffects from '../components/AboutEffects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -87,15 +88,18 @@ const About = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="py-24 md:py-32 bg-white/80 backdrop-blur-sm"
+      aria-labelledby="about-heading"
+      className="py-24 md:py-32 bg-gray-50/80 backdrop-blur-sm relative overflow-hidden"
     >
+      {/* Blue Professional Effects */}
+      <AboutEffects />
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 bg-gray-100 text-gray-600 text-sm font-medium rounded-full mb-4">
             Get to know me
           </span>
-          <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold text-gray-900">
+          <h2 id="about-heading" ref={titleRef} className="text-4xl md:text-5xl font-bold text-gray-900">
             About Me
           </h2>
         </div>

@@ -6,6 +6,7 @@ import {
   Sparkles, X, Loader2, Globe, MousePointer2,
   Maximize2, Layers, Box, ArrowUpRight
 } from 'lucide-react';
+import ProjectsEffects from '../components/ProjectsEffects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -229,8 +230,12 @@ const Projects = () => {
       <section
         ref={sectionRef}
         id="projects"
+        aria-labelledby="projects-heading"
         className="relative py-20 md:py-28 bg-gray-50/80 backdrop-blur-sm overflow-hidden"
       >
+        {/* Cyan Tech Effects */}
+        <ProjectsEffects />
+        
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-100/50 to-transparent rounded-full blur-3xl" />
@@ -252,7 +257,7 @@ const Projects = () => {
                   <div className="h-px flex-1 max-w-[100px] bg-gradient-to-r from-gray-300 to-transparent" />
                 </div>
                 
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                <h2 id="projects-heading" className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                   Featured{' '}
                   <span className="relative inline-block">
                     <span className="relative z-10 bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent">

@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import skillsData from '../data/skills.json';
 import { Calculator, Code, Brain, TrendingUp, BookOpen, Landmark, Globe, Palette, Languages } from 'lucide-react';
+import SkillsEffects from '../components/SkillsEffects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -99,13 +100,16 @@ const Skills = () => {
     <section
       ref={sectionRef}
       id="skills"
-      className="section bg-gray-50/80 backdrop-blur-sm"
+      aria-labelledby="skills-heading"
+      className="section bg-gray-50/80 backdrop-blur-sm relative overflow-hidden"
     >
+      {/* Purple Creative Effects */}
+      <SkillsEffects />
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Title */}
         <div ref={titleRef} className="text-center mb-16">
           <span className="text-sm font-mono uppercase tracking-wider text-gray-400 mb-4 block">Expertise</span>
-          <h2 className="section-title">Skills & Technologies</h2>
+          <h2 id="skills-heading" className="section-title">Skills & Technologies</h2>
           <p className="section-subtitle mx-auto">
             Comprehensive toolkit built through coursework at VŠE Prague, self-study, and practical experience.
           </p>

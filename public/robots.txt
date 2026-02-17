@@ -1,0 +1,246 @@
+User-agent: *
+Allow: /
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.json$
+Allow: /*.xml$
+Disallow: /admin
+Disallow: /private
+Disallow: /api
+
+# Crawl settings
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://havliksimon.eu/sitemap.xml
+
+# Host
+Host: https://havliksimon.eu
+
+# ============================================
+# Major Search Engines - ALL ALLOWED
+# ============================================
+
+User-agent: Googlebot
+Allow: /
+Allow: /*.js$
+Allow: /*.css$
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+Allow: /*.js$
+Allow: /*.css$
+
+User-agent: MSNBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# ============================================
+# Chinese Search Engines - ALL ALLOWED
+# ============================================
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Baiduspider-image
+Allow: /
+
+User-agent: Baiduspider-video
+Allow: /
+
+User-agent: Baiduspider-news
+Allow: /
+
+User-agent: Baiduspider-render
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: Sogou inst spider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: HaosouSpider
+Allow: /
+
+User-agent: YoudaoBot
+Allow: /
+
+# ============================================
+# Social Media Bots - ALL ALLOWED
+# ============================================
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: FacebookExternalHit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Pinterest
+Allow: /
+
+User-agent: RedditBot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+# ============================================
+# SEO Tools - ALL ALLOWED
+# ============================================
+
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: AhrefsBot-SiteAudit
+Allow: /
+
+User-agent: SemrushBot
+Allow: /
+
+User-agent: SemrushBot-BA
+Allow: /
+
+User-agent: SemrushBot-SI
+Allow: /
+
+User-agent: SemrushBot-SWA
+Allow: /
+
+User-agent: SemrushBot-CT
+Allow: /
+
+User-agent: SemrushBot-BM
+Allow: /
+
+User-agent: MJ12bot
+Allow: /
+
+User-agent: DotBot
+Allow: /
+
+User-agent: Rogerbot
+Allow: /
+
+User-agent: Screaming Frog SEO Spider
+Allow: /
+
+User-agent: SiteCheckerBotCrawler
+Allow: /
+
+# ============================================
+# Other Bots - ALL ALLOWED
+# ============================================
+
+User-agent: PetalBot
+Allow: /
+
+User-agent: PetalBot-Image
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: archive.org_bot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ICC-Crawler
+Allow: /
+
+User-agent: ImagesiftBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: omgili
+Allow: /
+
+User-agent: omgilibot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Sidetrade indexer bot
+Allow: /
+
+User-agent: Timpibot
+Allow: /
+
+User-agent: VelenPublicWebCrawler
+Allow: /
+
+User-agent: Webzio-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /

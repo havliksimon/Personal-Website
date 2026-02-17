@@ -1,0 +1,44 @@
+# Cloudflare Pages Redirects
+# Format: [source] [destination] [status]
+
+# Czech URL redirects for better SEO
+/cinsky-analytik / 301
+/cinsky-poradce / 301
+/cinsky-konzultant / 301
+/analytik-ciny / 301
+/poradce-pro-cinu / 301
+/konzultant-pro-cinu / 301
+/cinske-investice / 301
+/cinske-akcie /#china 301
+/cinske-trhy /#china 301
+/asia-pacific / 301
+/apac-analytik / 301
+
+# English alternatives
+/china-analyst / 301
+/china-consultant / 301
+/china-investment / 301
+/chinese-markets /#china 301
+
+# Common questions - redirect to specific sections
+/kde-najit-cinskeho-poradce /#contact 301
+/dobry-cinsky-analytik / 301
+/investice-do-ciny /#china 301
+/cinske-investice-praha /#china 301
+/nejlepsi-cinsky-poradce / 301
+
+# Services pages
+/sluzby /#projects 301
+/konzultace /#contact 301
+/analyzy /#analyses 301
+/o-mne /#about 301
+/kontakt /#contact 301
+
+# Company specific
+/bilibili-analyza /analyses/EM_BILI_Havlik.docx.pdf 301
+/tencent-analyza /presentations/presentation_Tencent.pdf 301
+/tuya-analyza /analyses/EM_TUYA_Havlik.pdf 301
+/chagee-analyza /presentations/presentation_Chagee.pdf 301
+
+# Catch all 404s
+/* /404.html 404

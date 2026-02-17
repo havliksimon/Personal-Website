@@ -1,0 +1,58 @@
+# Cloudflare Pages SEO Headers
+# These headers improve SEO, security, and performance
+
+/*
+  # Security Headers
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  
+  # SEO Headers
+  X-Robots-Tag: all
+  
+  # Performance
+  Cache-Control: public, max-age=3600
+  
+  # Content Security Policy (adjust as needed)
+  # Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';
+
+# Specific routes for Chinese investment content
+/konzultant-pro-cinu/*
+  X-Robots-Tag: all
+  Cache-Control: public, max-age=86400
+
+/cinske-investice/*
+  X-Robots-Tag: all
+  Cache-Control: public, max-age=86400
+
+/analytik-cinskych-trhu/*
+  X-Robots-Tag: all
+  Cache-Control: public, max-age=86400
+
+# API and functions
+/api/*
+  Cache-Control: no-cache
+  X-Robots-Tag: noindex
+
+# Static assets - aggressive caching
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+*.pdf
+  Cache-Control: public, max-age=2592000
