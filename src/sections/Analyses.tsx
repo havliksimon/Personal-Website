@@ -69,7 +69,7 @@ const analyses: AnalysisDoc[] = [
     thumbnailColor: 'from-blue-500 to-indigo-600',
     icon: BarChart3,
     tags: ['Large Cap', 'Tech Giants', 'Valuation'],
-    language: 'en'
+    language: 'cs'
   },
   {
     id: 4,
