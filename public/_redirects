@@ -40,5 +40,3 @@
 /tuya-analyza /analyses/EM_TUYA_Havlik.pdf 301
 /chagee-analyza /presentations/presentation_Chagee.pdf 301
 
-# Catch all 404s
-/* /404.html 404
