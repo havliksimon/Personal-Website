@@ -39,20 +39,20 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-*.js
+/assets/*.js
   Cache-Control: public, max-age=31536000, immutable
 
-*.css
+/assets/*.css
   Cache-Control: public, max-age=31536000, immutable
 
-*.png
+/assets/*.png
   Cache-Control: public, max-age=31536000, immutable
 
-*.jpg
+/assets/*.jpg
   Cache-Control: public, max-age=31536000, immutable
 
-*.svg
+/assets/*.svg
   Cache-Control: public, max-age=31536000, immutable
 
-*.pdf
+/assets/*.pdf
   Cache-Control: public, max-age=2592000
