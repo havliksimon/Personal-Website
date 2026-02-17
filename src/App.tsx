@@ -15,6 +15,7 @@ import Footer from './sections/Footer';
 import ScrollProgress from './components/ScrollProgress';
 import CustomCursor from './components/CustomCursor';
 import InteractiveNav from './components/InteractiveNav';
+import GlobalSpotlight from './components/GlobalSpotlight';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,18 +35,33 @@ function App() {
     <>
       <CustomCursor />
       <InteractiveNav />
+      <GlobalSpotlight />
       <main className="relative cursor-none md:cursor-none">
         <ScrollProgress />
         <section id="hero">
           <Hero />
         </section>
-        <About />
-        <Timeline />
-        <Skills />
-        <Projects />
-        <Analyses />
-        <China />
-        <Contact />
+        <section id="about">
+          <About />
+        </section>
+        <section id="journey">
+          <Timeline />
+        </section>
+        <section id="skills">
+          <Skills />
+        </section>
+        <section id="projects">
+          <Projects />
+        </section>
+        <section id="analyses">
+          <Analyses />
+        </section>
+        <section id="china">
+          <China />
+        </section>
+        <section id="contact">
+          <Contact />
+        </section>
         <Footer />
       </main>
     </>

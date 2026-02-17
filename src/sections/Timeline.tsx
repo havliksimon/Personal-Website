@@ -77,7 +77,7 @@ const Timeline = () => {
     <section
       ref={sectionRef}
       id="journey"
-      className="section bg-white"
+      className="section bg-white/80 backdrop-blur-sm"
     >
       <div className="max-w-5xl mx-auto px-6 md:px-12">
         {/* Title */}
@@ -113,7 +113,7 @@ const Timeline = () => {
 
                   {/* Card content */}
                   <div className={`ml-10 md:ml-0 md:w-1/2 ${isLeft ? 'md:pr-8' : 'md:pl-8'}`}>
-                    <div className={`bg-white rounded-xl p-5 border ${typeColors[item.type as keyof typeof typeColors]} shadow-sm hover:shadow-md transition-shadow`}>
+                    <div className={`gloss-card bg-white rounded-xl p-5 border ${typeColors[item.type as keyof typeof typeColors]} shadow-sm transition-all duration-300`}>
                       <div className="flex items-start justify-between gap-4 mb-3">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-sm">

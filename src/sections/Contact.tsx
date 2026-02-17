@@ -115,7 +115,7 @@ const Contact = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className="section bg-white"
+      className="section bg-white/80 backdrop-blur-sm"
     >
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         {/* Title */}
@@ -138,7 +138,7 @@ const Contact = () => {
               {contactInfo.map((item, index) => {
                 const Icon = item.icon;
                 const content = (
-                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                  <div className="gloss-card flex items-center gap-4 p-4 bg-gray-50 rounded-xl transition-all duration-300 cursor-pointer">
                     <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
                       <Icon className="w-5 h-5 text-gray-600" />
                     </div>
@@ -172,7 +172,7 @@ const Contact = () => {
           </div>
 
           {/* Right - Form */}
-          <div className="bg-gray-50 rounded-2xl p-6 md:p-8">
+          <div className="premium-gloss bg-gray-50 rounded-2xl p-6 md:p-8">
             <h3 className="text-xl font-semibold text-gray-900 mb-6">Send a Message</h3>
             
             {submitted ? (

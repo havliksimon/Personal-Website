@@ -87,7 +87,7 @@ const About = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="py-24 md:py-32 bg-white"
+      className="py-24 md:py-32 bg-white/80 backdrop-blur-sm"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Section Header */}
@@ -234,22 +234,22 @@ const About = () => {
 
             {/* Highlight Cards */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-5 bg-gradient-to-br from-red-50 to-red-100/50 rounded-2xl border border-red-100">
+              <div className="premium-gloss p-5 bg-gradient-to-br from-red-50 to-red-100/50 rounded-2xl border border-red-100 transition-all duration-300">
                 <TrendingUp className="w-6 h-6 text-red-600 mb-3" />
                 <h4 className="font-semibold text-gray-900 mb-1">Investment Analysis</h4>
                 <p className="text-sm text-gray-500">DCF, multiples, equity research</p>
               </div>
-              <div className="p-5 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-2xl border border-blue-100">
+              <div className="premium-gloss p-5 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-2xl border border-blue-100 transition-all duration-300">
                 <Database className="w-6 h-6 text-blue-600 mb-3" />
                 <h4 className="font-semibold text-gray-900 mb-1">Data Science</h4>
                 <p className="text-sm text-gray-500">Python, SQL, R, ML</p>
               </div>
-              <div className="p-5 bg-gradient-to-br from-green-50 to-green-100/50 rounded-2xl border border-green-100">
+              <div className="premium-gloss p-5 bg-gradient-to-br from-green-50 to-green-100/50 rounded-2xl border border-green-100 transition-all duration-300">
                 <Globe className="w-6 h-6 text-green-600 mb-3" />
                 <h4 className="font-semibold text-gray-900 mb-1">Asia-Pacific</h4>
                 <p className="text-sm text-gray-500">China markets, Mandarin HSK3</p>
               </div>
-              <div className="p-5 bg-gradient-to-br from-purple-50 to-purple-100/50 rounded-2xl border border-purple-100">
+              <div className="premium-gloss p-5 bg-gradient-to-br from-purple-50 to-purple-100/50 rounded-2xl border border-purple-100 transition-all duration-300">
                 <Award className="w-6 h-6 text-purple-600 mb-3" />
                 <h4 className="font-semibold text-gray-900 mb-1">Recognition</h4>
                 <p className="text-sm text-gray-500">National thesis winner</p>

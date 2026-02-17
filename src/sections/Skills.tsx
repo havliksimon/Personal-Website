@@ -99,7 +99,7 @@ const Skills = () => {
     <section
       ref={sectionRef}
       id="skills"
-      className="section bg-gray-50"
+      className="section bg-gray-50/80 backdrop-blur-sm"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Title */}
@@ -118,7 +118,7 @@ const Skills = () => {
             const colors = colorMap[category.color];
             
             return (
-              <div key={category.id} className="skill-card bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+              <div key={category.id} className="skill-card premium-gloss bg-white rounded-2xl p-5 shadow-sm transition-all duration-300">
                 {/* Header */}
                 <div className="flex items-center gap-3 mb-4">
                   <div className={`w-9 h-9 rounded-lg ${colors.bg} flex items-center justify-center`}>

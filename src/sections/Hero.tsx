@@ -113,26 +113,23 @@ const Hero = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen overflow-hidden"
-      style={{ 
-        background: 'linear-gradient(180deg, #e8eaf0 0%, #f0f2f5 30%, #f5f7fa 60%, #fafbfc 100%)'
-      }}
+      className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-100 via-slate-50 to-white"
     >
-      {/* Background orbs - hidden on mobile */}
+      {/* Subtle ambient gradient orbs - work with global spotlight */}
       <div className="hidden md:block absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
-        {[...Array(8)].map((_, i) => (
+        {[...Array(4)].map((_, i) => (
           <div
             key={i}
             className="absolute rounded-full"
             style={{
-              width: `${500 + i * 150}px`,
-              height: `${500 + i * 150}px`,
-              left: `${-20 + i * 20}%`,
-              top: `${-30 + i * 8}%`,
-              background: `radial-gradient(circle, rgba(200,210,255,0.25) 0%, rgba(220,200,255,0.15) 40%, transparent 70%)`,
-              filter: 'blur(80px)',
-              animation: `floatOrb ${20 + i * 4}s ease-in-out infinite`,
-              animationDelay: `${i * 2}s`
+              width: `${400 + i * 100}px`,
+              height: `${400 + i * 100}px`,
+              left: `${-10 + i * 25}%`,
+              top: `${-20 + i * 10}%`,
+              background: `radial-gradient(circle, rgba(200,210,255,0.15) 0%, rgba(220,200,255,0.08) 40%, transparent 70%)`,
+              filter: 'blur(60px)',
+              animation: `floatOrb ${25 + i * 5}s ease-in-out infinite`,
+              animationDelay: `${i * 3}s`
             }}
           />
         ))}

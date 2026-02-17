@@ -229,7 +229,7 @@ const Projects = () => {
       <section
         ref={sectionRef}
         id="projects"
-        className="relative py-20 md:py-28 bg-gray-50 overflow-hidden"
+        className="relative py-20 md:py-28 bg-gray-50/80 backdrop-blur-sm overflow-hidden"
       >
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -304,7 +304,7 @@ const Projects = () => {
                     <div
                       key={project.id}
                       onClick={() => switchProject(project)}
-                      className={`group relative bg-white rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer ${
+                      className={`gloss-card group relative bg-white rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer ${
                         isActive 
                           ? 'ring-2 ring-gray-900 shadow-2xl scale-[1.02]' 
                           : 'ring-1 ring-gray-200 hover:ring-gray-400 hover:shadow-xl'

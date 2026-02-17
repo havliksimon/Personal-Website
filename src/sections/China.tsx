@@ -126,7 +126,7 @@ const China = () => {
     <section
       ref={sectionRef}
       id="china"
-      className="section bg-gray-50"
+      className="section bg-gray-50/80 backdrop-blur-sm"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Title */}
@@ -140,22 +140,22 @@ const China = () => {
 
         {/* Key Stats Grid */}
         <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div className="stat-card bg-white rounded-2xl p-6 shadow-sm">
+          <div className="stat-card premium-gloss bg-white rounded-2xl p-6 shadow-sm transition-all duration-300">
             <div className="text-4xl font-bold text-gray-900 mb-2">$33T</div>
             <div className="text-sm text-gray-500 mb-1">GDP (PPP)</div>
             <div className="text-xs text-green-600">World's largest since 2016</div>
           </div>
-          <div className="stat-card bg-white rounded-2xl p-6 shadow-sm">
+          <div className="stat-card premium-gloss bg-white rounded-2xl p-6 shadow-sm transition-all duration-300">
             <div className="text-4xl font-bold text-gray-900 mb-2">8,000+</div>
             <div className="text-sm text-gray-500 mb-1">Listed Companies</div>
             <div className="text-xs text-green-600">2× more than US markets</div>
           </div>
-          <div className="stat-card bg-white rounded-2xl p-6 shadow-sm">
+          <div className="stat-card premium-gloss bg-white rounded-2xl p-6 shadow-sm transition-all duration-300">
             <div className="text-4xl font-bold text-gray-900 mb-2">600M+</div>
             <div className="text-sm text-gray-500 mb-1">Middle Class</div>
             <div className="text-xs text-green-600">Largest consumer market</div>
           </div>
-          <div className="stat-card bg-white rounded-2xl p-6 shadow-sm">
+          <div className="stat-card premium-gloss bg-white rounded-2xl p-6 shadow-sm transition-all duration-300">
             <div className="text-4xl font-bold text-gray-900 mb-2">35%</div>
             <div className="text-sm text-gray-500 mb-1">Green Investment</div>
             <div className="text-xs text-green-600">Of global renewable energy</div>
@@ -164,19 +164,19 @@ const China = () => {
 
         {/* Additional Stats Row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div className="bg-white rounded-xl p-4 shadow-sm text-center">
+          <div className="gloss-card bg-white rounded-xl p-4 shadow-sm text-center transition-all duration-300">
             <div className="text-2xl font-bold text-gray-900">8/10</div>
             <div className="text-xs text-gray-500">Top unis in Leiden Ranking</div>
           </div>
-          <div className="bg-white rounded-xl p-4 shadow-sm text-center">
+          <div className="gloss-card bg-white rounded-xl p-4 shadow-sm text-center transition-all duration-300">
             <div className="text-2xl font-bold text-gray-900">$163B</div>
             <div className="text-xs text-gray-500">FDI inflows (2023)</div>
           </div>
-          <div className="bg-white rounded-xl p-4 shadow-sm text-center">
+          <div className="gloss-card bg-white rounded-xl p-4 shadow-sm text-center transition-all duration-300">
             <div className="text-2xl font-bold text-gray-900">14nm</div>
             <div className="text-xs text-gray-500">Domestic chip production</div>
           </div>
-          <div className="bg-white rounded-xl p-4 shadow-sm text-center">
+          <div className="gloss-card bg-white rounded-xl p-4 shadow-sm text-center transition-all duration-300">
             <div className="text-2xl font-bold text-gray-900">40%</div>
             <div className="text-xs text-gray-500">Global EV market share</div>
           </div>
@@ -230,7 +230,7 @@ const China = () => {
             {photos.map((photo, index) => (
               <div
                 key={index}
-                className="photo-card relative aspect-square rounded-xl overflow-hidden cursor-pointer group"
+                className="photo-card gloss-card relative aspect-square rounded-xl overflow-hidden cursor-pointer group"
                 onMouseEnter={() => setActivePhoto(index)}
                 onMouseLeave={() => setActivePhoto(null)}
               >

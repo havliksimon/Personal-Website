@@ -193,7 +193,7 @@ const Analyses = () => {
       <div
         key={doc.id}
         onClick={() => switchDocument(doc)}
-        className={`group relative rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer ${
+        className={`gloss-card group relative rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer ${
           isActive 
             ? 'ring-2 ring-gray-900 shadow-xl scale-[1.02]' 
             : 'ring-1 ring-gray-200 hover:ring-gray-400 hover:shadow-lg'
@@ -261,7 +261,7 @@ const Analyses = () => {
     <section
       ref={sectionRef}
       id="analyses"
-      className="relative py-20 md:py-28 bg-white overflow-hidden"
+      className="relative py-20 md:py-28 bg-white/80 backdrop-blur-sm overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

@@ -33,8 +33,10 @@
   }
   
   body {
-    @apply bg-white text-gray-900 antialiased;
+    @apply text-gray-900 antialiased;
     font-family: 'Inter', sans-serif;
+    background: linear-gradient(180deg, #fafbfc 0%, #f8fafc 50%, #f1f5f9 100%);
+    background-attachment: fixed;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -185,6 +187,170 @@
   
   .flip-card-back {
     transform: rotateY(180deg);
+  }
+
+  /* Glow Card - Enhanced hover effect for spotlight compatibility */
+  .glow-card {
+    @apply relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100/50 shadow-sm;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .glow-card:hover {
+    @apply shadow-xl border-gray-200/80;
+    transform: translateY(-2px);
+    box-shadow: 
+      0 20px 40px -10px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  }
+
+  /* Spotlight-aware section backgrounds */
+  .section-spotlight {
+    @apply relative;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+  }
+
+  /* Glass effect for cards */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md rounded-2xl border border-white/50 shadow-lg;
+    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+  }
+
+  /* Animated Gloss/Shine Effect */
+  .gloss-card {
+    @apply relative overflow-hidden;
+  }
+  
+  .gloss-card::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0) 45%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0) 55%,
+      transparent 60%
+    );
+    transform: translateX(-100%) skewX(-15deg);
+    transition: transform 0s;
+  }
+  
+  .gloss-card:hover::before {
+    animation: glossSweep 0.8s ease-in-out;
+  }
+  
+  @keyframes glossSweep {
+    0% {
+      transform: translateX(-100%) skewX(-15deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-15deg);
+    }
+  }
+
+  /* Continuous shimmer for featured items */
+  .shimmer-card {
+    @apply relative overflow-hidden;
+  }
+  
+  .shimmer-card::after {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0) 35%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 65%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  
+  @keyframes shimmer {
+    0%, 100% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Premium gloss with border reflection */
+  .premium-gloss {
+    @apply relative overflow-hidden rounded-2xl;
+    background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 50%, rgba(255,255,255,0.9) 100%);
+    box-shadow: 
+      0 4px 20px -4px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+      0 -2px 10px rgba(0, 0, 0, 0.02) inset;
+  }
+  
+  .premium-gloss::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.8) 45%,
+      rgba(255, 255, 255, 0.9) 50%,
+      rgba(255, 255, 255, 0.8) 55%,
+      transparent 70%
+    );
+    transform: translateX(-100%) skewX(-20deg);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .premium-gloss:hover::before {
+    opacity: 1;
+    animation: premiumGlossSweep 1s ease-out;
+  }
+  
+  .premium-gloss:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+      0 20px 40px -10px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+      0 -2px 10px rgba(0, 0, 0, 0.03) inset;
+  }
+  
+  @keyframes premiumGlossSweep {
+    0% {
+      transform: translateX(-100%) skewX(-20deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-20deg);
+    }
+  }
+
+  /* Subtle ambient shine */
+  .ambient-shine {
+    @apply relative overflow-hidden;
+  }
+  
+  .ambient-shine::before {
+    content: '';
+    @apply absolute -top-1/2 -left-1/2 w-[200%] h-[200%] pointer-events-none;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0.1) 30%,
+      transparent 60%
+    );
+    animation: ambientRotate 8s linear infinite;
+    opacity: 0.5;
+  }
+  
+  @keyframes ambientRotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }
 
