@@ -12,6 +12,7 @@ import {
   BarChart,
   Bar
 } from 'recharts';
+import ChinaEffects from '../components/ChinaEffects';
 
 const gdpData = [
   { year: 2000, China: 3.6, USA: 10.3 },
@@ -126,9 +127,12 @@ const China = () => {
     <section
       ref={sectionRef}
       id="china"
-      className="section bg-gray-50/80 backdrop-blur-sm"
+      className="section bg-gray-50/80 backdrop-blur-sm relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+      {/* Red Lightning & Storm Effects */}
+      <ChinaEffects />
+      
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         {/* Title */}
         <div ref={titleRef} className="text-center mb-12">
           <span className="text-sm font-mono uppercase tracking-wider text-gray-400 mb-4 block">Focus Area</span>
