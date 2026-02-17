@@ -33,8 +33,8 @@ const projects: Project[] = [
     tags: ['Python', 'Flask', 'SQLAlchemy', 'Bootstrap'],
     color: 'blue',
     gradientBg: 'from-blue-500 via-cyan-500 to-blue-600',
-    previewUrl: 'https://ki.verxl.com/',
-    liveUrl: 'https://ki.verxl.com/',
+    previewUrl: 'https://ki.havliksimon.eu/',
+    liveUrl: 'https://ki.havliksimon.eu/',
     github: 'https://github.com/havliksimon/ki-asset-management'
   },
   {
