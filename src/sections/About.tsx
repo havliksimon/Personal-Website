@@ -109,7 +109,7 @@ const About = () => {
           {/* Left Column - Text */}
           <div ref={leftRef}>
             <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-6 leading-tight">
-              Economics student passionate about <span className="text-blue-600">Asia-Pacific markets</span> and <span className="text-blue-600">data-driven investment analysis</span>
+              Economics student passionate about <span className="text-blue-600">market research</span> and <span className="text-blue-600">data-driven investment analysis</span>
             </h3>
             
             <div className="space-y-4 text-gray-600 leading-relaxed">
@@ -120,7 +120,7 @@ const About = () => {
                 As an active analyst at Klub Investorů, I combine fundamental valuation techniques with quantitative methods to identify investment opportunities. My focus on Asian markets stems from a deep fascination with the region's rapid economic transformation.
               </p>
               <p>
-                Currently advancing my Mandarin skills (HSK3 → HSK4) to better understand Chinese business culture and access primary market research. Planning a semester at Xi'an Jiaotong-Liverpool University to deepen my regional expertise.
+                Currently advancing my Mandarin skills (HSK3 → HSK4) to better understand Chinese business culture and access primary market research, with study-abroad experience at Xi'an Jiaotong-Liverpool University and Donghua University in China.
               </p>
             </div>
 

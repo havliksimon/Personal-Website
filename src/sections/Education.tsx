@@ -43,18 +43,18 @@ const educationData = [
     period: 'Feb — Jun 2026',
     location: 'Suzhou, China',
     description: 'Economics semester exchange program focusing on international economics and China-Asia business relations.',
-    status: 'Upcoming',
-    statusColor: 'bg-blue-100 text-blue-700'
+    status: 'Completed',
+    statusColor: 'bg-gray-100 text-gray-600'
   },
   {
     id: 5,
-    school: 'SISU Shanghai',
+    school: 'Donghua University',
     degree: 'Intensive Chinese Language',
     period: 'Jul — Sep 2026',
     location: 'Shanghai, China',
-    description: 'Shanghai International Studies University — Advanced Chinese language intensive course targeting HSK4 proficiency.',
-    status: 'Upcoming',
-    statusColor: 'bg-blue-100 text-blue-700'
+    description: 'Donghua University — Advanced Chinese language intensive course targeting HSK4 proficiency.',
+    status: 'Completed',
+    statusColor: 'bg-gray-100 text-gray-600'
   }
 ];
 

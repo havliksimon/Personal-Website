@@ -223,8 +223,8 @@ const Hero = () => {
             </div>
             <h1 className="text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight">
               Economics student<br />
-              specializing in <span className="italic">Asia-Pacific</span><br />
-              markets and <span className="italic">data-driven</span><br />
+              specializing in <span className="italic">market research</span><br />
+              and <span className="italic">data-driven</span><br />
               analysis
             </h1>
           </div>
@@ -296,8 +296,8 @@ const Hero = () => {
             </div>
             <h1 className="text-lg font-semibold text-gray-900 leading-tight">
               Economics student<br />
-              specializing in <span className="italic">Asia-Pacific</span><br />
-              markets and <span className="italic">data-driven</span><br />
+              specializing in <span className="italic">market research</span><br />
+              and <span className="italic">data-driven</span><br />
               analysis
             </h1>
           </div>

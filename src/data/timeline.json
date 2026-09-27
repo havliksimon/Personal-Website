@@ -85,18 +85,18 @@
       "description": "Economics semester exchange program focusing on international economics and China-Asia business relations.",
       "location": "Suzhou, China",
       "type": "education",
-      "status": "Upcoming",
+      "status": "Completed",
       "skills": ["International Economics", "Cross-cultural Communication", "Adaptability", "China Business"]
     },
     {
       "id": 9,
       "date": "Jul – Sep 2026",
-      "title": "SISU Shanghai",
+      "title": "Donghua University",
       "subtitle": "Intensive Chinese Language",
-      "description": "Shanghai International Studies University — Advanced Chinese language intensive course targeting HSK4 proficiency.",
+      "description": "Donghua University — Advanced Chinese language intensive course targeting HSK4 proficiency.",
       "location": "Shanghai, China",
       "type": "education",
-      "status": "Upcoming",
+      "status": "Completed",
       "skills": ["Advanced Mandarin", "Business Chinese", "China Market Knowledge"]
     }
   ]
