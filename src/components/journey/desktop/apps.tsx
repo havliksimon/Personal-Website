@@ -7,6 +7,7 @@ import {
   AppWindow, FileArchive, Apple, Star, type LucideIcon,
 } from 'lucide-react';
 import skillsData from '../../../data/skills.json';
+import PdfFrame from '../../PdfFrame';
 import { WALLPAPERS, CONTACT_EMAIL, FORMSPREE_ENDPOINT, docs, projects, type DesktopDoc } from './data';
 import {
   SCRIPT, SEG_STARTS, TOTAL_CHARS, seg, line, getDir, joinPath, ROOT,
@@ -232,7 +233,7 @@ export const TerminalApp = ({ count, actions }: { count: number; actions: Termin
   return (
     <div
       ref={scrollRef}
-      className="h-full cursor-text overflow-y-auto p-5 text-[12.5px] leading-[1.75]"
+      className="h-full cursor-text overflow-y-auto p-3 text-[11px] leading-[1.6] sm:p-5 sm:text-[12.5px] sm:leading-[1.75]"
       style={{ fontFamily: MONO }}
       onClick={() => inputRef.current?.focus()}
     >
@@ -648,13 +649,14 @@ export const ViewerApp = ({ doc }: { doc: DesktopDoc }) => (
         Open
       </a>
     </div>
-    <iframe
-      src={doc.pdfUrl}
-      title={doc.title}
-      allow="fullscreen"
-      referrerPolicy="no-referrer-when-downgrade"
-      className="min-h-0 w-full flex-1 border-0 bg-white"
-    />
+    <div className="min-h-0 flex-1">
+      <PdfFrame
+        src={doc.pdfUrl}
+        title={doc.title}
+        subtitle={doc.subtitle}
+        pages={doc.pages}
+      />
+    </div>
   </div>
 );
 

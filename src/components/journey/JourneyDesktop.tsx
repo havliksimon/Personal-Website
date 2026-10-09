@@ -159,6 +159,9 @@ const JourneyDesktop = () => {
   const viewerDoc = docs.find((doc) => doc.id === viewerDocId) ?? docs[0];
   const resolvedTheme = theme === 'auto' ? (prefersDark ? 'dark' : 'light') : theme;
   const isDark = resolvedTheme === 'dark';
+  // On phones there's no room for floating windows — everything goes full screen.
+  const compact = bounds.w < 700;
+  const winRect = (w: Win) => (compact ? maximizeRect(bounds) : clampRect(w, bounds));
 
   const stop = (e: { stopPropagation: () => void }) => e.stopPropagation();
   const toggleMenu = (name: string) => setOpenMenu((prev) => (prev === name ? null : name));
@@ -631,7 +634,7 @@ const JourneyDesktop = () => {
           </div>
 
           <div className={`flex items-center gap-3 ${desktopDark ? 'text-white/90' : 'text-gray-700'}`}>
-            <BatteryFull className="h-4 w-4" />
+            <BatteryFull className="hidden h-4 w-4 sm:block" />
             <button
               type="button"
               onPointerDown={stop}
@@ -639,12 +642,12 @@ const JourneyDesktop = () => {
                 e.stopPropagation();
                 toggleMenu('control');
               }}
-              className="flex items-center rounded px-1.5 py-1 hover:bg-white/15"
+              className="hidden items-center rounded px-1.5 py-1 hover:bg-white/15 sm:flex"
               aria-label="Wi-Fi"
             >
               <Wifi className="h-4 w-4" />
             </button>
-            <Search className="h-4 w-4" />
+            <Search className="hidden h-4 w-4 sm:block" />
             <div className="relative">
               <button
                 type="button"
@@ -747,7 +750,7 @@ const JourneyDesktop = () => {
         {wins.terminal.open && !wins.terminal.minimized && (
           <MacWindow
             title="simon — -zsh — 120×40"
-            rect={clampRect(wins.terminal, bounds)}
+            rect={winRect(wins.terminal)}
             bounds={bounds}
             z={wins.terminal.z}
             dark
@@ -787,7 +790,7 @@ const JourneyDesktop = () => {
         {wins.mail.open && !wins.mail.minimized && (
           <MacWindow
             title="New Message"
-            rect={clampRect(wins.mail, bounds)}
+            rect={winRect(wins.mail)}
             bounds={bounds}
             z={wins.mail.z}
             dark={desktopDark}
@@ -804,7 +807,7 @@ const JourneyDesktop = () => {
         {wins.safari.open && !wins.safari.minimized && (
           <MacWindow
             title="Safari"
-            rect={clampRect(wins.safari, bounds)}
+            rect={winRect(wins.safari)}
             bounds={bounds}
             z={wins.safari.z}
             dark={desktopDark}
@@ -822,7 +825,7 @@ const JourneyDesktop = () => {
         {wins.finder.open && !wins.finder.minimized && (
           <MacWindow
             title="Education"
-            rect={clampRect(wins.finder, bounds)}
+            rect={winRect(wins.finder)}
             bounds={bounds}
             z={wins.finder.z}
             dark={desktopDark}
@@ -839,7 +842,7 @@ const JourneyDesktop = () => {
         {wins.viewer.open && !wins.viewer.minimized && (
           <MacWindow
             title={`${viewerDoc.kind === 'presentation' ? 'Keynote' : viewerDoc.kind === 'cv' ? 'Figma' : 'Pages'} — ${viewerDoc.title}`}
-            rect={clampRect(wins.viewer, bounds)}
+            rect={winRect(wins.viewer)}
             bounds={bounds}
             z={wins.viewer.z}
             dark={desktopDark}
@@ -857,7 +860,7 @@ const JourneyDesktop = () => {
         {wins.skills.open && !wins.skills.minimized && (
           <MacWindow
             title="Skills"
-            rect={clampRect(wins.skills, bounds)}
+            rect={winRect(wins.skills)}
             bounds={bounds}
             z={wins.skills.z}
             dark={desktopDark}
@@ -874,7 +877,7 @@ const JourneyDesktop = () => {
         {wins.siri.open && !wins.siri.minimized && (
           <MacWindow
             title="Siri"
-            rect={clampRect(wins.siri, bounds)}
+            rect={winRect(wins.siri)}
             bounds={bounds}
             z={wins.siri.z}
             dark
@@ -891,7 +894,7 @@ const JourneyDesktop = () => {
         {wins.settings.open && !wins.settings.minimized && (
           <MacWindow
             title="System Settings"
-            rect={clampRect(wins.settings, bounds)}
+            rect={winRect(wins.settings)}
             bounds={bounds}
             z={wins.settings.z}
             dark={desktopDark}
@@ -915,7 +918,7 @@ const JourneyDesktop = () => {
         {wins.trash.open && !wins.trash.minimized && (
           <MacWindow
             title="Trash"
-            rect={clampRect(wins.trash, bounds)}
+            rect={winRect(wins.trash)}
             bounds={bounds}
             z={wins.trash.z}
             dark={desktopDark}
@@ -932,7 +935,7 @@ const JourneyDesktop = () => {
         {wins.minecraft.open && !wins.minecraft.minimized && (
           <MacWindow
             title="Minecraft"
-            rect={clampRect(wins.minecraft, bounds)}
+            rect={winRect(wins.minecraft)}
             bounds={bounds}
             z={wins.minecraft.z}
             dark
@@ -950,7 +953,7 @@ const JourneyDesktop = () => {
         {/* Dock */}
         <div className="desktop-dock absolute inset-x-0 bottom-4 z-40 flex justify-center">
           <div
-            className={`flex items-end gap-1.5 rounded-2xl border px-2.5 py-2 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6)] backdrop-blur-2xl sm:gap-3 sm:px-4 sm:py-2.5 ${
+            className={`flex max-w-[94vw] items-end gap-1 overflow-x-auto rounded-2xl border px-2 py-2 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6)] backdrop-blur-2xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:max-w-none sm:gap-3 sm:overflow-visible sm:px-4 sm:py-2.5 ${
               desktopDark ? 'border-white/25 bg-white/20' : 'border-white/60 bg-white/55'
             }`}
           >
@@ -962,7 +965,7 @@ const JourneyDesktop = () => {
                 type="button"
                 onClick={() => setLaunchpad(true)}
                 aria-label="Launchpad"
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-b from-slate-100 to-slate-400 text-gray-700 shadow-lg transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 sm:h-12 sm:w-12 sm:rounded-[14px] [&_svg]:h-5 [&_svg]:w-5 sm:[&_svg]:h-6 sm:[&_svg]:w-6"
+                className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-b from-slate-100 to-slate-400 text-gray-700 shadow-lg transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 sm:h-12 sm:w-12 sm:rounded-[14px] [&_svg]:h-4 [&_svg]:w-4 sm:[&_svg]:h-6 sm:[&_svg]:w-6"
               >
                 <span className="dock-idle" style={{ animationDelay: '0ms' }}>
                   <LayoutGrid className="h-6 w-6" />
@@ -977,7 +980,7 @@ const JourneyDesktop = () => {
                 <button
                   type="button"
                   onClick={item.onClick}
-                  className={`flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-lg transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 sm:h-12 sm:w-12 sm:rounded-[14px] [&_svg]:h-5 [&_svg]:w-5 sm:[&_svg]:h-6 sm:[&_svg]:w-6 ${item.color}`}
+                  className={`flex h-9 w-9 items-center justify-center rounded-lg text-white shadow-lg transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 sm:h-12 sm:w-12 sm:rounded-[14px] [&_svg]:h-4 [&_svg]:w-4 sm:[&_svg]:h-6 sm:[&_svg]:w-6 ${item.color}`}
                 >
                   <span
                     className={item.key === 'terminal' && typing ? 'dock-bounce' : 'dock-idle'}
@@ -996,7 +999,7 @@ const JourneyDesktop = () => {
               <button
                 type="button"
                 onClick={() => toggleWin('trash')}
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-b from-zinc-300 to-zinc-500 text-white shadow-lg transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 sm:h-12 sm:w-12 sm:rounded-[14px] [&_svg]:h-5 [&_svg]:w-5 sm:[&_svg]:h-6 sm:[&_svg]:w-6"
+                className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-b from-zinc-300 to-zinc-500 text-white shadow-lg transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 sm:h-12 sm:w-12 sm:rounded-[14px] [&_svg]:h-4 [&_svg]:w-4 sm:[&_svg]:h-6 sm:[&_svg]:w-6"
               >
                 <span className="dock-idle" style={{ animationDelay: '1500ms' }}>
                   <Trash2 className="h-6 w-6" />

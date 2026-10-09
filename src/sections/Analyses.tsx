@@ -7,6 +7,7 @@ import {
   TrendingUp, Globe, Sparkles, Languages, Info, type LucideIcon
 } from 'lucide-react';
 import AnalysesEffects from '../components/AnalysesEffects';
+import PdfFrame from '../components/PdfFrame';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -430,11 +431,12 @@ const Analyses = () => {
               
               {/* PDF Viewer */}
               <div className="relative flex-1 bg-gray-100 min-h-[500px] overflow-hidden">
-                <iframe
+                <PdfFrame
                   key={activeDoc.id}
                   src={activeDoc.pdfUrl}
-                  className="w-full h-full border-0"
                   title={activeDoc.title}
+                  subtitle={activeDoc.subtitle}
+                  pages={activeDoc.pages}
                 />
               </div>
 

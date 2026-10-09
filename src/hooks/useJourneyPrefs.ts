@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 
 const QUERY_REDUCED = '(prefers-reduced-motion: reduce)';
-const QUERY_COARSE = '(pointer: coarse)';
 
+/**
+ * Whether to render the rich Shmack OS desktop. It's DOM/CSS only (no WebGL),
+ * so it runs on phones too — we only step aside for reduced-motion users.
+ */
 const shouldAllowRich = (): boolean => {
   if (typeof window === 'undefined') return false;
-  const reduced = window.matchMedia(QUERY_REDUCED).matches;
-  const coarse = window.matchMedia(QUERY_COARSE).matches || window.innerWidth < 640;
-  return !reduced && !coarse;
+  return !window.matchMedia(QUERY_REDUCED).matches;
 };
 
 export const useJourneyPrefs = (): boolean => {
@@ -16,15 +17,8 @@ export const useJourneyPrefs = (): boolean => {
   useEffect(() => {
     const update = () => setAllowRich(shouldAllowRich());
     const reduced = window.matchMedia(QUERY_REDUCED);
-    const coarse = window.matchMedia(QUERY_COARSE);
     reduced.addEventListener('change', update);
-    coarse.addEventListener('change', update);
-    window.addEventListener('resize', update);
-    return () => {
-      reduced.removeEventListener('change', update);
-      coarse.removeEventListener('change', update);
-      window.removeEventListener('resize', update);
-    };
+    return () => reduced.removeEventListener('change', update);
   }, []);
 
   return allowRich;

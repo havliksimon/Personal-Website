@@ -131,18 +131,18 @@ export const GlobalSpotlight: React.FC = () => {
   // Update spotlight colors when section changes
   useEffect(() => {
     const theme = sectionThemes[currentSection];
-    if (!theme || !spotlightRef.current) return;
+    const spotlight = spotlightRef.current;
+    if (!theme || !spotlight) return;
 
-    // Use opacity-based transition for smoother color changes
-    // First fade out completely
-    gsap.to(spotlightRef.current, {
+    // Use opacity-based transition for smoother color changes.
+    // Re-check the ref inside onComplete: the tween can outlive the node.
+    gsap.to(spotlight, {
       opacity: 0,
       duration: 0.4,
       ease: 'power2.in',
       onComplete: () => {
-        // Change the background while fully transparent
-        spotlightRef.current!.style.background = `radial-gradient(circle at center, ${theme.primary} 0%, ${theme.secondary} 40%, transparent 70%)`;
-        // Then fade back in
+        if (!spotlightRef.current) return;
+        spotlightRef.current.style.background = `radial-gradient(circle at center, ${theme.primary} 0%, ${theme.secondary} 40%, transparent 70%)`;
         gsap.to(spotlightRef.current, {
           opacity: isVisible ? 0.85 : 0,
           duration: 0.6,
@@ -152,13 +152,15 @@ export const GlobalSpotlight: React.FC = () => {
     });
 
     // Update ambient orbs with same opacity-based approach
-    if (orb1Ref.current) {
-      gsap.to(orb1Ref.current, {
+    const orb1 = orb1Ref.current;
+    if (orb1) {
+      gsap.to(orb1, {
         opacity: 0,
         duration: 0.45,
         ease: 'power2.in',
         onComplete: () => {
-          orb1Ref.current!.style.background = `radial-gradient(circle, ${theme.secondary} 0%, transparent 70%)`;
+          if (!orb1Ref.current) return;
+          orb1Ref.current.style.background = `radial-gradient(circle, ${theme.secondary} 0%, transparent 70%)`;
           gsap.to(orb1Ref.current, {
             opacity: isVisible ? 0.4 : 0,
             duration: 0.65,
@@ -167,13 +169,16 @@ export const GlobalSpotlight: React.FC = () => {
         },
       });
     }
-    if (orb2Ref.current) {
-      gsap.to(orb2Ref.current, {
+
+    const orb2 = orb2Ref.current;
+    if (orb2) {
+      gsap.to(orb2, {
         opacity: 0,
         duration: 0.45,
         ease: 'power2.in',
         onComplete: () => {
-          orb2Ref.current!.style.background = `radial-gradient(circle, ${theme.primary} 0%, transparent 70%)`;
+          if (!orb2Ref.current) return;
+          orb2Ref.current.style.background = `radial-gradient(circle, ${theme.primary} 0%, transparent 70%)`;
           gsap.to(orb2Ref.current, {
             opacity: isVisible ? 0.35 : 0,
             duration: 0.65,
