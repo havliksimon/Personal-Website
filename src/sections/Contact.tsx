@@ -40,6 +40,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -84,12 +85,14 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+    setError(null);
+
     try {
       const response = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           name: formData.name,
@@ -98,17 +101,24 @@ const Contact = () => {
           message: formData.message,
         }),
       });
-      
+
       if (response.ok) {
         setSubmitted(true);
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        alert('Something went wrong. Please try again.');
+        let detail = `HTTP ${response.status}`;
+        try {
+          const data = await response.json();
+          if (data?.errors?.length) detail = data.errors.map((x: { message: string }) => x.message).join(', ');
+        } catch {
+          /* keep the status code */
+        }
+        setError(`The mail service rejected that (${detail}).`);
       }
-    } catch (error) {
-      alert('Something went wrong. Please try again.');
+    } catch {
+      setError('Could not reach the mail service — a browser blocker may be blocking formspree.io.');
     }
-    
+
     setIsSubmitting(false);
   };
 
@@ -229,6 +239,19 @@ const Contact = () => {
                     required
                   />
                 </div>
+                {error && (
+                  <div className="rounded-lg border border-red-100 bg-red-50 p-3 text-sm text-red-700">
+                    {error}{' '}
+                    <a
+                      className="font-medium underline"
+                      href={`mailto:havlik.simon@post.cz?subject=${encodeURIComponent(
+                        formData.subject || 'Website enquiry'
+                      )}&body=${encodeURIComponent(formData.message)}`}
+                    >
+                      Send it by email instead
+                    </a>
+                  </div>
+                )}
                 <button
                   type="submit"
                   disabled={isSubmitting}

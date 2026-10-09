@@ -13,6 +13,8 @@ interface MacWindowProps {
   onFocus: () => void;
   onChange: (rect: Rect) => void;
   onClose?: () => void;
+  onMinimize?: () => void;
+  onMaximize?: () => void;
   children: ReactNode;
 }
 
@@ -28,6 +30,8 @@ export const MacWindow = ({
   onFocus,
   onChange,
   onClose,
+  onMinimize,
+  onMaximize,
   children,
 }: MacWindowProps) => {
   const drag = useRef<{ px: number; py: number; rect: Rect } | null>(null);
@@ -102,8 +106,26 @@ export const MacWindow = ({
               closable ? '' : 'opacity-40'
             }`}
           />
-          <span className="h-3 w-3 rounded-full bg-[#febc2e] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.12)]" />
-          <span className="h-3 w-3 rounded-full bg-[#28c840] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.12)]" />
+          <button
+            type="button"
+            aria-label="Minimize window"
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              onMinimize?.();
+            }}
+            className="h-3 w-3 rounded-full bg-[#febc2e] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.12)]"
+          />
+          <button
+            type="button"
+            aria-label="Maximize window"
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              onMaximize?.();
+            }}
+            className="h-3 w-3 rounded-full bg-[#28c840] shadow-[0_0_0_1px_rgba(0,0,0,0.12)]"
+          />
         </div>
         <span className={`mx-auto truncate text-[12px] font-medium ${dark ? 'text-zinc-300' : 'text-gray-500'}`}>
           {title}

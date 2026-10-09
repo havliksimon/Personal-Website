@@ -23,3 +23,10 @@ export const clampRect = (rect: Rect, bounds: Bounds): Rect => {
 
 export const place = (bounds: Bounds, w: number, h: number, dx = 0, dy = 0): Rect =>
   clampRect({ x: (bounds.w - w) / 2 + dx, y: (bounds.h - h) / 2 + dy, w, h }, bounds);
+
+export const maximizeRect = (bounds: Bounds): Rect => ({
+  x: 8,
+  y: MENU_H + 6,
+  w: Math.max(320, bounds.w - 16),
+  h: Math.max(240, bounds.h - MENU_H - DOCK_H - 6),
+});

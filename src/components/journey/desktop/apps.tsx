@@ -8,20 +8,189 @@ import {
 } from 'lucide-react';
 import skillsData from '../../../data/skills.json';
 import { WALLPAPERS, CONTACT_EMAIL, FORMSPREE_ENDPOINT, docs, projects, type DesktopDoc } from './data';
-import { SCRIPT, SEG_STARTS, TOTAL_CHARS } from './terminal';
+import {
+  SCRIPT, SEG_STARTS, TOTAL_CHARS, seg, line, getDir, joinPath, ROOT,
+  HELP, NEOFETCH, HTOP, NANO, JARGON, EDUCATION_LOG, type Seg,
+} from './terminal';
 
 const MONO = "'SF Mono', Menlo, Monaco, 'JetBrains Mono', monospace";
 
 /* ----------------------------- Terminal ----------------------------- */
 
-export const TerminalBody = ({ count }: { count: number }) => {
+export interface TerminalActions {
+  openDoc: (docId: number) => void;
+  openSafari: () => void;
+  openSkills: () => void;
+  openFinder: () => void;
+  openSettings: () => void;
+  openMinecraft: () => void;
+  openTrash: () => void;
+  openMail: () => void;
+  openSiri: () => void;
+}
+
+export const TerminalApp = ({ count, actions }: { count: number; actions: TerminalActions }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const done = count >= TOTAL_CHARS;
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [cwd, setCwd] = useState('~');
+  const [lines, setLines] = useState<Seg[][]>([]);
+  const [input, setInput] = useState('');
+  const [cleared, setCleared] = useState(false);
+  const [busy, setBusy] = useState(false);
+
+  const introDone = count >= TOTAL_CHARS;
 
   useEffect(() => {
     const el = scrollRef.current;
     if (el) el.scrollTop = el.scrollHeight;
-  }, [count]);
+  }, [count, lines, busy]);
+
+  useEffect(() => {
+    if (introDone) inputRef.current?.focus();
+  }, [introDone]);
+
+  const append = (out: Seg[][]) => setLines((prev) => [...prev, ...out]);
+
+  const runCommand = async (raw: string) => {
+    const trimmed = raw.trim();
+    const [cmd, ...rest] = trimmed.split(/\s+/);
+    const arg = rest.join(' ');
+    const cur = getDir(cwd) ?? ROOT;
+
+    switch (cmd) {
+      case '':
+        return;
+      case 'help':
+        return append(HELP);
+      case 'pwd':
+        return append([line(cwd, 'text-zinc-300')]);
+      case 'ls':
+      case 'lsd': {
+        const out: Seg[][] = [];
+        if (cmd === 'lsd') {
+          out.push(line(`${cur.dirs.length} dirs · ${cur.files.length} files · 0 unproductivity`, 'text-zinc-500'));
+        }
+        cur.dirs.forEach((dir) => out.push([seg(`${dir.name}/`, 'font-semibold text-sky-400')]));
+        cur.files.forEach((file) =>
+          out.push([
+            seg(
+              file.name,
+              file.kind === 'pdf'
+                ? 'text-amber-300'
+                : file.kind === 'html'
+                  ? 'text-cyan-300'
+                  : file.kind === 'skills'
+                    ? 'text-fuchsia-300'
+                    : 'text-zinc-300'
+            ),
+          ])
+        );
+        return append(out.length ? out : [line('(empty)', 'text-zinc-500')]);
+      }
+      case 'cd': {
+        if (!arg || arg === '~') {
+          setCwd('~');
+          return;
+        }
+        const target = joinPath(cwd, arg.replace(/\/$/, ''));
+        if (getDir(target)) {
+          setCwd(target);
+          return;
+        }
+        return append([line(`cd: no such directory: ${arg}`, 'text-red-400')]);
+      }
+      case 'cat': {
+        if (!arg) return append([line('usage: cat <file|url>', 'text-zinc-400')]);
+        if (/^https?:\/\//i.test(arg)) {
+          setBusy(true);
+          append([line(`fetching ${arg} via r.jina.ai …`, 'text-zinc-500')]);
+          try {
+            const res = await fetch(`https://r.jina.ai/${arg}`);
+            const text = await res.text();
+            const out = text
+              .split('\n')
+              .slice(0, 40)
+              .map((l) => line(l.length ? l : ' ', 'text-zinc-300'));
+            append(out.length ? out : [line('(empty response)', 'text-zinc-500')]);
+          } catch {
+            append([line('cat: fetch failed (network or r.jina.ai unavailable)', 'text-red-400')]);
+          }
+          setBusy(false);
+          return;
+        }
+        const file = cur.files.find((f) => f.name === arg);
+        if (!file) return append([line(`cat: ${arg}: No such file or directory`, 'text-red-400')]);
+        if (file.kind === 'log') return append(EDUCATION_LOG.split('\n').map((l) => line(l, 'text-zinc-300')));
+        if (file.content) return append(file.content.split('\n').map((l) => line(l, 'text-zinc-300')));
+        return append([line(`cat: ${arg}: binary file (try \`open ${arg}\`)`, 'text-zinc-500')]);
+      }
+      case 'open': {
+        if (!arg) return append([line('usage: open <file>', 'text-zinc-400')]);
+        const file = cur.files.find((f) => f.name === arg);
+        if (!file) return append([line(`open: ${arg}: No such file`, 'text-red-400')]);
+        if (file.kind === 'pdf' && file.docId !== undefined) {
+          actions.openDoc(file.docId);
+          return append([line(`Opening ${file.name} in ${file.docId >= 4 ? 'Keynote' : 'Pages'}…`, 'text-zinc-400')]);
+        }
+        if (file.kind === 'html') {
+          actions.openSafari();
+          return append([line('Opening links.html in Safari…', 'text-zinc-400')]);
+        }
+        if (file.kind === 'skills') {
+          actions.openSkills();
+          return append([line('Opening skills.freeform in Skills…', 'text-zinc-400')]);
+        }
+        return append([line(`open: cannot open ${arg} (try \`cat\`)`, 'text-zinc-500')]);
+      }
+      case 'neofetch':
+      case 'screenfetch':
+        return append(NEOFETCH);
+      case 'htop':
+        return append(HTOP);
+      case 'nano':
+        return append(NANO);
+      case 'jargon':
+        return append([line(JARGON[Math.floor(Math.random() * JARGON.length)], 'text-amber-300')]);
+      case 'whoami':
+        return append([
+          [
+            seg('simon', 'font-semibold text-emerald-300'),
+            seg('  — economics student, equity analyst, and (apparently) OS designer.', 'text-zinc-400'),
+          ],
+        ]);
+      case 'date':
+        return append([line(new Date().toString(), 'text-zinc-300')]);
+      case 'clear':
+        setLines([]);
+        setCleared(true);
+        return;
+      case 'sudo':
+        return append([line('Nice try. Root access denied — but full marks for initiative.', 'text-red-400')]);
+      case 'exit':
+      case 'logout':
+        return append([line('logout: there is no escape from this desktop.', 'text-zinc-400')]);
+      default:
+        return append([
+          line(`zsh: command not found: ${cmd}`, 'text-red-400'),
+          line("type 'help' for the good stuff.", 'text-zinc-500'),
+        ]);
+    }
+  };
+
+  const submit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (busy) return;
+    const raw = input;
+    setInput('');
+    const echo: Seg[] = [
+      seg('simon@macbook ', 'font-semibold text-emerald-400'),
+      seg(`${cwd} `, 'font-semibold text-sky-400'),
+      seg('% ', 'text-zinc-400'),
+      seg(raw, 'text-zinc-100'),
+    ];
+    append([echo]);
+    await runCommand(raw);
+  };
 
   let remaining = count;
   const newest = count - 1;
@@ -56,21 +225,56 @@ export const TerminalBody = ({ count }: { count: number }) => {
     }
     remaining -= take;
   });
-  typed.push(
-    <span
-      key="caret"
-      className="terminal-caret ml-0.5 inline-block h-[15px] w-[8px] translate-y-[2px] bg-emerald-300 align-middle shadow-[0_0_10px_rgba(110,231,183,0.9)]"
-    />
-  );
 
   return (
     <div
       ref={scrollRef}
-      className="h-full overflow-hidden p-5 text-[12.5px] leading-[1.75]"
+      className="h-full cursor-text overflow-y-auto p-5 text-[12.5px] leading-[1.75]"
       style={{ fontFamily: MONO }}
+      onClick={() => inputRef.current?.focus()}
     >
-      <div className="whitespace-pre-wrap break-words text-zinc-200">{typed}</div>
-      {done && <span className="sr-only">Education journey printed.</span>}
+      {!cleared && (
+        <div className="whitespace-pre-wrap break-words text-zinc-200">
+          {typed}
+          {!introDone && (
+            <span className="terminal-caret ml-0.5 inline-block h-[15px] w-[8px] translate-y-[2px] bg-emerald-300 align-middle shadow-[0_0_10px_rgba(110,231,183,0.9)]" />
+          )}
+        </div>
+      )}
+
+      {lines.map((ln, i) => (
+        <div key={i} className="whitespace-pre-wrap break-words">
+          {ln.map((s, j) => (
+            <span key={j} className={s.cls}>
+              {s.text}
+            </span>
+          ))}
+        </div>
+      ))}
+
+      {introDone && lines.length === 0 && (
+        <div className="text-zinc-500">
+          type <span className="text-cyan-300">help</span> to see what this shell can do — or try{' '}
+          <span className="text-cyan-300">neofetch</span>.
+        </div>
+      )}
+
+      {introDone && (
+        <form onSubmit={submit} className="flex items-baseline gap-1.5">
+          <span className="font-semibold text-emerald-400">simon@macbook</span>
+          <span className="font-semibold text-sky-400">{cwd}</span>
+          <span className="text-zinc-400">%</span>
+          <input
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            spellCheck={false}
+            autoComplete="off"
+            aria-label="Terminal input"
+            className="flex-1 bg-transparent text-zinc-100 caret-emerald-300 outline-none"
+          />
+        </form>
+      )}
     </div>
   );
 };
@@ -81,24 +285,33 @@ export const MailApp = () => {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     setSending(true);
+    setError(null);
     try {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(form),
       });
       if (res.ok) {
         setSent(true);
         setForm({ name: '', email: '', subject: '', message: '' });
       } else {
-        alert('Something went wrong. Please try again.');
+        let detail = `HTTP ${res.status}`;
+        try {
+          const data = await res.json();
+          if (data?.errors?.length) detail = data.errors.map((x: { message: string }) => x.message).join(', ');
+        } catch {
+          /* keep status */
+        }
+        setError(`Mail service rejected that (${detail}).`);
       }
     } catch {
-      alert('Something went wrong. Please try again.');
+      setError('Could not reach formspree.io — a browser blocker may be blocking it.');
     }
     setSending(false);
   };
@@ -154,6 +367,19 @@ export const MailApp = () => {
         value={form.message}
         onChange={(e) => setForm({ ...form, message: e.target.value })}
       />
+      {error && (
+        <div className="border-t border-red-100 bg-red-50 px-3 py-2 text-[12px] text-red-700">
+          {error}{' '}
+          <a
+            className="font-medium underline"
+            href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+              form.subject || 'Website enquiry'
+            )}&body=${encodeURIComponent(form.message)}`}
+          >
+            Send by email instead
+          </a>
+        </div>
+      )}
       <div className="flex items-center justify-between border-t border-gray-100 px-3 py-2">
         <span className="text-[11px] text-gray-400">Sent via havliksimon.eu</span>
         <button
