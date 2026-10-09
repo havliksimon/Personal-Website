@@ -2,13 +2,13 @@ import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 import { 
   Home, User, Route, Wrench, Briefcase, 
-  FileText, Globe, Mail, ChevronUp
+  FileText, Globe, Mail, ChevronUp, type LucideIcon
 } from 'lucide-react';
 
 interface NavItem {
   id: string;
   label: string;
-  icon: React.ElementType;
+  icon: LucideIcon;
   color: string;
 }
 

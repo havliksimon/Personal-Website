@@ -2,12 +2,12 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import skillsData from '../data/skills.json';
-import { Calculator, Code, Brain, TrendingUp, BookOpen, Landmark, Globe, Palette, Languages } from 'lucide-react';
+import { Calculator, Code, Brain, TrendingUp, BookOpen, Landmark, Globe, Palette, Languages, type LucideIcon } from 'lucide-react';
 import SkillsEffects from '../components/SkillsEffects';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const iconMap: Record<string, React.ElementType> = {
+const iconMap: Record<string, LucideIcon> = {
   Calculator,
   Code,
   Brain,
@@ -19,16 +19,16 @@ const iconMap: Record<string, React.ElementType> = {
   Languages
 };
 
-const colorMap: Record<string, { bg: string; fill: string; text: string; circle: string }> = {
-  blue: { bg: 'bg-blue-50', fill: 'bg-blue-500', text: 'text-blue-700', circle: 'stroke-blue-500' },
-  cyan: { bg: 'bg-cyan-50', fill: 'bg-cyan-500', text: 'text-cyan-700', circle: 'stroke-cyan-500' },
-  purple: { bg: 'bg-purple-50', fill: 'bg-purple-500', text: 'text-purple-700', circle: 'stroke-purple-500' },
-  green: { bg: 'bg-green-50', fill: 'bg-green-500', text: 'text-green-700', circle: 'stroke-green-500' },
-  orange: { bg: 'bg-orange-50', fill: 'bg-orange-500', text: 'text-orange-700', circle: 'stroke-orange-500' },
-  emerald: { bg: 'bg-emerald-50', fill: 'bg-emerald-500', text: 'text-emerald-700', circle: 'stroke-emerald-500' },
-  red: { bg: 'bg-red-50', fill: 'bg-red-500', text: 'text-red-700', circle: 'stroke-red-500' },
-  pink: { bg: 'bg-pink-50', fill: 'bg-pink-500', text: 'text-pink-700', circle: 'stroke-pink-500' },
-  indigo: { bg: 'bg-indigo-50', fill: 'bg-indigo-500', text: 'text-indigo-700', circle: 'stroke-indigo-500' }
+const colorMap: Record<string, { bg: string; fill: string; text: string }> = {
+  blue: { bg: 'bg-blue-50', fill: 'bg-blue-500', text: 'text-blue-700' },
+  cyan: { bg: 'bg-cyan-50', fill: 'bg-cyan-500', text: 'text-cyan-700' },
+  purple: { bg: 'bg-purple-50', fill: 'bg-purple-500', text: 'text-purple-700' },
+  green: { bg: 'bg-green-50', fill: 'bg-green-500', text: 'text-green-700' },
+  orange: { bg: 'bg-orange-50', fill: 'bg-orange-500', text: 'text-orange-700' },
+  emerald: { bg: 'bg-emerald-50', fill: 'bg-emerald-500', text: 'text-emerald-700' },
+  red: { bg: 'bg-red-50', fill: 'bg-red-500', text: 'text-red-700' },
+  pink: { bg: 'bg-pink-50', fill: 'bg-pink-500', text: 'text-pink-700' },
+  indigo: { bg: 'bg-indigo-50', fill: 'bg-indigo-500', text: 'text-indigo-700' }
 };
 
 const Skills = () => {
@@ -71,26 +71,6 @@ const Skills = () => {
           }
         );
       }
-
-      const progressBars = cardsRef.current?.querySelectorAll('.skill-progress');
-      if (progressBars) {
-        progressBars.forEach((bar) => {
-          const width = bar.getAttribute('data-width');
-          gsap.fromTo(bar,
-            { width: '0%' },
-            {
-              width: `${width}%`,
-              duration: 1,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: bar,
-                start: 'top 85%',
-                toggleActions: 'play none none reverse'
-              }
-            }
-          );
-        });
-      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -124,62 +104,31 @@ const Skills = () => {
             return (
               <div key={category.id} className="skill-card premium-gloss bg-white rounded-2xl p-5 shadow-sm transition-all duration-300">
                 {/* Header */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-9 h-9 rounded-lg ${colors.bg} flex items-center justify-center`}>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`w-9 h-9 rounded-lg ${colors.bg} flex items-center justify-center flex-shrink-0`}>
                     <Icon className={`w-4 h-4 ${colors.text}`} />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <h3 className="text-base font-semibold text-gray-900">{category.name}</h3>
                     <p className="text-gray-400 text-xs">{category.description}</p>
                   </div>
                 </div>
 
+                {/* Accent */}
+                <div className={`h-0.5 w-10 rounded-full ${colors.fill} opacity-60 mb-3`} />
+
                 {/* Skills List */}
-                <div className="space-y-2.5">
+                <div className="space-y-0.5">
                   {category.skills.map((skill, index) => (
-                    <div key={index}>
-                      <div className="flex items-center justify-between mb-1">
-                        <div className="flex items-center gap-2">
-                          {/* Circular Progress */}
-                          <div className="relative w-6 h-6">
-                            <svg className="w-6 h-6 transform -rotate-90">
-                              <circle
-                                cx="12"
-                                cy="12"
-                                r="9"
-                                fill="none"
-                                stroke="#e5e7eb"
-                                strokeWidth="2"
-                              />
-                              <circle
-                                cx="12"
-                                cy="12"
-                                r="9"
-                                fill="none"
-                                className={colors.circle}
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeDasharray={`${2 * Math.PI * 9}`}
-                                strokeDashoffset={`${2 * Math.PI * 9 * (1 - skill.level / 100)}`}
-                                style={{ transition: 'stroke-dashoffset 1s ease' }}
-                              />
-                            </svg>
-                            <span className="absolute inset-0 flex items-center justify-center text-[6px] font-medium text-gray-600">
-                              {skill.level}%
-                            </span>
-                          </div>
-                          <span className="text-sm font-medium text-gray-900">{skill.name}</span>
-                        </div>
-                        <span className="text-xs text-gray-400">{skill.context}</span>
-                      </div>
-                      {/* Horizontal Progress Bar */}
-                      <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
-                        <div
-                          className={`skill-progress h-full rounded-full ${colors.fill}`}
-                          data-width={skill.level}
-                          style={{ width: '0%' }}
-                        />
-                      </div>
+                    <div
+                      key={index}
+                      className="group/skill flex items-center justify-between gap-3 rounded-lg px-2.5 py-1.5 -mx-1 transition-colors duration-200 hover:bg-gray-50"
+                    >
+                      <span className="flex items-center gap-2.5 min-w-0">
+                        <span className={`w-1.5 h-1.5 rounded-full ${colors.fill} flex-shrink-0 transition-transform duration-300 group-hover/skill:scale-150`} />
+                        <span className="text-sm font-medium text-gray-900 truncate">{skill.name}</span>
+                      </span>
+                      <span className="text-[11px] text-gray-400 whitespace-nowrap">{skill.context}</span>
                     </div>
                   ))}
                 </div>

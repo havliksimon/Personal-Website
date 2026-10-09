@@ -360,6 +360,125 @@
   }
 }
 
+/* Education journey — terminal "write-in" animation on newly typed characters */
+@keyframes charIn {
+  0% {
+    opacity: 0;
+    color: #fde68a;
+    text-shadow: 0 0 14px rgba(253, 230, 138, 0.95);
+    filter: blur(1.5px);
+  }
+  55% {
+    opacity: 1;
+    color: #6ee7b7;
+    text-shadow: 0 0 9px rgba(110, 231, 183, 0.7);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    color: inherit;
+    text-shadow: none;
+    filter: blur(0);
+  }
+}
+
+.terminal-print {
+  animation: charIn 0.5s ease-out both;
+}
+
+@keyframes caretBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.terminal-caret {
+  animation: caretBlink 1.05s steps(1) infinite;
+}
+
+/* Dock app bounce (active app) */
+@keyframes dockBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(-16px);
+  }
+  55% {
+    transform: translateY(-4px);
+  }
+  72% {
+    transform: translateY(-9px);
+  }
+}
+
+.dock-bounce {
+  animation: dockBounce 1.15s ease-in-out infinite;
+}
+
+/* Periodic sheen sweep across a window */
+@keyframes windowSheen {
+  0% {
+    transform: translateX(-140%) skewX(-18deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  55%,
+  100% {
+    transform: translateX(340%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+.window-sheen {
+  animation: windowSheen 7s ease-in-out infinite;
+}
+
+/* Gentle idle float for dock icons */
+@keyframes dockIdle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.dock-idle {
+  animation: dockIdle 3.4s ease-in-out infinite;
+}
+
+/* Siri orb */
+@keyframes siriSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.siri-orb {
+  background: conic-gradient(from 0deg, #38bdf8, #a855f7, #f472b6, #fbbf24, #34d399, #38bdf8);
+  filter: blur(4px) saturate(1.3);
+  animation: siriSpin 7s linear infinite;
+  box-shadow: 0 0 70px rgba(168, 85, 247, 0.55);
+}
+
+.siri-orb::after {
+  content: '';
+  position: absolute;
+  inset: 24%;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 65%);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

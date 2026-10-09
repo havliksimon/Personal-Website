@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   FileText, Presentation, Download, ExternalLink, 
   ChevronRight, BookOpen, BarChart3,
-  TrendingUp, Globe, Sparkles, Languages, Info
+  TrendingUp, Globe, Sparkles, Languages, Info, type LucideIcon
 } from 'lucide-react';
 import AnalysesEffects from '../components/AnalysesEffects';
 
@@ -23,7 +23,7 @@ interface AnalysisDoc {
   pages: number;
   pdfUrl: string;
   thumbnailColor: string;
-  icon: React.ElementType;
+  icon: LucideIcon;
   tags: string[];
   language?: Language;
 }

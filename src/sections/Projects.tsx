@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   TrendingUp, Globe, Sparkles, Layers, Box,
   Code2, Github, ExternalLink,
-  MousePointer2, Loader2, ArrowUpRight, Maximize2, X, ZoomIn, ZoomOut
+  MousePointer2, Loader2, ArrowUpRight, Maximize2, X, ZoomIn, ZoomOut, type LucideIcon
 } from 'lucide-react';
 import ProjectsEffects from '../components/ProjectsEffects';
 
@@ -15,7 +15,7 @@ interface Project {
   title: string;
   shortTitle: string;
   description: string;
-  icon: React.ElementType;
+  icon: LucideIcon;
   tags: string[];
   color: string;
   gradientBg: string;
