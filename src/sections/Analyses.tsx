@@ -35,7 +35,7 @@ const analyses: AnalysisDoc[] = [
     subtitle: 'EM Technology & Entertainment',
     description: 'Fundamental equity analysis of Bilibili Inc. (BILI), covering business model, financial performance, valuation metrics, and investment thesis for this Chinese video-sharing platform.',
     type: 'analysis',
-    date: 'Dec 2024',
+    date: 'Oct 2026',
     pages: 28,
     pdfUrl: '/analyses/EM_BILI_Havlik.docx.pdf',
     thumbnailColor: 'from-pink-500 to-rose-600',
