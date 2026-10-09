@@ -69,7 +69,7 @@ function generateSEOPage(type) {
         
         <h2>Kontaktujte mě</h2>
         <p>Email: havlik.simon@post.cz<br>
-        Telefon: +420 776 341 621<br>
+        Telefon: na vyžádání e-mailem<br>
         Lokalita: Praha, Česká republika</p>
         
         <p><a href="/">Zpět na hlavní stránku</a></p>
@@ -180,7 +180,7 @@ function generateSEOPage(type) {
     
     <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 14px;">
         <p>© 2026 Šimon Havlík | Konzultant pro čínské investice | Praha</p>
-        <p>Kontakt: havlik.simon@post.cz | +420 776 341 621</p>
+        <p>Kontakt: havlik.simon@post.cz</p>
     </footer>
 </body>
 </html>`;

@@ -14,7 +14,6 @@ export async function onRequestGet(context) {
       "description": "Profesionální konzultant pro investice do Číny a analytik čínských trhů z Prahy",
       "url": "https://havliksimon.eu/",
       "email": "havlik.simon@post.cz",
-      "telephone": "+420-776-341-621",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Praha",

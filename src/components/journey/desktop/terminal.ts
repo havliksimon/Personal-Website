@@ -237,29 +237,43 @@ export const HELP: Seg[][] = [
   helpLine('whoami, date, clear, sudo, exit', 'the usual suspects'),
 ];
 
-const APPLE = [
-  "                    'c.",
-  '                 ,xNMM.',
-  '               .OMMMMo',
-  '               OMMM0,',
-  "     .;loddo:' loolloddol;.",
-  '   cKMMMMMMMMMMNWMMMMMMMMMM0:',
-  ' .KMMMMMMMMMMMMMMMMMMMMMMMWd.',
-  ' XMMMMMMMMMMMMMMMMMMMMMMMX.',
-  ';MMMMMMMMMMMMMMMMMMMMMMMM:',
-  ':MMMMMMMMMMMMMMMMMMMMMMMM:',
-  '.MMMMMMMMMMMMMMMMMMMMMMMMMX.',
-  ' kMMMMMMMMMMMMMMMMMMMMMMMMWd.',
-  ' .XMMMMMMMMMMMMMMMMMMMMMMMMMMk',
-  '  .XMMMMMMMMMMMMMMMMMMMMMMMMK.',
-  '    kMMMMMMMMMMMMMMMMMMMMMMd',
-  '     ;KMMMMMMMWXXWMMMMMMMk.',
-  '       .cooc,.    .,coo:.',
+/** Whole, solid apple (no bite) — the Shmack OS logo. */
+const LOGO = [
+  '              .#.',
+  '             ###',
+  '          ########',
+  '        ############',
+  '      ################',
+  '     ##################',
+  '    ####################',
+  '    ####################',
+  '    ####################',
+  '     ##################',
+  '      ################',
+  '        ############',
+  '          ########',
+  '            ####',
 ];
 
-export const NEOFETCH: Seg[][] = [
-  ...APPLE.map((artLine) => line(artLine, 'text-emerald-400')),
-  line('', ''),
+/** Per-line gradient (leaf green → ripe red) so the logo is properly colourful. */
+const LOGO_COLORS = [
+  'text-amber-600',
+  'text-green-400',
+  'text-lime-400',
+  'text-lime-300',
+  'text-yellow-400',
+  'text-yellow-500',
+  'text-amber-400',
+  'text-orange-400',
+  'text-orange-500',
+  'text-red-400',
+  'text-red-500',
+  'text-rose-500',
+  'text-red-500',
+  'text-red-600',
+];
+
+const NEO_INFO: Seg[][] = [
   line('simon@shmackbook', 'font-semibold text-emerald-400'),
   line('---------------', 'text-emerald-400'),
   kv('OS', 'Shmack OS 14.0 “Sonoma-ish” arm64'),
@@ -270,21 +284,29 @@ export const NEOFETCH: Seg[][] = [
   kv('Shell', 'zsh 5.9'),
   kv('Resolution', '5120x2880 @ 60Hz (Retina 5K)'),
   kv('DE', 'Aqua (Shmack edition)'),
-  kv('WM', 'Quartz Compositor'),
   kv('Terminal', 'shmack-term 6.7'),
   kv('CPU', 'CommandCode Silicon M∞ (67) @ 6.9GHz'),
   kv('GPU', '8x AI Training GPUs — H200 cluster, obviously'),
   kv('Memory', '128GB / 16TB (16TB pinned to PyTorch)'),
-  kv('Disk', '~/analyses 4.9GB · ~/presentations 6.6GB · ~/ideas ∞'),
   kv('WiFi', 'WiFi 6.7 — “idk_pass” (signal: exquisite)'),
   kv('Bluetooth', '6.9 (ahead of spec, as usual)'),
   kv('Bandwidth', '69 opportunity channels (all open)'),
-  kv('Alpha', '+∞ bps (statistically significant)'),
   kv('Sharpe', '4.20 (do not fact-check this)'),
-  kv('Beta', '< 1, by construction'),
   kv('Locale', 'en_US.UTF-8 · cs_CZ.UTF-8 · zh_CN.UTF-8'),
   kv('Battery', '100% — never dips, like the portfolio'),
 ];
+
+/** Logo on the left, stats on the right — like the real thing. */
+export const NEOFETCH: Seg[][] = (() => {
+  const artWidth = Math.max(...LOGO.map((artLine) => artLine.length));
+  const rows = Math.max(LOGO.length, NEO_INFO.length);
+  const out: Seg[][] = [];
+  for (let i = 0; i < rows; i += 1) {
+    const art = `${(LOGO[i] ?? '').padEnd(artWidth)}   `;
+    out.push([seg(art, LOGO_COLORS[i % LOGO_COLORS.length]), ...(NEO_INFO[i] ?? [])]);
+  }
+  return out;
+})();
 
 export const HTOP: Seg[][] = [
   line('  0[||||||||||||||||||||||||||||||98.7%]  1[|||||||||||||||||||      62.0%]    Tasks: 69, 420 thr; 1 running', 'text-zinc-300'),

@@ -1,12 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Mail, Phone, MapPin, Linkedin, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Send, CheckCircle, type LucideIcon } from 'lucide-react';
 import ContactEffects from '../components/ContactEffects';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const contactInfo = [
+interface ContactItem {
+  icon: LucideIcon;
+  label: string;
+  value: string;
+  href: string | null;
+  hoverValue?: string;
+}
+
+const contactInfo: ContactItem[] = [
   {
     icon: Mail,
     label: 'Email',
@@ -28,8 +36,9 @@ const contactInfo = [
   {
     icon: Phone,
     label: 'Phone',
-    value: '+420 776 341 621',
-    href: 'tel:+420776341621'
+    value: 'Redacted for privacy',
+    hoverValue: 'Shared via email',
+    href: 'mailto:havlik.simon@post.cz'
   }
 ];
 
@@ -152,13 +161,18 @@ const Contact = () => {
               {contactInfo.map((item, index) => {
                 const Icon = item.icon;
                 const content = (
-                  <div className="gloss-card flex items-center gap-4 p-4 bg-gray-50 rounded-xl transition-all duration-300 cursor-pointer">
+                  <div className="gloss-card group flex items-center gap-4 p-4 bg-gray-50 rounded-xl transition-all duration-300 cursor-pointer">
                     <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
                       <Icon className="w-5 h-5 text-gray-600" />
                     </div>
                     <div>
                       <span className="text-sm text-gray-500">{item.label}</span>
-                      <p className="text-gray-900 font-medium">{item.value}</p>
+                      <p className="font-medium text-gray-900">
+                        <span className={item.hoverValue ? 'group-hover:hidden' : undefined}>{item.value}</span>
+                        {item.hoverValue && (
+                          <span className="hidden text-amber-600 group-hover:inline">{item.hoverValue}</span>
+                        )}
+                      </p>
                     </div>
                   </div>
                 );
