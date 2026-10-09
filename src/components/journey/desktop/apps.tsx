@@ -560,7 +560,9 @@ export const SafariApp = ({ initialTabTitle }: { initialTabTitle?: string }) => 
         key={`${active.id}-${active.url}-${reloadKey}`}
         src={active.url}
         title={active.title}
-        className="min-h-0 flex-1 border-0 bg-white"
+        allow="fullscreen; autoplay; encrypted-media"
+        referrerPolicy="no-referrer-when-downgrade"
+        className="min-h-0 w-full flex-1 border-0 bg-white"
       />
     </div>
   );
@@ -640,7 +642,13 @@ export const ViewerApp = ({ doc }: { doc: DesktopDoc }) => (
         Open
       </a>
     </div>
-    <iframe src={doc.pdfUrl} title={doc.title} className="min-h-0 flex-1 border-0 bg-white" />
+    <iframe
+      src={doc.pdfUrl}
+      title={doc.title}
+      allow="fullscreen"
+      referrerPolicy="no-referrer-when-downgrade"
+      className="min-h-0 w-full flex-1 border-0 bg-white"
+    />
   </div>
 );
 
@@ -1009,6 +1017,12 @@ export const MinecraftApp = () => (
         Open
       </a>
     </div>
-    <iframe src="https://mcraft.fun/" title="Minecraft" allowFullScreen className="min-h-0 flex-1 border-0 bg-black" />
+    <iframe
+      src="https://mcraft.fun/"
+      title="Minecraft"
+      allow="fullscreen; autoplay; encrypted-media; gamepad"
+      referrerPolicy="no-referrer-when-downgrade"
+      className="min-h-0 w-full flex-1 border-0 bg-black"
+    />
   </div>
 );

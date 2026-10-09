@@ -6,7 +6,7 @@ const QUERY_COARSE = '(pointer: coarse)';
 const shouldAllowRich = (): boolean => {
   if (typeof window === 'undefined') return false;
   const reduced = window.matchMedia(QUERY_REDUCED).matches;
-  const coarse = window.matchMedia(QUERY_COARSE).matches || window.innerWidth < 768;
+  const coarse = window.matchMedia(QUERY_COARSE).matches || window.innerWidth < 640;
   return !reduced && !coarse;
 };
 

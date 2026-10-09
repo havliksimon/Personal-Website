@@ -329,7 +329,7 @@ const JourneyDesktop = () => {
       ref={sectionRef}
       id="journey"
       aria-labelledby="journey-heading"
-      className="relative h-[150vh] min-h-[900px] w-full"
+      className="relative h-[125vh] min-h-[720px] w-full"
       style={{ background: WALLPAPERS[wallpaperIndex].css }}
     >
       <h2 id="journey-heading" className="sr-only">
@@ -485,6 +485,7 @@ const JourneyDesktop = () => {
               </button>
               {openMenu === 'control' && (
                 <div
+                  onPointerDown={(e) => e.stopPropagation()}
                   className={`absolute right-0 top-full z-50 mt-1 w-[19rem] rounded-2xl border p-3 shadow-2xl backdrop-blur-2xl ${
                     desktopDark ? 'border-white/10 bg-zinc-800/90 text-white' : 'border-black/10 bg-white/90 text-gray-800'
                   }`}
@@ -632,6 +633,7 @@ const JourneyDesktop = () => {
             bounds={bounds}
             z={wins.safari.z}
             dark={desktopDark}
+            solid
             onFocus={() => focus('safari')}
             onChange={(r) => setRect('safari', r)}
             onClose={() => closeWin('safari')}
@@ -666,6 +668,7 @@ const JourneyDesktop = () => {
             bounds={bounds}
             z={wins.viewer.z}
             dark={desktopDark}
+            solid
             onFocus={() => focus('viewer')}
             onChange={(r) => setRect('viewer', r)}
             onClose={() => closeWin('viewer')}
@@ -758,6 +761,7 @@ const JourneyDesktop = () => {
             bounds={bounds}
             z={wins.minecraft.z}
             dark
+            solid
             onFocus={() => focus('minecraft')}
             onChange={(r) => setRect('minecraft', r)}
             onClose={() => closeWin('minecraft')}
@@ -771,7 +775,7 @@ const JourneyDesktop = () => {
         {/* Dock */}
         <div className="desktop-dock absolute inset-x-0 bottom-4 z-40 flex justify-center">
           <div
-            className={`flex items-end gap-3 rounded-2xl border px-4 py-2.5 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6)] backdrop-blur-2xl ${
+            className={`flex items-end gap-1.5 rounded-2xl border px-2.5 py-2 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6)] backdrop-blur-2xl sm:gap-3 sm:px-4 sm:py-2.5 ${
               desktopDark ? 'border-white/25 bg-white/20' : 'border-white/60 bg-white/55'
             }`}
           >
@@ -783,7 +787,7 @@ const JourneyDesktop = () => {
                 type="button"
                 onClick={() => setLaunchpad(true)}
                 aria-label="Launchpad"
-                className="flex h-12 w-12 items-center justify-center rounded-[14px] bg-gradient-to-b from-slate-100 to-slate-400 text-gray-700 shadow-lg transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110"
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-b from-slate-100 to-slate-400 text-gray-700 shadow-lg transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 sm:h-12 sm:w-12 sm:rounded-[14px] [&_svg]:h-5 [&_svg]:w-5 sm:[&_svg]:h-6 sm:[&_svg]:w-6"
               >
                 <span className="dock-idle" style={{ animationDelay: '0ms' }}>
                   <LayoutGrid className="h-6 w-6" />
@@ -798,7 +802,7 @@ const JourneyDesktop = () => {
                 <button
                   type="button"
                   onClick={item.onClick}
-                  className={`flex h-12 w-12 items-center justify-center rounded-[14px] text-white shadow-lg transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 ${item.color}`}
+                  className={`flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-lg transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 sm:h-12 sm:w-12 sm:rounded-[14px] [&_svg]:h-5 [&_svg]:w-5 sm:[&_svg]:h-6 sm:[&_svg]:w-6 ${item.color}`}
                 >
                   <span
                     className={item.key === 'terminal' && typing ? 'dock-bounce' : 'dock-idle'}
@@ -812,12 +816,12 @@ const JourneyDesktop = () => {
                 )}
               </div>
             ))}
-            <span className={`mx-1 h-9 w-px self-center ${desktopDark ? 'bg-white/30' : 'bg-black/15'}`} />
+            <span className={`mx-1 h-7 w-px self-center sm:h-9 ${desktopDark ? 'bg-white/30' : 'bg-black/15'}`} />
             <div className="group relative flex flex-col items-center">
               <button
                 type="button"
                 onClick={() => toggleWin('trash')}
-                className="flex h-12 w-12 items-center justify-center rounded-[14px] bg-gradient-to-b from-zinc-300 to-zinc-500 text-white shadow-lg transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110"
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-b from-zinc-300 to-zinc-500 text-white shadow-lg transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 sm:h-12 sm:w-12 sm:rounded-[14px] [&_svg]:h-5 [&_svg]:w-5 sm:[&_svg]:h-6 sm:[&_svg]:w-6"
               >
                 <span className="dock-idle" style={{ animationDelay: '1500ms' }}>
                   <Trash2 className="h-6 w-6" />

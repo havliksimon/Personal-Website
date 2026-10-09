@@ -7,6 +7,8 @@ interface MacWindowProps {
   bounds: Bounds;
   z: number;
   dark?: boolean;
+  /** Solid background — required for windows that embed an iframe (Safari bug with backdrop-filter). */
+  solid?: boolean;
   closable?: boolean;
   headerExtra?: ReactNode;
   toolbar?: ReactNode;
@@ -24,6 +26,7 @@ export const MacWindow = ({
   bounds,
   z,
   dark,
+  solid,
   closable = true,
   headerExtra,
   toolbar,
@@ -78,8 +81,12 @@ export const MacWindow = ({
 
   return (
     <div
-      className={`absolute flex flex-col overflow-hidden rounded-xl border shadow-[0_40px_90px_-25px_rgba(0,0,0,0.8)] animate-in fade-in zoom-in-95 duration-200 ${
-        dark ? 'border-white/10 bg-[#17171b]/95' : 'border-black/10 bg-white/90 backdrop-blur-xl'
+      className={`absolute flex flex-col overflow-hidden rounded-xl border shadow-[0_40px_90px_-25px_rgba(0,0,0,0.8)] ${
+        dark
+          ? 'border-white/10 bg-[#17171b]/95'
+          : solid
+            ? 'border-black/10 bg-white'
+            : 'border-black/10 bg-white/90 backdrop-blur-xl'
       }`}
       style={{ left: rect.x, top: rect.y, width: rect.w, height: rect.h, zIndex: z }}
       onPointerDown={onFocus}

@@ -85,7 +85,7 @@ const JourneyTimeline2D = () => {
       <TimelineEffects />
       <div className="max-w-5xl mx-auto px-6 md:px-12">
         {/* Title */}
-        <div ref={titleRef} className="text-center mb-16">
+        <div ref={titleRef} className="text-center mb-10 md:mb-16">
           <h2 id="journey-heading" className="section-title">Education Journey</h2>
           <p className="section-subtitle mx-auto">
             My academic path from secondary education through university, 
@@ -99,7 +99,7 @@ const JourneyTimeline2D = () => {
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gray-200 md:-translate-x-1/2" />
 
           {/* Cards */}
-          <div className="space-y-8">
+          <div className="space-y-5 md:space-y-8">
             {timelineData.events.map((item, index) => {
               const Icon = typeIcons[item.type as keyof typeof typeIcons];
               const isLeft = index % 2 === 0;
@@ -117,7 +117,7 @@ const JourneyTimeline2D = () => {
 
                   {/* Card content */}
                   <div className={`ml-10 md:ml-0 md:w-1/2 ${isLeft ? 'md:pr-8' : 'md:pl-8'}`}>
-                    <div className={`gloss-card bg-white rounded-xl p-5 border ${typeColors[item.type as keyof typeof typeColors]} shadow-sm transition-all duration-300`}>
+                    <div className={`gloss-card bg-white rounded-xl p-4 md:p-5 border ${typeColors[item.type as keyof typeof typeColors]} shadow-sm transition-all duration-300`}>
                       <div className="flex items-start justify-between gap-4 mb-3">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-sm">
@@ -144,7 +144,7 @@ const JourneyTimeline2D = () => {
                         </span>
                       </div>
                       
-                      <p className="text-gray-600 text-sm leading-relaxed mb-3">
+                      <p className="text-gray-600 text-sm leading-relaxed mb-3 line-clamp-2 sm:line-clamp-none">
                         {item.description}
                       </p>
                       
