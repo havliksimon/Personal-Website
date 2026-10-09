@@ -81,7 +81,9 @@ export const TerminalApp = ({ count, actions }: { count: number; actions: Termin
                   ? 'text-cyan-300'
                   : file.kind === 'skills'
                     ? 'text-fuchsia-300'
-                    : 'text-zinc-300'
+                    : file.kind === 'cv'
+                      ? 'text-emerald-300'
+                      : 'text-zinc-300'
             ),
           ])
         );
@@ -128,9 +130,10 @@ export const TerminalApp = ({ count, actions }: { count: number; actions: Termin
         if (!arg) return append([line('usage: open <file>', 'text-zinc-400')]);
         const file = cur.files.find((f) => f.name === arg);
         if (!file) return append([line(`open: ${arg}: No such file`, 'text-red-400')]);
-        if (file.kind === 'pdf' && file.docId !== undefined) {
+        if ((file.kind === 'pdf' || file.kind === 'cv') && file.docId !== undefined) {
           actions.openDoc(file.docId);
-          return append([line(`Opening ${file.name} in ${file.docId >= 4 ? 'Keynote' : 'Pages'}…`, 'text-zinc-400')]);
+          const opener = file.kind === 'cv' ? 'Figma' : file.docId >= 4 ? 'Keynote' : 'Pages';
+          return append([line(`Opening ${file.name} in ${opener}…`, 'text-zinc-400')]);
         }
         if (file.kind === 'html') {
           actions.openSafari();
@@ -571,7 +574,7 @@ export const SafariApp = ({ initialTabTitle }: { initialTabTitle?: string }) => 
 /* ------------------------------ Finder ------------------------------ */
 
 export const FinderApp = ({ onOpen }: { onOpen: (doc: DesktopDoc) => void }) => {
-  const [section, setSection] = useState<'analysis' | 'presentation'>('analysis');
+  const [section, setSection] = useState<'analysis' | 'presentation' | 'cv'>('analysis');
   const items = docs.filter((doc) => doc.kind === section);
 
   return (
@@ -581,6 +584,7 @@ export const FinderApp = ({ onOpen }: { onOpen: (doc: DesktopDoc) => void }) => 
         {[
           { key: 'analysis' as const, icon: <FileText className="h-3.5 w-3.5 text-blue-500" />, label: 'Analyses' },
           { key: 'presentation' as const, icon: <Presentation className="h-3.5 w-3.5 text-purple-500" />, label: 'Presentations' },
+          { key: 'cv' as const, icon: <FileText className="h-3.5 w-3.5 text-emerald-500" />, label: 'CV' },
         ].map((item) => (
           <button
             key={item.key}
@@ -598,7 +602,7 @@ export const FinderApp = ({ onOpen }: { onOpen: (doc: DesktopDoc) => void }) => 
       <div className="flex flex-1 flex-col">
         <div className="flex items-center gap-2 border-b border-gray-100 px-3 py-1.5 text-[11px] text-gray-400">
           <Folder className="h-3.5 w-3.5" />
-          {section === 'analysis' ? 'Analyses' : 'Presentations'}
+          {section === 'analysis' ? 'Analyses' : section === 'presentation' ? 'Presentations' : 'CV'}
           <span className="ml-auto">{items.length} items</span>
         </div>
         <div className="grid flex-1 grid-cols-3 content-start gap-4 overflow-auto p-4">
@@ -612,6 +616,8 @@ export const FinderApp = ({ onOpen }: { onOpen: (doc: DesktopDoc) => void }) => 
             >
               {doc.kind === 'analysis' ? (
                 <FileText className="h-9 w-9 text-blue-500" strokeWidth={1.3} />
+              ) : doc.kind === 'cv' ? (
+                <FileText className="h-9 w-9 text-emerald-500" strokeWidth={1.3} />
               ) : (
                 <Presentation className="h-9 w-9 text-purple-500" strokeWidth={1.3} />
               )}

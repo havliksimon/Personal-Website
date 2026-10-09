@@ -14,7 +14,44 @@ import {
   SettingsApp, TrashApp, MinecraftApp, type Theme, type SettingsPane,
 } from './desktop/apps';
 import { useTyping, TOTAL_CHARS } from './desktop/terminal';
-import { docs, projects, WALLPAPERS, type DesktopDoc } from './desktop/data';
+import { docs, projects, WALLPAPERS, CV_DOC_ID, type DesktopDoc } from './desktop/data';
+
+const weatherLook = (code: number): { icon: string; text: string } => {
+  if (code === 0) return { icon: '☀️', text: 'Clear' };
+  if (code <= 2) return { icon: '🌤️', text: 'Mostly clear' };
+  if (code === 3) return { icon: '☁️', text: 'Overcast' };
+  if (code <= 48) return { icon: '🌫️', text: 'Foggy' };
+  if (code <= 67) return { icon: '🌧️', text: 'Rain' };
+  if (code <= 77) return { icon: '❄️', text: 'Snow' };
+  if (code <= 82) return { icon: '🌦️', text: 'Showers' };
+  if (code <= 86) return { icon: '🌨️', text: 'Snow showers' };
+  return { icon: '⛈️', text: 'Thunderstorm' };
+};
+
+const Meter = ({ value, tone = 'bg-emerald-400' }: { value: number; tone?: string }) => (
+  <span className="ml-auto block h-1.5 w-20 overflow-hidden rounded-full bg-white/20">
+    <span
+      className={`block h-full rounded-full ${tone} transition-[width] duration-700 ease-out`}
+      style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
+    />
+  </span>
+);
+
+const Widget = ({ children }: { children: ReactNode }) => (
+  <div className="w-44 rounded-2xl border border-white/15 bg-black/25 p-3 text-white shadow-[0_16px_36px_-18px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+    {children}
+  </div>
+);
+
+const FigmaLogo = () => (
+  <svg viewBox="0 0 38 57" className="h-[22px] w-auto" aria-hidden="true">
+    <path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0Z" />
+    <path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 0 1-19 0Z" />
+    <path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19Z" />
+    <path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5Z" />
+    <path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5Z" />
+  </svg>
+);
 
 type WinId =
   | 'terminal' | 'mail' | 'safari' | 'finder' | 'viewer'
@@ -113,6 +150,10 @@ const JourneyDesktop = () => {
   const [safariTab, setSafariTab] = useState(projects[0].shortTitle);
   const [safariKey, setSafariKey] = useState(0);
   const [launchpad, setLaunchpad] = useState(false);
+  const [lpQuery, setLpQuery] = useState('');
+  const [cpu, setCpu] = useState(38);
+  const [gpu, setGpu] = useState(61);
+  const [weather, setWeather] = useState<{ city: string; temp: number; code: number } | null>(null);
   const count = useTyping(started);
 
   const viewerDoc = docs.find((doc) => doc.id === viewerDocId) ?? docs[0];
@@ -175,6 +216,46 @@ const JourneyDesktop = () => {
     fmt();
     const id = window.setInterval(fmt, 1000);
     return () => window.clearInterval(id);
+  }, []);
+
+  useEffect(() => () => document.body.classList.remove('shmack-mode'), []);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setCpu(32 + Math.round(Math.random() * 58));
+      setGpu(46 + Math.round(Math.random() * 48));
+    }, 1400);
+    return () => window.clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const geo = await fetch('https://ipapi.co/json/').then((r) => r.json());
+        const lat = geo?.latitude ?? 50.08;
+        const lon = geo?.longitude ?? 14.44;
+        const city = geo?.city ?? 'Prague';
+        const w = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`
+        ).then((r) => r.json());
+        if (!cancelled) {
+          setWeather({
+            city,
+            temp: Math.round(w?.current?.temperature_2m ?? 12),
+            code: w?.current?.weather_code ?? 2,
+          });
+        }
+      } catch {
+        if (!cancelled) setWeather({ city: 'Prague', temp: 12, code: 2 });
+      }
+    };
+    load();
+    const id = window.setInterval(load, 600000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(id);
+    };
   }, []);
 
   useEffect(() => {
@@ -271,7 +352,14 @@ const JourneyDesktop = () => {
     (Object.keys(wins) as WinId[])
       .filter((id) => wins[id].open)
       .sort((a, b) => wins[b].z - wins[a].z)[0] ?? 'terminal';
-  const appName = frontId === 'viewer' ? (viewerDoc.kind === 'presentation' ? 'Keynote' : 'Pages') : APP_NAME[frontId];
+  const appName =
+    frontId === 'viewer'
+      ? viewerDoc.kind === 'presentation'
+        ? 'Keynote'
+        : viewerDoc.kind === 'cv'
+          ? 'Figma'
+          : 'Pages'
+      : APP_NAME[frontId];
 
   const typing = count < TOTAL_CHARS;
   const analysisId = docs.find((d) => d.kind === 'analysis')?.id ?? docs[0].id;
@@ -283,6 +371,7 @@ const JourneyDesktop = () => {
     { label: 'Mail', action: () => openWin('mail') },
     { label: 'Pages', action: () => openWin('viewer', analysisId) },
     { label: 'Keynote', action: () => openWin('viewer', presentationId) },
+    { label: 'Figma (CV)', action: () => openWin('viewer', CV_DOC_ID) },
     { label: 'Skills', action: () => openWin('skills') },
     { label: 'Siri', action: () => openWin('siri') },
     { label: 'Minecraft', action: () => openWin('minecraft') },
@@ -301,6 +390,7 @@ const JourneyDesktop = () => {
     { key: 'mail', label: 'Mail', icon: <MailIcon className="h-6 w-6" />, color: 'bg-gradient-to-b from-sky-300 to-blue-600', onClick: () => toggleWin('mail'), active: wins.mail.open },
     { key: 'viewer', label: 'Pages', icon: <FileText className="h-6 w-6" />, color: 'bg-gradient-to-b from-orange-300 to-amber-500', onClick: () => (wins.viewer.open && viewerDoc.kind === 'analysis' ? closeWin('viewer') : openWin('viewer', analysisId)), active: wins.viewer.open && viewerDoc.kind === 'analysis' },
     { key: 'viewer', label: 'Keynote', icon: <Presentation className="h-6 w-6" />, color: 'bg-gradient-to-b from-blue-400 to-indigo-600', onClick: () => (wins.viewer.open && viewerDoc.kind === 'presentation' ? closeWin('viewer') : openWin('viewer', presentationId)), active: wins.viewer.open && viewerDoc.kind === 'presentation' },
+    { key: 'viewer', label: 'Figma', icon: <FigmaLogo />, color: 'bg-white ring-1 ring-black/10', onClick: () => openWin('viewer', CV_DOC_ID), active: wins.viewer.open && viewerDoc.kind === 'cv' },
     { key: 'skills', label: 'Skills', icon: <Sparkles className="h-6 w-6" />, color: 'bg-gradient-to-b from-violet-400 to-fuchsia-600', onClick: () => toggleWin('skills'), active: wins.skills.open },
     { key: 'siri', label: 'Siri', icon: <Mic className="h-6 w-6" />, color: 'bg-gradient-to-b from-fuchsia-500 via-purple-500 to-sky-500', onClick: () => toggleWin('siri'), active: wins.siri.open },
     { key: 'settings', label: 'Settings', icon: <SettingsIcon className="h-6 w-6" />, color: 'bg-gradient-to-b from-slate-400 to-slate-600', onClick: () => toggleWin('settings'), active: wins.settings.open },
@@ -313,6 +403,7 @@ const JourneyDesktop = () => {
     { label: 'Mail', icon: <MailIcon className="h-7 w-7" />, color: 'bg-gradient-to-b from-sky-300 to-blue-600', action: () => openWin('mail') },
     { label: 'Pages', icon: <FileText className="h-7 w-7" />, color: 'bg-gradient-to-b from-orange-300 to-amber-500', action: () => openWin('viewer', analysisId) },
     { label: 'Keynote', icon: <Presentation className="h-7 w-7" />, color: 'bg-gradient-to-b from-blue-400 to-indigo-600', action: () => openWin('viewer', presentationId) },
+    { label: 'Figma (CV)', icon: <FigmaLogo />, color: 'bg-white ring-1 ring-black/10', action: () => openWin('viewer', CV_DOC_ID) },
     { label: 'Skills', icon: <Sparkles className="h-7 w-7" />, color: 'bg-gradient-to-b from-violet-400 to-fuchsia-600', action: () => openWin('skills') },
     { label: 'Siri', icon: <Mic className="h-7 w-7" />, color: 'bg-gradient-to-b from-fuchsia-500 via-purple-500 to-sky-500', action: () => openWin('siri') },
     { label: 'Minecraft', icon: <Gamepad2 className="h-7 w-7" />, color: 'bg-gradient-to-b from-emerald-400 to-green-700', action: () => openWin('minecraft') },
@@ -340,7 +431,9 @@ const JourneyDesktop = () => {
       <div
         ref={stageRef}
         onPointerDown={() => setOpenMenu(null)}
-        className="desktop-stage sticky top-0 h-screen min-h-[640px] w-full overflow-hidden"
+        onPointerEnter={() => document.body.classList.add('shmack-mode')}
+        onPointerLeave={() => document.body.classList.remove('shmack-mode')}
+        className="desktop-stage shmack-cursors sticky top-0 h-screen min-h-[640px] w-full overflow-hidden"
       >
         {/* Wallpaper glow + grain */}
         <div className="pointer-events-none absolute inset-0">
@@ -352,6 +445,88 @@ const JourneyDesktop = () => {
             style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px)', backgroundSize: '4px 4px' }}
           />
           <div className={`absolute inset-0 ${desktopDark ? 'bg-gradient-to-t from-black/25 via-transparent to-black/10' : 'bg-gradient-to-t from-black/10 via-transparent to-white/10'}`} />
+        </div>
+
+        {/* Desktop widgets — left: files */}
+        <div className="absolute left-4 top-11 z-0 hidden flex-col gap-3 lg:flex">
+          <Widget>
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-white/60">Files</p>
+            <button
+              type="button"
+              onClick={() => openWin('viewer', CV_DOC_ID)}
+              className="flex w-full items-center gap-2 rounded-lg px-1.5 py-1 text-left text-[12px] hover:bg-white/10"
+            >
+              <FileText className="h-3.5 w-3.5 text-emerald-300" />
+              CV.pdf
+            </button>
+            {[
+              { name: 'journey', action: () => openWin('terminal') },
+              { name: 'analyses', action: () => openWin('finder') },
+              { name: 'presentations', action: () => openWin('finder') },
+              { name: 'projects', action: () => openWin('safari') },
+              { name: 'skills', action: () => openWin('skills') },
+              { name: 'cv', action: () => openWin('viewer', CV_DOC_ID) },
+            ].map((item) => (
+              <button
+                key={item.name}
+                type="button"
+                onClick={item.action}
+                className="flex w-full items-center gap-2 rounded-lg px-1.5 py-1 text-left text-[12px] hover:bg-white/10"
+              >
+                <Folder className="h-3.5 w-3.5 text-sky-300" fill="currentColor" />
+                {item.name}/
+              </button>
+            ))}
+            <p className="mt-2 text-[10px] text-white/50">tip: cd there in the Terminal</p>
+          </Widget>
+        </div>
+
+        {/* Desktop widgets — right: weather, system, markets */}
+        <div className="absolute right-4 top-11 z-0 hidden flex-col gap-3 lg:flex">
+          <Widget>
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-white/60">
+              {weather?.city ?? 'Weather'}
+            </p>
+            <div className="mt-1 flex items-center gap-2">
+              <span className="text-2xl">{weather ? weatherLook(weather.code).icon : '🌤️'}</span>
+              <span className="text-2xl font-semibold tabular-nums">
+                {weather ? `${weather.temp}°` : '—'}
+              </span>
+            </div>
+            <p className="text-[11px] text-white/70">{weather ? weatherLook(weather.code).text : 'locating…'}</p>
+          </Widget>
+
+          <Widget>
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-white/60">Shmack OS</p>
+            <div className="flex items-center text-[11px]">
+              CPU
+              <Meter value={cpu} />
+            </div>
+            <div className="mt-1.5 flex items-center text-[11px]">
+              GPU
+              <Meter value={gpu} tone="bg-fuchsia-400" />
+            </div>
+            <p className="mt-2 text-[10px] text-white/50">CommandCode Silicon M∞ · 67 cores</p>
+          </Widget>
+
+          <Widget>
+            <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-white/60">Markets</p>
+            <div className="space-y-0.5 text-[11px]">
+              <div className="flex justify-between">
+                <span>BILI</span>
+                <span className="text-emerald-300">▲ +∞%</span>
+              </div>
+              <div className="flex justify-between">
+                <span>TUYA</span>
+                <span className="text-emerald-300">▲ +6.9%</span>
+              </div>
+              <div className="flex justify-between">
+                <span>GOOGL</span>
+                <span className="text-rose-300">▼ −0.1%</span>
+              </div>
+            </div>
+            <p className="mt-1.5 text-[10px] text-white/50">Sharpe 4.20 · conviction: high</p>
+          </Widget>
         </div>
 
         {/* Menu bar */}
@@ -663,7 +838,7 @@ const JourneyDesktop = () => {
 
         {wins.viewer.open && !wins.viewer.minimized && (
           <MacWindow
-            title={`${viewerDoc.kind === 'presentation' ? 'Keynote' : 'Pages'} — ${viewerDoc.title}`}
+            title={`${viewerDoc.kind === 'presentation' ? 'Keynote' : viewerDoc.kind === 'cv' ? 'Figma' : 'Pages'} — ${viewerDoc.title}`}
             rect={clampRect(wins.viewer, bounds)}
             bounds={bounds}
             z={wins.viewer.z}
@@ -837,33 +1012,55 @@ const JourneyDesktop = () => {
         {/* Launchpad */}
         {launchpad && (
           <div
-            className="absolute inset-0 z-[70] flex flex-col items-center justify-center bg-black/40 backdrop-blur-2xl"
+            className="absolute inset-0 z-[70] flex flex-col items-center bg-black/35 pt-10 backdrop-blur-[30px] sm:pt-14"
             onPointerDown={() => setLaunchpad(false)}
+            aria-label="Launchpad"
           >
-            <div
-              className="grid grid-cols-4 gap-x-10 gap-y-8 px-8 sm:grid-cols-6"
-              onPointerDown={(e) => e.stopPropagation()}
-            >
-              {launcherApps.map((app) => (
-                <button
-                  key={app.label}
-                  type="button"
-                  onClick={() => {
-                    setLaunchpad(false);
-                    app.action();
-                  }}
-                  className="flex flex-col items-center gap-2"
-                >
-                  <span
-                    className={`flex h-16 w-16 items-center justify-center rounded-2xl text-white shadow-xl transition-transform duration-200 hover:scale-105 ${app.color}`}
-                  >
-                    {app.icon}
-                  </span>
-                  <span className="text-[12px] font-medium text-white drop-shadow">{app.label}</span>
-                </button>
-              ))}
+            <div onPointerDown={(e) => e.stopPropagation()} className="flex w-64 items-center gap-2 rounded-full border border-white/20 bg-white/15 px-3 py-1.5 backdrop-blur">
+              <Search className="h-3.5 w-3.5 shrink-0 text-white/70" />
+              <input
+                value={lpQuery}
+                onChange={(e) => setLpQuery(e.target.value)}
+                placeholder="Search"
+                aria-label="Search apps"
+                className="w-full bg-transparent text-center text-[13px] text-white placeholder-white/60 outline-none"
+              />
             </div>
-            <p className="mt-10 text-[12px] text-white/60">Click an app · click outside to close</p>
+
+            <div
+              onPointerDown={(e) => e.stopPropagation()}
+              className="mt-10 grid grid-cols-4 gap-x-8 gap-y-8 px-6 sm:mt-14 sm:grid-cols-6 sm:gap-x-12 sm:gap-y-10 lg:grid-cols-7"
+            >
+              {launcherApps
+                .filter((app) => app.label.toLowerCase().includes(lpQuery.trim().toLowerCase()))
+                .map((app) => (
+                  <button
+                    key={app.label}
+                    type="button"
+                    onClick={() => {
+                      setLaunchpad(false);
+                      setLpQuery('');
+                      app.action();
+                    }}
+                    className="group flex w-[84px] flex-col items-center gap-2"
+                  >
+                    <span
+                      className={`flex h-[72px] w-[72px] items-center justify-center rounded-[22%] text-white shadow-[0_14px_28px_-10px_rgba(0,0,0,0.75)] ring-1 ring-inset ring-white/20 transition-transform duration-200 group-hover:scale-105 [&_svg]:h-9 [&_svg]:w-9 ${app.color}`}
+                    >
+                      {app.icon}
+                    </span>
+                    <span className="w-full truncate text-center text-[12px] font-medium text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                      {app.label}
+                    </span>
+                  </button>
+                ))}
+            </div>
+
+            <div className="mt-auto mb-8 flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-white/90" />
+              <span className="h-1.5 w-1.5 rounded-full bg-white/35" />
+              <span className="h-1.5 w-1.5 rounded-full bg-white/35" />
+            </div>
           </div>
         )}
 

@@ -457,6 +457,41 @@
   animation: dockIdle 3.4s ease-in-out infinite;
 }
 
+/* Shmack OS desktop — restore real cursors (the site hides them globally) */
+body.shmack-mode .custom-cursor {
+  display: none !important;
+}
+
+.shmack-cursors,
+.shmack-cursors * {
+  cursor: auto !important;
+}
+
+.shmack-cursors button,
+.shmack-cursors a,
+.shmack-cursors [role='button'],
+.shmack-cursors input[type='range'],
+.shmack-cursors label {
+  cursor: pointer !important;
+}
+
+.shmack-cursors input:not([type='range']),
+.shmack-cursors textarea {
+  cursor: text !important;
+}
+
+.shmack-cursors .win-titlebar {
+  cursor: grab !important;
+}
+
+.shmack-cursors .win-titlebar:active {
+  cursor: grabbing !important;
+}
+
+.shmack-cursors .win-resize {
+  cursor: nwse-resize !important;
+}
+
 /* Siri orb */
 @keyframes siriSpin {
   to {

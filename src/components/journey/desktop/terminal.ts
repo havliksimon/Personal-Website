@@ -88,7 +88,7 @@ export const useTyping = (started: boolean): number => {
 
 /* --------------------------- Filesystem ---------------------------- */
 
-export type FileKind = 'pdf' | 'html' | 'txt' | 'skills' | 'log';
+export type FileKind = 'pdf' | 'html' | 'txt' | 'skills' | 'log' | 'cv';
 
 export interface VFile {
   name: string;
@@ -137,6 +137,25 @@ export const ROOT: VDir = {
       name: 'skills',
       dirs: [],
       files: [{ name: 'skills.freeform', kind: 'skills' }],
+    },
+    {
+      name: 'cv',
+      dirs: [],
+      files: [
+        { name: 'simon_havlik_cv.pdf', kind: 'cv', docId: 10 },
+        {
+          name: 'README.txt',
+          kind: 'txt',
+          content: [
+            'CV — Simon Havlík',
+            '',
+            'Open it here:   open simon_havlik_cv.pdf',
+            'Otherwise:      the Figma app on the dock,',
+            '                Finder → CV,',
+            '                or the CV.pdf icon on the desktop.',
+          ].join('\n'),
+        },
+      ],
     },
   ],
   files: [

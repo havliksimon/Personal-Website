@@ -1,4 +1,5 @@
 import { useRef, type PointerEvent as ReactPointerEvent, type ReactNode } from 'react';
+import { X, Minus, Plus } from 'lucide-react';
 import { clampRect, type Bounds, type Rect } from './geometry';
 
 interface MacWindowProps {
@@ -92,15 +93,16 @@ export const MacWindow = ({
       onPointerDown={onFocus}
     >
       <div
-        className={`flex shrink-0 items-center gap-3 px-3 py-2 ${
+        className={`win-titlebar flex shrink-0 items-center gap-3 px-3 py-2 ${
           dark ? 'border-b border-white/10 bg-white/5' : 'border-b border-black/5 bg-white/70'
         }`}
         onPointerDown={startDrag}
         onPointerMove={moveDrag}
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
+        onDoubleClick={() => onMaximize?.()}
       >
-        <div className="flex items-center gap-2">
+        <div className="group/tl flex items-center gap-2">
           <button
             type="button"
             aria-label="Close window"
@@ -109,10 +111,12 @@ export const MacWindow = ({
               e.stopPropagation();
               onClose?.();
             }}
-            className={`h-3 w-3 rounded-full bg-[#ff5f57] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.12)] ${
+            className={`flex h-3 w-3 items-center justify-center rounded-full bg-[#ff5f57] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.12)] transition-transform duration-150 ease-out hover:scale-125 hover:brightness-110 active:scale-95 ${
               closable ? '' : 'opacity-40'
             }`}
-          />
+          >
+            <X className="h-2 w-2 text-black/50 opacity-0 transition-opacity duration-150 group-hover/tl:opacity-100" strokeWidth={3.5} />
+          </button>
           <button
             type="button"
             aria-label="Minimize window"
@@ -121,8 +125,10 @@ export const MacWindow = ({
               e.stopPropagation();
               onMinimize?.();
             }}
-            className="h-3 w-3 rounded-full bg-[#febc2e] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.12)]"
-          />
+            className="flex h-3 w-3 items-center justify-center rounded-full bg-[#febc2e] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.12)] transition-transform duration-150 ease-out hover:scale-125 hover:brightness-110 active:scale-95"
+          >
+            <Minus className="h-2 w-2 text-black/50 opacity-0 transition-opacity duration-150 group-hover/tl:opacity-100" strokeWidth={3.5} />
+          </button>
           <button
             type="button"
             aria-label="Maximize window"
@@ -131,8 +137,10 @@ export const MacWindow = ({
               e.stopPropagation();
               onMaximize?.();
             }}
-            className="h-3 w-3 rounded-full bg-[#28c840] shadow-[0_0_0_1px_rgba(0,0,0,0.12)]"
-          />
+            className="flex h-3 w-3 items-center justify-center rounded-full bg-[#28c840] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.12)] transition-transform duration-150 ease-out hover:scale-125 hover:brightness-110 active:scale-95"
+          >
+            <Plus className="h-2 w-2 text-black/50 opacity-0 transition-opacity duration-150 group-hover/tl:opacity-100" strokeWidth={3.5} />
+          </button>
         </div>
         <span className={`mx-auto truncate text-[12px] font-medium ${dark ? 'text-zinc-300' : 'text-gray-500'}`}>
           {title}
@@ -149,7 +157,7 @@ export const MacWindow = ({
         onPointerMove={moveResize}
         onPointerUp={endResize}
         onPointerCancel={endResize}
-        className="absolute bottom-0 right-0 z-20 h-4 w-4 cursor-nwse-resize"
+        className="win-resize absolute bottom-0 right-0 z-20 h-4 w-4"
       />
     </div>
   );

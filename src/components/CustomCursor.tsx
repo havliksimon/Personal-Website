@@ -163,7 +163,7 @@ const CustomCursor = () => {
         ref={cursorTrailRef}
         data-x="0"
         data-y="0"
-        className="fixed top-0 left-0 w-16 h-16 rounded-full pointer-events-none z-[9997] opacity-0"
+        className="custom-cursor fixed top-0 left-0 w-16 h-16 rounded-full pointer-events-none z-[9997] opacity-0"
         style={{
           background: 'radial-gradient(circle, rgba(220, 38, 38, 0.08) 0%, transparent 70%)',
           willChange: 'transform',
@@ -173,7 +173,7 @@ const CustomCursor = () => {
       {/* Main ring - with mix-blend-mode for cool effect */}
       <div
         ref={cursorRingRef}
-        className="fixed top-0 left-0 w-10 h-10 rounded-full pointer-events-none z-[9998] opacity-0 mix-blend-difference"
+        className="custom-cursor fixed top-0 left-0 w-10 h-10 rounded-full pointer-events-none z-[9998] opacity-0 mix-blend-difference"
         style={{
           border: '2px solid white',
           backgroundColor: 'transparent',
@@ -184,7 +184,7 @@ const CustomCursor = () => {
       {/* Central dot - also with mix-blend-mode */}
       <div
         ref={cursorDotRef}
-        className="fixed top-0 left-0 w-3 h-3 bg-white rounded-full pointer-events-none z-[9999] opacity-0 mix-blend-difference"
+        className="custom-cursor fixed top-0 left-0 w-3 h-3 bg-white rounded-full pointer-events-none z-[9999] opacity-0 mix-blend-difference"
         style={{
           willChange: 'transform',
         }}

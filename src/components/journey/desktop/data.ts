@@ -4,7 +4,7 @@ export interface DesktopDoc {
   subtitle: string;
   date: string;
   pages: number;
-  kind: 'analysis' | 'presentation';
+  kind: 'analysis' | 'presentation' | 'cv';
   pdfUrl: string;
 }
 
@@ -54,7 +54,18 @@ export const docs: DesktopDoc[] = [
     kind: 'presentation',
     pdfUrl: '/presentations/presentation_Tencent.pdf',
   },
+  {
+    id: 10,
+    title: 'CV — Simon Havlík',
+    subtitle: 'Curriculum Vitae',
+    date: '2026',
+    pages: 1,
+    kind: 'cv',
+    pdfUrl: '/CV_Simon_Havlik.pdf',
+  },
 ];
+
+export const CV_DOC_ID = 10;
 
 export interface DesktopProject {
   id: number;
