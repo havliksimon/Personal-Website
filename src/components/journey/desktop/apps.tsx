@@ -4,7 +4,7 @@ import {
   Presentation, Folder, Send, CheckCircle, ExternalLink, Search,
   Calculator, Code, Brain, TrendingUp, BookOpen, Landmark, Globe, Palette,
   Languages, Info, Image as ImageIcon, Sun, Moon, Monitor, Gamepad2, Trash2,
-  AppWindow, FileArchive, Apple, type LucideIcon,
+  AppWindow, FileArchive, Apple, Star, type LucideIcon,
 } from 'lucide-react';
 import skillsData from '../../../data/skills.json';
 import { WALLPAPERS, CONTACT_EMAIL, FORMSPREE_ENDPOINT, docs, projects, type DesktopDoc } from './data';
@@ -818,13 +818,102 @@ export const SkillsApp = () => {
 /* ----------------------------- Settings ----------------------------- */
 
 export type Theme = 'light' | 'dark' | 'auto';
-export type SettingsPane = 'appearance' | 'wallpaper' | 'about';
+export type SettingsPane = 'appearance' | 'wallpaper' | 'rate' | 'about';
 
 const APPEARANCES: { key: Theme; label: string; icon: LucideIcon }[] = [
   { key: 'light', label: 'Light', icon: Sun },
   { key: 'dark', label: 'Dark', icon: Moon },
   { key: 'auto', label: 'Auto', icon: Monitor },
 ];
+
+const RatePane = () => {
+  const [value, setValue] = useState('');
+  const [suggested, setSuggested] = useState(10);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [message, setMessage] = useState<string | null>(null);
+  const [hint, setHint] = useState<string | null>(null);
+
+  const valid = Number(value) > 10;
+
+  const dodge = () => {
+    if (valid) return;
+    setOffset({
+      x: Math.round((Math.random() * 2 - 1) * 80),
+      y: Math.round((Math.random() * 2 - 1) * 55),
+    });
+    setSuggested((s) => Math.min(99, s + 1));
+    setHint('ehm ehm… we only accept scores above 10.');
+    setMessage(null);
+  };
+
+  const submit = () => {
+    if (!valid) {
+      dodge();
+      return;
+    }
+    setMessage(`Submitted ${value}/10 — generous. We'll take it.`);
+    setHint(null);
+  };
+
+  return (
+    <div className="relative">
+      <h3 className="mb-1 text-[15px] font-semibold">Rate Shmack</h3>
+      <p className="text-[12px] text-gray-500">
+        How would you rate Shmack OS? Out of 10 — we accept anything above 10.
+      </p>
+
+      <div className="mt-6 flex items-center gap-4">
+        <div
+          className="flex h-20 w-20 items-center justify-center rounded-xl bg-zinc-900 text-4xl font-semibold text-emerald-300"
+          style={{ perspective: '420px' }}
+        >
+          <span key={suggested} className="flip-in tabular-nums">
+            {suggested}
+          </span>
+        </div>
+        <div className="text-[12px] text-gray-500">
+          <p>
+            Current consensus: <span className="font-semibold text-gray-800">{suggested}/10</span>
+          </p>
+          <p className="italic">…and rising.</p>
+        </div>
+      </div>
+
+      <div className="mt-8 flex items-center gap-3">
+        <input
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+            setMessage(null);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              submit();
+            }
+          }}
+          placeholder="Your score"
+          inputMode="numeric"
+          aria-label="Your score out of ten"
+          className="w-32 rounded-lg border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+        />
+        <span className="text-[13px] text-gray-400">/ 10</span>
+        <button
+          type="button"
+          onMouseEnter={dodge}
+          onClick={submit}
+          style={{ transform: valid ? 'translate(0, 0)' : `translate(${offset.x}px, ${offset.y}px)` }}
+          className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-transform duration-300 ease-out hover:bg-blue-700"
+        >
+          Submit rating
+        </button>
+      </div>
+
+      {hint && <p className="mt-4 text-[12px] text-amber-600">{hint}</p>}
+      {message && <p className="mt-4 text-[12px] text-emerald-600">{message}</p>}
+    </div>
+  );
+};
 
 export const SettingsApp = ({
   theme,
@@ -843,6 +932,7 @@ export const SettingsApp = ({
   const nav: { key: SettingsPane; label: string; icon: LucideIcon }[] = [
     { key: 'appearance', label: 'Appearance', icon: Palette },
     { key: 'wallpaper', label: 'Wallpaper', icon: ImageIcon },
+    { key: 'rate', label: 'Rate Shmack', icon: Star },
     { key: 'about', label: 'About', icon: Info },
   ];
 
@@ -926,6 +1016,8 @@ export const SettingsApp = ({
             </div>
           </div>
         )}
+
+        {pane === 'rate' && <RatePane />}
 
         {pane === 'about' && (
           <div className="flex flex-col items-center pt-4 text-center">
