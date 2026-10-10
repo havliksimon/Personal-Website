@@ -1,26 +1,23 @@
 /* TEAM */
     Name: Šimon Havlík
-    Role: China Investment Analyst & Consultant
-    Specialization: Chinese Markets, Asia-Pacific Investments, APAC Equity Research
+    Role: Financial Analyst & Economics Student (VŠE Prague)
+    Specialization: Equity Research, Finance, Valuation, Data Analysis
     Site: https://havliksimon.eu
     LinkedIn: https://linkedin.com/in/havliksimon
     Twitter: https://x.com/shavlik
     GitHub: https://github.com/havliksimon
-    From: Prague, Czech Republic
+    From: Prague, Czech Republic (Praha, Česká republika / Czechia)
     Email: havlik.simon@post.cz
 
 /* EXPERTISE */
-    China Investment Analysis
-    Chinese Markets Consulting
-    APAC Equity Research
-    Asia-Pacific Portfolio Strategy
-    Chinese Tech Stocks (Bilibili, Tencent, Alibaba, Tuya)
-    Emerging Markets Analysis
-    Investment Portfolio Optimization
-    Quantitative Financial Analysis
-    Konzultace pro čínské investice
-    Analýza čínských trhů
-    Poradenství pro čínu
+    Financial Analysis (Finanční analýza)
+    Equity Research (Akciové analýzy)
+    Investment Analysis
+    Portfolio Analysis
+    Valuation, DCF, Multiples
+    Economics (Ekonomie, VŠE)
+    Quantitative & Data Analysis (Python, SQL, R)
+    China markets as research interest (field experience, Mandarin HSK3)
 
 /* THANKS */
     VŠE Prague - Prague University of Economics and Business
@@ -30,7 +27,7 @@
     Site: https://www.klubinvestoru.cz
 
 /* SITE */
-    Last update: 2026-02-17
+    Last update: 2026-10-10
     Language: English, Czech
     Doctype: HTML5
     Standards: HTML5, CSS3, ES6+
@@ -45,14 +42,12 @@
     Icons: Lucide React
     
 /* SEO KEYWORDS */
-    Chinese Analyst, Chinese Consultant, China Investment Analyst,
-    China Market Analyst, Konzultant pro čínu, Poradce pro čínu,
-    Analytik čínských trhů, Čínský trh, Čínské akcie,
-    Asia-Pacific Analyst, APAC Investment Analyst,
-    Investment Analyst, Investiční analytik, Equity Research,
-    Portfolio Optimization, Finance, VŠE Prague, Python,
-    Asia-Pacific Markets, China Markets, Emerging Markets,
-    Simon Havlik, Šimon Havlík
+    Simon Havlik, Šimon Havlík, Simon Prague, Simon Czechia,
+    Šimon investor, Šimon Havlík ekonom, Šimon Havlík LinkedIn, Šimon Havlík VŠE,
+    Financial Analyst, Finanční analytik, Investment Analyst, Investiční analytik,
+    Economist, Ekonom, Economics Student, VŠE Prague, VSE, Finance, Investor Praha,
+    Equity Research, Portfolio Analysis, Valuation, Python, SQL,
+    Prague (Praha), Czech Republic (Czechia, Česká republika)
 
 /* LOCATION */
     City: Prague (Praha)

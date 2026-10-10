@@ -5,10 +5,10 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   
-  <!-- Homepage - China Investment Analyst -->
+  <!-- Homepage - Šimon Havlík, Financial Analyst -->
   <url>
     <loc>https://havliksimon.eu/</loc>
-    <lastmod>2026-02-17</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://havliksimon.eu/"/>
@@ -19,7 +19,7 @@
   <!-- About Section -->
   <url>
     <loc>https://havliksimon.eu/#about</loc>
-    <lastmod>2026-02-17</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://havliksimon.eu/#about"/>
@@ -29,7 +29,7 @@
   <!-- Education Journey -->
   <url>
     <loc>https://havliksimon.eu/#journey</loc>
-    <lastmod>2026-02-17</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://havliksimon.eu/#journey"/>
@@ -39,7 +39,7 @@
   <!-- Skills -->
   <url>
     <loc>https://havliksimon.eu/#skills</loc>
-    <lastmod>2026-02-17</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://havliksimon.eu/#skills"/>
@@ -49,7 +49,7 @@
   <!-- Projects -->
   <url>
     <loc>https://havliksimon.eu/#projects</loc>
-    <lastmod>2026-02-17</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://havliksimon.eu/#projects"/>
@@ -59,19 +59,19 @@
   <!-- Analyses - Equity Research -->
   <url>
     <loc>https://havliksimon.eu/#analyses</loc>
-    <lastmod>2026-02-17</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://havliksimon.eu/#analyses"/>
     <xhtml:link rel="alternate" hreflang="cs" href="https://havliksimon.eu/#analyses"/>
   </url>
   
-  <!-- China Focus - Priority Section -->
+  <!-- China Focus - Research Interest -->
   <url>
     <loc>https://havliksimon.eu/#china</loc>
-    <lastmod>2026-02-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://havliksimon.eu/#china"/>
     <xhtml:link rel="alternate" hreflang="cs" href="https://havliksimon.eu/#china"/>
   </url>
@@ -79,7 +79,7 @@
   <!-- Contact -->
   <url>
     <loc>https://havliksimon.eu/#contact</loc>
-    <lastmod>2026-02-17</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://havliksimon.eu/#contact"/>

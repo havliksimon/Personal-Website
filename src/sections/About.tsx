@@ -111,6 +111,12 @@ const About = () => {
             <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-6 leading-tight">
               Economics student passionate about <span className="text-blue-600">market research</span> and <span className="text-blue-600">data-driven investment analysis</span>
             </h3>
+
+            <p className="sr-only">
+              Šimon Havlík (Simon Havlik Prague, Simon Czechia, Šimon investor, Šimon Havlík ekonom,
+              Šimon Havlík VŠE) je finanční analytik a student ekonomie na Vysoké škole ekonomické
+              v Praze. Věnuje se akciovým analýzám, financím a datové analýze. LinkedIn: linkedin.com/in/havliksimon.
+            </p>
             
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <p>
@@ -226,7 +232,7 @@ const About = () => {
             <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 aspect-[4/3]">
               <img
                 src="./images/about-portrait.jpg"
-                alt="Šimon Havlík"
+                alt="Šimon Havlík – Financial Analyst, VŠE Prague, Klub Investorů"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />

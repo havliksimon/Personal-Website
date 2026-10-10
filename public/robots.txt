@@ -13,9 +13,7 @@ Crawl-delay: 1
 
 # Sitemap location
 Sitemap: https://havliksimon.eu/sitemap.xml
-
-# Host
-Host: https://havliksimon.eu
+Sitemap: https://havliksimon.eu/sitemap-index.xml
 
 # ============================================
 # Major Search Engines - ALL ALLOWED
@@ -49,10 +47,10 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-User-agent: Baiduspider
+User-agent: Yandex
 Allow: /
 
-User-agent: Yandex
+User-agent: SeznamBot
 Allow: /
 
 User-agent: Applebot
@@ -61,9 +59,6 @@ Allow: /
 # ============================================
 # Chinese Search Engines - ALL ALLOWED
 # ============================================
-
-User-agent: Baiduspider
-Allow: /
 
 User-agent: Baiduspider-image
 Allow: /
@@ -243,4 +238,10 @@ User-agent: Webzio-Extended
 Allow: /
 
 User-agent: anthropic-ai
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: YouBot
 Allow: /

@@ -1,7 +1,27 @@
 # Cloudflare Pages Redirects
 # Format: [source] [destination] [status]
 
-# Czech URL redirects for better SEO
+# Personal-name URLs (people search "šimon havlík" / "simon havlik prague")
+/simon-havlik / 301
+/simon-havlik-prague / 301
+/simon-prague / 301
+/simon-czechia / 301
+/simon-havlik-linkedin https://linkedin.com/in/havliksimon 301
+/linkedin https://linkedin.com/in/havliksimon 301
+
+# Finance / analyst URLs (CZ + EN)
+/financni-analytik /#about 301
+/financni-analyza /#analyses 301
+/ekonom /#about 301
+/ekonom-vse /#about 301
+/investor /#about 301
+/investicni-analytik /#analyses 301
+/akciove-analyzy /#analyses 301
+/financial-analyst /#about 301
+/equity-research /#analyses 301
+/vse /#about 301
+
+# Czech URL redirects for existing China content (kept for backlinks)
 /cinsky-analytik / 301
 /cinsky-poradce / 301
 /cinsky-konzultant / 301

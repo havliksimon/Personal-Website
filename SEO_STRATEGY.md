@@ -1,175 +1,74 @@
-# SEO Content Strategy - Šimon Havlík
+# SEO Strategy — Šimon Havlík (havliksimon.eu)
 
-## Cíl
-Být #1 ve vyhledávání pro:
-- "dobrý čínský poradce"
-- "kde najít čínského poradce"
-- "konzultant pro čínské investice"
-- "analytik čínských trhů"
-- "investice do číny"
+## Goal
 
-## Cloudflare Pages Výhody
+Rank #1 for personal-name queries, in both Czech and English:
 
-### 1. Edge Functions (Hotovo ✅)
-- Soubor: `functions/seo-routes.js`
-- Automaticky generuje SEO stránky pro klíčová slova
-- Rychlé načítání z edge lokací Cloudflare
+- "šimon havlík", "simon havlik", "simon havlik prague", "simon prague", "simon czechia"
+- "šimon investor", "šimon havlík ekonom", "šimon havlík linkedin", "šimon havlík vše"
+- "financial analyst prague šimon havlík", "finanční analytik praha havlík"
 
-### 2. _headers (Hotovo ✅)
-- Cache control pro lepší výkon
-- SEO-friendly headers
-- Security headers
+Positioning: **financial analyst & economics student (VŠE Prague)**. China is kept as a
+research-interest section, not a consulting service.
 
-### 3. _redirects (Hotovo ✅)
-- České URL aliasy pro SEO
-- Přesměrování na relevantní sekce
-- Lepší uživatelský zážitek
+## What's Implemented
 
-## Obsahová Strategie
+### Head (`index.html`)
 
-### Fáze 1: Základ (Hotovo ✅)
-- [x] Optimalizované meta tagy v češtině
-- [x] Structured data (Schema.org)
-- [x] Sitemap.xml s hreflang
-- [x] Robots.txt pro všechny boty
-- [x] Cloudflare Functions pro dynamické routy
+- Title ≤ 60 chars, name first: `Šimon Havlík | Financial Analyst & Economics Student (VŠE Prague)`
+- Bilingual meta description (~155 chars, CZ + EN, name variants included)
+- `keywords` meta kept concise — ignored by Google but still read by Seznam.cz
+- Canonical, hreflang self-reference (`cs` / `en` / `x-default`), geo tags (Prague, CZ)
+- OG + Twitter cards pointing at a real `og-image.png` (1200×630)
+- Valid JSON-LD: `ProfilePage` + `Person` (financial-analyst job titles, VŠE alumniOf,
+  LinkedIn/GitHub sameAs), `WebSite`, `ProfessionalService` (Prague)
+- `<noscript>` fallback with indexable bilingual bio (the app is client-rendered)
+- Preconnect to fonts + preload of hero portrait
 
-### Fáze 2: Blog (Doporučeno 🔥)
-**Top priority články:**
+### On-page (invisible only — no visible copy changes)
 
-1. **"Kde najít dobrého čínského poradce v Praze?"**
-   - Cílová fráze: přesná shoda s uživatelským dotazem
-   - Obsah: Představení, reference, kontakt
-   - CTA: Konzultace zdarma
+- `sr-only` bilingual keyword paragraphs in Hero and About (name variants CZ/EN)
+- Descriptive image `alt` text (portraits)
 
-2. **"Jak začít investovat do Číny 2026"**
-   - Kompletní průvodce pro začátečníky
-   - Krok za krokem
-   - Video tutoriál (YouTube)
+### Edge routes (`functions/seo-routes.js`)
 
-3. **"Top 10 čínských akcií"**
-   - Aktualizováno každý kvartál
-   - Detailní analýzy
-   - Srovnání s českým trhem
+Lightweight server-rendered landing pages with self-canonicals and Person schema:
 
-### Fáze 3: Backlink Building
+- `/simon-havlik`, `/simon-havlik-prague`, `/simon-prague`, `/simon-czechia` → person page
+- `/financni-analytik`, `/ekonom-vse`, `/investor`, `/financial-analyst`, `/equity-research` → analyst page
+- Legacy China paths (`/konzultant-pro-cinu`, `/investice-do-ciny`, …) → kept alive for
+  backlinks, framed as research interest
 
-**Cílové weby pro zpětné odkazy:**
+### Redirects (`public/_redirects`)
 
-1. **Finanční weby CZ:**
-   - Finteum.cz
-   - Roklen24.cz
-   - Investičníweb.cz
-   - Penize.cz
-   - Finmag.cz
+Name/finance aliases plus all legacy China URLs (link equity preserved).
 
-2. **LinkedIn:**
-   - Články v češtině
-   - Komentáře v čínských investičních skupinách
-   - Pravidelné posty o čínském trhu
+### Crawlers (`public/robots.txt`)
 
-3. **Vzdělávací instituce:**
-   - Profil na VŠE
-   - Klub Investorů
-   - Finance Club CZ
+All allowed: `* → Allow: /`, explicit allows for Google, Bing, Seznam, Apple, Baidu —
+and all AI bots (GPTBot, ChatGPT-User, OAI-SearchBot, Google-Extended, Claude-Web,
+PerplexityBot, CCBot, Meta-ExternalAgent, MistralAI-User, YouBot, …).
 
-4. **Katalogy a adresáře:**
-   - Firmy.cz
-   - Zlaté stránky
-   - Google Business Profile
+### Sitemaps (`public/sitemap*.xml`)
 
-5. **Partnerství:**
-   - Česko-čínská obchodní komora
-   - Deloitte Czech Republic (guest post)
-   - KPMG Prague (webinar)
-   - EY Czech Republic (expert article)
+Master index: `sitemap-index.xml`. Home priority 1.0; China demoted to 0.8 (interest, not service).
+`robots.txt` advertises both `sitemap.xml` and `sitemap-index.xml`.
 
-### Fáze 4: Local SEO
+## After Deploy (manual, ~15 min)
 
-1. **Google Business Profile:**
-   - Vytvořit profil
-   - Přidat kategorii: Finanční poradce
-   - Fotky, hodnocení
+1. **Google Search Console** — add property, submit `sitemap-index.xml`, request indexing of `/`.
+   Set geographic target if offered; verify with the DNS/HTML method and keep the token in `index.html`.
+2. **Bing Webmaster Tools** — same (covers DuckDuckGo/Yahoo too).
+3. **Seznam Webmaster** (`webmaster.seznam.cz`) — submit sitemap; important for Czech queries.
+4. **LinkedIn headline** — mirror the title: "Financial Analyst | Economics Student @ VŠE Prague" +
+   link to havliksimon.eu (strong entity signal for name queries).
+5. **Google Business / Mapy.cz** — optional; only if offering services publicly.
+6. **Backlinks** — link the site from GitHub profile README, LinkedIn featured section,
+   VŠE/Klub Investorů profiles, email signature.
 
-2. **Mapové služby:**
-   - Google Maps
-   - Mapy.cz
-   - Seznam.cz
+## KPIs
 
-3. **Recenze:**
-   - Žádat klienty o recenze
-   - Odpovídat na všechny recenze
-   - Screenshoty do portfolia
-
-## Technické Doporučení
-
-### Performance
-- [x] Preconnect k fontům
-- [x] Optimalizované cache headers
-- [x] CDN přes Cloudflare
-- [ ] Lazy loading obrázků
-- [ ] WebP formát obrázků
-- [ ] Critical CSS inline
-
-### Mobile
-- [ ] Accelerated Mobile Pages (AMP) verze blogu
-- [ ] App-like experience (PWA)
-- [ ] Touch-friendly navigation
-
-### Security
-- [x] HTTPS (Cloudflare SSL)
-- [x] Security headers
-- [ ] Content Security Policy
-
-## Měření Úspěchu
-
-### KPIs
-1. **Organický traffic:** Cíl +50% za 3 měsíce
-2. **Keyword rankings:** Top 3 pro hlavní klíčová slova
-3. **Dwell time:** >3 minuty
-4. **Bounce rate:** <50%
-5. **Conversions:** Kontaktní formuláře, emaily
-
-### Nástroje
-- Google Search Console
-- Google Analytics 4
-- Ahrefs / SEMrush
-- Google PageSpeed Insights
-
-## Content Calendar (Doporučeno)
-
-### Týden 1-4: Základ
-- [ ] Spustit blog
-- [ ] Publikovat 4 články
-- [ ] Nastavit Google Business Profile
-
-### Měsíc 2-3: Rozšíření
-- [ ] Guest post na 2 finanční weby
-- [ ] 8 nových článků
-- [ ] LinkedIn content strategy
-
-### Měsíc 4-6: Autorita
-- [ ] Webinar o čínských investicích
-- [ ] Partneřství s finanční institucí
-- [ ] Press release v českých médiích
-
-## Quick Wins 🔥
-
-1. **Už dnes:**
-   - Přidat odkaz do email signature
-   - Aktualizovat LinkedIn headline
-   - Začít psát na LinkedIn 3x týdně
-
-2. **Tento týden:**
-   - Registrovat na Google Business Profile
-   - Přidat do 3 katalogů firem
-   - Kontaktovat 2 finanční weby o guest post
-
-3. **Tento měsíc:**
-   - Spustit blog
-   - Publikovat první 4 články
-   - Získat první 5 zpětných odkazů
-
----
-
-**Poznámka:** Tento plán je flexibilní. Začněte s Fází 1 a pokračujte postupně. Nejdůležitější je **konzistence** v tvorbě obsahu.
+- Impressions/clicks for "šimon havlík" and "simon havlik *" in Search Console (expect #1 within weeks — near-zero competition)
+- OG card renders correctly (test: LinkedIn Post Inspector, X Card Validator)
+- Zero soft-404s: every sitemap URL returns 200
+- PageSpeed green on mobile (single biggest ranking lever left after relevance)

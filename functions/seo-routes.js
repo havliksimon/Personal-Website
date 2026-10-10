@@ -1,187 +1,137 @@
-// Cloudflare Pages Function - SEO Optimized Route Handler
-// This function enhances SEO by providing structured data and handling specific queries
+// Cloudflare Pages Function - SEO Route Handler
+// Serves lightweight bilingual (CZ/EN) landing pages for key person + topic
+// queries. Every page canonicals to itself and links back to the main site.
 
 export async function onRequest(context) {
   const url = new URL(context.request.url);
   const path = url.pathname;
-  
-  // Handle specific SEO routes
-  if (path === '/konzultant-pro-cinu' || path === '/cinsky-poradce') {
-    return new Response(generateSEOPage('konzultant'), {
+
+  const routes = {
+    // Personal-name routes (highest priority: "šimon havlík", "simon havlik prague")
+    '/simon-havlik': 'osoba',
+    '/simon-havlik-prague': 'osoba',
+    '/simon-prague': 'osoba',
+    '/simon-czechia': 'osoba',
+    // Finance / analyst routes (CZ + EN)
+    '/financni-analytik': 'analytik',
+    '/ekonom-vse': 'analytik',
+    '/investor': 'analytik',
+    '/financial-analyst': 'analytik',
+    '/equity-research': 'analytik',
+    // Kept for backlinks: China research interest (no consulting claims)
+    '/konzultant-pro-cinu': 'cina',
+    '/cinsky-poradce': 'cina',
+    '/investice-do-ciny': 'cina',
+    '/cinske-investice': 'cina',
+    '/analytik-cinskych-trhu': 'cina',
+  };
+
+  const page = routes[path];
+  if (page) {
+    return new Response(generateSEOPage(page, path), {
       headers: {
         'Content-Type': 'text/html; charset=utf-8',
         'Cache-Control': 'public, max-age=3600',
-        'X-Robots-Tag': 'all'
-      }
+      },
     });
   }
-  
-  if (path === '/investice-do-ciny' || path === '/cinske-investice') {
-    return new Response(generateSEOPage('investice'), {
-      headers: {
-        'Content-Type': 'text/html; charset=utf-8',
-        'Cache-Control': 'public, max-age=3600',
-        'X-Robots-Tag': 'all'
-      }
-    });
-  }
-  
-  if (path === '/analytik-cinskych-trhu') {
-    return new Response(generateSEOPage('analytik'), {
-      headers: {
-        'Content-Type': 'text/html; charset=utf-8',
-        'Cache-Control': 'public, max-age=3600',
-        'X-Robots-Tag': 'all'
-      }
-    });
-  }
-  
+
   // Continue to static site for all other routes
   return context.next();
 }
 
-function generateSEOPage(type) {
-  const pages = {
-    konzultant: {
-      title: 'Konzultant pro čínské investice | Šimon Havlík | Praha',
-      description: 'Profesionální konzultant pro investice do Číny. Specialista na čínské trhy, akcie a APAC strategie. Pomáhám českým investorům orientovat se v čínských investicích.',
-      heading: 'Konzultant pro čínské investice',
-      content: `
-        <h1>Konzultant pro čínské investice v Praze</h1>
-        <p>Hledáte <strong>dobrého čínského poradce</strong>? Jsem Šimon Havlík, konzultant specializující se na čínské trhy a investice do Číny.</p>
-        
-        <h2>Proč investovat do Číny?</h2>
-        <ul>
-          <li>Druhá největší ekonomika světa</li>
-          <li>Rychle rostoucí technologický sektor</li>
-          <li>Přístup k inovativním společnostem (Tencent, Alibaba, Bilibili)</li>
-          <li>Diverzifikace investičního portfolia</li>
-        </ul>
-        
-        <h2>Služby konzultanta</h2>
-        <ul>
-          <li>Analýza čínských akcií a trhů</li>
-          <li>Portfolio strategie pro APAC region</li>
-          <li>Výzkum čínských technologických společností</li>
-          <li>Rizikové zhodnocení čínských investic</li>
-          <li>Pravidelné investiční reporty</li>
-        </ul>
-        
-        <h2>Kontaktujte mě</h2>
-        <p>Email: havlik.simon@post.cz<br>
-        Telefon: na vyžádání e-mailem<br>
-        Lokalita: Praha, Česká republika</p>
-        
-        <p><a href="/">Zpět na hlavní stránku</a></p>
-      `
-    },
-    investice: {
-      title: 'Investice do Číny | Průvodce čínskými trhy | Šimon Havlík',
-      description: 'Kompletní průvodce investicemi do Číny. Analýza čínských akcií, strategie pro začátečníky i pokročilé investory. Expert na čínské trhy z Prahy.',
-      heading: 'Investice do Číny - kompletní průvodce',
-      content: `
-        <h1>Investice do Číny - kompletní průvodce</h1>
-        <p>Chcete začít investovat do Číny? Jako <strong>analytik čínských trhů</strong> vám pomohu orientovat se v komplexním čínském investičním prostředí.</p>
-        
-        <h2>Jak začít investovat do Číny?</h2>
-        <ol>
-          <li><strong>Vzdělání:</strong> Pochopte čínský tržní kontext</li>
-          <li><strong>Platforma:</strong> Vyberte správného brokera</li>
-          <li><strong>Výběr:</strong> Identifikujte kvalitní čínské společnosti</li>
-          <li><strong>Diverzifikace:</strong> Vyvážené portfolio</li>
-          <li><strong>Monitoring:</strong> Pravidelná analýza</li>
-        </ol>
-        
-        <h2>Nejlepší čínské akcie pro rok 2026</h2>
-        <ul>
-          <li><strong>Tencent (0700.HK)</strong> - Technologický gigant</li>
-          <li><strong>Alibaba (BABA)</strong> - E-commerce lídr</li>
-          <li><strong>Bilibili (BILI)</strong> - Mladá generace platforma</li>
-          <li><strong>Tuya Smart (TUYA)</strong> - IoT inovace</li>
-        </ul>
-        
-        <h2>Rizika čínských investic</h2>
-        <p>Investice do Číny nesou specifická rizika:</p>
-        <ul>
-          <li>Regulační změny</li>
-          <li>Geopolitické napětí</li>
-          <li>Měnové riziko</li>
-          <li>Transparence firem</li>
-        </ul>
-        
-        <p><a href="/">Zpět na hlavní stránku</a></p>
-      `
-    },
-    analytik: {
-      title: 'Analytik čínských trhů | Šimon Havlík | Praha',
-      description: 'Profesionální analytik čínských trhů z Prahy. Specializace na čínské akcie, APAC equity research a čínské technologické společnosti.',
-      heading: 'Analytik čínských trhů',
-      content: `
-        <h1>Analytik čínských trhů - Šimon Havlík</h1>
-        <p>Jsem profesionální <strong>analytik čínských trhů</strong> se specializací na čínské akcie a asijsko-pacifické investice.</p>
-        
-        <h2>Moje expertiza</h2>
-        <ul>
-          <li>Čínský akciový trh (A-shares, H-shares, ADRs)</li>
-          <li>Hong Kong Stock Exchange</li>
-          <li>Čínské technologické společnosti</li>
-          <li>Asijsko-pacifické trhy (APAC)</li>
-          <li>BRICS ekonomiky</li>
-        </ul>
-        
-        <h2>Publikované analýzy</h2>
-        <ul>
-          <li><a href="/analyses/EM_BILI_Havlik.docx.pdf">Bilibili Inc. - Equity Research</a></li>
-          <li><a href="/analyses/EM_TUYA_Havlik.pdf">Tuya Smart - Investment Analysis</a></li>
-          <li><a href="/presentations/presentation_Tencent.pdf">Tencent Holdings - Market Analysis</a></li>
-          <li><a href="/presentations/presentation_Chagee.pdf">Chagee (霸王茶姬) - IPO Analysis</a></li>
-        </ul>
-        
-        <h2>Vzdělání a zkušenosti</h2>
-        <ul>
-          <li>Student VŠE Praha - Fakulta podnikohospodářská</li>
-          <li>Člen Klubu Investorů</li>
-          <li>Specializace na emerging markets</li>
-          <li>Expertíza v kvantitativní analýze</li>
-        </ul>
-        
-        <p><a href="/">Zpět na hlavní stránku</a></p>
-      `
-    }
-  };
-  
-  const page = pages[type] || pages.konzultant;
-  
+function layout({ title, description, canonical, body, extraHead = '' }) {
   return `<!DOCTYPE html>
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${page.title}</title>
-    <meta name="description" content="${page.description}">
-    <meta name="keywords" content="čínský analytik, čínský poradce, konzultant čína, investice čína, čínské akcie, analytik praha">
+    <title>${title}</title>
+    <meta name="description" content="${description}">
     <meta name="author" content="Šimon Havlík">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://havliksimon.eu${type === 'konzultant' ? '/konzultant-pro-cinu' : type === 'investice' ? '/investice-do-ciny' : '/analytik-cinskych-trhu'}">
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="canonical" href="https://havliksimon.eu${canonical}">
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; color: #333; }
-        h1 { color: #1a1a2e; border-bottom: 3px solid #e94560; padding-bottom: 10px; }
+        h1 { color: #1a1a2e; border-bottom: 3px solid #2563eb; padding-bottom: 10px; }
         h2 { color: #16213e; margin-top: 30px; }
-        a { color: #e94560; }
+        a { color: #2563eb; }
         a:hover { text-decoration: underline; }
         ul, ol { padding-left: 20px; }
         li { margin-bottom: 8px; }
-        .contact-info { background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0; }
     </style>
+    ${extraHead}
 </head>
 <body>
-    ${page.content}
-    
+    ${body}
     <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 14px;">
-        <p>© 2026 Šimon Havlík | Konzultant pro čínské investice | Praha</p>
-        <p>Kontakt: havlik.simon@post.cz</p>
+        <p>© 2026 Šimon Havlík – Financial Analyst, Prague | Finanční analytik, Praha</p>
+        <p>Kontakt: havlik.simon@post.cz · <a href="https://linkedin.com/in/havliksimon">LinkedIn: Šimon Havlík</a> · <a href="/">havliksimon.eu</a></p>
     </footer>
 </body>
 </html>`;
+}
+
+function generateSEOPage(type, path) {
+  if (type === 'osoba') {
+    return layout({
+      title: 'Šimon Havlík (Simon Havlik) – Financial Analyst, Prague | Finanční analytik VŠE',
+      description: 'Šimon Havlík (Simon Havlik, Simon Prague, Simon Czechia) – financial analyst and economics student at VŠE Prague. Investor, equity research, finance. LinkedIn: havliksimon.',
+      canonical: path,
+      extraHead: `<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Šimon Havlík","alternateName":["Simon Havlik","Simon Prague","Simon Czechia"],"jobTitle":["Financial Analyst","Economics Student","Finanční analytik"],"url":"https://havliksimon.eu/","sameAs":["https://linkedin.com/in/havliksimon","https://github.com/havliksimon"],"address":{"@type":"PostalAddress","addressLocality":"Prague","addressCountry":"CZ"},"alumniOf":{"@type":"EducationalOrganization","name":"Prague University of Economics and Business (VŠE)"}}</script>`,
+      body: `
+        <h1>Šimon Havlík – Financial Analyst, Prague</h1>
+        <p><strong>Šimon Havlík</strong> (also searched as <strong>Simon Havlik</strong>, Simon Prague, Simon Czechia) is a financial analyst and economics student at the Prague University of Economics and Business (VŠE). Investor focused on equity research, finance, valuation and data-driven investment analysis. Based in Prague, Czech Republic.</p>
+        <h2>Šimon Havlík – finanční analytik, ekonom (VŠE Praha)</h2>
+        <p><strong>Šimon Havlík</strong> (Šimon investor, Šimon Havlík ekonom, Šimon Havlík VŠE) je finanční analytik a student ekonomie na Vysoké škole ekonomické v Praze. Věnuje se akciovým analýzám, financím, valuaci a datové analýze. Působí v Klubu Investorů.</p>
+        <h2>Links / Odkazy</h2>
+        <ul>
+          <li><a href="/">Main site – havliksimon.eu</a></li>
+          <li><a href="https://linkedin.com/in/havliksimon">Šimon Havlík on LinkedIn</a></li>
+          <li><a href="https://github.com/havliksimon">Šimon Havlík on GitHub</a></li>
+          <li><a href="/#analyses">Equity research – analýzy</a></li>
+          <li><a href="/#contact">Contact – kontakt</a></li>
+        </ul>
+      `,
+    });
+  }
+
+  if (type === 'analytik') {
+    return layout({
+      title: 'Šimon Havlík – Finanční analytik & Financial Analyst (VŠE Prague)',
+      description: 'Šimon Havlík – finanční analytik a student ekonomie na VŠE v Praze. Akciové analýzy, valuace, finance. Financial analyst: equity research, valuation, Prague.',
+      canonical: path,
+      body: `
+        <h1>Šimon Havlík – finanční analytik (VŠE Praha) / Financial Analyst</h1>
+        <p>Jsem <strong>Šimon Havlík</strong>, finanční analytik a student ekonomie na Vysoké škole ekonomické v Praze (VŠE). Věnuji se akciovým analýzám (equity research), valuaci firem (DCF, multiplikátory), správě portfolia a datové analýze v Pythonu a SQL. Působím v Klubu Investorů, Praha.</p>
+        <p>I am <strong>Simon Havlik</strong>, a financial analyst and economics student at VŠE Prague. My work covers equity research, company valuation, portfolio analysis and data-driven investing.</p>
+        <h2>Publikované analýzy / Published research</h2>
+        <ul>
+          <li><a href="/analyses/EM_BILI_Havlik.docx.pdf">Bilibili Inc. – Equity Research</a></li>
+          <li><a href="/analyses/EM_TUYA_Havlik.pdf">Tuya Smart – Investment Analysis</a></li>
+          <li><a href="/analyses/GOOGL_Havlik.pdf">Alphabet (Google) – Analysis</a></li>
+          <li><a href="/presentations/presentation_Tencent.pdf">Tencent Holdings – Market Analysis</a></li>
+        </ul>
+        <p><a href="/">Zpět na hlavní stránku / Back to main site</a> · <a href="https://linkedin.com/in/havliksimon">LinkedIn</a></p>
+      `,
+    });
+  }
+
+  // type === 'cina' – kept for existing backlinks; framed as research interest
+  return layout({
+    title: 'Šimon Havlík – China Markets Research Interest | Čína jako výzkumné téma',
+    description: 'China (Čína) as a research interest of Šimon Havlík, financial analyst (VŠE Prague): equity research on Chinese tech companies, field experience, Mandarin HSK3.',
+    canonical: path,
+    body: `
+      <h1>China as a research interest – Šimon Havlík</h1>
+      <p>China (Čína) is one of my research interests as a financial analyst and economics student at VŠE Prague — alongside broader equity research, valuation and portfolio analysis. This page preserves older links; my current focus is finance and economics.</p>
+      <h2>Výzkum čínských trhů</h2>
+      <ul>
+        <li>Equity research čínských technologických společností (Bilibili, Tencent, Alibaba, Tuya)</li>
+        <li>Terénní zkušenost ze studijních pobytů v Číně, mandarínština HSK3</li>
+        <li>Publikované analýzy: <a href="/analyses/EM_BILI_Havlik.docx.pdf">Bilibili</a>, <a href="/analyses/EM_TUYA_Havlik.pdf">Tuya</a>, <a href="/presentations/presentation_Tencent.pdf">Tencent</a></li>
+      </ul>
+      <p><a href="/">Zpět na hlavní stránku / Back to main site</a> · <a href="https://linkedin.com/in/havliksimon">LinkedIn</a></p>
+    `,
+  });
 }

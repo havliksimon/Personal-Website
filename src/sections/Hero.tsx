@@ -183,7 +183,8 @@ const Hero = () => {
         >
           <img
             src="./images/hero-portrait.png"
-            alt="Šimon Havlík"
+            alt="Šimon Havlík – Financial Analyst and Economics Student (VŠE Prague)"
+            fetchPriority="high"
             style={{ 
               height: '100%',
               width: 'auto',
@@ -227,6 +228,11 @@ const Hero = () => {
               and <span className="italic">data-driven</span><br />
               analysis
             </h1>
+            <p className="sr-only">
+              Šimon Havlík (Simon Havlik, Simon Prague, Simon Czechia) – financial analyst and economics
+              student at VŠE Prague. Investor focused on equity research, finance and data analysis.
+              Finanční analytik a student ekonomie na VŠE v Praze. LinkedIn: linkedin.com/in/havliksimon.
+            </p>
           </div>
 
           {/* Right side - at 6% from right */}
@@ -265,7 +271,7 @@ const Hero = () => {
           >
             <img
               src="./images/hero-portrait.png"
-              alt="Šimon Havlík"
+              alt="Šimon Havlík – Financial Analyst, Prague"
               style={{ 
                 height: '100%',
                 width: 'auto',

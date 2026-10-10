@@ -1,16 +1,16 @@
 {
-  "name": "Šimon Havlík | China Investment Analyst & Consultant",
+  "name": "Šimon Havlík | Financial Analyst & Economics Student (VŠE Prague)",
   "short_name": "Šimon Havlík",
-  "description": "China Investment Analyst & Consultant specializing in Chinese markets, Asia-Pacific equity research, and APAC investment strategies. Expert on Chinese tech companies. Konzultant pro čínské trhy.",
+  "description": "Šimon Havlík (Simon Havlik, Prague) – financial analyst and economics student at VŠE. Equity research, finance and data-driven investment analysis. Finanční analytik, Praha.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#1a1a2e",
   "theme_color": "#1a1a2e",
   "orientation": "portrait-primary",
   "scope": "/",
-  "lang": "en",
+  "lang": "cs",
   "dir": "ltr",
-  "categories": ["finance", "business", "investment", "china", "asia-pacific", "equity-research", "consulting"],
+  "categories": ["finance", "business", "investment", "economics", "equity-research", "education"],
   "icons": [
     {
       "src": "/favicon.svg",
@@ -39,23 +39,23 @@
   ],
   "shortcuts": [
     {
-      "name": "About",
+      "name": "About – O mně",
       "short_name": "About",
-      "description": "Learn more about Šimon Havlík - China Investment Analyst",
+      "description": "Learn more about Šimon Havlík – Financial Analyst, VŠE Prague",
       "url": "/#about",
       "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
     },
     {
-      "name": "China Focus",
+      "name": "China Research",
       "short_name": "China",
-      "description": "China market analysis and expertise",
+      "description": "China markets – research interest and field experience",
       "url": "/#china",
       "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
     },
     {
       "name": "Analyses",
       "short_name": "Analyses",
-      "description": "Equity research analyses on Chinese companies",
+      "description": "Equity research and investment analyses by Šimon Havlík",
       "url": "/#analyses",
       "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
     },
@@ -69,27 +69,18 @@
     {
       "name": "Contact",
       "short_name": "Contact",
-      "description": "Get in touch for China consulting",
+      "description": "Get in touch with Šimon Havlík",
       "url": "/#contact",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "LinkedIn – Šimon Havlík",
+      "short_name": "LinkedIn",
+      "description": "Šimon Havlík on LinkedIn",
+      "url": "https://linkedin.com/in/havliksimon",
       "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
     }
   ],
   "related_applications": [],
-  "prefer_related_applications": false,
-  "screenshots": [
-    {
-      "src": "/screenshot-desktop.png",
-      "sizes": "1920x1080",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Desktop view of Šimon Havlík - China Investment Analyst"
-    },
-    {
-      "src": "/screenshot-mobile.png",
-      "sizes": "750x1334",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Mobile view of Šimon Havlík portfolio"
-    }
-  ]
+  "prefer_related_applications": false
 }
