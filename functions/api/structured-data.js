@@ -12,7 +12,7 @@ export async function onRequestGet(context) {
       "name": "Šimon Havlík",
       "jobTitle": ["Konzultant pro čínské investice", "Analytik čínských trhů", "China Investment Analyst"],
       "description": "Profesionální konzultant pro investice do Číny a analytik čínských trhů z Prahy",
-      "url": "https://havliksimon.eu/",
+      "url": "https://simonhavlik.com/",
       "email": "havlik.simon@post.cz",
       "address": {
         "@type": "PostalAddress",

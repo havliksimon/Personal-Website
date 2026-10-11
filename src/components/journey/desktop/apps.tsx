@@ -385,7 +385,7 @@ export const MailApp = () => {
         </div>
       )}
       <div className="flex items-center justify-between border-t border-gray-100 px-3 py-2">
-        <span className="text-[11px] text-gray-400">Sent via havliksimon.eu</span>
+        <span className="text-[11px] text-gray-400">Sent via simonhavlik.com</span>
         <button
           type="submit"
           disabled={sending}

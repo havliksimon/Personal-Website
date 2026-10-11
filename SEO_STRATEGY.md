@@ -1,4 +1,4 @@
-# SEO Strategy — Šimon Havlík (havliksimon.eu)
+# SEO Strategy — Šimon Havlík (simonhavlik.com)
 
 ## Goal
 
@@ -61,7 +61,7 @@ Master index: `sitemap-index.xml`. Home priority 1.0; China demoted to 0.8 (inte
 2. **Bing Webmaster Tools** — same (covers DuckDuckGo/Yahoo too).
 3. **Seznam Webmaster** (`webmaster.seznam.cz`) — submit sitemap; important for Czech queries.
 4. **LinkedIn headline** — mirror the title: "Financial Analyst | Economics Student @ VŠE Prague" +
-   link to havliksimon.eu (strong entity signal for name queries).
+   link to simonhavlik.com (strong entity signal for name queries).
 5. **Google Business / Mapy.cz** — optional; only if offering services publicly.
 6. **Backlinks** — link the site from GitHub profile README, LinkedIn featured section,
    VŠE/Klub Investorů profiles, email signature.

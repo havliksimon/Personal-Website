@@ -2,7 +2,7 @@
     Name: Šimon Havlík
     Role: Financial Analyst & Economics Student (VŠE Prague)
     Specialization: Equity Research, Finance, Valuation, Data Analysis
-    Site: https://havliksimon.eu
+    Site: https://simonhavlik.com
     LinkedIn: https://linkedin.com/in/havliksimon
     Twitter: https://x.com/shavlik
     GitHub: https://github.com/havliksimon

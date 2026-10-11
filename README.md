@@ -1,6 +1,6 @@
 # Šimon Havlík — Personal Website
 
-Personal portfolio of **Šimon Havlík** (Simon Havlik, Prague, Czechia) — financial analyst and economics student at VŠE Prague. Live at [havliksimon.eu](https://havliksimon.eu/).
+Personal portfolio of **Šimon Havlík** (Simon Havlik, Prague, Czechia) — financial analyst and economics student at VŠE Prague. Live at [simonhavlik.com](https://simonhavlik.com/).
 
 ## Stack
 

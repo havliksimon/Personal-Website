@@ -3,14 +3,14 @@
   
   <!-- Main sitemap -->
   <sitemap>
-    <loc>https://havliksimon.eu/sitemap.xml</loc>
-    <lastmod>2026-10-10</lastmod>
+    <loc>https://simonhavlik.com/sitemap.xml</loc>
+    <lastmod>2026-10-11</lastmod>
   </sitemap>
   
   <!-- Analysis documents sitemap -->
   <sitemap>
-    <loc>https://havliksimon.eu/sitemap-analyses.xml</loc>
-    <lastmod>2026-10-10</lastmod>
+    <loc>https://simonhavlik.com/sitemap-analyses.xml</loc>
+    <lastmod>2026-10-11</lastmod>
   </sitemap>
 
   <!-- Blog sitemap: re-add once /blog/ exists (empty sitemaps cause reader warnings) -->

@@ -12,8 +12,8 @@ Disallow: /api
 Crawl-delay: 1
 
 # Sitemap location
-Sitemap: https://havliksimon.eu/sitemap.xml
-Sitemap: https://havliksimon.eu/sitemap-index.xml
+Sitemap: https://simonhavlik.com/sitemap.xml
+Sitemap: https://simonhavlik.com/sitemap-index.xml
 
 # ============================================
 # Major Search Engines - ALL ALLOWED

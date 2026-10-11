@@ -50,7 +50,7 @@ function layout({ title, description, canonical, body, extraHead = '' }) {
     <meta name="description" content="${description}">
     <meta name="author" content="Šimon Havlík">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://havliksimon.eu${canonical}">
+    <link rel="canonical" href="https://simonhavlik.com${canonical}">
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; color: #333; }
         h1 { color: #1a1a2e; border-bottom: 3px solid #2563eb; padding-bottom: 10px; }
@@ -66,7 +66,7 @@ function layout({ title, description, canonical, body, extraHead = '' }) {
     ${body}
     <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 14px;">
         <p>© 2026 Šimon Havlík – Financial Analyst, Prague | Finanční analytik, Praha</p>
-        <p>Kontakt: havlik.simon@post.cz · <a href="https://linkedin.com/in/havliksimon">LinkedIn: Šimon Havlík</a> · <a href="/">havliksimon.eu</a></p>
+        <p>Kontakt: havlik.simon@post.cz · <a href="https://linkedin.com/in/havliksimon">LinkedIn: Šimon Havlík</a> · <a href="/">simonhavlik.com</a></p>
     </footer>
 </body>
 </html>`;
@@ -78,7 +78,7 @@ function generateSEOPage(type, path) {
       title: 'Šimon Havlík (Simon Havlik) – Financial Analyst, Prague | Finanční analytik VŠE',
       description: 'Šimon Havlík (Simon Havlik, Simon Prague, Simon Czechia) – financial analyst and economics student at VŠE Prague. Investor, equity research, finance. LinkedIn: havliksimon.',
       canonical: path,
-      extraHead: `<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Šimon Havlík","alternateName":["Simon Havlik","Simon Prague","Simon Czechia"],"jobTitle":["Financial Analyst","Economics Student","Finanční analytik"],"url":"https://havliksimon.eu/","sameAs":["https://linkedin.com/in/havliksimon","https://github.com/havliksimon"],"address":{"@type":"PostalAddress","addressLocality":"Prague","addressCountry":"CZ"},"alumniOf":{"@type":"EducationalOrganization","name":"Prague University of Economics and Business (VŠE)"}}</script>`,
+      extraHead: `<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Šimon Havlík","alternateName":["Simon Havlik","Simon Prague","Simon Czechia"],"jobTitle":["Financial Analyst","Economics Student","Finanční analytik"],"url":"https://simonhavlik.com/","sameAs":["https://linkedin.com/in/havliksimon","https://github.com/havliksimon"],"address":{"@type":"PostalAddress","addressLocality":"Prague","addressCountry":"CZ"},"alumniOf":{"@type":"EducationalOrganization","name":"Prague University of Economics and Business (VŠE)"}}</script>`,
       body: `
         <h1>Šimon Havlík – Financial Analyst, Prague</h1>
         <p><strong>Šimon Havlík</strong> (also searched as <strong>Simon Havlik</strong>, Simon Prague, Simon Czechia) is a financial analyst and economics student at the Prague University of Economics and Business (VŠE). Investor focused on equity research, finance, valuation and data-driven investment analysis. Based in Prague, Czech Republic.</p>
@@ -86,7 +86,7 @@ function generateSEOPage(type, path) {
         <p><strong>Šimon Havlík</strong> (Šimon investor, Šimon Havlík ekonom, Šimon Havlík VŠE) je finanční analytik a student ekonomie na Vysoké škole ekonomické v Praze. Věnuje se akciovým analýzám, financím, valuaci a datové analýze. Působí v Klubu Investorů.</p>
         <h2>Links / Odkazy</h2>
         <ul>
-          <li><a href="/">Main site – havliksimon.eu</a></li>
+          <li><a href="/">Main site – simonhavlik.com</a></li>
           <li><a href="https://linkedin.com/in/havliksimon">Šimon Havlík on LinkedIn</a></li>
           <li><a href="https://github.com/havliksimon">Šimon Havlík on GitHub</a></li>
           <li><a href="/#analyses">Equity research – analýzy</a></li>
