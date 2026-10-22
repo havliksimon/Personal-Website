@@ -125,6 +125,7 @@ export const ROOT: VDir = {
       name: 'presentations',
       dirs: [],
       files: [
+        { name: 'bilibili_investment_case_iie.pdf', kind: 'pdf', docId: 7 },
         { name: 'chagee_investment_case.pdf', kind: 'pdf', docId: 4 },
         { name: 'tencent_investment_case.pdf', kind: 'pdf', docId: 5 },
       ],

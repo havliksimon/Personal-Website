@@ -37,6 +37,15 @@ export const docs: DesktopDoc[] = [
     pdfUrl: '/analyses/GOOGL_Havlik.pdf',
   },
   {
+    id: 7,
+    title: 'Bilibili Investment Case (IIE)',
+    subtitle: 'Chinese Long-Form Video · 371M MAU',
+    date: 'Oct 2026',
+    pages: 16,
+    kind: 'presentation',
+    pdfUrl: '/presentations/presentation_BILI.pdf',
+  },
+  {
     id: 4,
     title: 'Chagee Investment Case',
     subtitle: 'High Risk, High Reward Opportunity',

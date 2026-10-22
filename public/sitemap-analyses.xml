@@ -41,6 +41,14 @@
     <priority>0.85</priority>
   </url>
   
+  <!-- Bilibili Investment Case (IIE presentation) -->
+  <url>
+    <loc>https://simonhavlik.com/presentations/presentation_BILI.pdf</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
   <!-- Chagee Equity Analysis - full write-up -->
   <url>
     <loc>https://simonhavlik.com/analyses/EM_CHA_Havlik.pdf</loc>

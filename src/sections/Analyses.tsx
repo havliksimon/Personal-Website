@@ -75,6 +75,21 @@ const analyses: AnalysisDoc[] = [
     language: 'cs'
   },
   {
+    id: 9,
+    title: 'Bilibili Investment Case (IIE)',
+    subtitle: 'Chinese Long-Form Video · 371M MAU',
+    description: 'Pitch deck for Bilibili (NASDAQ: BILI, HKEX: 9626) presented with the KI analytical team: 371M monthly actives, monetisation path, gaming and advertising mix, and the valuation case for the platform.',
+    type: 'presentation',
+    date: 'Oct 2026',
+    pages: 16,
+    pdfUrl: '/presentations/presentation_BILI.pdf',
+    thumbnailColor: 'from-rose-500 to-pink-600',
+    icon: Presentation,
+    tags: ['China', 'Media', 'Investment Case'],
+    language: 'cs',
+    featured: true
+  },
+  {
     id: 4,
     title: 'Chagee Investment Case',
     subtitle: 'High Risk, High Reward Opportunity',
@@ -99,8 +114,7 @@ const analyses: AnalysisDoc[] = [
     pdfUrl: '/presentations/presentation_Tencent.pdf',
     thumbnailColor: 'from-violet-500 to-purple-600',
     icon: BookOpen,
-    tags: ['Tech', 'China', 'Investment Case'],
-    featured: true
+    tags: ['Tech', 'China', 'Investment Case']
   },
   {
     id: 6,
