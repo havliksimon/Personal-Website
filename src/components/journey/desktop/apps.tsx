@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
 import {
   ChevronLeft, ChevronRight, RefreshCw, Lock, Plus, X, FileText,
   Presentation, Folder, Send, CheckCircle, ExternalLink, Search,
@@ -15,8 +15,6 @@ import {
 } from './terminal';
 import { LUCY_ROWS } from './lucyArt';
 
-const ART_CELL = 5;
-
 const decodeRow = (row: string) => {
   const runs: { n: number; fg: string; bg: string }[] = [];
   for (let i = 0; i + 12 <= row.length; i += 12) {
@@ -32,16 +30,20 @@ const decodeRow = (row: string) => {
 const LUCY_RUNS = LUCY_ROWS.map(decodeRow);
 
 const LucyNeofetch = () => (
-  <div className="flex flex-wrap gap-3">
-    <div className="shrink-0" aria-hidden="true">
+  <div className="flex flex-wrap gap-4">
+    <div
+      className="shrink-0"
+      aria-hidden="true"
+      style={{ '--lucy-cell': 'clamp(7px, 1.5vw, 11px)' } as CSSProperties}
+    >
       {LUCY_RUNS.map((runs, y) => (
         <div key={y} className="flex">
           {runs.map((r, i) => (
             <span
               key={i}
               style={{
-                width: r.n * ART_CELL,
-                height: ART_CELL,
+                width: `calc(var(--lucy-cell) * ${r.n})`,
+                height: 'var(--lucy-cell)',
                 backgroundImage: `linear-gradient(to bottom, ${r.bg} 0 50%, ${r.fg} 50% 100%)`,
               }}
             />
@@ -49,7 +51,7 @@ const LucyNeofetch = () => (
         </div>
       ))}
     </div>
-    <div className="min-w-0 flex-1 whitespace-pre-wrap break-words">
+    <div className="min-w-[220px] flex-1 whitespace-pre-wrap break-words">
       {NEO_INFO.map((ln, i) => (
         <div key={i}>
           {ln.map((s, j) => (
