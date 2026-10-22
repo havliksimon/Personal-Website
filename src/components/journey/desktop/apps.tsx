@@ -187,7 +187,7 @@ export const TerminalApp = ({ count, actions }: { count: number; actions: Termin
     const raw = input;
     setInput('');
     const echo: Seg[] = [
-      seg('simon@macbook ', 'font-semibold text-emerald-400'),
+      seg('simon@shmackbook ', 'font-semibold text-emerald-400'),
       seg(`${cwd} `, 'font-semibold text-sky-400'),
       seg('% ', 'text-zinc-400'),
       seg(raw, 'text-zinc-100'),
@@ -265,7 +265,7 @@ export const TerminalApp = ({ count, actions }: { count: number; actions: Termin
 
       {introDone && (
         <form onSubmit={submit} className="flex items-baseline gap-1.5">
-          <span className="font-semibold text-emerald-400">simon@macbook</span>
+          <span className="font-semibold text-emerald-400">simon@shmackbook</span>
           <span className="font-semibold text-sky-400">{cwd}</span>
           <span className="text-zinc-400">%</span>
           <input
@@ -1024,14 +1024,14 @@ export const SettingsApp = ({
         {pane === 'about' && (
           <div className="flex flex-col items-center pt-4 text-center">
             <Apple className="h-12 w-12 text-gray-800" fill="currentColor" />
-            <h3 className="mt-3 text-xl font-semibold">Shmack OS</h3>
-            <p className="mb-6 text-[12px] text-gray-500">Version 14.0 “Sonoma-ish”</p>
+            <h3 className="mt-3 text-xl font-semibold">Shmack OS 67</h3>
+            <p className="mb-6 text-[12px] text-gray-500">“Sun Tzu” — Art of War edition, 495 BCE</p>
             <dl className="w-full max-w-xs space-y-1 text-[12px]">
               {[
-                ['Chip', 'CommandCode Silicon'],
-                ['Memory', '16 GB'],
-                ['Startup disk', 'Macintosh HD'],
-                ['Display', 'Retina 5K'],
+                ['Chip', 'SmoothBrain Silicon'],
+                ['Architecture', 'ARM6or7'],
+                ['Startup disk', 'Floppy Disk Rack — 5 KB of 16 TiB'],
+                ['Display', 'Retina 5K Okularis'],
                 ['Serial number', 'SHMACK-2026-SIMON'],
               ].map(([key, value]) => (
                 <div key={key} className="flex justify-between border-b border-black/5 py-1">
@@ -1039,6 +1039,10 @@ export const SettingsApp = ({
                   <dd className="font-medium text-gray-800">{value}</dd>
                 </div>
               ))}
+              <div className="flex items-center justify-between border-b border-black/5 py-1">
+                <dt className="text-gray-500">Memory</dt>
+                <dd className="text-[15px] font-bold text-gray-900">M∞</dd>
+              </div>
             </dl>
           </div>
         )}

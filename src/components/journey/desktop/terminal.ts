@@ -29,7 +29,7 @@ export const line = (text: string, cls: string): Seg[] => [seg(text, cls)];
 
 export const SCRIPT: Seg[] = [
   seg('Last login: Thu Oct  9 21:41:02 on ttys001\n', 'text-zinc-500'),
-  seg('simon@macbook ', 'font-semibold text-emerald-400'),
+  seg('simon@shmackbook ', 'font-semibold text-emerald-400'),
   seg('~ ', 'font-semibold text-sky-400'),
   seg('% ', 'text-zinc-400'),
   seg('cat ~/journey/education.log\n\n', 'text-zinc-100'),
@@ -217,6 +217,30 @@ const kv = (key: string, value: string): Seg[] => [
   seg(`: ${value}`, 'text-zinc-300'),
 ];
 
+/** Same as kv, but the value is built from styled segments. */
+const kvSegs = (key: string, ...value: Seg[]): Seg[] => [
+  seg(`${key}`, 'font-semibold text-cyan-400'),
+  seg(': ', 'text-zinc-300'),
+  ...value,
+];
+
+const ageSince = (year: number, month: number, day: number): string => {
+  const now = new Date();
+  const then = new Date(year, month - 1, day);
+  let years = now.getFullYear() - then.getFullYear();
+  let months = now.getMonth() - then.getMonth();
+  let days = now.getDate() - then.getDate();
+  if (days < 0) {
+    months -= 1;
+    days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+  }
+  if (months < 0) {
+    years -= 1;
+    months += 12;
+  }
+  return `${years} years, ${months} months, ${days} days`;
+};
+
 const helpLine = (cmd: string, desc: string): Seg[] => [
   seg(`  ${cmd}`.padEnd(20, ' '), 'text-cyan-300'),
   seg(desc, 'text-zinc-300'),
@@ -276,23 +300,28 @@ const LOGO_COLORS = [
 const NEO_INFO: Seg[][] = [
   line('simon@shmackbook', 'font-semibold text-emerald-400'),
   line('---------------', 'text-emerald-400'),
-  kv('OS', 'Shmack OS 14.0 “Sonoma-ish” arm64'),
-  kv('Host', 'MacBook Pro (Virtual) 2026'),
+  kv('OS', 'Shmack OS 67 “Sun Tzu” ARM6or7 (495 BCE, Art of War edition)'),
+  kv('Host', 'ShmackBook Bro'),
   kv('Kernel', '6.7.0-commandcode-generic'),
-  kv('Uptime', '20 years, 4 months (since Gymnázium)'),
+  kv('Uptime', `${ageSince(2004, 6, 26)} (since 26. 06. 2004)`),
   kv('Packages', '9 milestones, 47 skills, 3 cities'),
   kv('Shell', 'zsh 5.9'),
-  kv('Resolution', '5120x2880 @ 60Hz (Retina 5K)'),
+  kv('Resolution', '5120x2880 @ 60Hz (Retina 5K Okularis)'),
   kv('DE', 'Aqua (Shmack edition)'),
   kv('WM', 'Quartz Compositor'),
   kv('Terminal', 'shmack-term 6.7'),
-  kv('CPU', 'CommandCode Silicon M∞ (67) @ 6.9GHz'),
+  kvSegs(
+    'CPU',
+    seg('SmoothBrain Silicon ', 'text-zinc-300'),
+    seg('M∞', 'text-[1.15em] font-bold text-emerald-300'),
+    seg(' @ 6.9GHz', 'text-zinc-300'),
+  ),
   kv('GPU', '8x AI Training GPUs — H200 cluster, obviously'),
-  kv('Memory', '128GB / 16TB (16TB pinned to PyTorch)'),
+  kv('Memory', '5 KB / 16 TiB (floppy disk rack)'),
   kv('WiFi', 'WiFi 6.7 — “idk_pass” (signal: exquisite)'),
   kv('Sharpe', '4.20 (do not fact-check this)'),
   kv('Locale', 'en_US.UTF-8 · cs_CZ.UTF-8 · zh_CN.UTF-8'),
-  kv('Battery', '100% — never dips, like the portfolio'),
+  kv('Battery', '180% — never dips, like the portfolio'),
 ];
 
 /** Logo on the left, stats on the right — like the real thing. */

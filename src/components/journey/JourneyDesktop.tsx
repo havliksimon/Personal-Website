@@ -605,7 +605,7 @@ const JourneyDesktop = () => {
                 {openMenu === label && (
                   <div className={panelCls}>
                     <MenuRow label={`${label}: nothing here yet`} disabled />
-                    <MenuRow label="Shmack OS v14.0" disabled />
+                    <MenuRow label="Shmack OS 67 — “Sun Tzu”" disabled />
                   </div>
                 )}
               </div>
@@ -634,7 +634,10 @@ const JourneyDesktop = () => {
           </div>
 
           <div className={`flex items-center gap-3 ${desktopDark ? 'text-white/90' : 'text-gray-700'}`}>
-            <BatteryFull className="hidden h-4 w-4 sm:block" />
+            <span className="hidden items-center gap-1 sm:flex">
+              <BatteryFull className="h-4 w-4" />
+              <span className="text-[11px] font-medium tabular-nums">180%</span>
+            </span>
             <button
               type="button"
               onPointerDown={stop}
