@@ -11,8 +11,57 @@ import PdfFrame from '../../PdfFrame';
 import { WALLPAPERS, CONTACT_EMAIL, FORMSPREE_ENDPOINT, docs, projects, type DesktopDoc } from './data';
 import {
   SCRIPT, SEG_STARTS, TOTAL_CHARS, seg, line, getDir, joinPath, ROOT,
-  HELP, NEOFETCH, HTOP, NANO, JARGON, EDUCATION_LOG, type Seg,
+  HELP, NEOFETCH, NEO_INFO, HTOP, NANO, JARGON, EDUCATION_LOG, type Seg,
 } from './terminal';
+import { LUCY_ROWS } from './lucyArt';
+
+const ART_CELL = 5;
+
+const decodeRow = (row: string) => {
+  const runs: { n: number; fg: string; bg: string }[] = [];
+  for (let i = 0; i + 12 <= row.length; i += 12) {
+    const fg = `#${row.slice(i, i + 6)}`;
+    const bg = `#${row.slice(i + 6, i + 12)}`;
+    const last = runs[runs.length - 1];
+    if (last && last.fg === fg && last.bg === bg) last.n += 1;
+    else runs.push({ n: 1, fg, bg });
+  }
+  return runs;
+};
+
+const LUCY_RUNS = LUCY_ROWS.map(decodeRow);
+
+const LucyNeofetch = () => (
+  <div className="flex flex-wrap gap-3">
+    <div className="shrink-0" aria-hidden="true">
+      {LUCY_RUNS.map((runs, y) => (
+        <div key={y} className="flex">
+          {runs.map((r, i) => (
+            <span
+              key={i}
+              style={{
+                width: r.n * ART_CELL,
+                height: ART_CELL,
+                backgroundImage: `linear-gradient(to bottom, ${r.bg} 0 50%, ${r.fg} 50% 100%)`,
+              }}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+    <div className="min-w-0 flex-1 whitespace-pre-wrap break-words">
+      {NEO_INFO.map((ln, i) => (
+        <div key={i}>
+          {ln.map((s, j) => (
+            <span key={j} className={s.cls}>
+              {s.text}
+            </span>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
 const MONO = "'SF Mono', Menlo, Monaco, 'JetBrains Mono', monospace";
 
@@ -248,20 +297,9 @@ export const TerminalApp = ({ count, actions }: { count: number; actions: Termin
       )}
 
       {lines.map((ln, i) => {
-        const [first, ...rest] = ln;
-        if (first?.cls.includes('shmack-art')) {
-          return (
-            <div key={i} className="flex">
-              <span className={`shrink-0 whitespace-pre ${first.cls}`}>{first.text}</span>
-              <span className="min-w-0 flex-1 whitespace-pre-wrap break-words">
-                {rest.map((s, j) => (
-                  <span key={j} className={s.cls}>
-                    {s.text}
-                  </span>
-                ))}
-              </span>
-            </div>
-          );
+        const [first] = ln;
+        if (first?.cls.includes('shmack-neofetch')) {
+          return <LucyNeofetch key={i} />;
         }
         return (
           <div key={i} className="whitespace-pre-wrap break-words">

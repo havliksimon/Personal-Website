@@ -261,43 +261,7 @@ export const HELP: Seg[][] = [
   helpLine('whoami, date, clear, sudo, exit', 'the usual suspects'),
 ];
 
-/** Whole, solid apple (no bite) — the Shmack OS logo. */
-const LOGO = [
-  '              .#.',
-  '             ###',
-  '          ########',
-  '        ############',
-  '      ################',
-  '     ##################',
-  '    ####################',
-  '    ####################',
-  '    ####################',
-  '     ##################',
-  '      ################',
-  '        ############',
-  '          ########',
-  '            ####',
-];
-
-/** Per-line gradient (leaf green → ripe red) so the logo is properly colourful. */
-const LOGO_COLORS = [
-  'text-amber-600',
-  'text-green-400',
-  'text-lime-400',
-  'text-lime-300',
-  'text-yellow-400',
-  'text-yellow-500',
-  'text-amber-400',
-  'text-orange-400',
-  'text-orange-500',
-  'text-red-400',
-  'text-red-500',
-  'text-rose-500',
-  'text-red-500',
-  'text-red-600',
-];
-
-const NEO_INFO: Seg[][] = [
+export const NEO_INFO: Seg[][] = [
   line('simon@shmackbook', 'font-semibold text-emerald-400'),
   line('---------------', 'text-emerald-400'),
   kv('OS', 'Shmack OS 67 “Sun Tzu” ARM6or7 (495 BCE, Art of War edition)'),
@@ -324,20 +288,8 @@ const NEO_INFO: Seg[][] = [
   kv('Battery', '180% — never dips, like the portfolio'),
 ];
 
-/** Logo on the left, stats on the right — like the real thing. */
-export const NEOFETCH: Seg[][] = (() => {
-  const artWidth = Math.max(...LOGO.map((artLine) => artLine.length));
-  const rows = Math.max(LOGO.length, NEO_INFO.length);
-  const out: Seg[][] = [];
-  for (let i = 0; i < rows; i += 1) {
-    const art = `${(LOGO[i] ?? '').padEnd(artWidth)}   `;
-    out.push([
-      seg(art, `shmack-art ${LOGO_COLORS[i % LOGO_COLORS.length]}`),
-      ...(NEO_INFO[i] ?? []),
-    ]);
-  }
-  return out;
-})();
+/** Marker row — the renderer draws Lucy beside the stats. */
+export const NEOFETCH: Seg[][] = [[seg('', 'shmack-neofetch')]];
 
 export const HTOP: Seg[][] = [
   line('  0[||||||||||||||||||||||||||||||98.7%]  1[|||||||||||||||||||      62.0%]    Tasks: 69, 420 thr; 1 running', 'text-zinc-300'),
