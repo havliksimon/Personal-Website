@@ -65,12 +65,12 @@
     }
   ],
   "photos": [
-    { "src": "/images/china-1.jpg", "alt": "Forbidden City, Beijing", "location": "Forbidden City" },
-    { "src": "/images/china-2.jpg", "alt": "Historic street in Beijing", "location": "Beijing Hutong" },
-    { "src": "/images/china-3.jpg", "alt": "Summer Palace selfie", "location": "Summer Palace" },
-    { "src": "/images/china-4.jpg", "alt": "Summer Palace view", "location": "Summer Palace" },
-    { "src": "/images/china-5.jpg", "alt": "Temple of Heaven", "location": "Temple of Heaven" },
-    { "src": "/images/china-6.jpg", "alt": "Great Wall of China", "location": "Great Wall" }
+    { "src": "/images/china-1.webp", "alt": "Forbidden City, Beijing", "location": "Forbidden City" },
+    { "src": "/images/china-2.webp", "alt": "Historic street in Beijing", "location": "Beijing Hutong" },
+    { "src": "/images/china-3.webp", "alt": "Summer Palace selfie", "location": "Summer Palace" },
+    { "src": "/images/china-4.webp", "alt": "Summer Palace view", "location": "Summer Palace" },
+    { "src": "/images/china-5.webp", "alt": "Temple of Heaven", "location": "Temple of Heaven" },
+    { "src": "/images/china-6.webp", "alt": "Great Wall of China", "location": "Great Wall" }
   ],
   "keyFacts": [
     "China has been the world's largest economy by PPP since 2016",

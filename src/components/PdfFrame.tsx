@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FileText, ExternalLink, Download } from 'lucide-react';
 
 /**
@@ -25,7 +25,11 @@ interface PdfFrameProps {
 }
 
 export const PdfFrame = ({ src, title, subtitle, pages, className }: PdfFrameProps) => {
-  const [canEmbed] = useState(detectEmbeddable);
+  const [canEmbed, setCanEmbed] = useState(true);
+
+  useEffect(() => {
+    setCanEmbed(detectEmbeddable());
+  }, []);
 
   if (canEmbed) {
     return (

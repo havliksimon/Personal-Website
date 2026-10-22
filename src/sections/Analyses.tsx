@@ -385,7 +385,7 @@ const Analyses = () => {
                     <>
                       <div className="flex items-center gap-1">
                         <a
-                          href={`https://r.jina.ai/http://${typeof window !== 'undefined' ? window.location.host : 'localhost'}${activeDoc.pdfUrl}`}
+                          href={`https://r.jina.ai/http://simonhavlik.com${activeDoc.pdfUrl}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-amber-400 hover:text-amber-300 hover:bg-gray-800 rounded-lg transition-colors"

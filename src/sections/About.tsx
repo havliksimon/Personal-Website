@@ -231,8 +231,10 @@ const About = () => {
             {/* Portrait */}
             <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 aspect-[4/3]">
               <img
-                src="./images/about-portrait.jpg"
+                src="./images/about-portrait.webp"
                 alt="Šimon Havlík – Financial Analyst, VŠE Prague, Klub Investorů"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />

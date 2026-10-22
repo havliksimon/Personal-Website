@@ -7,6 +7,7 @@ import {
   MousePointer2, Loader2, ArrowUpRight, Maximize2, X, ZoomIn, ZoomOut, type LucideIcon
 } from 'lucide-react';
 import ProjectsEffects from '../components/ProjectsEffects';
+import { useInView } from '../hooks/useInView';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -157,6 +158,7 @@ const Projects = () => {
   });
   const [showZoomControls, setShowZoomControls] = useState(false);
   const [iframeScale, setIframeScale] = useState(1);
+  const { ref: iframeWrapRef, inView: showIframe } = useInView<HTMLDivElement>('800px');
 
   const openFullscreen = (url: string, title: string) => {
     setFullscreenModal({ isOpen: true, url, title });
@@ -464,8 +466,8 @@ const Projects = () => {
                 </div>
                 
                 {/* Iframe Container - Tall */}
-                <div className="relative flex-1 bg-gray-100 min-h-[500px] lg:min-h-0">
-                  {iframeLoading && (
+                <div ref={iframeWrapRef} className="relative flex-1 bg-gray-100 min-h-[500px] lg:min-h-0">
+                  {(iframeLoading || !showIframe) && (
                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-900 z-10">
                       <div className="relative">
                         <div className={`w-16 h-16 rounded-full border-4 border-gray-700 border-t-${activeProject.color}-500 animate-spin`} />
@@ -473,6 +475,7 @@ const Projects = () => {
                       <span className="mt-4 text-sm text-gray-400">Loading {activeProject.shortTitle}...</span>
                     </div>
                   )}
+                  {showIframe && (
                   <iframe
                     key={activeProject.id}
                     src={activeProject.previewUrl}
@@ -482,6 +485,7 @@ const Projects = () => {
                     title={activeProject.title}
                     style={{ transform: `scale(${iframeScale})`, transformOrigin: 'top left', width: `${100/iframeScale}%`, height: `${100/iframeScale}%` }}
                   />
+                  )}
                 </div>
                 
                 {/* Footer bar */}

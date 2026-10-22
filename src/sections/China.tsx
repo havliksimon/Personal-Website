@@ -115,12 +115,12 @@ const China = () => {
   }, []);
 
   const photos = [
-    { src: './images/china-1.jpg', location: 'Forbidden City, Beijing' },
-    { src: './images/china-2.jpg', location: 'Beijing Hutong' },
-    { src: './images/china-3.jpg', location: 'Summer Palace' },
-    { src: './images/china-4.jpg', location: 'Summer Palace View' },
-    { src: './images/china-5.jpg', location: 'Temple of Heaven' },
-    { src: './images/china-6.jpg', location: 'Great Wall of China' },
+    { src: './images/china-1.webp', location: 'Forbidden City, Beijing' },
+    { src: './images/china-2.webp', location: 'Beijing Hutong' },
+    { src: './images/china-3.webp', location: 'Summer Palace' },
+    { src: './images/china-4.webp', location: 'Summer Palace View' },
+    { src: './images/china-5.webp', location: 'Temple of Heaven' },
+    { src: './images/china-6.webp', location: 'Great Wall of China' },
   ];
 
   return (
@@ -251,6 +251,8 @@ const China = () => {
                 <img
                   src={photo.src}
                   alt={photo.location}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div 

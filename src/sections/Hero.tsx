@@ -182,9 +182,8 @@ const Hero = () => {
           }}
         >
           <img
-            src="./images/hero-portrait.png"
+            src="./images/hero-portrait.webp"
             alt="Šimon Havlík – Financial Analyst and Economics Student (VŠE Prague)"
-            fetchPriority="high"
             style={{ 
               height: '100%',
               width: 'auto',
@@ -270,7 +269,7 @@ const Hero = () => {
             className="flex justify-center items-end h-full w-full"
           >
             <img
-              src="./images/hero-portrait.png"
+              src="./images/hero-portrait.webp"
               alt="Šimon Havlík – Financial Analyst, Prague"
               style={{ 
                 height: '100%',
