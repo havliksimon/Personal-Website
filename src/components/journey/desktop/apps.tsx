@@ -30,11 +30,11 @@ const decodeRow = (row: string) => {
 const LUCY_RUNS = LUCY_ROWS.map(decodeRow);
 
 const LucyNeofetch = () => (
-  <div className="flex flex-wrap gap-4">
+  <div className="flex flex-col gap-4 sm:flex-row">
     <div
-      className="shrink-0"
+      className="shrink-0 self-start"
       aria-hidden="true"
-      style={{ '--lucy-cell': 'clamp(7px, 1.5vw, 11px)' } as CSSProperties}
+      style={{ '--lucy-cell': 'clamp(4px, 0.5vw, 6px)' } as CSSProperties}
     >
       {LUCY_RUNS.map((runs, y) => (
         <div key={y} className="flex">
@@ -43,7 +43,7 @@ const LucyNeofetch = () => (
               key={i}
               style={{
                 width: `calc(var(--lucy-cell) * ${r.n})`,
-                height: 'var(--lucy-cell)',
+                height: 'calc(var(--lucy-cell) * 2)',
                 backgroundImage: `linear-gradient(to bottom, ${r.bg} 0 50%, ${r.fg} 50% 100%)`,
               }}
             />
@@ -51,7 +51,7 @@ const LucyNeofetch = () => (
         </div>
       ))}
     </div>
-    <div className="min-w-[220px] flex-1 whitespace-pre-wrap break-words">
+    <div className="min-w-0 flex-1 whitespace-pre-wrap break-words">
       {NEO_INFO.map((ln, i) => (
         <div key={i}>
           {ln.map((s, j) => (
