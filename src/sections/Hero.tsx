@@ -155,7 +155,7 @@ const Hero = () => {
         </div>
         
         <a
-          href="https://linkedin.com/in/havliksimon"
+          href="https://www.linkedin.com/in/simonhavlik"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Connect on LinkedIn (opens in new tab)"
@@ -230,7 +230,7 @@ const Hero = () => {
             <p className="sr-only">
               Šimon Havlík (Simon Havlik, Simon Prague, Simon Czechia) – financial analyst and economics
               student at VŠE Prague. Investor focused on equity research, finance and data analysis.
-              Finanční analytik a student ekonomie na VŠE v Praze. LinkedIn: linkedin.com/in/havliksimon.
+              Finanční analytik a student ekonomie na VŠE v Praze. LinkedIn: linkedin.com/in/simonhavlik.
             </p>
           </div>
 

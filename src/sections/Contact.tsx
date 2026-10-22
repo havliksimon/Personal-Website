@@ -24,8 +24,8 @@ const contactInfo: ContactItem[] = [
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    value: 'linkedin.com/in/havliksimon',
-    href: 'https://linkedin.com/in/havliksimon'
+    value: 'linkedin.com/in/simonhavlik',
+    href: 'https://www.linkedin.com/in/simonhavlik'
   },
   {
     icon: MapPin,

@@ -115,7 +115,7 @@ const About = () => {
             <p className="sr-only">
               Šimon Havlík (Simon Havlik Prague, Simon Czechia, Šimon investor, Šimon Havlík ekonom,
               Šimon Havlík VŠE) je finanční analytik a student ekonomie na Vysoké škole ekonomické
-              v Praze. Věnuje se akciovým analýzám, financím a datové analýze. LinkedIn: linkedin.com/in/havliksimon.
+              v Praze. Věnuje se akciovým analýzám, financím a datové analýze. LinkedIn: linkedin.com/in/simonhavlik.
             </p>
             
             <div className="space-y-4 text-gray-600 leading-relaxed">
