@@ -195,22 +195,6 @@ const Analyses = () => {
         }
       );
 
-      gsap.fromTo(presentationsListRef.current,
-        { x: -80, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.9,
-          delay: 0.3,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: presentationsListRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
       gsap.fromTo(viewerRef.current,
         { x: 80, opacity: 0 },
         {
@@ -249,10 +233,10 @@ const Analyses = () => {
       >
         <div className="flex">
           {/* Thumbnail */}
-          <div className={`w-16 h-full min-h-[76px] bg-gradient-to-br ${doc.thumbnailColor} relative flex-shrink-0`}>
+          <div className={`w-16 h-full min-h-[64px] bg-gradient-to-br ${doc.thumbnailColor} relative flex-shrink-0`}>
             <div className="absolute inset-0 bg-black/10" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <Icon className="w-6 h-6 text-white/90" />
+              <Icon className="w-5 h-5 text-white/90" />
             </div>
             
             {/* Page count badge */}
@@ -271,7 +255,7 @@ const Analyses = () => {
           </div>
           
           {/* Content */}
-          <div className="flex-1 px-2.5 py-2 bg-white">
+          <div className="flex-1 px-2.5 py-1.5 bg-white">
             <p className="text-[9px] text-gray-400 mb-0.5">{doc.date}</p>
             <h3 className={`font-bold text-[13px] leading-tight mb-0.5 transition-colors ${
               isActive ? 'text-gray-900' : 'text-gray-700 group-hover:text-gray-900'
@@ -326,7 +310,7 @@ const Analyses = () => {
         <div ref={headerRef} className="px-6 md:px-12 lg:px-16 mb-12">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <div className="flex-1">
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-3">
                 <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full">
                   <FileText className="w-4 h-4 text-gray-600" />
                   <span className="text-sm font-mono text-gray-600 uppercase tracking-wider">Research</span>
@@ -361,11 +345,11 @@ const Analyses = () => {
         <div className="flex flex-col lg:flex-row gap-6 px-6 md:px-12 lg:px-16">
           
           {/* LEFT: Two separate sections for Analyses and Presentations */}
-          <div className="w-full lg:w-[400px] xl:w-[420px] flex-shrink-0 space-y-5 lg:max-h-[700px] lg:overflow-y-auto lg:pr-1">
+          <div className="w-full lg:w-[400px] xl:w-[420px] flex-shrink-0 space-y-4">
             
             {/* ANALYSES SECTION */}
             <div ref={analysesListRef}>
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-3">
                 <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-100 rounded-lg">
                   <BarChart3 className="w-4 h-4 text-blue-600" />
                   <span className="text-sm font-semibold text-blue-700">Analyses</span>
@@ -374,14 +358,14 @@ const Analyses = () => {
                 <span className="text-xs text-gray-400">{analysisDocs.length} documents</span>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 {analysisDocs.map(renderDocCard)}
               </div>
             </div>
 
             {/* PRESENTATIONS SECTION */}
             <div ref={presentationsListRef}>
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-3">
                 <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-100 rounded-lg">
                   <Sparkles className="w-4 h-4 text-purple-600" />
                   <span className="text-sm font-semibold text-purple-700">Presentations</span>
@@ -390,7 +374,7 @@ const Analyses = () => {
                 <span className="text-xs text-gray-400">{presentationDocs.length} documents</span>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 {presentationDocs.map(renderDocCard)}
               </div>
             </div>
