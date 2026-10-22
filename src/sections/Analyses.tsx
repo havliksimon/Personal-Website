@@ -32,20 +32,6 @@ interface AnalysisDoc {
 
 const analyses: AnalysisDoc[] = [
   {
-    id: 8,
-    title: 'Geely Automobile Analysis',
-    subtitle: 'Chinese Auto & NEV Conglomerate',
-    description: 'Geely (0175.HK) at a holding-company discount: 55.8% NEV mix, 3.02M units in 2025, SEA platform licensing and RMB 34.4B net cash, valued on a three-scenario DCF with base fair value ~25 HKD versus ~16.8 HKD at the time of writing.',
-    type: 'analysis',
-    date: 'Feb 2026',
-    pages: 21,
-    pdfUrl: '/analyses/EM_GELYF_Havlik.pdf',
-    thumbnailColor: 'from-sky-500 to-blue-700',
-    icon: BarChart3,
-    tags: ['China', 'Automotive', 'NEV'],
-    language: 'cs'
-  },
-  {
     id: 1,
     title: 'Bilibili Equity Analysis',
     subtitle: 'EM Technology & Entertainment',
@@ -143,7 +129,21 @@ const analyses: AnalysisDoc[] = [
     icon: BarChart3,
     tags: ['Turnaround', 'Mobility', 'Value'],
     language: 'en'
-  }
+  },
+  {
+    id: 8,
+    title: 'Geely Automobile Analysis',
+    subtitle: 'Chinese Auto & NEV Conglomerate',
+    description: 'Geely (0175.HK) at a holding-company discount: 55.8% NEV mix, 3.02M units in 2025, SEA platform licensing and RMB 34.4B net cash, valued on a three-scenario DCF with base fair value ~25 HKD versus ~16.8 HKD at the time of writing.',
+    type: 'analysis',
+    date: 'Feb 2026',
+    pages: 21,
+    pdfUrl: '/analyses/EM_GELYF_Havlik.pdf',
+    thumbnailColor: 'from-sky-500 to-blue-700',
+    icon: BarChart3,
+    tags: ['China', 'Automotive', 'NEV'],
+    language: 'cs'
+  },
 ];
 
 const Analyses = () => {
@@ -249,16 +249,16 @@ const Analyses = () => {
       >
         <div className="flex">
           {/* Thumbnail */}
-          <div className={`w-20 h-full min-h-[120px] bg-gradient-to-br ${doc.thumbnailColor} relative flex-shrink-0`}>
+          <div className={`w-16 h-full min-h-[76px] bg-gradient-to-br ${doc.thumbnailColor} relative flex-shrink-0`}>
             <div className="absolute inset-0 bg-black/10" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <Icon className="w-8 h-8 text-white/90" />
+              <Icon className="w-6 h-6 text-white/90" />
             </div>
             
             {/* Page count badge */}
-            <div className="absolute bottom-2 left-2 right-2">
+            <div className="absolute bottom-1.5 left-1.5 right-1.5">
               <div className="bg-white/90 backdrop-blur-sm rounded px-1.5 py-0.5 text-center">
-                <span className="text-[10px] font-bold text-gray-800">{doc.pages}p</span>
+                <span className="text-[9px] font-bold text-gray-800">{doc.pages}p</span>
               </div>
             </div>
 
@@ -271,14 +271,14 @@ const Analyses = () => {
           </div>
           
           {/* Content */}
-          <div className="flex-1 p-3 bg-white">
-            <p className="text-[10px] text-gray-400 mb-0.5">{doc.date}</p>
-            <h3 className={`font-bold text-sm leading-tight mb-0.5 transition-colors ${
+          <div className="flex-1 px-2.5 py-2 bg-white">
+            <p className="text-[9px] text-gray-400 mb-0.5">{doc.date}</p>
+            <h3 className={`font-bold text-[13px] leading-tight mb-0.5 transition-colors ${
               isActive ? 'text-gray-900' : 'text-gray-700 group-hover:text-gray-900'
             }`}>
               {doc.title}
             </h3>
-            <p className="text-[10px] text-gray-500 mb-1.5">{doc.subtitle}</p>
+            <p className="text-[9.5px] text-gray-500 mb-1">{doc.subtitle}</p>
             
             {/* Tags + Language */}
             <div className="flex flex-wrap gap-1 items-center">
@@ -361,7 +361,7 @@ const Analyses = () => {
         <div className="flex flex-col lg:flex-row gap-6 px-6 md:px-12 lg:px-16">
           
           {/* LEFT: Two separate sections for Analyses and Presentations */}
-          <div className="w-full lg:w-[400px] xl:w-[420px] flex-shrink-0 space-y-6">
+          <div className="w-full lg:w-[400px] xl:w-[420px] flex-shrink-0 space-y-5 lg:max-h-[700px] lg:overflow-y-auto lg:pr-1">
             
             {/* ANALYSES SECTION */}
             <div ref={analysesListRef}>
@@ -374,7 +374,7 @@ const Analyses = () => {
                 <span className="text-xs text-gray-400">{analysisDocs.length} documents</span>
               </div>
               
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {analysisDocs.map(renderDocCard)}
               </div>
             </div>
@@ -390,7 +390,7 @@ const Analyses = () => {
                 <span className="text-xs text-gray-400">{presentationDocs.length} documents</span>
               </div>
               
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {presentationDocs.map(renderDocCard)}
               </div>
             </div>
