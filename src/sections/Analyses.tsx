@@ -97,6 +97,34 @@ const analyses: AnalysisDoc[] = [
     thumbnailColor: 'from-violet-500 to-purple-600',
     icon: BookOpen,
     tags: ['Tech', 'China', 'Investment Case']
+  },
+  {
+    id: 6,
+    title: 'Chagee Equity Analysis',
+    subtitle: 'Chinese Premium Tea Chain',
+    description: 'Full write-up on Chagee (NASDAQ: CHA): premium tea unit economics, store growth and overseas expansion, margin durability, and a GARP case at roughly 6x EV/EBITDA versus a discount to peers.',
+    type: 'analysis',
+    date: 'Sep 2025',
+    pages: 20,
+    pdfUrl: '/analyses/EM_CHA_Havlik.pdf',
+    thumbnailColor: 'from-emerald-500 to-lime-600',
+    icon: TrendingUp,
+    tags: ['Consumer', 'China', 'GARP'],
+    language: 'cs'
+  },
+  {
+    id: 7,
+    title: 'Lyft Equity Analysis',
+    subtitle: 'North American Rideshare',
+    description: 'Lyft (NASDAQ: LYFT) turnaround case: sustained profitability and free cash flow under new leadership, roughly 30% North American share, AV partnerships and FREENOW expansion, with a ~60% upside target.',
+    type: 'analysis',
+    date: 'Mar 2026',
+    pages: 27,
+    pdfUrl: '/analyses/LYFT_Havlik.pdf',
+    thumbnailColor: 'from-pink-500 to-fuchsia-600',
+    icon: BarChart3,
+    tags: ['Turnaround', 'Mobility', 'Value'],
+    language: 'en'
   }
 ];
 

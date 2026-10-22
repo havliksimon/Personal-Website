@@ -41,4 +41,20 @@
     <priority>0.85</priority>
   </url>
   
+  <!-- Chagee Equity Analysis - full write-up -->
+  <url>
+    <loc>https://simonhavlik.com/analyses/EM_CHA_Havlik.pdf</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Lyft Equity Analysis - North American rideshare -->
+  <url>
+    <loc>https://simonhavlik.com/analyses/LYFT_Havlik.pdf</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
 </urlset>
