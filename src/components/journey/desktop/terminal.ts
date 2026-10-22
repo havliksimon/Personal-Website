@@ -254,7 +254,7 @@ export const HELP: Seg[][] = [
   helpLine('pwd', 'print working directory'),
   helpLine('open <file>', 'open a file in its app (pdf → Pages/Keynote, links.html → Safari, skills.freeform → Skills)'),
   helpLine('cat <file|url>', 'print a file, or fetch a URL through r.jina.ai'),
-  helpLine('neofetch', 'system info (a.k.a. screenfetch)'),
+  helpLine('neofetch', 'system info (also fastfetch / screenfetch)'),
   helpLine('htop', 'process viewer (100% real)'),
   helpLine('nano <file>', 'the text editor (allegedly)'),
   helpLine('jargon', 'random finance / programmer jargon'),
@@ -331,7 +331,10 @@ export const NEOFETCH: Seg[][] = (() => {
   const out: Seg[][] = [];
   for (let i = 0; i < rows; i += 1) {
     const art = `${(LOGO[i] ?? '').padEnd(artWidth)}   `;
-    out.push([seg(art, LOGO_COLORS[i % LOGO_COLORS.length]), ...(NEO_INFO[i] ?? [])]);
+    out.push([
+      seg(art, `shmack-art ${LOGO_COLORS[i % LOGO_COLORS.length]}`),
+      ...(NEO_INFO[i] ?? []),
+    ]);
   }
   return out;
 })();

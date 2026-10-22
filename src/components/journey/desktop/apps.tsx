@@ -147,6 +147,7 @@ export const TerminalApp = ({ count, actions }: { count: number; actions: Termin
         return append([line(`open: cannot open ${arg} (try \`cat\`)`, 'text-zinc-500')]);
       }
       case 'neofetch':
+      case 'fastfetch':
       case 'screenfetch':
         return append(NEOFETCH);
       case 'htop':
@@ -246,15 +247,32 @@ export const TerminalApp = ({ count, actions }: { count: number; actions: Termin
         </div>
       )}
 
-      {lines.map((ln, i) => (
-        <div key={i} className="whitespace-pre-wrap break-words">
-          {ln.map((s, j) => (
-            <span key={j} className={s.cls}>
-              {s.text}
-            </span>
-          ))}
-        </div>
-      ))}
+      {lines.map((ln, i) => {
+        const [first, ...rest] = ln;
+        if (first?.cls.includes('shmack-art')) {
+          return (
+            <div key={i} className="flex">
+              <span className={`shrink-0 whitespace-pre ${first.cls}`}>{first.text}</span>
+              <span className="min-w-0 flex-1 whitespace-pre-wrap break-words">
+                {rest.map((s, j) => (
+                  <span key={j} className={s.cls}>
+                    {s.text}
+                  </span>
+                ))}
+              </span>
+            </div>
+          );
+        }
+        return (
+          <div key={i} className="whitespace-pre-wrap break-words">
+            {ln.map((s, j) => (
+              <span key={j} className={s.cls}>
+                {s.text}
+              </span>
+            ))}
+          </div>
+        );
+      })}
 
       {introDone && lines.length === 0 && (
         <div className="text-zinc-500">
