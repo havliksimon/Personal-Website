@@ -138,7 +138,7 @@ const About = () => {
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-500">
                 <GraduationCap className="w-4 h-4" />
-                <span>VŠE Prague</span>
+                <span>VŠE Prague · top 10% of class</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-500">
                 <Briefcase className="w-4 h-4" />
@@ -285,8 +285,8 @@ const About = () => {
             <p className="text-sm text-gray-500">Tech Stack</p>
           </div>
           <div className="stat-item text-center">
-            <p className="text-4xl font-bold text-gray-900 mb-1">2027</p>
-            <p className="text-sm text-gray-500">Graduation</p>
+            <p className="text-4xl font-bold text-gray-900 mb-1">Top 10%</p>
+            <p className="text-sm text-gray-500">Class Standing</p>
           </div>
         </div>
       </div>
