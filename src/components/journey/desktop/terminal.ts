@@ -302,7 +302,7 @@ const NEO_INFO: Seg[][] = [
   line('---------------', 'text-emerald-400'),
   kv('OS', 'Shmack OS 67 “Sun Tzu” ARM6or7 (495 BCE, Art of War edition)'),
   kv('Host', 'ShmackBook Bro'),
-  kv('Kernel', '6.7.0-commandcode-generic'),
+  kv('Kernel', '6.7.0-intamvidia-generic'),
   kv('Uptime', `${ageSince(2004, 6, 26)} (since 26. 06. 2004)`),
   kv('Packages', '9 milestones, 47 skills, 3 cities'),
   kv('Shell', 'zsh 5.9'),
