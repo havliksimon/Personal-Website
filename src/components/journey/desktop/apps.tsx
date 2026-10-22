@@ -723,7 +723,7 @@ export const ViewerApp = ({ doc }: { doc: DesktopDoc }) => (
 
 const SIRI_QUESTION = 'Should I hire Simon?';
 const SIRI_ANSWER =
-  "Correct. BUY, not hold. You get the model, the assumptions behind it, and the paragraph explaining where it could be wrong. Most candidates only bring the first one. Not investment advice.";
+  "Yes. Definitely. You should. 😈 He knows you've been here… he knows. Hire him — or else 💀";
 
 export const SiriApp = () => {
   const [phase, setPhase] = useState<'question' | 'thinking' | 'answer'>('question');
