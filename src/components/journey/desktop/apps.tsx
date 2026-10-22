@@ -1027,10 +1027,17 @@ export const SettingsApp = ({
             <h3 className="mt-3 text-xl font-semibold">Shmack OS 67</h3>
             <p className="mb-6 text-[12px] text-gray-500">“Sun Tzu” — Art of War edition, 495 BCE</p>
             <dl className="w-full max-w-xs space-y-1 text-[12px]">
+              <div className="flex items-center justify-between border-b border-black/5 py-1">
+                <dt className="text-gray-500">Chip</dt>
+                <dd className="font-medium text-gray-800">
+                  SmoothBrain Silicon{' '}
+                  <span className="text-[15px] font-bold text-gray-900">M∞</span>
+                </dd>
+              </div>
               {[
-                ['Chip', 'SmoothBrain Silicon'],
                 ['Architecture', 'ARM6or7'],
-                ['Startup disk', 'Floppy Disk Rack — 5 KB of 16 TiB'],
+                ['Memory', '5 KB / 16 TiB'],
+                ['Startup disk', 'Floppy Disk Rack'],
                 ['Display', 'Retina 5K Okularis'],
                 ['Serial number', 'SHMACK-2026-SIMON'],
               ].map(([key, value]) => (
@@ -1039,10 +1046,6 @@ export const SettingsApp = ({
                   <dd className="font-medium text-gray-800">{value}</dd>
                 </div>
               ))}
-              <div className="flex items-center justify-between border-b border-black/5 py-1">
-                <dt className="text-gray-500">Memory</dt>
-                <dd className="text-[15px] font-bold text-gray-900">M∞</dd>
-              </div>
             </dl>
           </div>
         )}
