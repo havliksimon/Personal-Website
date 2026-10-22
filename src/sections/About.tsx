@@ -100,7 +100,7 @@ const About = () => {
             Get to know me
           </span>
           <h2 id="about-heading" ref={titleRef} className="text-4xl md:text-5xl font-bold text-gray-900">
-            About Me
+            About Me — Who Is Šimon Havlík?
           </h2>
         </div>
 

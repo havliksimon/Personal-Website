@@ -55,6 +55,15 @@ export const docs: DesktopDoc[] = [
     pdfUrl: '/presentations/presentation_Tencent.pdf',
   },
   {
+    id: 6,
+    title: 'Geely Automobile Analysis',
+    subtitle: 'Chinese Auto & NEV Conglomerate',
+    date: 'Feb 2026',
+    pages: 21,
+    kind: 'analysis',
+    pdfUrl: '/analyses/EM_GELYF_Havlik.pdf',
+  },
+  {
     id: 10,
     title: 'CV — Simon Havlík',
     subtitle: 'Curriculum Vitae',

@@ -57,4 +57,12 @@
     <priority>0.8</priority>
   </url>
   
+  <!-- Geely Automobile Analysis - Chinese auto & NEV -->
+  <url>
+    <loc>https://simonhavlik.com/analyses/EM_GELYF_Havlik.pdf</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
 </urlset>

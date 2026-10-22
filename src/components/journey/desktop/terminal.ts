@@ -118,6 +118,7 @@ export const ROOT: VDir = {
         { name: 'bilibili_equity_analysis.pdf', kind: 'pdf', docId: 1 },
         { name: 'tuya_inc_analysis.pdf', kind: 'pdf', docId: 2 },
         { name: 'alphabet_google_analysis.pdf', kind: 'pdf', docId: 3 },
+        { name: 'geely_automobile_analysis.pdf', kind: 'pdf', docId: 6 },
       ],
     },
     {

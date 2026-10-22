@@ -27,9 +27,24 @@ interface AnalysisDoc {
   icon: LucideIcon;
   tags: string[];
   language?: Language;
+  featured?: boolean;
 }
 
 const analyses: AnalysisDoc[] = [
+  {
+    id: 8,
+    title: 'Geely Automobile Analysis',
+    subtitle: 'Chinese Auto & NEV Conglomerate',
+    description: 'Geely (0175.HK) at a holding-company discount: 55.8% NEV mix, 3.02M units in 2025, SEA platform licensing and RMB 34.4B net cash, valued on a three-scenario DCF with base fair value ~25 HKD versus ~16.8 HKD at the time of writing.',
+    type: 'analysis',
+    date: 'Feb 2026',
+    pages: 21,
+    pdfUrl: '/analyses/EM_GELYF_Havlik.pdf',
+    thumbnailColor: 'from-sky-500 to-blue-700',
+    icon: BarChart3,
+    tags: ['China', 'Automotive', 'NEV'],
+    language: 'cs'
+  },
   {
     id: 1,
     title: 'Bilibili Equity Analysis',
@@ -42,7 +57,8 @@ const analyses: AnalysisDoc[] = [
     thumbnailColor: 'from-pink-500 to-rose-600',
     icon: TrendingUp,
     tags: ['Equity Research', 'Technology', 'China'],
-    language: 'cs'
+    language: 'cs',
+    featured: true
   },
   {
     id: 2,
@@ -83,7 +99,8 @@ const analyses: AnalysisDoc[] = [
     pdfUrl: '/presentations/presentation_Chagee.pdf',
     thumbnailColor: 'from-emerald-500 to-teal-600',
     icon: Presentation,
-    tags: ['High Risk/Reward', 'Consumer', 'Value']
+    tags: ['High Risk/Reward', 'Consumer', 'Value'],
+    featured: true
   },
   {
     id: 5,
@@ -96,7 +113,8 @@ const analyses: AnalysisDoc[] = [
     pdfUrl: '/presentations/presentation_Tencent.pdf',
     thumbnailColor: 'from-violet-500 to-purple-600',
     icon: BookOpen,
-    tags: ['Tech', 'China', 'Investment Case']
+    tags: ['Tech', 'China', 'Investment Case'],
+    featured: true
   },
   {
     id: 6,
@@ -224,7 +242,9 @@ const Analyses = () => {
         className={`gloss-card group relative rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer ${
           isActive 
             ? 'ring-2 ring-gray-900 shadow-xl scale-[1.02]' 
-            : 'ring-1 ring-gray-200 hover:ring-gray-400 hover:shadow-lg'
+            : doc.featured
+              ? 'featured-glow ring-2 ring-amber-400/70 hover:ring-amber-500'
+              : 'ring-1 ring-gray-200 hover:ring-gray-400 hover:shadow-lg'
         }`}
       >
         <div className="flex">

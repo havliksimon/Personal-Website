@@ -554,3 +554,20 @@ body.shmack-mode .custom-cursor {
 ::-webkit-scrollbar-thumb:hover {
   background: #a1a1a1;
 }
+
+/* Pulsing highlight for featured research cards */
+@keyframes featured-glow {
+  0%, 100% { box-shadow: 0 0 18px -6px rgba(245, 158, 11, 0.45); }
+  50% { box-shadow: 0 0 34px -4px rgba(245, 158, 11, 0.8); }
+}
+
+.featured-glow {
+  animation: featured-glow 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-glow {
+    animation: none;
+    box-shadow: 0 0 24px -6px rgba(245, 158, 11, 0.6);
+  }
+}

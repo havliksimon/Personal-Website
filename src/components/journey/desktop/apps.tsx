@@ -184,7 +184,8 @@ export const TerminalApp = ({ count, actions }: { count: number; actions: Termin
         if (!file) return append([line(`open: ${arg}: No such file`, 'text-red-400')]);
         if ((file.kind === 'pdf' || file.kind === 'cv') && file.docId !== undefined) {
           actions.openDoc(file.docId);
-          const opener = file.kind === 'cv' ? 'Figma' : file.docId >= 4 ? 'Keynote' : 'Pages';
+          const docKind = docs.find((d) => d.id === file.docId)?.kind;
+          const opener = file.kind === 'cv' ? 'Figma' : docKind === 'presentation' ? 'Keynote' : 'Pages';
           return append([line(`Opening ${file.name} in ${opener}…`, 'text-zinc-400')]);
         }
         if (file.kind === 'html') {
