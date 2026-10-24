@@ -105,7 +105,7 @@ export const projects: DesktopProject[] = [
     tags: ['Python', 'Flask', 'SQLAlchemy', 'Bootstrap'],
     previewUrl: 'https://ki.havliksimon.eu/',
     liveUrl: 'https://ki.havliksimon.eu/',
-    github: 'https://github.com/havliksimon/ki-asset-management',
+    github: 'https://github.com/simonhavlik/ki-asset-management',
   },
   {
     id: 2,
@@ -115,7 +115,7 @@ export const projects: DesktopProject[] = [
     tags: ['Python', 'Flask', 'CVXPY', 'Plotly'],
     previewUrl: 'https://optimizer.havliksimon.eu/',
     liveUrl: 'https://optimizer.havliksimon.eu/',
-    github: 'https://github.com/havliksimon/Portfolio-Optimization-Model',
+    github: 'https://github.com/simonhavlik/Portfolio-Optimization-Model',
   },
 ];
 

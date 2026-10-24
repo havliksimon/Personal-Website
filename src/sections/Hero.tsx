@@ -1,11 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { Linkedin, Mail } from 'lucide-react';
+import HeroTicker from '../components/HeroTicker';
+
+// three.js is heavy; keep it out of the initial bundle and hydrate it after paint
+const HeroBackdrop = lazy(() => import('../components/HeroBackdrop'));
 
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [mounted, setMounted] = useState(false);
   const particlesRef = useRef<HTMLDivElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     // Check if mobile - skip heavy animations on mobile
@@ -117,6 +126,13 @@ const Hero = () => {
       aria-label="Hero Section - Introduction"
       className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-100 via-slate-50 to-white"
     >
+      {/* three.js constellation behind the portrait, loaded after first paint */}
+      {mounted && (
+        <Suspense fallback={null}>
+          <HeroBackdrop />
+        </Suspense>
+      )}
+
       {/* Subtle ambient gradient orbs - work with global spotlight */}
       <div className="hidden md:block absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
         {[...Array(4)].map((_, i) => (
@@ -308,6 +324,9 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Exchange tape along the white fade at the bottom */}
+      <HeroTicker />
 
       <style>{`
         @keyframes floatOrb {

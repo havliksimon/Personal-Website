@@ -37,7 +37,7 @@ const projects: Project[] = [
     gradientBg: 'from-blue-500 via-cyan-500 to-blue-600',
     previewUrl: 'https://ki.havliksimon.eu/',
     liveUrl: 'https://ki.havliksimon.eu/',
-    github: 'https://github.com/havliksimon/ki-asset-management'
+    github: 'https://github.com/simonhavlik/ki-asset-management'
   },
   {
     id: 2,
@@ -50,7 +50,7 @@ const projects: Project[] = [
     gradientBg: 'from-emerald-500 via-teal-500 to-emerald-600',
     previewUrl: 'https://optimizer.havliksimon.eu/',
     liveUrl: 'https://optimizer.havliksimon.eu/',
-    github: 'https://github.com/havliksimon/Portfolio-Optimization-Model'
+    github: 'https://github.com/simonhavlik/Portfolio-Optimization-Model'
   }
 ];
 
