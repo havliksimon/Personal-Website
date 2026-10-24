@@ -13,7 +13,6 @@ import China from './sections/China';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
 import ScrollProgress from './components/ScrollProgress';
-import CustomCursor from './components/CustomCursor';
 import InteractiveNav from './components/InteractiveNav';
 import GlobalSpotlight from './components/GlobalSpotlight';
 
@@ -33,7 +32,6 @@ function App() {
 
   return (
     <>
-      <CustomCursor />
       <InteractiveNav />
       <GlobalSpotlight />
       <main className="relative cursor-none md:cursor-none">

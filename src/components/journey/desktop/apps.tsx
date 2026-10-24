@@ -634,14 +634,15 @@ export const SafariApp = ({ initialTabTitle }: { initialTabTitle?: string }) => 
 /* ------------------------------ Finder ------------------------------ */
 
 export const FinderApp = ({ onOpen }: { onOpen: (doc: DesktopDoc) => void }) => {
-  const [section, setSection] = useState<'analysis' | 'presentation' | 'cv'>('analysis');
-  const items = docs.filter((doc) => doc.kind === section);
+  const [section, setSection] = useState<'documents' | 'analysis' | 'presentation' | 'cv'>('documents');
+  const items = section === 'documents' ? docs : docs.filter((doc) => doc.kind === section);
 
   return (
     <div className="flex h-full bg-white">
       <div className="w-44 shrink-0 border-r border-gray-100 bg-gray-50/70 p-3 text-[12px] text-gray-600">
         <p className="mb-2 px-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400">Favourites</p>
         {[
+          { key: 'documents' as const, icon: <Folder className="h-3.5 w-3.5 text-gray-500" />, label: 'Documents' },
           { key: 'analysis' as const, icon: <FileText className="h-3.5 w-3.5 text-blue-500" />, label: 'Analyses' },
           { key: 'presentation' as const, icon: <Presentation className="h-3.5 w-3.5 text-purple-500" />, label: 'Presentations' },
           { key: 'cv' as const, icon: <FileText className="h-3.5 w-3.5 text-emerald-500" />, label: 'CV' },
@@ -662,7 +663,13 @@ export const FinderApp = ({ onOpen }: { onOpen: (doc: DesktopDoc) => void }) => 
       <div className="flex flex-1 flex-col">
         <div className="flex items-center gap-2 border-b border-gray-100 px-3 py-1.5 text-[11px] text-gray-400">
           <Folder className="h-3.5 w-3.5" />
-          {section === 'analysis' ? 'Analyses' : section === 'presentation' ? 'Presentations' : 'CV'}
+          {section === 'documents'
+            ? 'Documents'
+            : section === 'analysis'
+              ? 'Analyses'
+              : section === 'presentation'
+                ? 'Presentations'
+                : 'CV'}
           <span className="ml-auto">{items.length} items</span>
         </div>
         <div className="grid flex-1 grid-cols-3 content-start gap-4 overflow-auto p-4">
@@ -682,7 +689,11 @@ export const FinderApp = ({ onOpen }: { onOpen: (doc: DesktopDoc) => void }) => 
                 <Presentation className="h-9 w-9 text-purple-500" strokeWidth={1.3} />
               )}
               <span className="line-clamp-2 text-[11px] leading-tight text-gray-700">{doc.title}</span>
-              <span className="text-[10px] text-gray-400">{doc.pages} pages · {doc.date}</span>
+              <span className="text-[10px] text-gray-400">
+                {section === 'documents'
+                  ? `${doc.kind === 'cv' ? 'CV' : doc.kind === 'presentation' ? 'Deck' : 'Write-up'} · ${doc.pages}p`
+                  : `${doc.pages} pages · ${doc.date}`}
+              </span>
             </button>
           ))}
         </div>

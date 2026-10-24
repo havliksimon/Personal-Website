@@ -108,21 +108,6 @@
 
   /* ---------- skills ---------- */
 
-  #skills .cv-row {
-    padding-top: 0.6rem !important;
-    padding-bottom: 0.6rem !important;
-    gap: 0.15rem !important;
-  }
-
-  #skills .cv-row h3 {
-    font-size: 0.62rem !important;
-    letter-spacing: 0.12em !important;
-  }
-
-  #skills .cv-row span {
-    font-size: 0.8rem !important;
-  }
-
   /* ---------- journey / shmack on a phone ---------- */
 
   #journey .desktop-stage {
@@ -144,40 +129,6 @@
 /* ---------- density pass two: the content-heavy sections ---------- */
 
 @media (max-width: 640px) {
-  /* Skills: one line per skill, name and context side by side */
-  #skills .cv-row {
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
-  }
-
-  #skills .cv-row > div {
-    display: block !important;
-    line-height: 1.35 !important;
-  }
-
-  #skills .cv-row .inline-flex {
-    display: inline-flex !important;
-    align-items: baseline;
-    gap: 0.3rem !important;
-    margin-right: 0.55rem;
-    white-space: nowrap;
-  }
-
-  #skills .cv-row .text-\[13px\] {
-    font-size: 0.78rem !important;
-    font-weight: 500 !important;
-  }
-
-  #skills .cv-row .font-mono {
-    font-size: 0.52rem !important;
-    letter-spacing: 0.02em !important;
-    color: rgb(148 148 152) !important;
-  }
-
-  #skills .cv-row + .cv-row {
-    margin-top: 0 !important;
-  }
-
   /* China: stat tiles at half height */
   #china .stat-card {
     padding: 0.6rem 0.7rem !important;

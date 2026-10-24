@@ -1,20 +1,13 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { Linkedin, Mail } from 'lucide-react';
 import HeroTicker from '../components/HeroTicker';
 
-// three.js is heavy; keep it out of the initial bundle and hydrate it after paint
-const HeroBackdrop = lazy(() => import('../components/HeroBackdrop'));
 
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const [mounted, setMounted] = useState(false);
   const particlesRef = useRef<HTMLDivElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     // Check if mobile - skip heavy animations on mobile
@@ -108,10 +101,12 @@ const Hero = () => {
         }
       }
 
-      // Portrait animation - run on both
+      // The portrait emerges through the white fade: opacity only, never a
+      // translate. Moving the photograph while its gradient stays fixed is what
+      // made it look pushed upwards on first load.
       gsap.fromTo(portraitRef.current,
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.8, ease: 'power3.out', delay: 0.3 }
+        { opacity: 0 },
+        { opacity: 1, duration: 1.6, ease: 'power2.out', delay: 0.15 }
       );
 
     }, sectionRef);
@@ -126,13 +121,6 @@ const Hero = () => {
       aria-label="Hero Section - Introduction"
       className="relative md:min-h-screen overflow-hidden bg-gradient-to-b from-slate-100 via-slate-50 to-white"
     >
-      {/* three.js constellation behind the portrait, loaded after first paint */}
-      {mounted && (
-        <Suspense fallback={null}>
-          <HeroBackdrop />
-        </Suspense>
-      )}
-
       {/* Subtle ambient gradient orbs - work with global spotlight */}
       <div className="hidden md:block absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
         {[...Array(4)].map((_, i) => (

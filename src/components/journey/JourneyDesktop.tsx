@@ -84,7 +84,7 @@ const initialWins = (b: Bounds): Record<WinId, Win> => {
     terminal: { ...place(b, Math.min(880, b.w - 80), Math.min(520, b.h - 200), 0, -8), open: true, z: 10 },
     mail: { ...place(b, 680, 520, b.w * 0.22, b.h * 0.02), open: false, z: 11 },
     safari: { ...place(b, Math.min(960, b.w - 80), 600, b.w * 0.12, b.h * 0.02), open: false, z: 12 },
-    finder: { ...place(b, 740, 480, -b.w * 0.2, b.h * 0.06), open: false, z: 13 },
+    finder: { ...place(b, 740, 480, -b.w * 0.2, b.h * 0.06), open: true, z: 14 },
     viewer: { ...place(b, 800, 580, b.w * 0.1, b.h * 0.04), open: false, z: 14 },
     skills: { ...place(b, 820, 560, -b.w * 0.1, b.h * 0.03), open: false, z: 15 },
     siri: { ...place(b, 520, 460, b.w * 0.16, -b.h * 0.02), open: false, z: 16 },
@@ -840,7 +840,7 @@ const JourneyDesktop = () => {
 
         {wins.finder.open && !wins.finder.minimized && (
           <MacWindow
-            title="Education"
+            title="Documents"
             rect={winRect(wins.finder)}
             bounds={bounds}
             z={wins.finder.z}
