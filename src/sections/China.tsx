@@ -1,16 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-  BarChart,
-  Bar
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
+  BarChart, Bar,
 } from 'recharts';
 import ChinaEffects from '../components/ChinaEffects';
 
@@ -32,249 +24,187 @@ const fdiData = [
   { year: 2023, China: 163, USA: 148 },
 ];
 
+const STATS = [
+  ['$33T', 'GDP (PPP)', "world's largest"],
+  ['8,000+', 'listed companies', '2× US markets'],
+  ['600M+', 'middle class', 'largest consumer market'],
+  ['35%', 'green investment', 'of global renewables'],
+  ['8/10', 'Leiden top unis', 'in the region'],
+  ['$163B', 'FDI inflows', '2023'],
+  ['14nm', 'domestic chips', 'production node'],
+  ['40%', 'global EV share', 'of output'],
+];
+
+const ROWS: { src: string; note: string }[][] = [
+  [
+    { src: '/field/dahuchun-shengjian.jpg', note: 'Shanghai · Dahuchun Sheng Jian, Michelin-listed bao shop' },
+    { src: '/field/nanjing-road-storefronts.jpg', note: 'Shanghai · Nanjing Road signage after dark' },
+    { src: '/field/suzhou-night-signage.jpg', note: 'Suzhou · commercial frontage at night' },
+    { src: '/field/chongqing-service-centre.jpg', note: 'Chongqing · tourist service centre, Hongya Cave' },
+  ],
+  [
+    { src: '/field/hangzhou-temple-plaque.jpg', note: 'Hangzhou · temple plaque above West Lake' },
+    { src: '/field/yellow-crane-tower-plaque.jpg', note: 'Wuhan · Yellow Crane Tower inscription' },
+    { src: '/field/yuyuan-hanging-banners.jpg', note: 'Shanghai · Yuyuan market banners' },
+  ],
+  [
+    { src: '/field/wuhan-tower-characters.jpg', note: 'Wuhan · characters lit across the riverside towers' },
+    { src: '/field/wuhan-campus-banners.jpg', note: 'Wuhan · campus banners on the lawn' },
+    { src: '/field/bund-street-sign.jpg', note: 'Shanghai · the Bund, street sign behind the bull' },
+  ],
+];
+
 const China = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
-  const chartsRef = useRef<HTMLDivElement>(null);
-  const photosRef = useRef<HTMLDivElement>(null);
-  const [activePhoto, setActivePhoto] = useState<number | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(titleRef.current,
-        { y: 40, opacity: 0 },
+        { y: 18, opacity: 0 },
         {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: titleRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-          }
-        }
+          y: 0, opacity: 1, duration: 0.6, ease: 'power3.out',
+          scrollTrigger: { trigger: titleRef.current, start: 'top 88%', toggleActions: 'play none none reverse' },
+        },
       );
-
-      const statItems = statsRef.current?.querySelectorAll('.stat-card');
-      if (statItems) {
-        gsap.fromTo(statItems,
-          { y: 30, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.08,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: statsRef.current,
-              start: 'top 80%',
-              toggleActions: 'play none none reverse'
-            }
-          }
-        );
-      }
-
-      gsap.fromTo(chartsRef.current,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: chartsRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-      const photoItems = photosRef.current?.querySelectorAll('.photo-card');
-      if (photoItems) {
-        gsap.fromTo(photoItems,
-          { y: 30, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.06,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: photosRef.current,
-              start: 'top 80%',
-              toggleActions: 'play none none reverse'
-            }
-          }
-        );
-      }
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
-
-  const photos = [
-    { src: './images/china-1.webp', location: 'Forbidden City, Beijing' },
-    { src: './images/china-2.webp', location: 'Beijing Hutong' },
-    { src: './images/china-3.webp', location: 'Summer Palace' },
-    { src: './images/china-4.webp', location: 'Summer Palace View' },
-    { src: './images/china-5.webp', location: 'Temple of Heaven' },
-    { src: './images/china-6.webp', location: 'Great Wall of China' },
-  ];
 
   return (
     <section
       ref={sectionRef}
       id="china"
       aria-labelledby="china-heading"
-      className="section bg-gradient-to-b from-gray-50 via-gray-50/95 to-gray-50/80 backdrop-blur-sm relative overflow-hidden"
+      className="section bg-gray-50/80 backdrop-blur-sm relative overflow-hidden"
     >
-      {/* Top gradient fade for smooth transition from gray-50 (Analyses) */}
-      <div
-        className="absolute inset-x-0 top-0 h-48 pointer-events-none"
-        style={{
-          background: 'linear-gradient(to bottom, rgba(249,250,251,0.9) 0%, rgba(249,250,251,0.5) 50%, transparent 100%)',
-          zIndex: 5,
-        }}
-      />
-      
-      {/* Red Lightning & Storm Effects */}
       <ChinaEffects />
-      
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        {/* Title */}
-        <div ref={titleRef} className="text-center mb-12">
-          <span className="text-sm font-mono uppercase tracking-wider text-gray-400 mb-4 block">Focus Area</span>
-          <h2 id="china-heading" className="section-title">China: The World's Economic Engine</h2>
-          <p className="section-subtitle mx-auto">
-            Understanding the scale and momentum of the world's largest economy by purchasing power parity.
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
+        <div ref={titleRef} className="mb-4 flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between">
+          <div>
+            <span className="mb-1 block font-mono text-[9px] uppercase tracking-[0.2em] text-gray-400">
+              Field research · China
+            </span>
+            <h2 id="china-heading" className="text-2xl font-semibold tracking-[-0.02em] text-gray-900 md:text-3xl">
+              The world's second economy, read from the street
+            </h2>
+          </div>
+          <p className="max-w-md text-[12px] leading-snug text-gray-500 md:text-right">
+            Scale, capital and language. Six months of coursework and three summers on the ground —
+            what the numbers look like in signage, and what they cost in a conversation.
           </p>
         </div>
 
-        {/* Key Stats Grid */}
-        <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div className="stat-card premium-gloss bg-white rounded-2xl p-6 shadow-sm transition-all duration-300">
-            <div className="text-4xl font-bold text-gray-900 mb-2">$33T</div>
-            <div className="text-sm text-gray-500 mb-1">GDP (PPP)</div>
-            <div className="text-xs text-green-600">World's largest since 2016</div>
-          </div>
-          <div className="stat-card premium-gloss bg-white rounded-2xl p-6 shadow-sm transition-all duration-300">
-            <div className="text-4xl font-bold text-gray-900 mb-2">8,000+</div>
-            <div className="text-sm text-gray-500 mb-1">Listed Companies</div>
-            <div className="text-xs text-green-600">2× more than US markets</div>
-          </div>
-          <div className="stat-card premium-gloss bg-white rounded-2xl p-6 shadow-sm transition-all duration-300">
-            <div className="text-4xl font-bold text-gray-900 mb-2">600M+</div>
-            <div className="text-sm text-gray-500 mb-1">Middle Class</div>
-            <div className="text-xs text-green-600">Largest consumer market</div>
-          </div>
-          <div className="stat-card premium-gloss bg-white rounded-2xl p-6 shadow-sm transition-all duration-300">
-            <div className="text-4xl font-bold text-gray-900 mb-2">35%</div>
-            <div className="text-sm text-gray-500 mb-1">Green Investment</div>
-            <div className="text-xs text-green-600">Of global renewable energy</div>
-          </div>
+        {/* one dense strip instead of eight cards */}
+        <div className="grid grid-cols-4 border-t border-gray-300 md:grid-cols-8">
+          {STATS.map(([value, label, note]) => (
+            <div key={label} className="border-b border-gray-200 px-1.5 py-1.5 md:px-2">
+              <p className="font-mono text-[15px] leading-none tabular-nums text-gray-900 md:text-[16px]">{value}</p>
+              <p className="mt-1 font-mono text-[7px] uppercase leading-none tracking-[0.06em] text-gray-500">{label}</p>
+              <p className="mt-0.5 hidden text-[7px] uppercase leading-tight tracking-[0.04em] text-gray-400 md:block">{note}</p>
+            </div>
+          ))}
         </div>
 
-        {/* Additional Stats Row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div className="gloss-card bg-white rounded-xl p-4 shadow-sm text-center transition-all duration-300">
-            <div className="text-2xl font-bold text-gray-900">8/10</div>
-            <div className="text-xs text-gray-500">Top unis in Leiden Ranking</div>
-          </div>
-          <div className="gloss-card bg-white rounded-xl p-4 shadow-sm text-center transition-all duration-300">
-            <div className="text-2xl font-bold text-gray-900">$163B</div>
-            <div className="text-xs text-gray-500">FDI inflows (2023)</div>
-          </div>
-          <div className="gloss-card bg-white rounded-xl p-4 shadow-sm text-center transition-all duration-300">
-            <div className="text-2xl font-bold text-gray-900">14nm</div>
-            <div className="text-xs text-gray-500">Domestic chip production</div>
-          </div>
-          <div className="gloss-card bg-white rounded-xl p-4 shadow-sm text-center transition-all duration-300">
-            <div className="text-2xl font-bold text-gray-900">40%</div>
-            <div className="text-xs text-gray-500">Global EV market share</div>
-          </div>
-        </div>
-
-        {/* Charts */}
-        <div ref={chartsRef} className="grid lg:grid-cols-2 gap-6 mb-12">
-          {/* GDP Chart */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-900 mb-1">GDP (PPP) Comparison</h3>
-            <p className="text-sm text-gray-500 mb-4">China vs USA (Trillion USD)</p>
-            <div className="h-64">
+        {/* the two charts, half the height */}
+        <div className="mt-4 grid gap-3 md:grid-cols-2">
+          <div className="border border-gray-200 bg-white px-2 pb-1 pt-2">
+            <div className="mb-1 flex items-baseline justify-between">
+              <h3 className="text-[11px] font-medium text-gray-900">GDP (PPP), $T</h3>
+              <span className="font-mono text-[7px] uppercase tracking-[0.08em] text-gray-400">China vs USA</span>
+            </div>
+            <div className="h-40 md:h-44">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={gdpData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                  <XAxis dataKey="year" stroke="#9ca3af" fontSize={12} tickLine={false} />
-                  <YAxis stroke="#9ca3af" fontSize={12} tickLine={false} axisLine={false} />
-                  <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
-                  <Legend />
-                  <Line type="monotone" dataKey="China" stroke="#DC2626" strokeWidth={3} dot={{ fill: '#DC2626', r: 4 }} />
-                  <Line type="monotone" dataKey="USA" stroke="#6B7280" strokeWidth={2} strokeDasharray="5 5" dot={{ fill: '#6B7280', r: 4 }} />
+                <LineChart data={gdpData} margin={{ top: 4, right: 4, bottom: 0, left: -22 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#eef0f3" />
+                  <XAxis dataKey="year" stroke="#9ca3af" fontSize={9} tickLine={false} />
+                  <YAxis stroke="#9ca3af" fontSize={9} tickLine={false} axisLine={false} />
+                  <Tooltip contentStyle={{ borderRadius: 0, border: '1px solid #e5e7eb', fontSize: 11 }} />
+                  <Legend iconSize={6} wrapperStyle={{ fontSize: 9, paddingTop: 0 }} />
+                  <Line type="monotone" dataKey="China" stroke="#DC2626" strokeWidth={2} dot={false} />
+                  <Line type="monotone" dataKey="USA" stroke="#6B7280" strokeWidth={1.5} strokeDasharray="4 3" dot={false} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </div>
 
-          {/* FDI Chart */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-900 mb-1">FDI Inflows</h3>
-            <p className="text-sm text-gray-500 mb-4">Foreign Direct Investment (Billion USD)</p>
-            <div className="h-64">
+          <div className="border border-gray-200 bg-white px-2 pb-1 pt-2">
+            <div className="mb-1 flex items-baseline justify-between">
+              <h3 className="text-[11px] font-medium text-gray-900">FDI inflows, $B</h3>
+              <span className="font-mono text-[7px] uppercase tracking-[0.08em] text-gray-400">China vs USA</span>
+            </div>
+            <div className="h-40 md:h-44">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={fdiData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                  <XAxis dataKey="year" stroke="#9ca3af" fontSize={12} tickLine={false} />
-                  <YAxis stroke="#9ca3af" fontSize={12} tickLine={false} axisLine={false} />
-                  <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
-                  <Legend />
-                  <Bar dataKey="China" fill="#DC2626" radius={[4, 4, 0, 0]} />
-                  <Bar dataKey="USA" fill="#9CA3AF" radius={[4, 4, 0, 0]} />
+                <BarChart data={fdiData} margin={{ top: 4, right: 4, bottom: 0, left: -22 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#eef0f3" />
+                  <XAxis dataKey="year" stroke="#9ca3af" fontSize={9} tickLine={false} />
+                  <YAxis stroke="#9ca3af" fontSize={9} tickLine={false} axisLine={false} />
+                  <Tooltip contentStyle={{ borderRadius: 0, border: '1px solid #e5e7eb', fontSize: 11 }} />
+                  <Legend iconSize={6} wrapperStyle={{ fontSize: 9, paddingTop: 0 }} />
+                  <Bar dataKey="China" fill="#DC2626" />
+                  <Bar dataKey="USA" fill="#9CA3AF" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </div>
         </div>
 
-        {/* Photos Grid */}
-        <div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-6">Field Research</h3>
-          <div ref={photosRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-            {photos.map((photo, index) => (
-              <div
-                key={index}
-                className="photo-card gloss-card relative aspect-square rounded-xl overflow-hidden cursor-pointer group"
-                onMouseEnter={() => setActivePhoto(index)}
-                onMouseLeave={() => setActivePhoto(null)}
-              >
-                <img
-                  src={photo.src}
-                  alt={photo.location}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div 
-                  className={`absolute inset-0 bg-black/70 flex items-center justify-center transition-opacity duration-300 ${
-                    activePhoto === index ? 'opacity-100' : 'opacity-0'
-                  }`}
-                >
-                  <span className="text-white text-sm font-medium text-center px-2">{photo.location}</span>
+        {/* signage, three rows, no crops and no rounded corners */}
+        <div className="mt-5">
+          <div className="mb-1.5 flex items-baseline justify-between border-t border-gray-300 pt-2">
+            <h3 className="font-mono text-[9px] uppercase tracking-[0.16em] text-gray-500">Signage</h3>
+            <span className="font-mono text-[7px] uppercase tracking-[0.1em] text-gray-400">
+              ten frames · hover for the note
+            </span>
+          </div>
+
+          <div className="space-y-[3px]">
+            {ROWS.map((row, rowIndex) => {
+              // repeat enough that the track always exceeds the viewport, then
+              // translate by half so the loop is seamless at any width
+              const copies = 6;
+              const doubled = Array.from({ length: copies }, () => row).flat();
+              return (
+                <div key={rowIndex} className="field-row group/row overflow-hidden">
+                  <div
+                    className={`field-track flex w-max gap-[3px] ${rowIndex === 1 ? 'field-track--reverse' : ''}`}
+                    style={{ animationDuration: `${rowIndex === 1 ? 38 : 46 + rowIndex * 6}s` }}
+                  >
+                    {doubled.map((item, index) => (
+                      <figure
+                        key={`${item.src}-${index}`}
+                        className="field-cell group relative h-[74px] w-[112px] shrink-0 overflow-hidden md:h-[104px] md:w-[168px]"
+                      >
+                        <img
+                          src={item.src}
+                          alt={item.note}
+                          loading="lazy"
+                          decoding="async"
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                        />
+                        <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-black/72 px-1.5 py-1 font-mono text-[6.5px] uppercase leading-tight tracking-[0.04em] text-white opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 md:text-[7.5px]">
+                          {item.note}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
-            {[...Array(6)].map((_, i) => (
-              <div
-                key={`placeholder-${i}`}
-                className="photo-card aspect-square rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center bg-gray-50"
-              >
-                <span className="text-gray-400 text-xs font-mono">Photo {i + 7}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
+
+      <style>{`
+        .field-track { animation: fieldSlide linear infinite; }
+        .field-row:hover .field-track { animation-play-state: paused; }
+        .field-track--reverse { animation-direction: reverse; }
+        @keyframes fieldSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @media (prefers-reduced-motion: reduce) {
+          .field-track { animation: none !important; }
+        }
+      `}</style>
     </section>
   );
 };

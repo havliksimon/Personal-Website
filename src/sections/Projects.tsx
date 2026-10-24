@@ -479,11 +479,11 @@ const Projects = () => {
                   <iframe
                     key={activeProject.id}
                     src={activeProject.previewUrl}
-                    className="w-full h-full border-0"
+                    className="absolute left-0 top-0 border-0"
                     onLoad={() => setIframeLoading(false)}
                     sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
                     title={activeProject.title}
-                    style={{ transform: `scale(${iframeScale})`, transformOrigin: 'top left', width: `${100/iframeScale}%`, height: `${100/iframeScale}%` }}
+                    style={{ transform: `scale(${iframeScale})`, transformOrigin: 'top left', width: `${100 / iframeScale}%`, height: `${100 / iframeScale}%` }}
                   />
                   )}
                 </div>

@@ -150,7 +150,9 @@ const JourneyDesktop = () => {
   );
   const [settingsPane, setSettingsPane] = useState<SettingsPane>('appearance');
   const [settingsKey, setSettingsKey] = useState(0);
-  const [safariTab, setSafariTab] = useState(projects[0].shortTitle);
+  const [safariTab, setSafariTab] = useState(
+    (projects.find((p) => p.liveUrl.includes('optimizer')) ?? projects[0]).shortTitle,
+  );
   const [safariKey, setSafariKey] = useState(0);
   const [launchpad, setLaunchpad] = useState(false);
   const [lpQuery, setLpQuery] = useState('');
@@ -439,7 +441,7 @@ const JourneyDesktop = () => {
         onPointerDown={() => setOpenMenu(null)}
         onPointerEnter={() => document.body.classList.add('shmack-mode')}
         onPointerLeave={() => document.body.classList.remove('shmack-mode')}
-        className="desktop-stage shmack-cursors sticky top-0 z-[60] h-screen min-h-[640px] w-full overflow-hidden"
+        className="desktop-stage shmack-cursors sticky top-0 z-[60] h-[calc(100dvh-58px)] min-h-[520px] w-full overflow-hidden md:h-screen md:min-h-[640px]"
       >
         {/* Default three.js wallpaper */}
         {WALLPAPERS[wallpaperIndex].name === 'Orbit' && (
