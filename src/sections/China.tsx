@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
@@ -35,26 +35,76 @@ const STATS = [
   ['40%', 'global EV share', 'of output'],
 ];
 
-const ROWS: { src: string; note: string }[][] = [
+type Frame = { src: string; note: string; video?: boolean; poster?: string };
+
+const ROWS: Frame[][] = [
   [
+    { src: '/field/nanjing-city-wall.jpg', note: 'Nanjing · city wall, Zifeng Tower behind' },
+    { src: '/field/suzhou-night-signage.jpg', note: 'Suzhou · commercial frontage at night' },
+    { src: '/field/bund-street-sign.jpg', note: 'Shanghai · the Bund, street sign behind the bull' },
     { src: '/field/dahuchun-shengjian.jpg', note: 'Shanghai · Dahuchun Sheng Jian, Michelin-listed bao shop' },
     { src: '/field/nanjing-road-storefronts.jpg', note: 'Shanghai · Nanjing Road signage after dark' },
-    { src: '/field/suzhou-night-signage.jpg', note: 'Suzhou · commercial frontage at night' },
-    { src: '/field/chongqing-service-centre.jpg', note: 'Chongqing · tourist service centre, Hongya Cave' },
   ],
   [
+    { src: '/field/chengdu-panda.mp4', poster: '/field/chengdu-panda.jpg', video: true, note: 'Chengdu · panda base, breakfast in progress' },
     { src: '/field/yuyuan-hanging-banners.jpg', note: 'Shanghai · Yuyuan market banners' },
-    { src: '/field/chongqing-hongyadong-signs.jpg', note: 'Chongqing · neon signs along the river' },
-    { src: '/field/wuhan-tower-characters.jpg', note: 'Wuhan · characters lit across the riverside towers' },
     { src: '/field/hangzhou-temple-plaque.jpg', note: 'Hangzhou · temple plaque above West Lake' },
+    { src: '/field/yellow-crane-tower-plaque.jpg', note: 'Wuhan · Yellow Crane Tower inscription' },
+    { src: '/field/wuhan-tower-characters.jpg', note: 'Wuhan · characters lit across the riverside towers' },
   ],
   [
-    { src: '/field/yellow-crane-tower-plaque.jpg', note: 'Wuhan · Yellow Crane Tower inscription' },
-    { src: '/field/xian-terracotta-plaque.jpg', note: 'Xi’an · Terracotta Army information plaque' },
+    { src: '/field/chongqing-hongyadong-signs.jpg', note: 'Chongqing · neon signs along the river' },
+    { src: '/field/chongqing-service-centre.jpg', note: 'Chongqing · tourist service centre, Hongya Cave' },
     { src: '/field/chengdu-panda-base-sign.jpg', note: 'Chengdu · panda base entry signage' },
-    { src: '/field/bund-street-sign.jpg', note: 'Shanghai · the Bund, street sign behind the bull' },
+    { src: '/field/xian-terracotta-plaque.jpg', note: 'Xi’an · Terracotta Army information plaque' },
   ],
 ];
+
+const FieldVideo = ({ src, poster, note }: { src: string; poster?: string; note: string }) => {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [load, setLoad] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setLoad(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLoad(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: '300px' },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (load) ref.current?.play().catch(() => undefined);
+  }, [load]);
+
+  return (
+    <figure className="field-cell group relative aspect-[16/9] h-[104px] w-auto shrink-0 overflow-hidden bg-gray-900 md:h-[168px]">
+      <video
+        ref={ref}
+        src={load ? src : undefined}
+        poster={poster}
+        muted
+        loop
+        playsInline
+        preload="none"
+        className="h-full w-full object-cover"
+      />
+      <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-black/72 px-1.5 py-1 font-mono text-[6.5px] uppercase leading-tight tracking-[0.04em] text-white opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 md:text-[7.5px]">
+        {note}
+      </figcaption>
+    </figure>
+  );
+};
 
 const China = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -157,7 +207,7 @@ const China = () => {
           <div className="mb-1.5 flex items-baseline justify-between border-t border-gray-300 pt-2">
             <h3 className="font-mono text-[9px] uppercase tracking-[0.16em] text-gray-500">Signage</h3>
             <span className="font-mono text-[7px] uppercase tracking-[0.1em] text-gray-400">
-              ten frames · hover for the note
+              thirteen frames · hover for the note
             </span>
           </div>
 
@@ -173,7 +223,9 @@ const China = () => {
                     className={`field-track flex w-max gap-[3px] ${rowIndex === 1 ? 'field-track--reverse' : ''}`}
                     style={{ animationDuration: `${rowIndex === 1 ? 38 : 46 + rowIndex * 6}s` }}
                   >
-                    {doubled.map((item, index) => (
+                    {doubled.map((item, index) => item.video ? (
+                      <FieldVideo key={`${item.src}-${index}`} src={item.src} poster={item.poster} note={item.note} />
+                    ) : (
                       <figure
                         key={`${item.src}-${index}`}
                         className="field-cell group relative aspect-[4/3] h-[104px] w-auto shrink-0 overflow-hidden md:h-[168px]"
