@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import './index.css'
+import './styles/mobile-compact.css'
 import App from './App.tsx'
 
 const container = document.getElementById('root')!

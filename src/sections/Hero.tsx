@@ -124,7 +124,7 @@ const Hero = () => {
       ref={sectionRef}
       id="hero"
       aria-label="Hero Section - Introduction"
-      className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-100 via-slate-50 to-white"
+      className="relative md:min-h-screen overflow-hidden bg-gradient-to-b from-slate-100 via-slate-50 to-white"
     >
       {/* three.js constellation behind the portrait, loaded after first paint */}
       {mounted && (
@@ -274,12 +274,12 @@ const Hero = () => {
       </div>
 
       {/* Mobile Layout - Flex column */}
-      <div className="md:hidden relative flex flex-col min-h-screen" style={{ zIndex: 10 }}>
+      <div className="md:hidden relative flex flex-col" style={{ zIndex: 10 }}>
         {/* Spacer for nav */}
-        <div className="h-20 shrink-0" />
+        <div className="h-9 shrink-0" />
         
         {/* Portrait container with gradient overlay */}
-        <div className="relative shrink-0" style={{ height: '58vh' }}>
+        <div className="relative shrink-0" style={{ height: 'clamp(200px, 33vh, 300px)' }}>
           <div
             ref={portraitRef}
             className="flex justify-center items-end h-full w-full"
@@ -309,18 +309,38 @@ const Hero = () => {
         </div>
 
         {/* Content - Mobile with matching background */}
-        <div className="flex-1 flex flex-col justify-start px-6 pb-8" style={{ background: '#fafbfc' }}>
-          <div className="pointer-events-auto w-full text-center pt-2">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-xs text-gray-500 font-mono uppercase tracking-wider">Investment Analyst</span>
+        <div className="flex flex-col px-5 pb-14 pt-1" style={{ background: '#fafbfc' }}>
+          <div className="pointer-events-auto w-full text-center">
+            <div className="mb-2 flex items-center justify-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-gray-500">
+                Investment Analyst
+              </span>
             </div>
-            <h1 className="text-lg font-semibold text-gray-900 leading-tight">
-              Economics student<br />
-              specializing in <span className="italic">market research</span><br />
-              and <span className="italic">data-driven</span><br />
-              analysis
+
+            <h1 className="text-[17px] font-semibold leading-[1.3] tracking-[-0.01em] text-gray-900 text-balance">
+              Economics student working in <span className="italic">market research</span> and{' '}
+              <span className="italic">data-driven</span> investment analysis
             </h1>
+
+            <p className="mx-auto mt-2 max-w-[300px] text-[11px] leading-snug text-gray-500">
+              VŠE Prague · Klub Investorů · published equity research
+            </p>
+
+            <div className="mt-3 flex items-center justify-center gap-2">
+              <a
+                href="#projects"
+                className="rounded-full bg-gray-900 px-3.5 py-1.5 text-[11px] font-medium text-white"
+              >
+                See the work
+              </a>
+              <a
+                href="#analyses"
+                className="rounded-full border border-gray-300 px-3.5 py-1.5 text-[11px] font-medium text-gray-700"
+              >
+                Read analyses
+              </a>
+            </div>
           </div>
         </div>
       </div>
