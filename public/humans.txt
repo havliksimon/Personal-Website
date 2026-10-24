@@ -5,7 +5,7 @@
     Site: https://simonhavlik.com
     LinkedIn: https://www.linkedin.com/in/simonhavlik
     Twitter: https://x.com/shavlik
-    GitHub: https://github.com/havliksimon
+    GitHub: https://github.com/simonhavlik
     From: Prague, Czech Republic (Praha, Česká republika / Czechia)
     Email: havlik.simon@post.cz
 

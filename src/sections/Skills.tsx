@@ -3,7 +3,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import skillsData from '../data/skills.json';
 import SkillsEffects from '../components/SkillsEffects';
-import EducationLab from '../components/EducationLab';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,13 +62,12 @@ const Skills = () => {
             </h2>
           </div>
           <p className="max-w-sm text-[13px] leading-relaxed text-gray-500 md:text-right">
-            The toolkit built across VŠE Prague, Klub Investorů and published research — and the
-            order it is applied in.
+            The toolkit built across VŠE Prague, Klub Investorů and published research: quantitative
+            work, programming, valuation, Asia-Pacific and languages.
           </p>
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14">
-          <div ref={gridRef} className="grid grid-cols-2 gap-x-6 gap-y-5 sm:gap-x-8 sm:gap-y-6">
+        <div ref={gridRef} className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-6 lg:gap-y-7">
             {skillsData.categories.map((category) => (
               <div key={category.id} className="skill-block border-t border-gray-300 pt-2.5">
                 <h3 className="mb-1.5 font-mono text-[8.5px] uppercase leading-tight tracking-[0.12em] text-gray-500">
@@ -87,9 +85,6 @@ const Skills = () => {
                 </ul>
               </div>
             ))}
-          </div>
-
-          <EducationLab />
         </div>
       </div>
     </section>
