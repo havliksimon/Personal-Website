@@ -240,10 +240,11 @@ const JourneyDesktop = () => {
     let cancelled = false;
     const load = async () => {
       try {
-        const geo = await fetch('https://ipapi.co/json/').then((r) => r.json());
-        const lat = geo?.latitude ?? 50.08;
-        const lon = geo?.longitude ?? 14.44;
-        const city = geo?.city ?? 'Prague';
+        // fixed coordinates: no third-party geo lookup, no visitor IP leaving
+        // the page, and no CSP violation in the console
+        const lat = 49.9275;
+        const lon = 14.3128;
+        const city = 'Dobřichovice';
         const w = await fetch(
           `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`
         ).then((r) => r.json());
@@ -255,7 +256,7 @@ const JourneyDesktop = () => {
           });
         }
       } catch {
-        if (!cancelled) setWeather({ city: 'Prague', temp: 12, code: 2 });
+        if (!cancelled) setWeather({ city: 'Dobřichovice', temp: 12, code: 2 });
       }
     };
     load();
@@ -998,6 +999,9 @@ const JourneyDesktop = () => {
                 <button
                   type="button"
                   onClick={item.onClick}
+                  aria-label={item.label}
+                  title={item.label}
+                  aria-pressed={item.active}
                   className={`flex h-9 w-9 items-center justify-center rounded-lg text-white shadow-lg transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 sm:h-12 sm:w-12 sm:rounded-[14px] [&_svg]:h-4 [&_svg]:w-4 sm:[&_svg]:h-6 sm:[&_svg]:w-6 ${item.color}`}
                 >
                   <span
