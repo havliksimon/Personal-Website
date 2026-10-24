@@ -1,79 +1,95 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * Skills gained — five stages, and at each one the capabilities that were
- * actually acquired, with the method or tool named beside them. The institution
- * is a caption, not the subject: what a reader should take away is the skill.
+ * Learning path — the journey on one line, and what was gained at each stop
+ * underneath it.
+ *
+ * The story a recruiter is looking for here is a progression with proof:
+ * quantitative foundation, economics core, applied valuation, working across
+ * markets, and tools built by hand. The strip shows when, the detail shows what,
+ * and every stop carries one hard number that can be checked.
  */
 
-type Capability = { skill: string; method: string };
-
-type Stage = {
+type Stop = {
   id: string;
+  year: string;
   place: string;
-  years: string;
-  capabilities: Capability[];
-  proof?: string;
+  span: string;
+  theme: string;
+  gained: { skill: string; method: string }[];
+  proof: string;
 };
 
-const STAGES: Stage[] = [
+const STOPS: Stop[] = [
+  {
+    id: 'gym',
+    year: 'Foundation',
+    place: 'Gymnázium Karla Sladkovského',
+    span: '2015 — 2024',
+    theme: 'Quantitative foundation',
+    gained: [
+      { skill: 'Research writing', method: 'thesis · argument · citation' },
+      { skill: 'Mathematics', method: 'calculus · statistics' },
+    ],
+    proof: 'national thesis competition — placed',
+  },
   {
     id: 'vse',
+    year: 'Core',
     place: 'VŠE Prague',
-    years: '2024 — now',
-    capabilities: [
-      { skill: 'Econometric modelling', method: 'R · regression · time series' },
-      { skill: 'Statistical inference', method: 'testing · sampling · distributions' },
-      { skill: 'Applied micro & macro', method: 'market structure · policy effects' },
+    span: '2024 — now',
+    theme: 'Economics core',
+    gained: [
+      { skill: 'Econometrics', method: 'R · regression · time series' },
+      { skill: 'Statistics', method: 'inference · sampling' },
+      { skill: 'Applied micro & macro', method: 'markets · policy effects' },
     ],
-    proof: 'top 9.4% of cohort',
+    proof: 'top 9.4% of cohort · average 1.67',
   },
   {
     id: 'klub',
+    year: 'Applied',
     place: 'Klub Investorů',
-    years: '2024 — now',
-    capabilities: [
-      { skill: 'Valuation modelling', method: 'DCF · trading comps · SOTP' },
-      { skill: 'Equity research writing', method: 'thesis · risks · memo structure' },
-      { skill: 'Defending a position', method: 'committee Q&A · assumptions' },
+    span: '2024 — now',
+    theme: 'Applied valuation',
+    gained: [
+      { skill: 'DCF modelling', method: 'FCFF · WACC · terminal · sensitivity' },
+      { skill: 'Trading comps & SOTP', method: 'peer sets · segment EV' },
+      { skill: 'Equity research writing', method: 'memo · thesis · risks' },
     ],
-    proof: '7 published pieces',
-  },
-  {
-    id: 'xjtlu',
-    place: 'XJTLU, Suzhou',
-    years: '2026',
-    capabilities: [
-      { skill: 'Working in English', method: 'seminars · written assessment' },
-      { skill: 'Cross-border analysis', method: 'Chinese market data · filings' },
-    ],
-    proof: 'semester abroad',
+    proof: '7 published analyses & decks',
   },
   {
     id: 'china',
-    place: 'BFSU & Donghua',
-    years: '2025 — 2026',
-    capabilities: [
+    year: 'Abroad',
+    place: 'BFSU · XJTLU · Donghua',
+    span: '2025 — 2026',
+    theme: 'Working across markets',
+    gained: [
       { skill: 'Mandarin', method: 'HSK3 certified · business press' },
-      { skill: 'Reading primary sources', method: 'Chinese-language material' },
+      { skill: 'English-taught coursework', method: 'seminars · written assessment' },
+      { skill: 'Cross-border analysis', method: 'Chinese filings · market data' },
     ],
     proof: 'HSK1 → HSK3 in ten months',
   },
   {
-    id: 'gym',
-    place: 'Gymnázium Karla Sladkovského',
-    years: '2015 — 2024',
-    capabilities: [
-      { skill: 'Research writing', method: 'thesis · argument · citation' },
-      { skill: 'Quantitative basics', method: 'calculus · statistics' },
+    id: 'build',
+    year: 'Built',
+    place: 'Self-directed',
+    span: '2025 — now',
+    theme: 'Shipping tools',
+    gained: [
+      { skill: 'Python & pandas', method: 'data pipelines · models' },
+      { skill: 'SQL', method: 'queries · joins · aggregation' },
+      { skill: 'Product delivery', method: 'two live web applications' },
     ],
-    proof: 'national thesis competition — placed',
+    proof: 'portfolio optimiser · analyst tracker',
   },
 ];
 
 const EducationLab = () => {
   const hostRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
   const [paused, setPaused] = useState(false);
   const [live, setLive] = useState(false);
   const [reduce, setReduce] = useState(false);
@@ -95,9 +111,12 @@ const EducationLab = () => {
 
   useEffect(() => {
     if (!live || reduce || paused) return;
-    const id = window.setInterval(() => setActive((a) => (a + 1) % STAGES.length), 4200);
+    const id = window.setInterval(() => setActive((a) => (a + 1) % STOPS.length), 4400);
     return () => window.clearInterval(id);
   }, [live, reduce, paused]);
+
+  const stop = STOPS[active];
+  const progress = (active / (STOPS.length - 1)) * 100;
 
   return (
     <aside
@@ -105,95 +124,95 @@ const EducationLab = () => {
       className="hidden lg:block lg:sticky lg:top-24 lg:self-start"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      aria-label="Skills gained at each stage"
+      aria-label="Learning path"
     >
-      <div className="border-t border-gray-300 pt-3 pr-2">
+      <div className="border-t border-gray-300 pt-3 pr-1">
         <div className="flex items-baseline justify-between">
-          <p className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-gray-500">Skills gained</p>
-          <p className="font-mono text-[7px] uppercase tracking-[0.12em] text-gray-400">
-            {reduce ? 'static' : paused ? 'paused' : 'advancing'}
+          <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-gray-500">Learning path</p>
+          <p className="font-mono text-[7px] uppercase tracking-[0.12em] text-gray-400">2015 — 2026</p>
+        </div>
+
+        {/* the journey, on one line */}
+        <div className="relative mt-3">
+          <span className="absolute left-0 right-0 top-[3px] h-px bg-gray-200" aria-hidden="true" />
+          <span
+            className="absolute left-0 top-[3px] h-px bg-gray-900 transition-[width] duration-700 ease-out"
+            style={{ width: `${progress}%` }}
+            aria-hidden="true"
+          />
+          <ol className="relative flex justify-between px-[5px]">
+            {STOPS.map((item, index) => {
+              const on = index === active;
+              return (
+                <li key={item.id}>
+                  <button
+                    type="button"
+                    onClick={() => setActive(index)}
+                    aria-label={`${item.place}, ${item.span}`}
+                    className={`group flex flex-col ${
+                      index === 0 ? 'items-start' : index === STOPS.length - 1 ? 'items-end' : 'items-center'
+                    }`}
+                  >
+                    <span
+                      className={`h-[7px] w-[7px] rounded-full border transition-all duration-300 ${
+                        on ? 'scale-[1.35] border-gray-900 bg-gray-900' : 'border-gray-300 bg-white group-hover:border-gray-500'
+                      }`}
+                    />
+                    <span
+                      className={`mt-1.5 font-mono text-[8px] tabular-nums transition-colors ${
+                        on ? 'text-gray-900' : 'text-gray-500'
+                      }`}
+                    >
+                      {item.year}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+
+        {/* what was gained there */}
+        <div
+          key={stop.id}
+          className="mt-3.5 border-t border-gray-200 pt-2.5"
+          style={{ animation: reduce ? 'none' : 'stopIn 380ms ease-out both' }}
+        >
+          <div className="flex items-baseline justify-between gap-3">
+            <p className="text-[13px] font-semibold leading-tight text-gray-900">{stop.theme}</p>
+            <p className="shrink-0 text-right font-mono text-[7px] uppercase tracking-[0.08em] text-gray-400">
+              {stop.place} · {stop.span}
+            </p>
+          </div>
+
+          <ul className="mt-1.5 space-y-1">
+            {stop.gained.map((item) => (
+              <li key={item.skill} className="flex items-baseline justify-between gap-3">
+                <span className="text-[12px] font-medium leading-tight text-gray-900">{item.skill}</span>
+                <span className="shrink-0 text-right font-mono text-[8px] uppercase leading-tight tracking-[0.05em] text-gray-500">
+                  {item.method}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-2 border-t border-dashed border-gray-200 pt-1.5 font-mono text-[8px] uppercase tracking-[0.07em] text-gray-600">
+            {stop.proof}
           </p>
         </div>
 
-        <ol className="mt-3">
-          {STAGES.map((stage, index) => {
-            const open = index === active;
-            return (
-              <li key={stage.id} className="border-t border-gray-200 first:border-t-0">
-                <button
-                  type="button"
-                  onClick={() => setActive(index)}
-                  aria-expanded={open}
-                  className="w-full py-2 text-left"
-                >
-                  <span className="flex items-baseline justify-between gap-3">
-                    <span className="flex items-baseline gap-2">
-                      <span
-                        className={`font-mono text-[8px] tabular-nums transition-colors ${
-                          open ? 'text-gray-900' : 'text-gray-300'
-                        }`}
-                      >
-                        0{index + 1}
-                      </span>
-                      <span
-                        className={`text-[10px] font-medium uppercase tracking-[0.06em] transition-colors ${
-                          open ? 'text-gray-900' : 'text-gray-400'
-                        }`}
-                      >
-                        {stage.place}
-                      </span>
-                    </span>
-                    <span className="shrink-0 font-mono text-[7px] uppercase tracking-[0.08em] text-gray-400">
-                      {stage.years}
-                    </span>
-                  </span>
-
-                  <span className="relative mt-1 block h-[2px] overflow-hidden bg-gray-200">
-                    <span
-                      key={`${stage.id}-${open}`}
-                      className="absolute inset-y-0 left-0 bg-gray-900"
-                      style={{
-                        width: open && !reduce ? '100%' : open ? '100%' : '0%',
-                        transition: open && !reduce ? 'width 4.2s linear' : 'none',
-                        animation: open && !reduce ? 'rail 4.2s linear both' : 'none',
-                      }}
-                    />
-                  </span>
-
-                  <span className="mt-1 grid overflow-hidden" style={{ gridTemplateRows: open ? '1fr' : '0fr' }}>
-                    <span className="min-h-0">
-                      <span className="block space-y-[3px]">
-                        {stage.capabilities.map((capability) => (
-                          <span key={capability.skill} className="flex items-baseline justify-between gap-3">
-                            <span className="text-[11.5px] leading-tight text-gray-900">{capability.skill}</span>
-                            <span className="shrink-0 text-right font-mono text-[8px] uppercase leading-tight tracking-[0.05em] text-gray-400">
-                              {capability.method}
-                            </span>
-                          </span>
-                        ))}
-                      </span>
-                      {stage.proof && (
-                        <span className="mt-1.5 block border-t border-dashed border-gray-200 pt-1 font-mono text-[7.5px] uppercase tracking-[0.08em] text-gray-500">
-                          {stage.proof}
-                        </span>
-                      )}
-                    </span>
-                  </span>
-                </button>
-              </li>
-            );
-          })}
-        </ol>
-
-        <p className="mt-2 border-t border-gray-200 pt-2 font-mono text-[7px] uppercase tracking-[0.1em] text-gray-400">
-          5 stages · 12 capabilities named
+        <p className="mt-2 font-mono text-[7px] uppercase tracking-[0.1em] text-gray-400">
+          {reduce ? 'static' : paused ? 'paused' : 'advancing'} · click a year
         </p>
       </div>
 
       <style>{`
-        @keyframes rail { from { width: 0%; } to { width: 100%; } }
+        @keyframes stopIn {
+          from { opacity: 0; transform: translateY(4px); }
+          to { opacity: 1; transform: none; }
+        }
         @media (prefers-reduced-motion: reduce) {
-          aside span { animation: none !important; transition: none !important; }
+          aside span, aside div { animation: none !important; transition: none !important; }
         }
       `}</style>
     </aside>
