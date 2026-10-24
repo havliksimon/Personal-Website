@@ -679,7 +679,11 @@ export const FinderApp = ({ onOpen }: { onOpen: (doc: DesktopDoc) => void }) => 
               type="button"
               onDoubleClick={() => onOpen(doc)}
               onClick={() => onOpen(doc)}
-              className="flex flex-col items-center gap-1.5 rounded-lg p-2 text-center transition-colors hover:bg-blue-50"
+              className={`flex flex-col items-center gap-1.5 rounded-lg p-2 text-center transition-all ${
+                doc.featured
+                  ? 'bg-amber-50/40 ring-1 ring-amber-300/60 hover:ring-amber-400/70'
+                  : 'hover:bg-blue-50'
+              }`}
             >
               {doc.kind === 'analysis' ? (
                 <FileText className="h-9 w-9 text-blue-500" strokeWidth={1.3} />
@@ -689,6 +693,9 @@ export const FinderApp = ({ onOpen }: { onOpen: (doc: DesktopDoc) => void }) => 
                 <Presentation className="h-9 w-9 text-purple-500" strokeWidth={1.3} />
               )}
               <span className="line-clamp-2 text-[11px] leading-tight text-gray-700">{doc.title}</span>
+              {doc.featured && (
+                <span className="font-mono text-[6px] uppercase tracking-[0.14em] text-amber-600/70">featured</span>
+              )}
               <span className="text-[10px] text-gray-400">
                 {section === 'documents'
                   ? `${doc.kind === 'cv' ? 'CV' : doc.kind === 'presentation' ? 'Deck' : 'Write-up'} · ${doc.pages}p`

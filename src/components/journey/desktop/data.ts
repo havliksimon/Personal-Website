@@ -6,6 +6,7 @@ export interface DesktopDoc {
   pages: number;
   kind: 'analysis' | 'presentation' | 'cv';
   pdfUrl: string;
+  featured?: boolean;
 }
 
 export const docs: DesktopDoc[] = [
@@ -17,6 +18,7 @@ export const docs: DesktopDoc[] = [
     pages: 28,
     kind: 'analysis',
     pdfUrl: '/analyses/EM_BILI_Havlik.docx.pdf',
+    featured: true,
   },
   {
     id: 2,
@@ -44,6 +46,7 @@ export const docs: DesktopDoc[] = [
     pages: 16,
     kind: 'presentation',
     pdfUrl: '/presentations/presentation_BILI.pdf',
+    featured: true,
   },
   {
     id: 4,
@@ -53,6 +56,7 @@ export const docs: DesktopDoc[] = [
     pages: 20,
     kind: 'presentation',
     pdfUrl: '/presentations/presentation_Chagee.pdf',
+    featured: true,
   },
   {
     id: 5,
@@ -71,6 +75,24 @@ export const docs: DesktopDoc[] = [
     pages: 21,
     kind: 'analysis',
     pdfUrl: '/analyses/EM_GELYF_Havlik.pdf',
+  },
+  {
+    id: 8,
+    title: 'Chagee Equity Analysis',
+    subtitle: 'Chinese Premium Tea Chain',
+    date: 'Sep 2025',
+    pages: 20,
+    kind: 'analysis',
+    pdfUrl: '/analyses/EM_CHA_Havlik.pdf',
+  },
+  {
+    id: 9,
+    title: 'Lyft Equity Analysis',
+    subtitle: 'North American Rideshare',
+    date: 'Mar 2026',
+    pages: 27,
+    kind: 'analysis',
+    pdfUrl: '/analyses/LYFT_Havlik.pdf',
   },
   {
     id: 10,
