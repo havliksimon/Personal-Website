@@ -15,7 +15,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Home', icon: Home, color: 'bg-gray-900' },
   { id: 'about', label: 'About', icon: User, color: 'bg-blue-500' },
-  { id: 'timeline', label: 'Journey', icon: Route, color: 'bg-emerald-500' },
+  { id: 'journey', label: 'Journey', icon: Route, color: 'bg-emerald-500' },
   { id: 'skills', label: 'Skills', icon: Wrench, color: 'bg-violet-500' },
   { id: 'projects', label: 'Projects', icon: Briefcase, color: 'bg-cyan-500' },
   { id: 'analyses', label: 'Analyses', icon: FileText, color: 'bg-amber-500' },
