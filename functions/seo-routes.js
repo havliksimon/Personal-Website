@@ -66,7 +66,7 @@ function layout({ title, description, canonical, body, extraHead = '' }) {
     ${body}
     <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 14px;">
         <p>© 2026 Šimon Havlík – Financial Analyst, Prague | Finanční analytik, Praha</p>
-        <p>Kontakt: havlik.simon@post.cz · <a href="https://linkedin.com/in/havliksimon">LinkedIn: Šimon Havlík</a> · <a href="/">simonhavlik.com</a></p>
+        <p>Kontakt: havlik.simon@post.cz · <a href="https://linkedin.com/in/simonhavlik">LinkedIn: Šimon Havlík</a> · <a href="/">simonhavlik.com</a></p>
     </footer>
 </body>
 </html>`;
@@ -76,9 +76,9 @@ function generateSEOPage(type, path) {
   if (type === 'osoba') {
     return layout({
       title: 'Šimon Havlík (Simon Havlik) – Financial Analyst, Prague | Finanční analytik VŠE',
-      description: 'Šimon Havlík (Simon Havlik, Simon Prague, Simon Czechia) – financial analyst and economics student at VŠE Prague. Investor, equity research, finance. LinkedIn: havliksimon.',
+      description: 'Šimon Havlík (Simon Havlik, Simon Prague, Simon Czechia) – financial analyst and economics student at VŠE Prague. Investor, equity research, finance. LinkedIn: simonhavlik.',
       canonical: path,
-      extraHead: `<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Šimon Havlík","alternateName":["Simon Havlik","Simon Prague","Simon Czechia"],"jobTitle":["Financial Analyst","Economics Student","Finanční analytik"],"url":"https://simonhavlik.com/","sameAs":["https://linkedin.com/in/havliksimon","https://github.com/havliksimon"],"address":{"@type":"PostalAddress","addressLocality":"Prague","addressCountry":"CZ"},"alumniOf":{"@type":"EducationalOrganization","name":"Prague University of Economics and Business (VŠE)"}}</script>`,
+      extraHead: `<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Šimon Havlík","alternateName":["Simon Havlik","Simon Prague","Simon Czechia"],"jobTitle":["Financial Analyst","Economics Student","Finanční analytik"],"url":"https://simonhavlik.com/","sameAs":["https://linkedin.com/in/simonhavlik","https://github.com/simonhavlik"],"address":{"@type":"PostalAddress","addressLocality":"Prague","addressCountry":"CZ"},"alumniOf":{"@type":"EducationalOrganization","name":"Prague University of Economics and Business (VŠE)"}}</script>`,
       body: `
         <h1>Šimon Havlík – Financial Analyst, Prague</h1>
         <p><strong>Šimon Havlík</strong> (also searched as <strong>Simon Havlik</strong>, Simon Prague, Simon Czechia) is a financial analyst and economics student at the Prague University of Economics and Business (VŠE). Investor focused on equity research, finance, valuation and data-driven investment analysis. Based in Prague, Czech Republic.</p>
@@ -87,8 +87,8 @@ function generateSEOPage(type, path) {
         <h2>Links / Odkazy</h2>
         <ul>
           <li><a href="/">Main site – simonhavlik.com</a></li>
-          <li><a href="https://linkedin.com/in/havliksimon">Šimon Havlík on LinkedIn</a></li>
-          <li><a href="https://github.com/havliksimon">Šimon Havlík on GitHub</a></li>
+          <li><a href="https://linkedin.com/in/simonhavlik">Šimon Havlík on LinkedIn</a></li>
+          <li><a href="https://github.com/simonhavlik">Šimon Havlík on GitHub</a></li>
           <li><a href="/#analyses">Equity research – analýzy</a></li>
           <li><a href="/#contact">Contact – kontakt</a></li>
         </ul>
@@ -112,7 +112,7 @@ function generateSEOPage(type, path) {
           <li><a href="/analyses/GOOGL_Havlik.pdf">Alphabet (Google) – Analysis</a></li>
           <li><a href="/presentations/presentation_Tencent.pdf">Tencent Holdings – Market Analysis</a></li>
         </ul>
-        <p><a href="/">Zpět na hlavní stránku / Back to main site</a> · <a href="https://linkedin.com/in/havliksimon">LinkedIn</a></p>
+        <p><a href="/">Zpět na hlavní stránku / Back to main site</a> · <a href="https://linkedin.com/in/simonhavlik">LinkedIn</a></p>
       `,
     });
   }
@@ -131,7 +131,7 @@ function generateSEOPage(type, path) {
         <li>Terénní zkušenost ze studijních pobytů v Číně, mandarínština HSK3</li>
         <li>Publikované analýzy: <a href="/analyses/EM_BILI_Havlik.docx.pdf">Bilibili</a>, <a href="/analyses/EM_TUYA_Havlik.pdf">Tuya</a>, <a href="/presentations/presentation_Tencent.pdf">Tencent</a></li>
       </ul>
-      <p><a href="/">Zpět na hlavní stránku / Back to main site</a> · <a href="https://linkedin.com/in/havliksimon">LinkedIn</a></p>
+      <p><a href="/">Zpět na hlavní stránku / Back to main site</a> · <a href="https://linkedin.com/in/simonhavlik">LinkedIn</a></p>
     `,
   });
 }

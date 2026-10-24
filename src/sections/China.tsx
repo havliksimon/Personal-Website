@@ -46,11 +46,11 @@ const ROWS: { src: string; note: string }[][] = [
     { src: '/field/hangzhou-temple-plaque.jpg', note: 'Hangzhou · temple plaque above West Lake' },
     { src: '/field/yellow-crane-tower-plaque.jpg', note: 'Wuhan · Yellow Crane Tower inscription' },
     { src: '/field/yuyuan-hanging-banners.jpg', note: 'Shanghai · Yuyuan market banners' },
+    { src: '/field/wuhan-tower-characters.jpg', note: 'Wuhan · characters lit across the riverside towers' },
   ],
   [
-    { src: '/field/wuhan-tower-characters.jpg', note: 'Wuhan · characters lit across the riverside towers' },
-    { src: '/field/wuhan-campus-banners.jpg', note: 'Wuhan · campus banners on the lawn' },
     { src: '/field/bund-street-sign.jpg', note: 'Shanghai · the Bund, street sign behind the bull' },
+    { src: '/field/wuhan-campus-banners.jpg', note: 'Wuhan · campus banners on the lawn' },
   ],
 ];
 
@@ -174,14 +174,14 @@ const China = () => {
                     {doubled.map((item, index) => (
                       <figure
                         key={`${item.src}-${index}`}
-                        className="field-cell group relative h-[74px] w-[112px] shrink-0 overflow-hidden md:h-[104px] md:w-[168px]"
+                        className="field-cell group relative aspect-[4/3] h-[104px] w-auto shrink-0 overflow-hidden md:h-[168px]"
                       >
                         <img
                           src={item.src}
                           alt={item.note}
                           loading="lazy"
                           decoding="async"
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                          className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
                         />
                         <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-black/72 px-1.5 py-1 font-mono text-[6.5px] uppercase leading-tight tracking-[0.04em] text-white opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 md:text-[7.5px]">
                           {item.note}
