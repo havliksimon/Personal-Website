@@ -43,14 +43,16 @@ const ROWS: { src: string; note: string }[][] = [
     { src: '/field/chongqing-service-centre.jpg', note: 'Chongqing · tourist service centre, Hongya Cave' },
   ],
   [
-    { src: '/field/hangzhou-temple-plaque.jpg', note: 'Hangzhou · temple plaque above West Lake' },
-    { src: '/field/yellow-crane-tower-plaque.jpg', note: 'Wuhan · Yellow Crane Tower inscription' },
     { src: '/field/yuyuan-hanging-banners.jpg', note: 'Shanghai · Yuyuan market banners' },
+    { src: '/field/chongqing-hongyadong-signs.jpg', note: 'Chongqing · neon signs along the river' },
     { src: '/field/wuhan-tower-characters.jpg', note: 'Wuhan · characters lit across the riverside towers' },
+    { src: '/field/hangzhou-temple-plaque.jpg', note: 'Hangzhou · temple plaque above West Lake' },
   ],
   [
+    { src: '/field/yellow-crane-tower-plaque.jpg', note: 'Wuhan · Yellow Crane Tower inscription' },
+    { src: '/field/xian-terracotta-plaque.jpg', note: 'Xi’an · Terracotta Army information plaque' },
+    { src: '/field/chengdu-panda-base-sign.jpg', note: 'Chengdu · panda base entry signage' },
     { src: '/field/bund-street-sign.jpg', note: 'Shanghai · the Bund, street sign behind the bull' },
-    { src: '/field/wuhan-campus-banners.jpg', note: 'Wuhan · campus banners on the lawn' },
   ],
 ];
 

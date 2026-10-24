@@ -42,7 +42,7 @@ const ChinaEffects = () => {
         const randomPath = paths[Math.floor(Math.random() * paths.length)];
         lightning.innerHTML = `
           <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 600">
-            <path d="${randomPath}" stroke="rgba(220, 38, 38, 0.8)" stroke-width="3" fill="none" 
+            <path d="${randomPath}" stroke="rgba(220, 38, 38, 0.95)" stroke-width="3.4" fill="none" 
               filter="drop-shadow(0 0 10px rgba(220, 38, 38, 0.8)) drop-shadow(0 0 20px rgba(239, 68, 68, 0.6))"/>
             <path d="${randomPath}" stroke="rgba(255, 200, 200, 0.9)" stroke-width="1" fill="none"/>
           </svg>
@@ -52,7 +52,7 @@ const ChinaEffects = () => {
         const tl = gsap.timeline();
         
         // Quick flash
-        tl.to(flash, { opacity: 0.15, duration: 0.05, ease: 'power1.out' })
+        tl.to(flash, { opacity: 0.15, duration: 0.06, ease: 'power1.out' })
           .to(flash, { opacity: 0, duration: 0.1, ease: 'power1.in' })
           .to(flash, { opacity: 0.08, duration: 0.03, ease: 'power1.out' })
           .to(flash, { opacity: 0, duration: 0.15, ease: 'power1.in' });
@@ -64,7 +64,7 @@ const ChinaEffects = () => {
           .to(lightning, { opacity: 0, duration: 0.2 });
 
         // Schedule next lightning
-        const nextDelay = 3 + Math.random() * 7; // 3-10 seconds
+        const nextDelay = 2.4 + Math.random() * 3.6; // 2.4-6 seconds — keep the storm alive
         gsap.delayedCall(nextDelay, triggerLightning);
       };
 
