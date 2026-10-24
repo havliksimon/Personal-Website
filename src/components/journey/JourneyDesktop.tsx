@@ -16,6 +16,7 @@ import {
 import { useTyping, TOTAL_CHARS } from './desktop/terminal';
 
 const DesktopWallpaper = lazy(() => import('./desktop/DesktopWallpaper'));
+import DesktopToast from './desktop/DesktopToast';
 import { docs, projects, WALLPAPERS, CV_DOC_ID, type DesktopDoc } from './desktop/data';
 
 const weatherLook = (code: number): { icon: string; text: string } => {
@@ -446,6 +447,9 @@ const JourneyDesktop = () => {
             <DesktopWallpaper />
           </Suspense>
         )}
+
+        {/* Welcome banner — this is a working system, not a screenshot */}
+        <DesktopToast active={started} />
 
         {/* Wallpaper glow + grain */}
         <div className="pointer-events-none absolute inset-0">
