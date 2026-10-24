@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import skillsData from '../data/skills.json';
 import SkillsEffects from '../components/SkillsEffects';
-import SkillsLab from '../components/SkillsLab';
+import EducationLab from '../components/EducationLab';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -68,7 +68,7 @@ const Skills = () => {
           </p>
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-14">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14">
           <div ref={gridRef} className="grid grid-cols-2 gap-x-6 gap-y-5 sm:gap-x-8 sm:gap-y-6">
             {skillsData.categories.map((category) => (
               <div key={category.id} className="skill-block border-t border-gray-300 pt-2.5">
@@ -89,7 +89,7 @@ const Skills = () => {
             ))}
           </div>
 
-          <SkillsLab />
+          <EducationLab />
         </div>
       </div>
     </section>
