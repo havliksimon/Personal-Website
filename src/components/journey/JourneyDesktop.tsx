@@ -19,18 +19,6 @@ const DesktopWallpaper = lazy(() => import('./desktop/DesktopWallpaper'));
 import DesktopToast from './desktop/DesktopToast';
 import { docs, projects, WALLPAPERS, CV_DOC_ID, type DesktopDoc } from './desktop/data';
 
-const weatherLook = (code: number): { icon: string; text: string } => {
-  if (code === 0) return { icon: '☀️', text: 'Clear' };
-  if (code <= 2) return { icon: '🌤️', text: 'Mostly clear' };
-  if (code === 3) return { icon: '☁️', text: 'Overcast' };
-  if (code <= 48) return { icon: '🌫️', text: 'Foggy' };
-  if (code <= 67) return { icon: '🌧️', text: 'Rain' };
-  if (code <= 77) return { icon: '❄️', text: 'Snow' };
-  if (code <= 82) return { icon: '🌦️', text: 'Showers' };
-  if (code <= 86) return { icon: '🌨️', text: 'Snow showers' };
-  return { icon: '⛈️', text: 'Thunderstorm' };
-};
-
 const Meter = ({ value, tone = 'bg-emerald-400' }: { value: number; tone?: string }) => (
   <span className="ml-auto block h-1.5 w-20 overflow-hidden rounded-full bg-white/20">
     <span
@@ -158,7 +146,6 @@ const JourneyDesktop = () => {
   const [lpQuery, setLpQuery] = useState('');
   const [cpu, setCpu] = useState(38);
   const [gpu, setGpu] = useState(61);
-  const [weather, setWeather] = useState<{ city: string; temp: number; code: number } | null>(null);
   const count = useTyping(started);
 
   const viewerDoc = docs.find((doc) => doc.id === viewerDocId) ?? docs[0];
@@ -236,36 +223,6 @@ const JourneyDesktop = () => {
     return () => window.clearInterval(id);
   }, []);
 
-  useEffect(() => {
-    let cancelled = false;
-    const load = async () => {
-      try {
-        // fixed coordinates: no third-party geo lookup, no visitor IP leaving
-        // the page, and no CSP violation in the console
-        const lat = 49.9275;
-        const lon = 14.3128;
-        const city = 'Dobřichovice';
-        const w = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`
-        ).then((r) => r.json());
-        if (!cancelled) {
-          setWeather({
-            city,
-            temp: Math.round(w?.current?.temperature_2m ?? 12),
-            code: w?.current?.weather_code ?? 2,
-          });
-        }
-      } catch {
-        if (!cancelled) setWeather({ city: 'Dobřichovice', temp: 12, code: 2 });
-      }
-    };
-    load();
-    const id = window.setInterval(load, 600000);
-    return () => {
-      cancelled = true;
-      window.clearInterval(id);
-    };
-  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -503,16 +460,11 @@ const JourneyDesktop = () => {
         {/* Desktop widgets — right: weather, system, markets */}
         <div className="absolute right-4 top-11 z-0 hidden flex-col gap-3 lg:flex">
           <Widget>
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-white/60">
-              {weather?.city ?? 'Weather'}
-            </p>
-            <div className="mt-1 flex items-center gap-2">
-              <span className="text-2xl">{weather ? weatherLook(weather.code).icon : '🌤️'}</span>
-              <span className="text-2xl font-semibold tabular-nums">
-                {weather ? `${weather.temp}°` : '—'}
-              </span>
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-white/60">Prague</p>
+            <div className="mt-1 flex items-baseline gap-2">
+              <span className="text-2xl font-semibold tabular-nums text-white">{clock || '—'}</span>
             </div>
-            <p className="text-[11px] text-white/70">{weather ? weatherLook(weather.code).text : 'locating…'}</p>
+            <p className="text-[11px] text-white/70">local time · CET</p>
           </Widget>
 
           <Widget>
