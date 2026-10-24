@@ -34,7 +34,7 @@ function App() {
     <>
       <InteractiveNav />
       <GlobalSpotlight />
-      <main className="relative cursor-none md:cursor-none">
+      <main className="relative">
         <ScrollProgress />
         <section id="hero">
           <Hero />

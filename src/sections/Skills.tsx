@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import skillsData from '../data/skills.json';
 import SkillsEffects from '../components/SkillsEffects';
-import SkillsProcess from '../components/SkillsProcess';
+import SkillsLab from '../components/SkillsLab';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -89,7 +89,7 @@ const Skills = () => {
             ))}
           </div>
 
-          <SkillsProcess />
+          <SkillsLab />
         </div>
       </div>
     </section>
