@@ -40,37 +40,24 @@ type Frame = { src: string; note: string; video?: boolean; poster?: string };
 const ROWS: Frame[][] = [
   [
     { src: '/field/nanjing-city-wall.jpg', note: 'Nanjing · city wall, Zifeng Tower behind' },
-    { src: '/field/chengdu-panda-base.jpg', note: 'Chengdu · panda base entry signage' },
-    { src: '/field/chengdu-twin-towers.jpg', note: 'Chengdu · twin towers at night' },
-    { src: '/field/chongqing-hongyadong.jpg', note: 'Chongqing · Hongya Cave, lit' },
-    { src: '/field/chongqing-night-street.jpg', note: 'Chongqing · night streets' },
-    { src: '/field/chongqing-service-centre.jpg', note: 'Chongqing · tourist service centre, Hongya Cave' },
-    { src: '/field/chongqing-skyline.jpg', note: 'Chongqing · the skyline from above' },
-    { src: '/field/hangzhou-leifeng-pagoda.jpg', note: 'Hangzhou · Leifeng Pagoda above the lake' },
-    { src: '/field/hangzhou-temple-plaque.jpg', note: 'Hangzhou · temple plaque' },
-  ],
-  [
-    { src: '/field/hangzhou-west-lake-sunset.jpg', note: 'Hangzhou · West Lake at sunset' },
-    { src: '/field/luoyang-longmen-grottoes.jpg', note: 'Luoyang · Longmen Grottoes' },
-    { src: '/field/shanghai-bund-bull.jpg', note: 'Shanghai · the Bund, bull and street sign' },
-    { src: '/field/shanghai-dahuchun-shengjian.jpg', note: 'Shanghai · Dahuchun Sheng Jian, Michelin-listed' },
-    { src: '/field/shanghai-lujiazui.jpg', note: 'Shanghai · Lujiazui towers, close' },
-    { src: '/field/shanghai-nanjing-road.jpg', note: 'Shanghai · Nanjing Road signage after dark' },
-    { src: '/field/shanghai-pudong-view.jpg', note: 'Shanghai · Pudong from the river' },
-    { src: '/field/shanghai-yuyuan-banners.jpg', note: 'Shanghai · Yuyuan market banners' },
-    { src: '/field/suzhou-canals.jpg', note: 'Suzhou · the canal quarter' },
-    { src: '/field/chengdu-panda.mp4', poster: '/field/chengdu-panda.jpg', video: true, note: 'Chengdu · panda base, breakfast in progress' },
-  ],
-  [
-    { src: '/field/suzhou-gardens.jpg', note: 'Suzhou · classical garden' },
-    { src: '/field/suzhou-gateway-towers.jpg', note: 'Suzhou · the Gateway towers' },
-    { src: '/field/suzhou-humble-administrators.jpg', note: 'Suzhou · Humble Administrator’s Garden' },
     { src: '/field/suzhou-night-signage.jpg', note: 'Suzhou · commercial frontage at night' },
-    { src: '/field/wuhan-campus-lawn.jpg', note: 'Wuhan · banners on the campus lawn' },
-    { src: '/field/wuhan-river-boat.jpg', note: 'Wuhan · on the river' },
-    { src: '/field/wuhan-riverside-towers.jpg', note: 'Wuhan · characters lit across the towers' },
-    { src: '/field/wuhan-yangtze-bridge.jpg', note: 'Wuhan · Yangtze bridge from the tower' },
+    { src: '/field/shanghai-bund-bull.jpg', note: 'Shanghai · the Bund, bull and street sign' },
+    { src: '/field/shanghai-nanjing-road.jpg', note: 'Shanghai · Nanjing Road signage after dark' },
+    { src: '/field/shanghai-dahuchun-shengjian.jpg', note: 'Shanghai · Dahuchun Sheng Jian, Michelin-listed' },
+  ],
+  [
+    { src: '/field/shanghai-yuyuan-banners.jpg', note: 'Shanghai · Yuyuan market banners' },
+    { src: '/field/hangzhou-west-lake-sunset.jpg', note: 'Hangzhou · West Lake at sunset' },
+    { src: '/field/hangzhou-temple-plaque.jpg', note: 'Hangzhou · temple plaque' },
     { src: '/field/wuhan-yellow-crane-tower.jpg', note: 'Wuhan · Yellow Crane Tower inscription' },
+    { src: '/field/wuhan-riverside-towers.jpg', note: 'Wuhan · characters lit across the towers' },
+  ],
+  [
+    { src: '/field/chongqing-service-centre.jpg', note: 'Chongqing · tourist service centre, Hongya Cave' },
+    { src: '/field/chongqing-hongyadong.jpg', note: 'Chongqing · Hongya Cave, lit' },
+    { src: '/field/chengdu-panda.mp4', poster: '/field/chengdu-panda.jpg', video: true, note: 'Chengdu · panda base, breakfast in progress' },
+    { src: '/field/chengdu-panda-base.jpg', note: 'Chengdu · panda base entry signage' },
+    { src: '/field/xian-terracotta-army.jpg', note: 'Xi’an · Terracotta Army pit' },
   ],
 ];
 
@@ -221,7 +208,7 @@ const China = () => {
           <div className="mb-1.5 flex items-baseline justify-between border-t border-gray-300 pt-2">
             <h3 className="font-mono text-[9px] uppercase tracking-[0.16em] text-gray-500">Signage</h3>
             <span className="font-mono text-[7px] uppercase tracking-[0.1em] text-gray-400">
-              28 frames · hover for the note
+              fourteen frames · hover for the note
             </span>
           </div>
 
@@ -229,7 +216,7 @@ const China = () => {
             {ROWS.map((row, rowIndex) => {
               // repeat enough that the track always exceeds the viewport, then
               // translate by half so the loop is seamless at any width
-              const copies = 6;
+              const copies = 2;
               const doubled = Array.from({ length: copies }, () => row).flat();
               return (
                 <div key={rowIndex} className="field-row group/row overflow-hidden">

@@ -127,6 +127,7 @@ const JourneyDesktop = () => {
   const [wins, setWins] = useState<Record<WinId, Win>>(() => initialWins({ w: 1440, h: 900 }));
   const [viewerDocId, setViewerDocId] = useState<number>(docs[0].id);
   const [started, setStarted] = useState(false);
+  const [wallpaperReady, setWallpaperReady] = useState(false);
   const [clock, setClock] = useState('');
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [theme, setTheme] = useState<Theme>('dark');
@@ -178,10 +179,11 @@ const JourneyDesktop = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setStarted(true);
+          setWallpaperReady(true);
           observer.disconnect();
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.05, rootMargin: '400px' }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -402,7 +404,7 @@ const JourneyDesktop = () => {
         className="desktop-stage shmack-cursors sticky top-0 z-[60] h-[calc(100dvh-58px)] min-h-[520px] w-full overflow-hidden md:h-screen md:min-h-[640px]"
       >
         {/* Default three.js wallpaper */}
-        {WALLPAPERS[wallpaperIndex].name === 'Orbit' && (
+        {wallpaperReady && WALLPAPERS[wallpaperIndex].name === 'Orbit' && (
           <Suspense fallback={null}>
             <DesktopWallpaper />
           </Suspense>
