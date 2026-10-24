@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import gsap from 'gsap';
 import timelineData from '../../data/timeline.json';
 import {
@@ -14,6 +14,8 @@ import {
   SettingsApp, TrashApp, MinecraftApp, type Theme, type SettingsPane,
 } from './desktop/apps';
 import { useTyping, TOTAL_CHARS } from './desktop/terminal';
+
+const DesktopWallpaper = lazy(() => import('./desktop/DesktopWallpaper'));
 import { docs, projects, WALLPAPERS, CV_DOC_ID, type DesktopDoc } from './desktop/data';
 
 const weatherLook = (code: number): { icon: string; text: string } => {
@@ -438,6 +440,13 @@ const JourneyDesktop = () => {
         onPointerLeave={() => document.body.classList.remove('shmack-mode')}
         className="desktop-stage shmack-cursors sticky top-0 h-screen min-h-[640px] w-full overflow-hidden"
       >
+        {/* Default three.js wallpaper */}
+        {WALLPAPERS[wallpaperIndex].name === 'Orbit' && (
+          <Suspense fallback={null}>
+            <DesktopWallpaper />
+          </Suspense>
+        )}
+
         {/* Wallpaper glow + grain */}
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -left-20 top-1/4 h-[420px] w-[420px] animate-pulse rounded-full bg-fuchsia-500/30 blur-[120px]" />

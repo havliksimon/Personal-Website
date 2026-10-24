@@ -129,6 +129,7 @@ export interface Wallpaper {
 }
 
 export const WALLPAPERS: Wallpaper[] = [
+  { name: 'Orbit', css: 'radial-gradient(circle at 32% 18%, #131c33 0%, #070b15 52%, #03040a 100%)', dark: true },
   { name: 'Sonoma', css: 'linear-gradient(135deg, #1e1b4b 0%, #4c1d95 34%, #9d174d 68%, #ea580c 100%)', dark: true },
   { name: 'Monterey', css: 'linear-gradient(135deg, #0f172a 0%, #4338ca 48%, #db2777 100%)', dark: true },
   { name: 'Big Sur', css: 'linear-gradient(160deg, #0f172a 0%, #0e7490 48%, #22d3ee 100%)', dark: true },
